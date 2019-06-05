@@ -19,11 +19,15 @@ public class AdminController {
         return "login";
     }
 
+    /**
+     * 管理员登录
+     * @param userInfo
+     * @return
+     */
     @ResponseBody
     @RequestMapping("adminLogin")
     public Object Login(@RequestBody UserInfo userInfo) {
         UserInfo userInfos = userInfoService.adminLogin(userInfo);
-        System.out.println(userInfos);
         if (userInfos!=null){
             return true;
         }
