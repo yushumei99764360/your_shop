@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.UserInfoLoginMapper">
+    <!--登录-->
+    <select id="userInfoLogin" resultType="java.lang.String" parameterType="com.qf.vo.UserInfoLoginVo">
+        select * from userinfo
+        <where>
+            <if test="userName != null and userName != '' ">
+                or userName=#{userName}
+            </if>
+            <if test="password != null and password != '' ">
+                or password=#{password}
+            </if>
+            <if test="phoneNumber != null and phoneNumber != '' ">
+                or phoneNumber=#{phoneNumber}
+            </if>
+            <if test="email != null and email != '' ">
+                or email=#{email}
+            </if>
+        </where>
+        and flag = 1;
+    </select>
+</mapper>
