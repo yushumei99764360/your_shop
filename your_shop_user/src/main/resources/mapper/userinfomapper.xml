@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.UserInfoMapper">
+    <!--<insert id="insertRegister" parameterType="com.qf.vo.UserInfoVo">-->
+        <!--insert into userInfo(username,password,email,sex,country,name,birthMonth,phone,province,city,birthYear,birthYMD)-->
+        <!--values (<trim suffixOverrides=",">-->
+        <!--<if test="username !=null and username !=''">-->
+            <!--#{username},-->
+        <!--</if>-->
+        <!--<if test="password !=null and password !=''">-->
+            <!--#{password},-->
+        <!--</if>-->
+        <!--<if test="email !=null and email !=''">-->
+            <!--#{email},-->
+        <!--</if>-->
+        <!--<if test="age !=null and age !=''">-->
+            <!--#{age},-->
+        <!--</if>-->
+        <!--<if test="sex !=null and sex !=''">-->
+            <!--#{sex},-->
+        <!--</if>-->
+        <!--<if test="country !=null and country !=''">-->
+            <!--#{country},-->
+        <!--</if>-->
+
+        <!--<if test="name !=null and name !=''">-->
+            <!--#{name},-->
+        <!--</if>-->
+        <!--<if test="birthMonth !=null and birthMonth !=''">-->
+            <!--#{birthMonth},-->
+        <!--</if>-->
+        <!--<if test="phone !=null and phone !=''">-->
+            <!--#{phone},-->
+        <!--</if>-->
+        <!--<if test="province !=null and province !=''">-->
+            <!--#{province},-->
+        <!--</if>-->
+        <!--<if test="city !=null and city !=''">-->
+            <!--#{city},-->
+        <!--</if>-->
+        <!--<if test="birthYear !=null and birthYear !=''">-->
+            <!--#{birthYear},-->
+        <!--</if>-->
+        <!--<if test="birthYMD !=null and birthYMD !=''">-->
+            <!--#{birthYMD}-->
+        <!--</if>-->
+    <!--</trim>-->
+        <!--)-->
+    <!--</insert>-->
+
+    <!--<select id="checkUserName" parameterType="java.lang.String" resultType="int">-->
+        <!--select count(1) from userInfo where username = #{username}-->
+    <!--</select>-->
+
+    <!--<select id="LoginCheck" parameterType="com.qf.vo.UserInfoVo" resultType="com.qf.dto.LoginInfoDto">-->
+        <!--select * from userInfo where username=#{username} and password=#{password} and flag=1-->
+    <!--</select>-->
+</mapper>
