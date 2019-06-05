@@ -12,4 +12,5 @@ public class UserInfo implements Serializable {
    String phoneNumber;
    String email;
    int flag;
+   int checkState;
 }
