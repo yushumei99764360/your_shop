@@ -28,6 +28,7 @@ public class AdminController {
     @RequestMapping("adminLogin")
     public Object Login(@RequestBody UserInfo userInfo) {
         UserInfo userInfos = userInfoService.adminLogin(userInfo);
+        System.out.println();
         if (userInfos!=null){
             return true;
         }

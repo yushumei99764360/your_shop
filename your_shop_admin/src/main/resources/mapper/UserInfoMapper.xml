@@ -8,6 +8,6 @@
        SELECT * FROM userinfo,user_role WHERE username=#{userName} AND PASSWORD=#{password} AND  userinfo.`userId`=user_role.`userId`
         AND user_role.`roleId`=3
     </select>
-
+    <select id=""></select>
 
 </mapper>
