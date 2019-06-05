@@ -46,7 +46,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" onclick="dologin()" class="btn btn-primary btn-block btn-flat">登录</button>
+          <button type="button" onclick="dologin()" class="btn btn-primary btn-block btn-flat">登录</button>
         </div>
         <!-- /.col -->
       </div>
@@ -79,19 +79,18 @@
 
 
   function dologin() {
+
       var usernameVal = $("#username").val();
       var passwordVal = $("#password").val();
-      var user ={
-          username:usernameVal,
+      var userInfo ={
+          userName:usernameVal,
           password:passwordVal
       };
-
-      /* if ( type == "user" ) {*/
       $.ajax({
           type: 'POST',
-          url: '/init',
+          url: 'adminLogin',
           contentType:"application/json",
-          data: JSON.stringify(user),
+          data: JSON.stringify(userInfo),
           success: function (data) {
               if (data){
                   window.location.href = "goodsList.html";
