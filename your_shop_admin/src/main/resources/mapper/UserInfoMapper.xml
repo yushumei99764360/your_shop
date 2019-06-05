@@ -2,5 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qf.mapper">
+<mapper namespace="com.qf.mapper.UserInfoMapper">
+    <!--管理员登录-->
+    <select id="adminLogin" parameterType="com.qf.pojo.UserInfo" resultType="com.qf.pojo.UserInfo">
+       SELECT * FROM userinfo,user_role WHERE username=#{userName} AND PASSWORD=#{password} AND  userinfo.`userId`=user_role.`userId`
+        AND user_role.`roleId`=3
+    </select>
+    <select id=""></select>
+
 </mapper>
