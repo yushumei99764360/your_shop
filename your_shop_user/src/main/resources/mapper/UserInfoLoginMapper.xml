@@ -11,7 +11,7 @@
                 or userName=#{userName}
             </if>
             <if test="password != null and password != '' ">
-                or password=#{password}
+                and password=#{password}
             </if>
             <if test="phoneNumber != null and phoneNumber != '' ">
                 or phoneNumber=#{phoneNumber}

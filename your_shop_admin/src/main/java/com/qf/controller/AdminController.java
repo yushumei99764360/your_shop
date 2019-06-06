@@ -1,5 +1,6 @@
 package com.qf.controller;
 
+import com.qf.pojo.AdminInfo;
 import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +22,28 @@ public class AdminController {
 
     /**
      * 管理员登录
-     * @param userInfo
+     * @param
      * @return
      */
     @ResponseBody
     @RequestMapping("adminLogin")
-    public Object Login(@RequestBody UserInfo userInfo) {
-        UserInfo userInfos = userInfoService.adminLogin(userInfo);
+        public Object Login(@RequestBody AdminInfo adminInfo) {
+        AdminInfo adminInfos = userInfoService.adminLogin(adminInfo);
         System.out.println();
-        if (userInfos!=null){
+        if (adminInfos!=null){
             return true;
         }
         return  false;
+    }
+
+
+    /**
+     * 会员查询
+     */
+
+    @ResponseBody
+    @RequestMapping("listAllUserInfo")
+    public Object listAllUserInfo(){
+        return userInfoService.listAllUserInfo();
     }
 }

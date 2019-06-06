@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class addressInfo implements Serializable {
+public class AddressInfo implements Serializable {
     int adsId;
     String province;
     String city;
