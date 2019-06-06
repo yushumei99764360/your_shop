@@ -1,5 +1,6 @@
 package com.qf.service;
 
+import com.qf.dto.UserInfoDto;
 import com.qf.pojo.AdminInfo;
 import com.qf.pojo.UserInfo;
 
@@ -16,5 +17,5 @@ public interface UserInfoService {
 
     List<UserInfo> page(int start, int length);
 
-    int insertUserInfo(UserInfo userInfo);
+    int insertUserInfo(UserInfoDto userInfoDto);
 }

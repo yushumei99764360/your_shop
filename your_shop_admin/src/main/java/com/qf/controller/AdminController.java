@@ -1,14 +1,20 @@
 package com.qf.controller;
 
+import com.qf.dto.UserInfoDto;
 import com.qf.pojo.AdminInfo;
 import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -84,8 +90,17 @@ public class AdminController {
      * 添加会员
      */
     @ResponseBody
-    @RequestMapping("insertUserInfo")
-    public Object insertUserInfo(@RequestBody UserInfo userInfo){
-        return userInfoService.insertUserInfo(userInfo);
+    @RequestMapping(value="insertUserInfo",method = RequestMethod.POST)
+    public Object insertUserInfo(@Valid @RequestBody UserInfoDto userInfoDto, BindingResult result, ModelMap modelMap){
+        if (result.hasErrors()) {
+            List<FieldError> errorList = result.getFieldErrors();
+            for(FieldError error : errorList){
+                System.out.println(error.getField() + "*" + error.getDefaultMessage());
+                modelMap.put("ERR_" + error.getField(), error.getDefaultMessage());
+            }
+            return modelMap.toString();
+        }
+        return userInfoService.insertUserInfo(userInfoDto);
     }
+
 }

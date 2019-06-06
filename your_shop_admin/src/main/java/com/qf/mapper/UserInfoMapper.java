@@ -1,5 +1,6 @@
 package com.qf.mapper;
 
+import com.qf.dto.UserInfoDto;
 import com.qf.pojo.AdminInfo;
 import com.qf.pojo.UserInfo;
 
@@ -17,5 +18,5 @@ public interface UserInfoMapper {
 
     int count();
 
-    int insertUserInfo(UserInfo userInfo);
+    int insertUserInfo(UserInfoDto userInfoDto);
 }
