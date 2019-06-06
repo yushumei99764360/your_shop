@@ -57,4 +57,14 @@ public class UserInfoImpl implements UserInfoService {
         parms.put("length",length);
         return userInfoMapper.page(parms);
     }
+
+    /**
+     * 添加会员
+     * @param userInfo
+     * @return
+     */
+    @Override
+    public int insertUserInfo(UserInfo userInfo) {
+        return userInfoMapper.insertUserInfo(userInfo);
+    }
 }

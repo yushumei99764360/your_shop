@@ -17,4 +17,5 @@ public interface UserInfoMapper {
 
     int count();
 
+    int insertUserInfo(UserInfo userInfo);
 }

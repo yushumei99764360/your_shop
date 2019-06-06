@@ -20,9 +20,14 @@
     <select id="count" resultType="int">
       select count(*) from userinfo
     </select>
-
+    <!--分页-->
     <select id="page" parameterType="java.util.Map" resultType="com.qf.pojo.UserInfo">
       select * from  userinfo  limit #{start}, #{length}
     </select>
+
+    <!--添加会员-->
+    <insert id="insertUserInfo" parameterType="com.qf.pojo.UserInfo">
+       insert into userinfo (username,password,email,phonenumber) values (#{userName},#{password},#{email},#{phoneNumber})
+    </insert>
 
 </mapper>

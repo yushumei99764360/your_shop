@@ -1,6 +1,7 @@
 package com.qf.controller;
 
 import com.qf.pojo.AdminInfo;
+import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -77,5 +78,14 @@ public class AdminController {
         result.put("data",userInfoService.page(start,length));
         result.put("error","");
         return result;
+    }
+
+    /**
+     * 添加会员
+     */
+    @ResponseBody
+    @RequestMapping("insertUserInfo")
+    public Object insertUserInfo(@RequestBody UserInfo userInfo){
+        return userInfoService.insertUserInfo(userInfo);
     }
 }

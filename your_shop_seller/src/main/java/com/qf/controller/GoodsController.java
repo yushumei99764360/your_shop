@@ -16,9 +16,9 @@ public class GoodsController {
 
     // 获取所有商品信息
 
+    @ResponseBody
     @RequestMapping("getAllGoods")
     public Object getAllGoods(){
-        System.out.println(2222);
         List<GoodsInfo> goodsInfoList = goodsService.getAllGoods();
         System.out.println(goodsInfoList);
         return goodsInfoList;

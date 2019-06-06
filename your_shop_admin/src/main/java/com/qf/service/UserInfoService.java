@@ -15,4 +15,6 @@ public interface UserInfoService {
     int count();
 
     List<UserInfo> page(int start, int length);
+
+    int insertUserInfo(UserInfo userInfo);
 }
