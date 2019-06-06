@@ -190,7 +190,7 @@
             { "data": "phoneNumber" },
             { "data": "email" },
             {  "data":function (row,type) {
-                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"deleteJump("+row.userId+")\"><i class='fa fa-search'></i>查看</button>"+
+                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"searchJump("+row.userId+")\"><i class='fa fa-search'></i>查看</button>"+
                            "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.userId+")\"><i class='fa fa-trash'></i>删除</button>"+
                            "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.userId+")\"><i class='fa fa-edit'></i>修改</button>";
                 }
@@ -206,10 +206,10 @@
     function deleteJump(userId) {
         $.ajax({
             type: "POST",
-            url:"/deleteUserInfoById?userId="+userId,
+            url:"deleteUserInfoById?userId="+userId,
             contentType:"application/json",
             success: function (data) {
-                alert("删除成功")
+                alert("删除成功");
                 window.location.href="backUser.html";
             },
             error: function (data) {
@@ -221,7 +221,7 @@
 
 
     function jumptoadd(){
-        var url="addGoods.html";
+        var url="addUser.html";
         window.location.href=url;
     }
 
