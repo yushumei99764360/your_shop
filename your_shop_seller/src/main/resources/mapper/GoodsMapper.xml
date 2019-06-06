@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 命名空间 增删改查 节点 所对应的抽象方法 所在的接口位置-->
+<mapper namespace="com.qf.mapper.GoodsMapper">
+    <!--查询所有商品信息-->
+    <select id="getAllGoods" resultType="GoodsInfo">
+        SELECT * FROM goodsinfo
+    </select>
+    <!--新增商品信息-->
+    <insert id="addGoods" parameterType="GoodsInfo">
+        INSERT INTO goodsinfo(g_id,g_core,g_title,g_name,g_price,g_discount,g_disctprice,g_num,g_desc,g_pic,g_status,g_date,s_id)
+        VALUES(DEFAULT,#{g_core},#{g_title},#{g_name},#{g_price},#{g_discount},#{g_disctprice},#{g_num},#{g_desc},#{g_pic},#{g_status},default,#{s_id})
+    </insert>
+    
+    <!--商品类别展示-->
+    <select id="getAllCategory" resultType="">
+
+    </select>
+  <!--  &lt;!&ndash;根据商品id 查询商品信息&ndash;&gt;
+    <select id="getGoodsById" resultType="Goods" parameterType="int">
+        SELECT * FROM t_goods WHERE id= #{id}
+    </select>
+    &lt;!&ndash;根据商品id 删除商品&ndash;&gt;
+    <delete id="delGoodsById" parameterType="int">
+        DELETE FROM t_goods WHERE id = #{id}
+    </delete>
+    &lt;!&ndash;根据商品id 修改商品信息&ndash;&gt;
+    <update id="updateGoodsById" parameterType="GoodsVo">
+        update t_goods
+        <set>
+            <if test="goodsTitle != null and goodsTitle != ''">
+                goodsTitle=#{goodsTitle},
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                goodsName=#{goodsName},
+            </if>
+            <if test="basePrice != null and basePrice != ''">
+                basePrice = #{basePrice},
+            </if>
+            <if test="price != null and price != ''">
+                price = #{price},
+            </if>
+            <if test="costPrice != null and costPrice != ''">
+                costPrice=#{costPrice},
+            </if>
+            <if test="stockNum != null and stockNum != ''">
+                stockNum=#{stockNum},
+            </if>
+            <if test="goodsDesc != null and goodsDesc != ''">
+                goodsDesc = #{goodsDesc},
+            </if>
+            <if test="goodsHot != null and goodsHot != ''">
+                goodsHot = #{goodsHot},
+            </if>
+            <if test="status != null and status != ''">
+                status=#{status},
+            </if>
+            <if test="goodsType != null and goodsType != ''">
+                goodsType=#{goodsType},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    &lt;!&ndash;根据 商品名 价格区间 和 是否上架 三个条件 查询 商品信息&ndash;&gt;
+    <select id="selectGoodsBy" resultType="Goods" parameterType="GoodsVo">
+        select * from t_goods
+        <where>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="minPrice != null and minPrice != ''">
+                and price >= #{minPrice}
+            </if>
+            <if test="maxPrice != null and maxPrice != ''">
+                and #{maxPrice} >= price
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                and goodsName like #{goodsName}
+            </if>
+        </where>
+    </select>-->
+
+</mapper>
