@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="plugins/iCheck/all.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-    <script src="assets/app.js"></script>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -173,50 +173,44 @@
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="assets/app.js"></script>
 
-
+<script src="assets/app.js"></script>
 
 <script>
-    
-    
-    function listAllUserInfo() {
-        $.ajax({
-            type :"POST",
-            url :"listAllUserInfo",
-            contentType : "application/json",
-            success : function (data) {
-                var tabObj = $("#dataTable");
-                $(data).each(function (i,item) {
-                        var trHtml = "<tr>"+
-                            "<td><input type=\"checkbox\" class=\"minimal\" value="+item.userId+"></td>"+
-                            "<td >"+item.userId+"</td>"+
-                            "<td>"+item.userName+"</td>"+
-                            "<td>"+item.password+"</td>"+
-                            "<td>"+item.phoneNumber+"</td>"+
-                            "<td>"+item.email+"</td>"+
-                            "<td>"+
-                            "<button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"seachJump("+item.userId+")\"><i class='fa fa-search'></i>查看</button>"+
-                            "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+item.userId+")\"><i class='fa fa-trash'></i>删除</button>"+
-                            "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+item.userId+")\"><i class='fa fa-edit'></i>修改</button>"+
-                            "</td>"+
-                            "</tr>";
-                    tabObj.append(trHtml);
-                });
+
+    $(function () {
+        var columns=[
+            {
+                "data":function (row,type) {
+                    return '<input type="checkbox" class="minimal" value="'+row.userId+'"/>';
+                }
             },
-            error:function (data) {
-                alert("执行失败")
+            { "data": "userId" },
+            { "data": "userName" },
+            { "data": "password" },
+            { "data": "phoneNumber" },
+            { "data": "email" },
+            {  "data":function (row,type) {
+                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"searchJump("+row.userId+")\"><i class='fa fa-search'></i>查看</button>"+
+                           "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.userId+")\"><i class='fa fa-trash'></i>删除</button>"+
+                           "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.userId+")\"><i class='fa fa-edit'></i>修改</button>";
+                }
             }
-        });
-    }
-    listAllUserInfo();
-    
+        ];
+
+        APP.initDataTables("pageUsers",columns)
+    });
+
+
+
+
     function deleteJump(userId) {
         $.ajax({
             type: "POST",
-            url:"/deleteUserInfoById?id="+userId,
+            url:"deleteUserInfoById?userId="+userId,
             contentType:"application/json",
             success: function (data) {
+                alert("删除成功");
                 window.location.href="backUser.html";
-                alert("删除成功")
             },
             error: function (data) {
                 alert("删除失败")
@@ -227,7 +221,7 @@
 
 
     function jumptoadd(){
-        var url="addGoods.html";
+        var url="addUser.html";
         window.location.href=url;
     }
 
@@ -258,14 +252,9 @@
             dataType: "json"
         });
     }
-    
-
-    $(function () {
-
-        APP.initDataTables();
-        APP.init();
-    })
 
 </script>
+
+
 </body>
 </html>

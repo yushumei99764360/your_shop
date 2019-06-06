@@ -36,15 +36,20 @@ var APP=function () {
     /**
      * 初始化DataTables
      */
-    var handlerInitDataTables=function () {
-        $("#example1").DataTable({
+    var handlerInitDataTables=function (url,columns) {
+        var dataTable= $("#example1").DataTable({
             "paging":true,
             "info":true,
             "lengthChange":false,
             "ordering":false,
             "processing": true,
             "searching": false,
+            "serverSide": true,
             "deferRender": true,
+            "ajax": {
+                "url": url
+            },
+            "columns":columns,
             "language": {
                 "sProcessing": "处理中...",
                 "sLengthMenu": "显示 _MENU_ 项结果",
@@ -82,10 +87,9 @@ var APP=function () {
             handlerCheckboxall();
         },
 
-        initDataTables:function () {
-          handlerInitDataTables()
+        initDataTables:function (url,columns) {
+            handlerInitDataTables(url,columns)
         }
     }
-
 }();
 

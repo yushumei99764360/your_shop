@@ -5,10 +5,11 @@ import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -56,5 +57,27 @@ public class AdminController {
     @RequestMapping("deleteUserInfoById")
     public Object deleteUserInfoById(@RequestParam int userId){
         return userInfoService.deleteUserInfoById(userId);
+    }
+
+    /**
+     * 分页
+     */
+    @ResponseBody
+    @RequestMapping(value = "pageUsers",method = RequestMethod.GET)
+    public Map<String,Object> page(HttpServletRequest request){
+        //可以封装，这里只是测试，
+        Map<String,Object> result = new HashMap<String, Object>();
+        String strdraw = request.getParameter("draw");
+        String strstart = request.getParameter("start");
+        String strlength = request.getParameter("length");
+        int draw =strdraw==null?0:Integer.parseInt(strdraw);
+        int start =strdraw==null?0:Integer.parseInt(strstart);
+        int length =strdraw==null?10:Integer.parseInt(strlength);
+        result.put("draw",draw);
+        result.put("recordsTotal",userInfoService.count());
+        result.put("recordsFiltered",userInfoService.count());
+        result.put("data",userInfoService.page(start,length));
+        result.put("error","");
+        return result;
     }
 }

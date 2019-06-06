@@ -7,7 +7,9 @@ import com.qf.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserInfoImpl implements UserInfoService {
@@ -42,5 +44,17 @@ public class UserInfoImpl implements UserInfoService {
     @Override
     public int deleteUserInfoById(int userId) {
         return userInfoMapper.deleteUserInfoById(userId);
+    }
+
+    @Override
+    public int count() {
+        return userInfoMapper.count();
+    }
+
+    public List<UserInfo> page(int start, int length ) {
+        Map<String, Object> parms = new HashMap<String, Object>();
+        parms.put("start",start);
+        parms.put("length",length);
+        return userInfoMapper.page(parms);
     }
 }

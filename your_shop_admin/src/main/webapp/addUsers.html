@@ -18,11 +18,10 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <!-- Morris chart -->
     <link rel="stylesheet" href="bower_components/morris.js/morris.css">
-
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="plugins/iCheck/all.css">
-
-
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,7 +32,6 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
     <header class="main-header">
         <a href="index2.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -71,14 +69,28 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="active treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>商品列表</span>
+                        <i class="fa fa-dashboard"></i> <span>会员管理</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="goodsList.html"><i class="fa fa-circle-o"></i> 商品列表</a></li>
-                        <li><a href="addGoods.html"><i class="fa fa-circle-o"></i> 商品添加</a></li>
+                        <li class="active"><a href="backUser.html"><i class="fa fa-circle-o"></i> 会员列表</a></li>
+                        <li><a href="addUsers.html"><i class="fa fa-circle-o"></i>会员添加</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="active treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>商家管理</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active"><a href="goodsList.html"><i class="fa fa-circle-o"></i> 商家列表</a></li>
+                        <li><a href="addGoods.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
                     </ul>
                 </li>
             </ul>
@@ -87,56 +99,56 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                商品
-                <small>商品管理</small>
+                后台
+                <small>后台管理</small>
             </h1>
         </section>
         <section class="content">
             <div class="row">
-            <div class="col-xs-12">
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">商品添加</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <!-- form start -->
-                    <form class="form-horizontal">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label for="goodsName" class="col-sm-2 control-label">商品类型</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="type" placeholder="商品类型">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">用户添加</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form class="form-horizontal">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="goodsName" class="col-sm-2 control-label">用户名</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="type" placeholder="用户名">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="goodsName" class="col-sm-2 control-label">商品名称</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="goodsName" placeholder="商品名称">
+                                <div class="form-group">
+                                    <label for="goodsName" class="col-sm-2 control-label">用户密码</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="goodsName" placeholder="用户密码">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Price" class="col-sm-2 control-label">商品价格</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="Price" placeholder="商品价格">
+                                <div class="form-group">
+                                    <label for="Price" class="col-sm-2 control-label">邮箱</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="Price" placeholder="邮箱">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="Price" class="col-sm-2 control-label">商品描述</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="goodsDesc" placeholder="商品描述">
+                                <div class="form-group">
+                                    <label for="Price" class="col-sm-2 control-label">电话号码</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="goodsDesc" placeholder="电话号码">
+                                    </div>
                                 </div>
-                            </div>
 
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-default">清除</button>
-                            <button type="submit" class="btn btn-info pull-right">添加</button>
-                        </div>
-                        <!-- /.box-footer -->
-                    </form>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-default">清除</button>
+                                <button type="submit" class="btn btn-info pull-right">添加</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </form>
+                    </div>
                 </div>
-            </div>
             </div>
         </section>
     </div>
@@ -150,11 +162,6 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="bower_components/raphael/raphael.min.js"></script>
-<script src="bower_components/morris.js/morris.min.js"></script>
-<!-- Sparkline -->
-<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- AdminLTE App -->
@@ -164,10 +171,5 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 
-<!-- iCheck 1.0.1 -->
-<script src="plugins/iCheck/icheck.min.js"></script>
-<script>
-
-</script>
 </body>
 </html>
