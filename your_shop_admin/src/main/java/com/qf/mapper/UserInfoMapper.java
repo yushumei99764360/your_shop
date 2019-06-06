@@ -9,4 +9,7 @@ public interface UserInfoMapper {
     AdminInfo adminLogin(AdminInfo adminInfo);
 
     List<UserInfo> listAllUserInfo();
+
+    int deleteUserInfoById(int userId);
+
 }

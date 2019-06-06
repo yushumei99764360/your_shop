@@ -119,16 +119,10 @@
                             <div class="form-group has-feedback">
                                 <div class="input-group">
                                     <div class="input-group-addon">名称</div>
-                                    <input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入商品名称">
-                                    <div class="input-group-addon">是否上架</div>
-                                    <input class="form-control has-success" id="searchStatus" type="text" placeholder="请输入商品是否上架">
-                                    <div class="input-group-addon">商品价格</div>
-                                    <input class="form-control has-success" id="startPrice" type="text" placeholder="请输入商品价格">
-                                    <div class="input-group-addon">到</div>
-                                    <input class="form-control has-success" id="endPrice" type="text" placeholder="请输入商品价格">
+                                    <input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入用户名">
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-warning" onclick="serchGoodsInfo()"><i class="glyphicon glyphicon-search"></i> 查询</button>
+                            <button type="button" class="btn btn-warning" onclick="serchUserInfo()"><i class="glyphicon glyphicon-search"></i> 查询</button>
                         </form>
 
                         <!-- /.box-header -->
@@ -200,6 +194,7 @@
                             "<td>"+item.phoneNumber+"</td>"+
                             "<td>"+item.email+"</td>"+
                             "<td>"+
+                            "<button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"seachJump("+item.userId+")\"><i class='fa fa-search'></i>查看</button>"+
                             "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+item.userId+")\"><i class='fa fa-trash'></i>删除</button>"+
                             "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+item.userId+")\"><i class='fa fa-edit'></i>修改</button>"+
                             "</td>"+
@@ -214,13 +209,13 @@
     }
     listAllUserInfo();
     
-    function deleteJump(id) {
+    function deleteJump(userId) {
         $.ajax({
             type: "POST",
-            url:"/deleteGoodsInfoById?id="+id,
+            url:"/deleteUserInfoById?id="+userId,
             contentType:"application/json",
             success: function (data) {
-                window.location.href="goodsList.html";
+                window.location.href="backUser.html";
                 alert("删除成功")
             },
             error: function (data) {
@@ -266,8 +261,9 @@
     
 
     $(function () {
-        APP.init();
+
         APP.initDataTables();
+        APP.init();
     })
 
 </script>

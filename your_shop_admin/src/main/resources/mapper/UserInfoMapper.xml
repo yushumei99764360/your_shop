@@ -12,4 +12,9 @@
         SELECT * FROM userinfo
     </select>
 
+    <!--通过Id删除用户-->
+    <delete id="deleteUserInfoById" parameterType="int">
+        delete from userinfo where userId=#{userId}
+    </delete>
+
 </mapper>
