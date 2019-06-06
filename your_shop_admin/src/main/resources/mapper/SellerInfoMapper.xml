@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.SellerInfoMapper">
+    <select id="listAllSellerInfo" resultType="com.qf.pojo.SellerInfo">
+        select * from sellerinfo
+    </select>
+
+    <select id="count" resultType="int">
+      select count(*) from sellerinfo
+    </select>
+
+    <select id="page" parameterType="java.util.Map" resultType="com.qf.pojo.SellerInfo">
+      select * from  sellerinfo  limit #{start}, #{length}
+    </select>
+    
+</mapper>
