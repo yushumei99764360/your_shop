@@ -134,7 +134,7 @@
                     <th width="163px" class="table-set">操作</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="dataTable">
                 <tr>
                     <td><input type="checkbox"></td>
                     <td>1</td>
@@ -216,6 +216,54 @@
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
+
+<script>
+    $(function () {
+        alert(1111)
+        //1.发送ajax请求获取数据
+        $.ajax({
+            type: 'POST',
+            url: "getAllGoods",
+            success: function(data){
+                //循环
+                var tabObj = $("#dataTable");
+                $(data).each(function (index,item) {
+
+                           alert(item.g_id);
+                    var trHtml = "<tr>\n" +
+                        "                    <td><input type=\"checkbox\"></td>\n" +
+                        "                    <td>"+item.g_id+"</td>\n" +
+                        "                    <td>"+item.g_title+"</td>\n" +
+                        "                    <td>"+item.g_name+"</td>\n" +
+                        "                    <td>"+item.g_price+"</td>\n" +
+                        "                    <td>"+item.g_disctprice+"</td>\n" +
+                        "                    <td class=\"am-hide-sm-only\"><i class=\"am-icon-close am-text-primary\"></i></td>\n" +
+                        "                    <td class=\"am-hide-sm-only\">"+item.g_date+"</td>\n" +
+                        "                    <td class=\"am-hide-sm-only\">"+item.g_lastdate+"</td>\n" +
+                        "                    <td><div class=\"am-btn-toolbar\">\n" +
+                        "                        <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                            <button class=\"am-btn am-btn-default am-btn-xs am-text-success am-round\"><span class=\"am-icon-search\"></span> </button>\n" +
+                        "                            <button class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
+                        "                            <button class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\"><span class=\"am-icon-trash-o\"></span></button>\n" +
+                        "                        </div>\n" +
+                        "                    </div></td>\n" +
+                        "                </tr>"
+                    console.log(trHtml); //  2pm
+                    //将字符串添加到table中
+                    tabObj.append(trHtml);
+                });
+
+
+            },
+            error:function (data) {
+                console.error(data);
+
+            },
+            dataType: "json"
+        });
+    })
+
+</script>
 
 </body>
 </html>

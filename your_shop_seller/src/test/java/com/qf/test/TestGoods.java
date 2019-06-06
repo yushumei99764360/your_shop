@@ -23,12 +23,12 @@ public class TestGoods {
 
     @Test
     public void test2(){
-        GoodsInfo goodsInfo = new GoodsInfo();
+     /*   GoodsInfo goodsInfo = new GoodsInfo();
         goodsInfo.setG_name("香蕉");
         goodsInfo.setS_id(20000043);
         boolean addGoods = goodsService.addGoods(goodsInfo);
         System.out.println(addGoods);
-
+*/
 
     }
 
