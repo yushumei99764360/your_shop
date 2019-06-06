@@ -17,4 +17,12 @@
         delete from userinfo where userId=#{userId}
     </delete>
 
+    <select id="count" resultType="int">
+      select count(*) from userinfo
+    </select>
+
+    <select id="page" parameterType="java.util.Map" resultType="com.qf.pojo.UserInfo">
+      select * from  userinfo  limit #{start}, #{length}
+    </select>
+
 </mapper>

@@ -11,4 +11,8 @@ public interface UserInfoService {
     List<UserInfo> listAllUserInfo();
 
     int deleteUserInfoById(int userId);
+
+    int count();
+
+    List<UserInfo> page(int start, int length);
 }
