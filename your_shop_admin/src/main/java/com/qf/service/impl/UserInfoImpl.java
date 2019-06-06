@@ -33,4 +33,14 @@ public class UserInfoImpl implements UserInfoService {
     public List<UserInfo> listAllUserInfo() {
         return userInfoMapper.listAllUserInfo();
     }
+
+    /**
+     * 通过Id删除用户
+     * @param userId
+     * @return
+     */
+    @Override
+    public int deleteUserInfoById(int userId) {
+        return userInfoMapper.deleteUserInfoById(userId);
+    }
 }

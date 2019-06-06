@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -45,5 +46,15 @@ public class AdminController {
     @RequestMapping("listAllUserInfo")
     public Object listAllUserInfo(){
         return userInfoService.listAllUserInfo();
+    }
+
+
+    /**
+     * 会员删除
+     */
+    @ResponseBody
+    @RequestMapping("deleteUserInfoById")
+    public Object deleteUserInfoById(@RequestParam int userId){
+        return userInfoService.deleteUserInfoById(userId);
     }
 }
