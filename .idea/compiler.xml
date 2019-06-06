@@ -15,7 +15,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="your_shop" target="1.5" />
+      <module name="your_shop_ui" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

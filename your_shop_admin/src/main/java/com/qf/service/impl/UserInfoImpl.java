@@ -1,6 +1,7 @@
 package com.qf.service.impl;
 
 import com.qf.mapper.UserInfoMapper;
+import com.qf.pojo.AdminInfo;
 import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,22 @@ public class UserInfoImpl implements UserInfoService {
     @Autowired
     UserInfoMapper userInfoMapper;
 
+    /**
+     * 管理员登录
+     * @param
+     * @return
+     */
     @Override
-    public UserInfo adminLogin(UserInfo userInfo) {
-        return userInfoMapper.adminLogin(userInfo);
+    public AdminInfo adminLogin(AdminInfo adminInfo) {
+        return userInfoMapper.adminLogin(adminInfo);
     }
 
+    /**
+     * 管理员查询用户
+     * @return
+     */
     @Override
-    public List<UserInfo> u() {
-        return null;
+    public List<UserInfo> listAllUserInfo() {
+        return userInfoMapper.listAllUserInfo();
     }
 }
