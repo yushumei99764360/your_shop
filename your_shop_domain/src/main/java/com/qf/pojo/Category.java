@@ -8,5 +8,6 @@ public class Category {
     String c_name;
     String c_core;
     int c_parentid;
+//
 
 }
