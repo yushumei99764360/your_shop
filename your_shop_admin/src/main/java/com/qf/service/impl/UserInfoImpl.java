@@ -68,4 +68,29 @@ public class UserInfoImpl implements UserInfoService {
     public int insertUserInfo(UserInfoDto userInfoDto) {
         return userInfoMapper.insertUserInfo(userInfoDto);
     }
+
+    /**
+     * 批量删除
+     * @param selectUsersId
+     * @return
+     */
+    @Override
+    public int deleteUsersInfo(List<Integer> selectUsersId) {
+        return userInfoMapper.deleteUsersInfo(selectUsersId);
+    }
+
+    /**
+     * 通过id查询用户信息
+     * @param userId
+     * @return
+     */
+    @Override
+    public UserInfo getUserInfoById(int userId) {
+        return userInfoMapper.getUserInfoById(userId);
+    }
+
+    @Override
+    public int updateUserInfoById(UserInfo userInfo) {
+        return userInfoMapper.updateUserInfoById(userInfo);
+    }
 }

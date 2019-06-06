@@ -225,26 +225,26 @@
         window.location.href=url;
     }
 
-    function updatejump(){
-        var url="editGoods.html";
+    function updatejump(userId){
+        var url="edit.html?userId="+userId;
         window.location.href=url;
     }
 
     /*批量删除*/
-    var selectGoodsId = new Array();
+    var selectUsersId = new Array();
     function deletecheckUsers() {
         $(":checkbox:checked").each(function (i) {
             if ($(this).val() != '' && $(this).val() != "no") {
-                selectGoodsId.push($(this).val())
+                selectUsersId.push($(this).val())
             }
         });
         $.ajax({
             type: "POST",
-            url: "/deleteGoodsInfo",
+            url: "deleteUsersInfo",
             contentType: "application/json",
-            data: JSON.stringify(selectGoodsId),
+            data: JSON.stringify(selectUsersId),
             success: function (data) {
-                window.location.href = "goodsList.html"
+                window.location.href = "backUser.html"
             },
             error: function (data) {
                 alert("执行失败")

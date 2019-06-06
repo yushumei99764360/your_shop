@@ -19,4 +19,10 @@ public interface UserInfoMapper {
     int count();
 
     int insertUserInfo(UserInfoDto userInfoDto);
+
+    int deleteUsersInfo(List<Integer> selectUsersId);
+
+    UserInfo getUserInfoById(int userId);
+
+    int updateUserInfoById(UserInfo userInfo);
 }

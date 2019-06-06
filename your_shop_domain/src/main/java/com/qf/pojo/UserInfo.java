@@ -8,7 +8,6 @@ import java.io.Serializable;
 @Data
 public class UserInfo implements Serializable {
    int  userId;
-   @Length
    String userName;
    String password;
    String phoneNumber;

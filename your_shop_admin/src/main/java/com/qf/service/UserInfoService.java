@@ -18,4 +18,10 @@ public interface UserInfoService {
     List<UserInfo> page(int start, int length);
 
     int insertUserInfo(UserInfoDto userInfoDto);
+
+    int deleteUsersInfo(List<Integer> selectUsersId);
+
+    UserInfo getUserInfoById(int userId);
+
+    int updateUserInfoById(UserInfo userInfo);
 }
