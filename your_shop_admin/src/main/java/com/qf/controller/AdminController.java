@@ -1,7 +1,6 @@
 package com.qf.controller;
 
 import com.qf.pojo.AdminInfo;
-import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,7 +64,6 @@ public class AdminController {
     @ResponseBody
     @RequestMapping(value = "pageUsers",method = RequestMethod.GET)
     public Map<String,Object> page(HttpServletRequest request){
-        //可以封装，这里只是测试，
         Map<String,Object> result = new HashMap<String, Object>();
         String strdraw = request.getParameter("draw");
         String strstart = request.getParameter("start");
