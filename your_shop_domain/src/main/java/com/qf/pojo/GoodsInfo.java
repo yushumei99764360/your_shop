@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Data
 public class GoodsInfo {
+
     //商品id
     int g_id;
 //    商品编码

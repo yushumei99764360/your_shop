@@ -9,5 +9,4 @@ public class Category {
     String c_core;
     int c_parentid;
 //
-
 }
