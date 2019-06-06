@@ -213,7 +213,7 @@
     function insertUserInfo() {
         $.ajax({
             type:"POST",
-            url:"/insertUserInfo",
+            url:"insertUserInfo",
             contentType:"application/json",
             data: JSON.stringify({
                 "username":$("#username").val(),

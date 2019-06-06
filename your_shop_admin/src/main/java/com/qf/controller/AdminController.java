@@ -102,5 +102,4 @@ public class AdminController {
         }
         return userInfoService.insertUserInfo(userInfoDto);
     }
-
 }
