@@ -1,7 +1,6 @@
 package com.qf.pojo;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 

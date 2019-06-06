@@ -1,6 +1,5 @@
 package com.qf.service.impl;
 
-import com.qf.dto.UserInfoDto;
 import com.qf.mapper.UserInfoMapper;
 import com.qf.pojo.AdminInfo;
 import com.qf.pojo.UserInfo;
@@ -58,6 +57,7 @@ public class UserInfoImpl implements UserInfoService {
         parms.put("length",length);
         return userInfoMapper.page(parms);
     }
+<<<<<<< Updated upstream
 
     /**
      * 添加会员
@@ -93,4 +93,6 @@ public class UserInfoImpl implements UserInfoService {
     public int updateUserInfoById(UserInfo userInfo) {
         return userInfoMapper.updateUserInfoById(userInfo);
     }
+=======
+>>>>>>> Stashed changes
 }
