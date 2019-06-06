@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.UserInfoRegisterMapper">
+    <insert id="RegisterUserInfo" parameterType="com.qf.vo.RegisterUserVo">
+        insert into userinfo(userName,password,phoneNumber,email)
+        values (<trim suffixOverrides=",">
+        <if test="userName !=null and userName !=''">
+            #{userName},
+        </if>
+        <if test="password !=null and password !=''">
+            #{password},
+        </if>
+        <if test="phoneNumber !=null and phoneNumber !=''">
+            #{phoneNumber},
+        </if>
+        <if test="email !=null and email !=''">
+            #{email},
+        </if>
+    </trim>
+        )
+    </insert>
+    <select id="checkUserName" parameterType="java.lang.String" resultType="int">
+        select count(1) from userinfo where userName = #{userName}
+    </select>
+</mapper>

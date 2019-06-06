@@ -12,8 +12,8 @@ public class TestMain {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-mybatis.xml", "spring-service.xml");
         UserInfoService userInfoService = applicationContext.getBean(UserInfoService.class);
         UserInfoLoginVo userInfoLoginVo = new UserInfoLoginVo();
-        userInfoLoginVo.setEmail("zhangsan@qq.com");
-        userInfoLoginVo.setPassword("123");
+//        userInfoLoginVo.setEmail("zhangsan@qq.com");
+//        userInfoLoginVo.setPassword("123");
         Boolean aBoolean = userInfoService.userInfoLogin(userInfoLoginVo);
         System.out.println(aBoolean);
     }
