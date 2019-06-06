@@ -37,7 +37,7 @@
 		<ul class="header-right">
 			<li class="denglu dengl_hou">
 				<div>
-					<a class="red" href="dengl.html">Hi~山的那边是海</a>
+					<a class="red" href="dengl.html" id="userName">Hi~山的那边是海</a>
 					<i class="icon_plus_nickname"></i>
 					<i class="ci-leftll">
 						<s class="jt">◇</s>
@@ -330,14 +330,14 @@
 </div>
 <script type="text/javascript">
 $(function(){
-	$("#date").selectDate()
-	
-	$("#days").focusout(function(){
-		var year = $("#year option:selected").html()
-		var month = $("#month option:selected").html()
-		var day = $("#days option:selected").html()
-		console.log(year+month+day)
-	})
+	// $("#date").selectDate()
+	//
+	// $("#days").focusout(function(){
+	// 	var year = $("#year option:selected").html()
+	// 	var month = $("#month option:selected").html()
+	// 	var day = $("#days option:selected").html()
+	// 	console.log(year+month+day)
+	// })
 	
 })
 
@@ -424,6 +424,9 @@ $(function(){
 	</div>
 </div>
  
-
+	<script type="text/javascript">
+		var values = $("#userName").text;
+		console.log(values);
+	</script>
 </body>
 </html>
