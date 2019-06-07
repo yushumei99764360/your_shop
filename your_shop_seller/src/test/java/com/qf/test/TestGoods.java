@@ -2,6 +2,7 @@ package com.qf.test;
 
 import com.qf.pojo.GoodsInfo;
 import com.qf.service.GoodsService;
+import com.qf.vo.GoodsVo;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,9 +16,9 @@ public class TestGoods {
 
     @Test
     public void test1(){
-        List<GoodsInfo> goods = goodsService.getAllGoods();
+        List<GoodsVo> goods = goodsService.getAllGoods();
 
-        for (GoodsInfo goods1: goods)
+        for (GoodsVo goods1: goods)
             System.out.println(goods1);
     }
 

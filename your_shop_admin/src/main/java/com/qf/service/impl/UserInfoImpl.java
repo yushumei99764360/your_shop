@@ -60,6 +60,7 @@ public class UserInfoImpl implements UserInfoService {
         return userInfoMapper.page(parms);
     }
 
+
     /**
      * 添加会员
      * @param
@@ -90,23 +91,14 @@ public class UserInfoImpl implements UserInfoService {
         return userInfoMapper.getUserInfoById(userId);
     }
 
-    /**
-     * 修该用户信息
-     * @param userInfo
-     * @return
-     */
     @Override
     public int updateUserInfoById(UserInfo userInfo) {
         return userInfoMapper.updateUserInfoById(userInfo);
     }
 
-    /**
-     * 查询用户详细信息
-     * @param userId
-     * @return
-     */
     @Override
     public UserDetailInfo getUserDetailById(int userId) {
         return userInfoMapper.getUserDetailById(userId);
     }
+
 }

@@ -20,7 +20,7 @@
     <select id="count" resultType="int">
       select count(*) from userinfo
     </select>
-    <!--分页-->
+
     <select id="page" parameterType="java.util.Map" resultType="com.qf.pojo.UserInfo">
       select * from  userinfo  limit #{start}, #{length}
     </select>
@@ -47,8 +47,10 @@
       update userinfo set username=#{userName},password=#{password},email=#{email},phonenumber=#{phoneNumber} where userId=#{userId}
     </update>
 
+
     <!--通过用户ID查询用户详细信息-->
     <select id="getUserDetailById" parameterType="int" resultType="com.qf.dto.UserDetailInfo">
         select * from userdetail where userId = #{userId}
     </select>
+
 </mapper>

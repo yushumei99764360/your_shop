@@ -131,14 +131,4 @@ public class AdminController {
     public Object updateUserInfoById(@RequestBody UserInfo userInfo){
         return userInfoService.updateUserInfoById(userInfo);
     }
-
-    /**
-     * 通过Id查询用户详细信息
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("getUserDetailById")
-    public Object getUserDetailById(@RequestParam int userId){
-        return userInfoService.getUserDetailById(userId);
-    }
 }
