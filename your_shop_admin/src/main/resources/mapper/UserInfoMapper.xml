@@ -25,7 +25,6 @@
       select * from  userinfo  limit #{start}, #{length}
     </select>
 
-<<<<<<< Updated upstream
     <!--添加会员-->
     <insert id="insertUserInfo" parameterType="com.qf.dto.UserInfoDto">
        insert into userinfo (username,password,email,phonenumber) values (#{username},#{password},#{email},#{phonenumber})
@@ -47,6 +46,11 @@
     <update id="updateUserInfoById" parameterType="com.qf.pojo.UserInfo">
       update userinfo set username=#{userName},password=#{password},email=#{email},phonenumber=#{phoneNumber} where userId=#{userId}
     </update>
-=======
->>>>>>> Stashed changes
+
+
+    <!--通过用户ID查询用户详细信息-->
+    <select id="getUserDetailById" parameterType="int" resultType="com.qf.dto.UserDetailInfo">
+        select * from userdetail where userId = #{userId}
+    </select>
+
 </mapper>

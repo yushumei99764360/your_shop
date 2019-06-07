@@ -23,7 +23,6 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -90,58 +89,82 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="goodsList.html"><i class="fa fa-circle-o"></i> 商家列表</a></li>
-                        <li><a href="addUsers.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
+                        <li class="active"><a href="backSeller.html"><i class="fa fa-circle-o"></i> 商家列表</a></li>
+                        <li><a href="addGoods.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
                     </ul>
                 </li>
-            </ul>
+            </ul><ul class="sidebar-menu" data-widget="tree">
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>个人中心</span>
+                    <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a href="adminList.html"><i class="fa fa-circle-o"></i> 管理员列表</a></li>
+                    <li><a href="addAdmin.html"><i class="fa fa-circle-o"></i> 管理员添加</a></li>
+                </ul>
+            </li>
+        </ul>
+
         </section>
     </aside>
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                用户
-                <small>用户列表</small>
+                后台
+                <small>个人详细信息</small>
             </h1>
         </section>
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">用户</h3>
-                        </div>
-                        <div class="row" style="margin-left: 10px">
-                            <button  style="width: 70px; height: 30px" type="button" class="btn  btn-primary" onclick = "jumptoadd()">新增<i ></i></button>
-                            <button  style="width: 70px; height: 30px" type="button" class="btn  btn-danger" onclick = "deletecheckUsers()">删除<i ></i></button>
-                        </div>
-                        <form class="form-inline" role="form" style="margin-left: 10px; margin-top: 10px">
-                            <div class="form-group has-feedback">
-                                <div class="input-group">
-                                    <div class="input-group-addon">名称</div>
-                                    <input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入用户名">
+                    <div class="wd">
+                        <div class="up_avater">
+                            <div class="warp_tip">
+                                <div class="upload_tip">
+                                    <p class="upload_text">头像*</p>
+                                </div>
+                                <div class="upload_main">
+                                    <div class="up-left">
+                                        <div class="pic-show">
+                                            <div class="pic-wrap ">
+                                                <img src="" id="img">
+                                            </div>
+                                        </div>
+                                        <form role="form">
+                                            <div class="box-body">
+                                                <div class="form-group">
+                                                    <label for="nickName">用户昵称</label>
+                                                    <input type="email" class="form-control" id="nickName" placeholder="Enter email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="gender">性别</label>
+                                                    <input type="email" class="form-control" id="gender" placeholder="Password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="age">年龄</label>
+                                                    <input type="email" class="form-control" id="age" placeholder="Password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="realName">真实姓名</label>
+                                                    <input type="email" class="form-control" id="realName" placeholder="Password">
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox"> Check me out
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <!-- /.box-body -->
+                                            <div class="box-footer">
+                                                <a href="backUser.html"  class="btn btn-primary">确定</a>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-warning" onclick="serchUserInfo()"><i class="glyphicon glyphicon-search"></i> 查询</button>
-                        </form>
-
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th><input type="checkbox" class="minimal icheck_master" value="no"/></th>
-                                    <th>用户编号</th>
-                                    <th>用户名</th>
-                                    <th>用户密码</th>
-                                    <th>邮箱</th>
-                                    <th>电话号码</th>
-                                    <th>操作 </th>
-                                </tr>
-                                </thead>
-                                <tbody id="dataTable">
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
@@ -166,101 +189,34 @@
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<!-- iCheck 1.0.1 -->
-<script src="plugins/iCheck/icheck.min.js"></script>
-<!-- DataTables -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script src="assets/app.js"></script>
-
-<script src="assets/app.js"></script>
 
 <script>
-
-    $(function () {
-        var columns=[
-            {
-                "data":function (row,type) {
-                    return '<input type="checkbox" class="minimal" value="'+row.userId+'"/>';
-                }
-            },
-            { "data": "userId" },
-            { "data": "userName" },
-            { "data": "password" },
-            { "data": "phoneNumber" },
-            { "data": "email" },
-            {  "data":function (row,type) {
-                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"searchJump("+row.userId+")\"><i class='fa fa-search'></i>查看</button>"+
-                           "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.userId+")\"><i class='fa fa-trash'></i>删除</button>"+
-                           "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.userId+")\"><i class='fa fa-edit'></i>修改</button>";
-                }
-            }
-        ];
-
-        APP.initDataTables("pageUsers",columns)
-    });
-
-
-
-
-    function deleteJump(userId) {
+    var userId;
+    function getUserId() {
+        userId = window.location.search.split("=")[1];
+    }
+    getUserId();
+    //通过Id查询用户详细信息
+    function getUserById() {
         $.ajax({
-            type: "POST",
-            url:"deleteUserInfoById?userId="+userId,
+            type:"POST",
+            url:"getUserDetailById?userId="+userId,
             contentType:"application/json",
-            success: function (data) {
-                alert("删除成功");
-                window.location.href="backUser.html";
+            success:function (data) {
+                $("#nickName").val(data.nickName);
+                $("#gender").val(data.gender);
+                $("#age").val(data.age);
+                $("#realName").val(data.realName);
+                $("#img").attr("src",data.icon);
             },
-            error: function (data) {
-                alert("删除失败")
-            },
-            dataType: "json"
-        });
-    }
-
-
-    function jumptoadd(){
-        var url="addUsers.html";
-        window.location.href=url;
-    }
-
-    function updatejump(userId){
-        var url="editUser.html?userId="+userId;
-        window.location.href=url;
-    }
-
-    function searchJump(userId) {
-        var url="userDetail.html?userId="+userId;
-        window.location.href=url;
-    }
-
-    /*批量删除*/
-    var selectUsersId = new Array();
-    function deletecheckUsers() {
-        $(":checkbox:checked").each(function (i) {
-            if ($(this).val() != '' && $(this).val() != "no") {
-                selectUsersId.push($(this).val())
-            }
-        });
-        $.ajax({
-            type: "POST",
-            url: "deleteUsersInfo",
-            contentType: "application/json",
-            data: JSON.stringify(selectUsersId),
-            success: function (data) {
-                window.location.href = "backUser.html"
-            },
-            error: function (data) {
-                alert("执行失败")
+            error:function (data) {
             },
             dataType: "json"
         });
     }
-
+    getUserById();
 
 </script>
-
 
 </body>
 </html>

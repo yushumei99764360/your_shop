@@ -100,8 +100,8 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                商家
-                <small>商家列表</small>
+                用户
+                <small>用户列表</small>
             </h1>
         </section>
         <section class="content">
@@ -109,7 +109,7 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">商家</h3>
+                            <h3 class="box-title">用户</h3>
                         </div>
                         <div class="row" style="margin-left: 10px">
                             <button  style="width: 70px; height: 30px" type="button" class="btn  btn-primary" onclick = "jumptoadd()">新增<i ></i></button>
@@ -119,7 +119,7 @@
                             <div class="form-group has-feedback">
                                 <div class="input-group">
                                     <div class="input-group-addon">名称</div>
-                                    <input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入商店名">
+                                    <input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入用户名">
                                 </div>
                             </div>
                             <button type="button" class="btn btn-warning" onclick="serchUserInfo()"><i class="glyphicon glyphicon-search"></i> 查询</button>
@@ -137,7 +137,6 @@
                                     <th>电话号码</th>
                                     <th>地址</th>
                                     <th>描述</th>
-                                    <th>状态</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -192,10 +191,8 @@
             { "data": "s_phone" },
             { "data": "s_address" },
             { "data": "s_desc" },
-            { "data": "s_status" },
-
             {  "data":function (row,type) {
-                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"lookJump("+row.s_id+")\"><i class='fa fa-search'></i>查看</button>"+
+                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"deleteJump("+row.s_id+")\"><i class='fa fa-search'></i>查看</button>"+
                         "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.s_id+")\"><i class='fa fa-trash'></i>删除</button>"+
                         "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.s_id+")\"><i class='fa fa-edit'></i>修改</button>";
                 }
@@ -208,15 +205,14 @@
 
 
 
-    function deleteJump(s_id) {
-
+    function deleteJump(userId) {
         $.ajax({
             type: "POST",
-            url:"deleteSellerInfoById?s_id="+s_id,
-            // contentType:"application/json",
+            url:"/deleteUserInfoById?userId="+userId,
+            contentType:"application/json",
             success: function (data) {
                 alert("删除成功")
-                window.location.href="backSeller.html";
+                window.location.href="backUser.html";
             },
             error: function (data) {
                 alert("删除失败")
@@ -226,22 +222,13 @@
     }
 
 
-    //跳转商家详细商品
-    function lookJump(s_id) {
-        alert(s_id);
-        var url = "SellerDetail.html?s_id=" + s_id;
-        window.location.href=url;
-    }
-
-
     function jumptoadd(){
         var url="addGoods.html";
         window.location.href=url;
     }
 
-    function updatejump(s_id){
-        alert(s_id);
-        var url="editGoods.html?s_id="+s_id;
+    function updatejump(){
+        var url="editGoods.html";
         window.location.href=url;
     }
 

@@ -1,13 +1,20 @@
 package com.qf.controller;
 
+import com.qf.dto.UserInfoDto;
 import com.qf.pojo.AdminInfo;
+import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -78,7 +85,6 @@ public class AdminController {
         result.put("error","");
         return result;
     }
-<<<<<<< Updated upstream
 
     /**
      * 添加会员
@@ -125,6 +131,4 @@ public class AdminController {
     public Object updateUserInfoById(@RequestBody UserInfo userInfo){
         return userInfoService.updateUserInfoById(userInfo);
     }
-=======
->>>>>>> Stashed changes
 }
