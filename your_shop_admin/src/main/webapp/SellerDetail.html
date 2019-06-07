@@ -34,7 +34,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     <header class="main-header">
-        <a href="index2.html" class="logo">
+        <a href="backMain.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>商</b>城</span>
             <!-- logo for regular state and mobile devices -->
@@ -100,8 +100,8 @@
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                商家
-                <small>商家列表</small>
+                商店名
+                <small>本店商品</small>
             </h1>
         </section>
         <section class="content">
@@ -109,7 +109,7 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">商家</h3>
+                            <h3 class="box-title">商店名</h3>
                         </div>
                         <div class="row" style="margin-left: 10px">
                             <button  style="width: 70px; height: 30px" type="button" class="btn  btn-primary" onclick = "jumptoadd()">新增<i ></i></button>
@@ -119,7 +119,7 @@
                             <div class="form-group has-feedback">
                                 <div class="input-group">
                                     <div class="input-group-addon">名称</div>
-                                    <input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入商店名">
+                                    <input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入用户名">
                                 </div>
                             </div>
                             <button type="button" class="btn btn-warning" onclick="serchUserInfo()"><i class="glyphicon glyphicon-search"></i> 查询</button>
@@ -131,14 +131,15 @@
                                 <thead>
                                 <tr>
                                     <th><input type="checkbox" class="minimal icheck_master" value="no"/></th>
-                                    <th>商店编号</th>
-                                    <th>商店名</th>
-                                    <th>商店密码</th>
-                                    <th>电话号码</th>
-                                    <th>地址</th>
-                                    <th>描述</th>
-                                    <th>状态</th>
-                                    <th>操作</th>
+                                    <th>商品编号</th>
+                                    <th>品牌</th>
+                                    <th>商品名</th>
+                                    <th>库存数</th>
+                                    <th>商品售价</th>
+                                    <th>商品折扣</th>
+                                    <th>商品折扣价</th>
+                                    <th>商品状态</th>
+
                                 </tr>
                                 </thead>
                                 <tbody id="dataTable">
@@ -178,45 +179,50 @@
 <script src="assets/app.js"></script>
 
 <script>
+    var sellerId;
+    (function () {
+        sellerId = window.location.search.split("=")[1];
+
+    })();
 
     $(function () {
         var columns=[
             {
                 "data":function (row,type) {
-                    return '<input type="checkbox" class="minimal" value="'+row.s_id+'"/>';
+                    return '<input type="checkbox" class="minimal" value="'+row.g_id+'"/>';
                 }
             },
-            { "data": "s_id" },
-            { "data": "s_name" },
-            { "data": "s_pwd" },
-            { "data": "s_phone" },
-            { "data": "s_address" },
-            { "data": "s_desc" },
-            { "data": "s_status" },
-
+            { "data": "g_id" },
+            { "data": "g_title" },
+            { "data": "g_name" },
+            { "data": "g_num" },
+            { "data": "g_price" },
+            { "data": "g_discount" },
+            { "data": "g_disctprice" },
+            { "data": "g_status" },
             {  "data":function (row,type) {
-                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"lookJump("+row.s_id+")\"><i class='fa fa-search'></i>查看</button>"+
-                        "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.s_id+")\"><i class='fa fa-trash'></i>删除</button>"+
-                        "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.s_id+")\"><i class='fa fa-edit'></i>修改</button>";
+                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"searchJump("+row.g_id+")\"><i class='fa fa-search'></i>查看</button>"+
+                        "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.g_id+")\"><i class='fa fa-trash'></i>删除</button>"+
+                        "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.g_id+")\"><i class='fa fa-edit'></i>修改</button>";
                 }
             }
         ];
+        var url = "listGoodsOfSellerById?sellerId=" + sellerId;
 
-        APP.initDataTables("pageSellers",columns)
+        APP.initDataTables(url,columns)
     });
 
 
 
 
-    function deleteJump(s_id) {
-
+    function deleteJump(userId) {
         $.ajax({
             type: "POST",
-            url:"deleteSellerInfoById?s_id="+s_id,
-            // contentType:"application/json",
+            url:"deleteUserInfoById?userId="+userId,
+            contentType:"application/json",
             success: function (data) {
-                alert("删除成功")
-                window.location.href="backSeller.html";
+                alert("删除成功");
+                window.location.href="backUser.html";
             },
             error: function (data) {
                 alert("删除失败")
@@ -226,22 +232,13 @@
     }
 
 
-    //跳转商家详细商品
-    function lookJump(s_id) {
-        alert(s_id);
-        var url = "SellerDetail.html?s_id=" + s_id;
-        window.location.href=url;
-    }
-
-
     function jumptoadd(){
-        var url="addGoods.html";
+        var url="addUser.html";
         window.location.href=url;
     }
 
-    function updatejump(s_id){
-        alert(s_id);
-        var url="editGoods.html?s_id="+s_id;
+    function updatejump(){
+        var url="editGoods.html";
         window.location.href=url;
     }
 

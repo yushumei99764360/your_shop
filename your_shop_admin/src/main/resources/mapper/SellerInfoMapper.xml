@@ -3,16 +3,31 @@
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.mapper.SellerInfoMapper">
+
+    <!--查询所有-->
     <select id="listAllSellerInfo" resultType="com.qf.pojo.SellerInfo">
         select * from sellerinfo
     </select>
-
+    <!--分页的总数和数据-->
     <select id="count" resultType="int">
       select count(*) from sellerinfo
     </select>
 
-    <select id="page" parameterType="java.util.Map" resultType="com.qf.pojo.SellerInfo">
+    <select id="page" parameterType="java.util.Map" resultType="com.qf.dto.SellerInfoDto">
       select * from  sellerinfo  limit #{start}, #{length}
+    </select>
+<!--删除单个-->
+    <delete id="deleteSellerInfoById" parameterType="int">
+        delete from sellerinfo where s_id=#{s_id}
+    </delete>
+    <!--根据商店查询商品的分页的总数和数据-->
+    <select id="counts" resultType="int" parameterType="int">
+      SELECT COUNT(*) FROM goodsinfo g,sellerinfo s,seller_goods sg WHERE g.g_id=sg.`gid` AND sg.`sid`=s.`s_id`AND s.`s_id`=#{sellerId}
+    </select>
+
+    <select id="pages" parameterType="java.util.Map" resultType="com.qf.dto.SellerInfoDto">
+     SELECT * FROM goodsinfo g,sellerinfo s,seller_goods sg WHERE g.g_id=sg.`gid` AND sg.`sid`=s.`s_id`AND s.`s_id`=#{sellerId}
+      limit #{start}, #{length}
     </select>
     
 </mapper>
