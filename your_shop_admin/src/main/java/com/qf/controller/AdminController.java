@@ -131,4 +131,9 @@ public class AdminController {
     public Object updateUserInfoById(@RequestBody UserInfo userInfo){
         return userInfoService.updateUserInfoById(userInfo);
     }
+    @ResponseBody
+    @RequestMapping("getUserDetailById")
+    public Object getUserDetailById(@RequestParam int userId){
+        return userInfoService.getUserDetailById(userId);
+    }
 }

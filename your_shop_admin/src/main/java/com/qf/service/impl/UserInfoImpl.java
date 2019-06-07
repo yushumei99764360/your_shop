@@ -96,6 +96,11 @@ public class UserInfoImpl implements UserInfoService {
         return userInfoMapper.updateUserInfoById(userInfo);
     }
 
+    /**
+     * 通过id查询用户详细信息
+     * @param userId
+     * @return
+     */
     @Override
     public UserDetailInfo getUserDetailById(int userId) {
         return userInfoMapper.getUserDetailById(userId);
