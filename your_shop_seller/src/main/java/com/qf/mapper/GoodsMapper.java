@@ -1,7 +1,6 @@
 package com.qf.mapper;
 
 
-import com.qf.pojo.GoodsInfo;
 import com.qf.vo.GoodsSelecteds;
 import com.qf.vo.GoodsVo;
 

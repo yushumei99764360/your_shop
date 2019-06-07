@@ -95,9 +95,9 @@ WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id AND g.g_id = #{goodsId}
         </if>
     </select>
 
-    <!--根据商品id 删除商品信息-->
+    <!--根据商品id 删除商品信息 -->
     <delete id="delByGoodsId" parameterType="int">
-
+        DELETE FROM goodsinfo WHERE g_id = #{goodsId}
     </delete>
 
 </mapper>
