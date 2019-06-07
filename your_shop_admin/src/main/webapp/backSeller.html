@@ -151,6 +151,7 @@
                                     <th>电话号码</th>
                                     <th>地址</th>
                                     <th>描述</th>
+                                    <th>状态</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -205,8 +206,9 @@
             { "data": "s_phone" },
             { "data": "s_address" },
             { "data": "s_desc" },
+            { "data": "s_status" },
             {  "data":function (row,type) {
-                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"deleteJump("+row.s_id+")\"><i class='fa fa-search'></i>查看</button>"+
+                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"lookJump("+row.s_id+")\"><i class='fa fa-search'></i>查看</button>"+
                         "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.s_id+")\"><i class='fa fa-trash'></i>删除</button>"+
                         "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.s_id+")\"><i class='fa fa-edit'></i>修改</button>";
                 }
@@ -267,6 +269,12 @@
             },
             dataType: "json"
         });
+    }
+
+
+    function lookJump(sellerId) {
+        alert(sellerId);
+        window.location.href = "sellerDetail.html?sellerId=" + sellerId;
     }
 
 </script>

@@ -25,7 +25,7 @@
       SELECT COUNT(*) FROM goodsinfo g,sellerinfo s,seller_goods sg WHERE g.g_id=sg.`gid` AND sg.`sid`=s.`s_id`AND s.`s_id`=#{sellerId}
     </select>
 
-    <select id="pages" parameterType="java.util.Map" resultType="com.qf.dto.SellerInfoDto">
+    <select id="pages" parameterType="java.util.Map" resultType="com.qf.pojo.GoodsInfo">
      SELECT * FROM goodsinfo g,sellerinfo s,seller_goods sg WHERE g.g_id=sg.`gid` AND sg.`sid`=s.`s_id`AND s.`s_id`=#{sellerId}
       limit #{start}, #{length}
     </select>
