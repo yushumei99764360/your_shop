@@ -1,5 +1,6 @@
 package com.qf.service;
 
+import com.qf.dto.UserDetailInfo;
 import com.qf.dto.UserInfoDto;
 import com.qf.pojo.AdminInfo;
 import com.qf.pojo.UserInfo;
@@ -24,4 +25,7 @@ public interface UserInfoService {
     UserInfo getUserInfoById(int userId);
 
     int updateUserInfoById(UserInfo userInfo);
+
+    UserDetailInfo getUserDetailById(int userId);
+
 }

@@ -46,4 +46,9 @@
     <update id="updateUserInfoById" parameterType="com.qf.pojo.UserInfo">
       update userinfo set username=#{userName},password=#{password},email=#{email},phonenumber=#{phoneNumber} where userId=#{userId}
     </update>
+
+    <!--通过用户ID查询用户详细信息-->
+    <select id="getUserDetailById" parameterType="int" resultType="com.qf.dto.UserDetailInfo">
+        select * from userdetail where userId = #{userId}
+    </select>
 </mapper>

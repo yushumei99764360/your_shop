@@ -1,5 +1,6 @@
 package com.qf.service.impl;
 
+import com.qf.dto.UserDetailInfo;
 import com.qf.dto.UserInfoDto;
 import com.qf.mapper.UserInfoMapper;
 import com.qf.pojo.AdminInfo;
@@ -89,8 +90,23 @@ public class UserInfoImpl implements UserInfoService {
         return userInfoMapper.getUserInfoById(userId);
     }
 
+    /**
+     * 修该用户信息
+     * @param userInfo
+     * @return
+     */
     @Override
     public int updateUserInfoById(UserInfo userInfo) {
         return userInfoMapper.updateUserInfoById(userInfo);
+    }
+
+    /**
+     * 查询用户详细信息
+     * @param userId
+     * @return
+     */
+    @Override
+    public UserDetailInfo getUserDetailById(int userId) {
+        return userInfoMapper.getUserDetailById(userId);
     }
 }

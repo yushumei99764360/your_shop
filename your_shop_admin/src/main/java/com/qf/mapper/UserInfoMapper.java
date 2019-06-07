@@ -1,5 +1,6 @@
 package com.qf.mapper;
 
+import com.qf.dto.UserDetailInfo;
 import com.qf.dto.UserInfoDto;
 import com.qf.pojo.AdminInfo;
 import com.qf.pojo.UserInfo;
@@ -25,4 +26,6 @@ public interface UserInfoMapper {
     UserInfo getUserInfoById(int userId);
 
     int updateUserInfoById(UserInfo userInfo);
+
+    UserDetailInfo getUserDetailById(int userId);
 }
