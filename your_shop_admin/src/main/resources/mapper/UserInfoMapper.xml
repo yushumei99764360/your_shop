@@ -20,11 +20,12 @@
     <select id="count" resultType="int">
       select count(*) from userinfo
     </select>
-    <!--分页-->
+
     <select id="page" parameterType="java.util.Map" resultType="com.qf.pojo.UserInfo">
       select * from  userinfo  limit #{start}, #{length}
     </select>
 
+<<<<<<< Updated upstream
     <!--添加会员-->
     <insert id="insertUserInfo" parameterType="com.qf.dto.UserInfoDto">
        insert into userinfo (username,password,email,phonenumber) values (#{username},#{password},#{email},#{phonenumber})
@@ -46,4 +47,6 @@
     <update id="updateUserInfoById" parameterType="com.qf.pojo.UserInfo">
       update userinfo set username=#{userName},password=#{password},email=#{email},phonenumber=#{phoneNumber} where userId=#{userId}
     </update>
+=======
+>>>>>>> Stashed changes
 </mapper>

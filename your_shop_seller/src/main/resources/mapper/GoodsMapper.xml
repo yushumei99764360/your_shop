@@ -4,16 +4,100 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace 命名空间 增删改查 节点 所对应的抽象方法 所在的接口位置-->
 <mapper namespace="com.qf.mapper.GoodsMapper">
-    <!--查询所有商品信息-->
-    <select id="getAllGoods" resultType="com.qf.pojo.GoodsInfo">
-        SELECT * FROM goodsinfo
+    <!--查询所有商品信息  商品列表页面-->
+    <select id="getAllGoods" resultType="com.qf.vo.GoodsVo">
+        SELECT g.*,c.fathername,c.c_name childname FROM goodsinfo g , goods_category gc ,
+        (SELECT a.c_name fathername,b.*FROM category a ,category b WHERE a.c_parentid = 0 AND a.c_id = b.c_parentid ) c
+        WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id
     </select>
-    <!--新增商品信息-->
-    <insert id="addGoods" parameterType="com.qf.pojo.GoodsInfo">
+    <!--实现商品新增功能，1 先增加商品信息 2 再增加商品类别关系信息-->
+    <!--新增商品信息 -->
+    <insert id="addGoodsInfo" parameterType="com.qf.vo.GoodsVo">
         INSERT INTO goodsinfo(g_id,g_core,g_title,g_name,g_price,g_discount,g_disctprice,g_num,g_desc,g_pic,g_status,g_date,s_id)
         VALUES(DEFAULT,#{g_core},#{g_title},#{g_name},#{g_price},#{g_discount},#{g_disctprice},#{g_num},#{g_desc},#{g_pic},#{g_status},default,#{s_id})
     </insert>
-    
+    <!--新增商品列表关系信息-->
+    <insert id="addGoodsCategory" parameterType="com.qf.vo.GoodsVo">
+        INSERT INTO goods_category VALUES
+        (DEFAULT,  (SELECT c_id FROM category WHERE c_name = #{c_name}) , #{g_id})
+    </insert>
 
+    <!--实现商品修改功能； 1 先查询展示商品详情 2 再跟进修改的信息 修改商品信息 3 再修改商品类别关系信息-->
+    <!--根据商品id查询商品详情信息-->
+    <select id="getGoodsInfoByGoodsId" parameterType="int" resultType="com.qf.vo.GoodsVo">
+SELECT g.*,c.fathername,c.c_name childname FROM goodsinfo g , goods_category gc ,
+(SELECT a.c_name fathername,b.*FROM category a ,category b WHERE a.c_parentid = 0 AND a.c_id = b.c_parentid ) c
+WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id AND g.g_id = #{goodsId}
+    </select>
+    <!--修改商品信息-->
+    <update id="updateGoodsInfo" parameterType="com.qf.vo.GoodsVo">
+        UPDATE goodsinfo
+        <set>
+            <if test="g_id != null and g_id !=''">
+                g_id = #{g_id},
+            </if>
+            <if test="g_title != null and g_title !=''">
+                g_title = #{g_title},
+            </if>
+            <if test="g_name != null and g_name !=''">
+                g_name = #{g_name},
+            </if>
+            <if test="g_price != null and g_price !=''">
+                g_price = #{g_price},
+            </if>
+            <if test="g_discount != null and g_discount !=''">
+                g_discount = #{g_discount},
+            </if>
+            <if test="g_disctprice != null and g_disctprice !=''">
+                g_disctprice = #{g_disctprice},
+            </if>
+            <if test="g_num != null and g_num !=''">
+                g_num = #{g_num},
+            </if>
+            <if test="g_desc != null and g_desc !=''">
+                g_desc = #{g_desc},
+            </if>
+            <if test="g_pic != null and g_pic !=''">
+                g_pic = #{g_pic},
+            </if>
+            <if test="g_status != null and g_status !=''">
+                g_status = #{g_status},
+            </if>
+        </set>
+        WHERE g_id = #{g_id}
+    </update>
+    <!--修改关系信息-->
+    <update id="updateGoodsCategory" parameterType="com.qf.vo.GoodsVo">
+        UPDATE goods_category set c_id = (SELECT c_id FROM category WHERE c_name = #{c_name})
+        WHERE g_id = #{g_id}
+
+    </update>
+
+    <!--根据 产品类别  修改日期区间 是否上架 还有 name title desc 关键词搜索 商品列表-->
+    <select id="selectGoodsBys" resultType="com.qf.vo.GoodsVo" parameterType="com.qf.vo.GoodsSelecteds">
+        SELECT g.*,c.fathername,c.c_name childname FROM goodsinfo g , goods_category gc ,
+        (SELECT a.c_name fathername,b.*FROM category a ,category b WHERE a.c_parentid = 0 AND a.c_id = b.c_parentid ) c
+        WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id
+        <if test="categoryName != null and categoryName !=''">
+           and c.c_name = #{categoryName}
+        </if>
+        <if test="g_status != null and g_status !=''">
+            and g.g_status = #{g_status}
+        </if>
+        <if test="minDate != null and minDate !=''">
+            and g.g_lastdate > #{minDate}
+        </if>
+        <if test="maxDate != null and maxDate !=''">
+            and g.g_lastdate < #{maxDate}
+        </if>
+        <if test="categoryName != null and categoryName !=''">
+            and( g.g_title like #{str} or  g.g_name like #{str} or g.g_desc like #{str} )
+        </if>
+    </select>
+
+    <!--根据商品id 删除商品信息 -->
+    <delete id="delByGoodsId" parameterType="int">
+        DELETE FROM goodsinfo WHERE g_id = #{goodsId}
+    </delete>
 
 </mapper>
