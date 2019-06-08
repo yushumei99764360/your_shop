@@ -49,7 +49,7 @@
 
 
     <!--通过用户ID查询用户详细信息-->
-    <select id="getUserDetailById" parameterType="int" resultType="com.qf.dto.UserDetailInfo">
+    <select id="getUserDetailById" parameterType="int" resultType="com.qf.pojo.UserDetailInfo">
         select * from userdetail where userId = #{userId}
     </select>
 

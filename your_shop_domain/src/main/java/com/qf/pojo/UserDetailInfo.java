@@ -1,4 +1,4 @@
-package com.qf.dto;
+package com.qf.pojo;
 
 import lombok.Data;
 

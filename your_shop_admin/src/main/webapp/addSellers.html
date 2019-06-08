@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="plugins/iCheck/all.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/dropzone/css/basic.min.css" />
+    <link rel="stylesheet" href="plugins/dropzone/css/dropzone.min.css"/>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -114,13 +117,61 @@
         <section class="content-header">
             <h1>
                 后台
-                <small>后台管理</small>
+                <small>商家添加</small>
             </h1>
         </section>
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-
+                    <div class="wd">
+                        <div class="up_avater">
+                            <div class="warp_tip">
+                                <div class="upload_tip">
+                                    <p class="upload_text">头像*</p>
+                                </div>
+                                <div class="upload_main">
+                                    <div class="up-left">
+                                        <div class="pic-show">
+                                            <div id="dropz" class="dropzone" style="width: 200px; height: 200px"></div>
+                                        </div>
+                                        <form role="form">
+                                            <div class="box-body">
+                                                <div class="form-group">
+                                                    <label for="s_name">商家名</label>
+                                                    <input type="email" class="form-control" id="s_name" placeholder="商家名称">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="s_pwd">密码</label>
+                                                    <input type="email" class="form-control" id="s_pwd" placeholder="密码">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="s_phone">电话号码</label>
+                                                    <input type="email" class="form-control" id="s_phone" placeholder="电话号码">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="s_address">商家地址</label>
+                                                    <input type="email" class="form-control" id="s_address" placeholder="商家地址">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="s_desc">商家简介</label>
+                                                    <input type="email" class="form-control" id="s_desc" placeholder="商家简介">
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox"> Check me out
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <!-- /.box-body -->
+                                            <div class="box-footer">
+                                                <button type="submit" onclick="insertSellerInfo()" class="btn btn-primary">确定</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -143,6 +194,67 @@
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<!--Dropzone-->
+<script src="plugins/dropzone/js/dropzone.min.js"></script>
+<script>
+        Dropzone.options.dropz={
+            url: "upload", // 文件提交地址
+            method: "post",  // 也可用put
+            paramName: "dropzFile", // 默认为file
+            maxFiles: 1,// 一次性上传的文件数量上限
+            maxFilesize: 2, // 文件大小，单位：MB
+            acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
+            addRemoveLinks: true,
+            parallelUploads: 1,// 一次上传的文件数量
+            //previewsContainer:"#preview", // 上传图片的预览窗口
+            dictDefaultMessage: '拖动文件至此或者点击上传',
+            dictMaxFilesExceeded: "您最多只能上传1个文件！",
+            dictResponseError: '文件上传失败!',
+            dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
+            dictFallbackMessage: "浏览器不受支持",
+            dictFileTooBig: "文件过大上传文件最大支持.",
+            dictRemoveLinks: "删除",
+            dictCancelUpload: "取消",
+            init: function () {
+                this.on("addedfile", function (file) {
+                    // 上传文件时触发的事件
+                });
+                this.on("success", function (file, data) {
+                    // 上传成功触发的事件
+                    alert("上传成功")
+                });
+                this.on("error", function (file, data) {
+                    // 上传失败触发的事件
+                });
+                this.on("removedfile", function (file) {
+                    // 删除文件时触发的方法
+                });
+            }
+        };
+        /*商家信息添加*/
+    function insertSellerInfo() {
+        $.ajax({
+            type:"POST",
+            url:"insertSellerInfo",
+            contentType:"application/json",
+            data: JSON.stringify({
+                "s_name":$("#s_name").val(),
+                "s_pwd":$("#s_pwd").val(),
+                "s_phone":$("#s_phone").val(),
+                "s_address":$("#s_address").val(),
+                "s_desc":$("#s_desc").val()
+            }),
+            success : function (data) {
+                window.location.href="backSeller.html";
+            },
+            error : function (data) {
+                alert("新增失败")
+            },
+            dataType: "json"
+        });
+    }
 
+
+</script>
 </body>
 </html>

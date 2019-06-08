@@ -1,6 +1,6 @@
 package com.qf.service.impl;
 
-import com.qf.dto.UserDetailInfo;
+import com.qf.pojo.UserDetailInfo;
 import com.qf.dto.UserInfoDto;
 import com.qf.mapper.UserInfoMapper;
 import com.qf.pojo.AdminInfo;

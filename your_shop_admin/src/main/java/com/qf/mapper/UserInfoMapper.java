@@ -1,7 +1,7 @@
 package com.qf.mapper;
 
 
-import com.qf.dto.UserDetailInfo;
+import com.qf.pojo.UserDetailInfo;
 import com.qf.dto.UserInfoDto;
 
 import com.qf.pojo.AdminInfo;

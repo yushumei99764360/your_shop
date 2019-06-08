@@ -16,4 +16,6 @@ public class SellerInfo {
     int s_status;
     Date s_date;
     Date g_lastdate;
+    String icon;
+
 }
