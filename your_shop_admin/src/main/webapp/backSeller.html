@@ -34,7 +34,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     <header class="main-header">
-        <a href="backMain.html" class="logo">
+        <a href="index2.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>商</b>城</span>
             <!-- logo for regular state and mobile devices -->
@@ -77,7 +77,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="active"><a href="backUser.html"><i class="fa fa-circle-o"></i> 会员列表</a></li>
-                        <li><a href="addUsers.html"><i class="fa fa-circle-o"></i>会员添加</a></li>
+                        <li><a href="addGoods.html"><i class="fa fa-circle-o"></i>会员添加</a></li>
                     </ul>
                 </li>
             </ul>
@@ -91,10 +91,24 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="active"><a href="goodsList.html"><i class="fa fa-circle-o"></i> 商家列表</a></li>
-                        <li><a href="addUsers.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
+                        <li><a href="addGoods.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
                     </ul>
                 </li>
             </ul>
+            <ul class="sidebar-menu" data-widget="tree">
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>个人中心</span>
+                    <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a href="adminList.html"><i class="fa fa-circle-o"></i> 管理员列表</a></li>
+                    <li><a href="addAdmin.html"><i class="fa fa-circle-o"></i> 管理员添加</a></li>
+                </ul>
+            </li>
+        </ul>
         </section>
     </aside>
     <div class="content-wrapper">
@@ -131,12 +145,14 @@
                                 <thead>
                                 <tr>
                                     <th><input type="checkbox" class="minimal icheck_master" value="no"/></th>
-                                    <th>用户编号</th>
-                                    <th>用户名</th>
-                                    <th>用户密码</th>
-                                    <th>邮箱</th>
+                                    <th>商店编号</th>
+                                    <th>商店名</th>
+                                    <th>商店密码</th>
                                     <th>电话号码</th>
-                                    <th>操作 </th>
+                                    <th>地址</th>
+                                    <th>描述</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody id="dataTable">
@@ -181,23 +197,25 @@
         var columns=[
             {
                 "data":function (row,type) {
-                    return '<input type="checkbox" class="minimal" value="'+row.userId+'"/>';
+                    return '<input type="checkbox" class="minimal" value="'+row.s_id+'"/>';
                 }
             },
-            { "data": "userId" },
-            { "data": "userName" },
-            { "data": "password" },
-            { "data": "phoneNumber" },
-            { "data": "email" },
+            { "data": "s_id" },
+            { "data": "s_name" },
+            { "data": "s_pwd" },
+            { "data": "s_phone" },
+            { "data": "s_address" },
+            { "data": "s_desc" },
+            { "data": "s_status" },
             {  "data":function (row,type) {
-                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"searchJump("+row.userId+")\"><i class='fa fa-search'></i>查看</button>"+
-                           "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.userId+")\"><i class='fa fa-trash'></i>删除</button>"+
-                           "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.userId+")\"><i class='fa fa-edit'></i>修改</button>";
+                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"lookJump("+row.s_id+")\"><i class='fa fa-search'></i>查看</button>"+
+                        "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.s_id+")\"><i class='fa fa-trash'></i>删除</button>"+
+                        "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.s_id+")\"><i class='fa fa-edit'></i>修改</button>";
                 }
             }
         ];
 
-        APP.initDataTables("pageUsers",columns)
+        APP.initDataTables("pageSellers",columns)
     });
 
 
@@ -206,10 +224,10 @@
     function deleteJump(userId) {
         $.ajax({
             type: "POST",
-            url:"deleteUserInfoById?userId="+userId,
+            url:"/deleteUserInfoById?userId="+userId,
             contentType:"application/json",
             success: function (data) {
-                alert("删除成功");
+                alert("删除成功")
                 window.location.href="backUser.html";
             },
             error: function (data) {
@@ -221,35 +239,30 @@
 
 
     function jumptoadd(){
-        var url="addUsers.html";
+        var url="addGoods.html";
         window.location.href=url;
     }
 
-    function updatejump(userId){
-        var url="editUser.html?userId="+userId;
-        window.location.href=url;
-    }
-
-    function searchJump(userId) {
-        var url="userDetail.html?userId="+userId;
+    function updatejump(){
+        var url="editGoods.html";
         window.location.href=url;
     }
 
     /*批量删除*/
-    var selectUsersId = new Array();
+    var selectGoodsId = new Array();
     function deletecheckUsers() {
         $(":checkbox:checked").each(function (i) {
             if ($(this).val() != '' && $(this).val() != "no") {
-                selectUsersId.push($(this).val())
+                selectGoodsId.push($(this).val())
             }
         });
         $.ajax({
             type: "POST",
-            url: "deleteUsersInfo",
+            url: "/deleteGoodsInfo",
             contentType: "application/json",
-            data: JSON.stringify(selectUsersId),
+            data: JSON.stringify(selectGoodsId),
             success: function (data) {
-                window.location.href = "backUser.html"
+                window.location.href = "goodsList.html"
             },
             error: function (data) {
                 alert("执行失败")
@@ -258,6 +271,11 @@
         });
     }
 
+
+    function lookJump(sellerId) {
+        alert(sellerId);
+        window.location.href = "sellerDetail.html?sellerId=" + sellerId;
+    }
 
 </script>
 

@@ -1,5 +1,9 @@
 package com.qf.mapper;
 
+
+import com.qf.dto.UserDetailInfo;
+import com.qf.dto.UserInfoDto;
+
 import com.qf.pojo.AdminInfo;
 import com.qf.pojo.UserInfo;
 
@@ -17,7 +21,7 @@ public interface UserInfoMapper {
 
     int count();
 
-<<<<<<< Updated upstream
+
     int insertUserInfo(UserInfoDto userInfoDto);
 
     int deleteUsersInfo(List<Integer> selectUsersId);
@@ -25,6 +29,8 @@ public interface UserInfoMapper {
     UserInfo getUserInfoById(int userId);
 
     int updateUserInfoById(UserInfo userInfo);
-=======
->>>>>>> Stashed changes
+
+
+    UserDetailInfo getUserDetailById(int userId);
+
 }

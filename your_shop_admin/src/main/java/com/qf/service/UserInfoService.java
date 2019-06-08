@@ -1,5 +1,9 @@
 package com.qf.service;
 
+
+import com.qf.dto.UserDetailInfo;
+import com.qf.dto.UserInfoDto;
+
 import com.qf.pojo.AdminInfo;
 import com.qf.pojo.UserInfo;
 
@@ -15,7 +19,6 @@ public interface UserInfoService {
     int count();
 
     List<UserInfo> page(int start, int length);
-<<<<<<< Updated upstream
 
     int insertUserInfo(UserInfoDto userInfoDto);
 
@@ -24,6 +27,9 @@ public interface UserInfoService {
     UserInfo getUserInfoById(int userId);
 
     int updateUserInfoById(UserInfo userInfo);
-=======
->>>>>>> Stashed changes
+
+
+    UserDetailInfo getUserDetailById(int userId);
+
+
 }
