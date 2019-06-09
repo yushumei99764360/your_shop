@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -99,9 +99,8 @@
     </aside>
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>
-                商店名
-                <small>本店商品</small>
+            <h1 id="sellerName"  xml:lang="zh">
+
             </h1>
         </section>
         <section class="content">
@@ -109,12 +108,9 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">商店名</h3>
+                            <h3 class="box-title"></h3>
                         </div>
-                        <div class="row" style="margin-left: 10px">
-                            <button  style="width: 70px; height: 30px" type="button" class="btn  btn-primary" onclick = "jumptoadd()">新增<i ></i></button>
-                            <button  style="width: 70px; height: 30px" type="button" class="btn  btn-danger" onclick = "deletecheckUsers()">删除<i ></i></button>
-                        </div>
+
                         <form class="form-inline" role="form" style="margin-left: 10px; margin-top: 10px">
                             <div class="form-group has-feedback">
                                 <div class="input-group">
@@ -139,6 +135,7 @@
                                     <th>商品折扣</th>
                                     <th>商品折扣价</th>
                                     <th>商品状态</th>
+
 
                                 </tr>
                                 </thead>
@@ -180,15 +177,17 @@
 
 <script>
     var sellerId;
+    var sellerName;
     (function () {
         sellerId = window.location.search.split("=")[1];
-        alert(sellerId);
+        sellerName = decodeURI(window.location.search.split("=")[2]);
+        $("#sellerName").text(sellerName)
     })();
 
     $(function () {
         var columns=[
             {
-                "data":function (row,type) {
+                "data":function (row) {
                     return '<input type="checkbox" class="minimal" value="'+row.g_id+'"/>';
                 }
             },
@@ -199,13 +198,15 @@
             { "data": "g_price" },
             { "data": "g_discount" },
             { "data": "g_disctprice" },
-            { "data": "g_status" },
-            {  "data":function (row,type) {
-                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"searchJump("+row.g_id+")\"><i class='fa fa-search'></i>查看</button>"+
-                        "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.g_id+")\"><i class='fa fa-trash'></i>删除</button>"+
-                        "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.g_id+")\"><i class='fa fa-edit'></i>修改</button>";
-                }
-            }
+            { "data": function (row) {
+                    if (row.g_status == 1) {
+                        return "有售";
+                    } else {
+                        return "下架"
+                    }
+
+                } },
+
         ];
         var url = "listGoodsOfSellerById?sellerId=" + sellerId;
 

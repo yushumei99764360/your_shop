@@ -34,7 +34,6 @@ public class SellerController {
 
     @RequestMapping(value = "pageSellers",method = RequestMethod.GET)
     public Map<String,Object> page(HttpServletRequest request){
-
         Map<String,Object> result = new HashMap<String, Object>();
         String strdraw = request.getParameter("draw");
         String strstart = request.getParameter("start");
@@ -54,9 +53,8 @@ public class SellerController {
     查询该商店的商品并分页
      */
 
-    @RequestMapping(value = "listGoodsOfSellerById",method = RequestMethod.GET)
+    @RequestMapping(value = "listGoodsOfSellerById")
     public Map<String,Object> listGoodsOfSellerById(HttpServletRequest request){
-
         Map<String,Object> result = new HashMap<String, Object>();
         String strdraw = request.getParameter("draw");
         String strstart = request.getParameter("start");
@@ -66,7 +64,6 @@ public class SellerController {
         int start =strdraw==null?0:Integer.parseInt(strstart);
         int length =strdraw==null?10:Integer.parseInt(strlength);
         int sellerId =strdraw==null?0:Integer.parseInt(strsellerId);
-        System.out.println(sellerId);
         result.put("draw",draw);
         result.put("recordsTotal",sellerService.counts(sellerId));
         result.put("recordsFiltered",sellerService.counts(sellerId));
