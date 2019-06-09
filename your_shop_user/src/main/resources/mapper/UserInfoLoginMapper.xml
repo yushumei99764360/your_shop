@@ -7,6 +7,9 @@
     <select id="userInfoLogin" resultType="com.qf.pojo.UserInfo" parameterType="com.qf.vo.UserInfoLoginVo">
         select * from userinfo
         <where>
+            <if test="userId != null and userId != '' ">
+                or userId=#{userId}
+            </if>
             <if test="userName != null and userName != '' ">
                 or userName=#{userName}
             </if>

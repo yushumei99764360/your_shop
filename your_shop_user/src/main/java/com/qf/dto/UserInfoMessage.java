@@ -13,5 +13,7 @@ public class UserInfoMessage {
     private String nickName;
     private String gender;
     private String age;
+    private String icon;
     private String email;
+    private String realName;
 }

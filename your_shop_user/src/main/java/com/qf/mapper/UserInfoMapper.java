@@ -12,7 +12,7 @@ public interface UserInfoMapper {
      * @param userInfoLoginVo 用户名/密码/手机号/邮箱
      * @return
      */
-    public List<UserInfo> userInfoLogin(UserInfoLoginVo userInfoLoginVo);
+    public UserInfo userInfoLogin(UserInfoLoginVo userInfoLoginVo);
 
     /**
      * 根据用户id获取用户信息
