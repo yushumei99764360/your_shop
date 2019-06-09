@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.UserInfoMapper">
+    <!--根据id获取用户信息-->
+    <select id="getUserInfoMessageById" resultType="com.qf.dto.UserInfoMessage" parameterType="int">
+        SELECT u.userId,u.userName,u1.nickName,u1.gender,u1.age,u.email,u1.realname FROM userinfo u,userdetail u1 WHERE u.userId =#{userId};
+    </select>
+</mapper>

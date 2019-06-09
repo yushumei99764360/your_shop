@@ -1,6 +1,7 @@
 package com.qf.service.impl;
 
-import com.qf.mapper.UserInfoLoginMapper;
+import com.qf.dto.UserInfoMessage;
+import com.qf.mapper.UserInfoMapper;
 import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
 import com.qf.vo.UserInfoLoginVo;
@@ -13,14 +14,19 @@ import java.util.List;
 public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired
-    UserInfoLoginMapper userInfoLoginMapper;
+    UserInfoMapper userInfoMapper;
 
     @Override
     public Boolean userInfoLogin(UserInfoLoginVo userInfoLoginVo) {
-        List<UserInfo> userInfos = userInfoLoginMapper.userInfoLogin(userInfoLoginVo);
+        List<UserInfo> userInfos = userInfoMapper.userInfoLogin(userInfoLoginVo);
         if (userInfos != null && userInfos.size() > 0) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public UserInfoMessage getUserInfoMessageById(int userId) {
+        return userInfoMapper.getUserInfoMessageById(userId);
     }
 }

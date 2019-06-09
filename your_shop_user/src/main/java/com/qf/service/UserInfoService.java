@@ -1,5 +1,6 @@
 package com.qf.service;
 
+import com.qf.dto.UserInfoMessage;
 import com.qf.vo.UserInfoLoginVo;
 
 public interface UserInfoService {
@@ -9,4 +10,11 @@ public interface UserInfoService {
      * @return
      */
     public Boolean userInfoLogin(UserInfoLoginVo userInfoLoginVo);
+
+    /**
+     * 根据id获取用户信息
+     * @param userId 用户id
+     * @return
+     */
+    public UserInfoMessage getUserInfoMessageById(int userId);
 }
