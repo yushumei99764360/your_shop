@@ -17,4 +17,6 @@ public interface SellerService {
     int counts(int sellerId);
 
     List<GoodsInfo> pages(int start, int length, int sellerId);
+
+    int insertSellerInfo(SellerInfo sellerInfo);
 }

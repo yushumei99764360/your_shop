@@ -60,4 +60,9 @@ public class SellerServiceImpl implements SellerService {
         return sellerInfoMapper.pages(parms);
 
     }
+
+    @Override
+    public int insertSellerInfo(SellerInfo sellerInfo) {
+        return sellerInfoMapper.insertSellerInfo(sellerInfo);
+    }
 }

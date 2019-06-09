@@ -29,5 +29,8 @@
      SELECT * FROM goodsinfo g,sellerinfo s,seller_goods sg WHERE g.g_id=sg.`gid` AND sg.`sid`=s.`s_id`AND s.`s_id`=#{sellerId}
       limit #{start}, #{length}
     </select>
-    
+    <!--商家信息录入-->
+    <insert id="insertSellerInfo" parameterType="com.qf.pojo.SellerInfo">
+         insert into sellerinfo (s_name,s_pwd,s_phone,s_address,s_desc,icon,s_status) values (#{s_name},#{s_pwd},#{s_phone},#{s_address},#{s_desc},#{icon},1)
+    </insert>
 </mapper>

@@ -34,4 +34,12 @@ public interface SellerInfoMapper {
     int counts(int sellerId);
 
     List<GoodsInfo> pages(Map<String, Object> parms);
+
+    /**
+     * 商家信息录入
+     * @param sellerInfo
+     * @return
+     */
+    int insertSellerInfo(SellerInfo sellerInfo);
+
 }
