@@ -16,7 +16,7 @@
     <delete id="deleteUserInfoById" parameterType="int">
         delete from userinfo where userId=#{userId}
     </delete>
-
+    <!--分页-->
     <select id="count" resultType="int">
       select count(*) from userinfo
     </select>

@@ -23,6 +23,7 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -33,7 +34,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     <header class="main-header">
-        <a href="backMain.html" class="logo">
+        <a href="index2.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>商</b>城</span>
             <!-- logo for regular state and mobile devices -->
@@ -76,7 +77,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="active"><a href="backUser.html"><i class="fa fa-circle-o"></i> 会员列表</a></li>
-                        <li><a href="addUsers.html"><i class="fa fa-circle-o"></i>会员添加</a></li>
+                        <li><a href="addGoods.html"><i class="fa fa-circle-o"></i>会员添加</a></li>
                     </ul>
                 </li>
             </ul>
@@ -90,68 +91,71 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="active"><a href="backSeller.html"><i class="fa fa-circle-o"></i> 商家列表</a></li>
-                        <li><a href="addGoods.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
+                        <li><a href="addSellers.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
                     </ul>
                 </li>
-            </ul><ul class="sidebar-menu" data-widget="tree">
-            <li class="active treeview">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>个人中心</span>
-                    <span class="pull-right-container">
+            </ul>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="active treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>个人中心</span>
+                        <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="active"><a href="adminList.html"><i class="fa fa-circle-o"></i> 管理员列表</a></li>
-                    <li><a href="addAdmin.html"><i class="fa fa-circle-o"></i> 管理员添加</a></li>
-                </ul>
-            </li>
-        </ul>
-
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active"><a href="adminList.html"><i class="fa fa-circle-o"></i> 管理员列表</a></li>
+                        <li><a href="addAdmin.html"><i class="fa fa-circle-o"></i> 管理员添加</a></li>
+                    </ul>
+                </li>
+            </ul>
         </section>
     </aside>
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                后台
-                <small>后台管理</small>
+                用户
+                <small>用户列表</small>
             </h1>
         </section>
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <form class="form-horizontal">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">用户</h3>
+                        </div>
+                        <div class="row" style="margin-left: 10px">
+                            <button  style="width: 70px; height: 30px" type="button" class="btn  btn-primary" onclick = "jumptoadd()">新增<i ></i></button>
+                            <button  style="width: 70px; height: 30px" type="button" class="btn  btn-danger" onclick = "deletecheckAdmins()">删除<i ></i></button>
+                        </div>
+                        <form class="form-inline" role="form" style="margin-left: 10px; margin-top: 10px">
+                            <div class="form-group has-feedback">
+                                <div class="input-group">
+                                    <div class="input-group-addon">名称</div>
+                                    <input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入用户名">
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-warning" onclick=""><i class="glyphicon glyphicon-search"></i> 查询</button>
+                        </form>
+
+                        <!-- /.box-header -->
                         <div class="box-body">
-                            <div class="form-group">
-                                <label for="username" class="col-sm-1 control-label">用户名</label>
-                                <div class="col-sm-11">
-                                    <input type="" class="form-control" id="username" placeholder="用户名">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="col-sm-1 control-label">用户密码</label>
-                                <div class="col-sm-11">
-                                    <input type="password" class="form-control" id="password" placeholder="用户密码">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="col-sm-1 control-label">邮箱</label>
-                                <div class="col-sm-11">
-                                    <input type="email" class="form-control" id="email" placeholder="邮箱">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="phonenumber" class="col-sm-1 control-label">电话号码</label>
-                                <div class="col-sm-11">
-                                    <input  class="form-control" id="phonenumber" placeholder="电话号码">
-                                </div>
-                            </div>
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th><input type="checkbox" class="minimal icheck_master" value="no"/></th>
+                                    <th>管理员编号</th>
+                                    <th>用户名</th>
+                                    <th>密码</th>
+                                    <th>操作 </th>
+                                </tr>
+                                </thead>
+                                <tbody id="dataTable">
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="box-footer">
-                            <a href="backUser.html" type="submit" class="btn btn-default">返回</a>
-                            <button type="submit" onclick="insertUserInfo()" class="btn btn-info pull-right">添加</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -168,37 +172,101 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- iCheck 1.0.1 -->
+<script src="plugins/iCheck/icheck.min.js"></script>
+<!-- DataTables -->
+<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="assets/app.js"></script>
 
 
 <script>
 
-    function insertUserInfo() {
-        $.ajax({
-            type:"POST",
-            url:"insertUserInfo",
-            contentType:"application/json",
-            data: JSON.stringify({
-                "username":$("#username").val(),
-                "password":$("#password").val(),
-                "email":$("#email").val(),
-                "phonenumber":$("#phonenumber").val()
-            }),
-            success : function (data) {
 
-                window.location.href="backUser.html";
-
+    $(function () {
+        var columns=[
+            {
+                "data":function (row) {
+                    return '<input type="checkbox" class="minimal" value="'+row.aid+'"/>';
+                }
             },
-            error : function (data) {
-                alert("新增失败")
+            { "data": "aid" },
+            { "data": "ausername" },
+            { "data": "apassword" },
+            {  "data":function (row,type) {
+                    return"<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.aid+")\"><i class='fa fa-trash'></i>删除</button>"+
+                           "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.aid+")\"><i class='fa fa-edit'></i>修改</button>";
+                }
+            }
+        ];
+
+        APP.initDataTables("pageAdmins",columns)
+    });
+
+
+
+
+    function deleteJump(aid) {
+        alert(aid)
+        $.ajax({
+            type: "POST",
+            url:"deleteAdminInfoById?aidd="+aid,
+            contentType:"application/json",
+            success: function (data) {
+                alert("删除成功")
+                window.location.href="backUser.html";
+            },
+            error: function (data) {
+                alert("删除失败")
             },
             dataType: "json"
         });
     }
 
 
+    function jumptoadd(){
+        var url="addAdmin.html";
+        window.location.href=url;
+    }
+
+    function updatejump(aid){
+        var url="editAdmins.html?aid="+aid;
+        window.location.href=url;
+    }
+
+    /*批量删除*/
+    var selectAdminId = new Array();
+    function deletecheckAdmins() {
+        $(":checkbox:checked").each(function (i) {
+            if ($(this).val() != '' && $(this).val() != "no") {
+                selectAdminId.push($(this).val())
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "deleteAdminInfo",
+            contentType: "application/json",
+            data: JSON.stringify(selectAdminId),
+            success: function (data) {
+                window.location.href = "adminList.html"
+            },
+            error: function (data) {
+                alert("执行失败")
+            },
+            dataType: "json"
+        });
+    }
+
 </script>
+
 
 </body>
 </html>
+
+
