@@ -5,6 +5,6 @@
 <mapper namespace="com.qf.mapper.UserInfoMapper">
     <!--根据id获取用户信息-->
     <select id="getUserInfoMessageById" resultType="com.qf.dto.UserInfoMessage" parameterType="int">
-        SELECT u.userId,u.userName,u1.nickName,u1.gender,u1.age,u.email,u1.realname FROM userinfo u,userdetail u1 WHERE u.userId =#{userId};
+        SELECT u.userId,u.userName,u1.nickName,u1.gender,u1.age,u.email,u1.realname,u1.icon FROM userinfo u,userdetail u1 WHERE u.userId=u1.userID AND u.userId =#{userId};
     </select>
 </mapper>

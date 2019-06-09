@@ -17,12 +17,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     UserInfoMapper userInfoMapper;
 
     @Override
-    public Boolean userInfoLogin(UserInfoLoginVo userInfoLoginVo) {
-        List<UserInfo> userInfos = userInfoMapper.userInfoLogin(userInfoLoginVo);
-        if (userInfos != null && userInfos.size() > 0) {
-            return true;
-        }
-        return false;
+    public UserInfo userInfoLogin(UserInfoLoginVo userInfoLoginVo) {
+        return userInfoMapper.userInfoLogin(userInfoLoginVo);
     }
 
     @Override
