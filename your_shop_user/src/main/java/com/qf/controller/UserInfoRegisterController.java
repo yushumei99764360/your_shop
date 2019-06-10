@@ -5,9 +5,10 @@ import com.qf.tools.CodeUtils;
 import com.qf.tools.MailUtils;
 import com.qf.vo.RegisterUserVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class UserInfoRegisterController {
     @Autowired
     UserInfoService2 userInfoService2;
@@ -17,6 +18,7 @@ public class UserInfoRegisterController {
      * @param registerUserVo
      * @return
      */
+    @ResponseBody
     @RequestMapping(value = "RegisterUser",method = RequestMethod.POST)
     public String Register(@RequestBody(required = false) RegisterUserVo registerUserVo){
         Boolean aBoolean = userInfoService2.RegisterUserInfo(registerUserVo);
@@ -29,6 +31,7 @@ public class UserInfoRegisterController {
      * @param userName
      * @return
      */
+    @ResponseBody
     @RequestMapping(value = "checkUserName",method = RequestMethod.POST)
     public Object checkUserName(@RequestParam String userName){
         System.out.println("用户名为"+userName);
