@@ -32,4 +32,18 @@
     <insert id="insertSellerInfo" parameterType="com.qf.pojo.SellerInfo">
          insert into sellerinfo (s_name,s_pwd,s_phone,s_address,s_desc,icon,s_status) values (#{s_name},#{s_pwd},#{s_phone},#{s_address},#{s_desc},#{icon},1)
     </insert>
+
+    <!--查询单个商家-->
+    <select id="getSellerInfoById" parameterType="int" resultType="com.qf.pojo.SellerInfo">
+        select * from sellerinfo where s_id= #{sellerId}
+    </select>
+    <!--修改商家头像-->
+    <update id="updateIconBySellerId" >
+        update sellerinfo set icon=#{icon} where s_id=#{sellerId}
+    </update>
+    
+    <!--修改商家信息-->
+    <update id="updateSellerInfo" parameterType="com.qf.pojo.SellerInfo" >
+        update sellerinfo set s_name =#{s_name} ,s_pwd=#{s_pwd} ,s_phone=#{s_phone},s_address=#{s_address},s_desc=#{s_desc},s_status=#{s_status} where s_id=#{s_id};
+    </update>
 </mapper>

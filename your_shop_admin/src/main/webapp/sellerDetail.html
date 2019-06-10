@@ -77,7 +77,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="active"><a href="backUser.html"><i class="fa fa-circle-o"></i> 会员列表</a></li>
-                        <li><a href="addGoods.html"><i class="fa fa-circle-o"></i>会员添加</a></li>
+                        <li><a href="addUsers.html"><i class="fa fa-circle-o"></i>会员添加</a></li>
                     </ul>
                 </li>
             </ul>
@@ -90,8 +90,22 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="goodsList.html"><i class="fa fa-circle-o"></i> 商家列表</a></li>
-                        <li><a href="addGoods.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
+                        <li class="active"><a href="backSeller.html"><i class="fa fa-circle-o"></i> 商家列表</a></li>
+                        <li><a href="addSellers.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="active treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>个人中心</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active"><a href="adminList.html"><i class="fa fa-circle-o"></i> 管理员列表</a></li>
+                        <li><a href="addAdmin.html"><i class="fa fa-circle-o"></i> 管理员添加</a></li>
                     </ul>
                 </li>
             </ul>
@@ -108,18 +122,22 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title"></h3>
+                            <h3 class="box-title">商店头像</h3>
                         </div>
 
-                        <form class="form-inline" role="form" style="margin-left: 10px; margin-top: 10px">
-                            <div class="form-group has-feedback">
-                                <div class="input-group">
-                                    <div class="input-group-addon">名称</div>
-                                    <input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入用户名">
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-warning" onclick="serchUserInfo()"><i class="glyphicon glyphicon-search"></i> 查询</button>
-                        </form>
+                        <div class="pic-show "  >
+                            <div><img src="#" alt="头像" style="height: 200px ; width: 200px" id = "sellerIcon"></div>
+                        </div>
+
+                        <!--<form class="form-inline" role="form" style="margin-left: 10px; margin-top: 10px">-->
+                        <!--<div class="form-group has-feedback">-->
+                            <!--<div class="input-group">-->
+                                <!--<div class="input-group-addon">名称</div>-->
+                                <!--<input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入用户名">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<button type="button" class="btn btn-warning" onclick="serchUserInfo()"><i class="glyphicon glyphicon-search"></i> 查询</button>-->
+                    <!--</form>-->
 
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -176,10 +194,13 @@
 <script>
     var sellerId;
     var sellerName;
+    var icon;
     (function () {
         sellerId = window.location.search.split("=")[1];
         sellerName = decodeURI(window.location.search.split("=")[2]);
+        icon = decodeURI(window.location.search.split("=")[3]);
         $("#sellerName").text(sellerName)
+        $("#sellerIcon").attr("src", icon);
     })();
 
     $(function () {

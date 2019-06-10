@@ -2,6 +2,7 @@ package com.qf.mapper;
 
 import com.qf.pojo.GoodsInfo;
 import com.qf.pojo.SellerInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -42,4 +43,26 @@ public interface SellerInfoMapper {
      */
     int insertSellerInfo(SellerInfo sellerInfo);
 
+    /**
+     * 根据id查询商家
+     * @param sellerId
+     * @return
+     */
+    SellerInfo getSellerInfoById(int sellerId);
+
+    /**
+     * 修改商家头像
+     * @param sellerId
+     * @param icon
+     * @return
+     */
+    int updateIconBySellerId(@Param("sellerId") int sellerId,@Param("icon") String icon);
+
+    /**
+     * 修改商家信息
+     * @param sellerInfo
+     * @return
+     */
+
+    int updateSellerInfo(SellerInfo sellerInfo);
 }
