@@ -111,4 +111,13 @@ public class SellerController {
         sellerInfo.setIcon("images/"+icon);
         return sellerService.insertSellerInfo(sellerInfo);
     }
+
+    /*
+    删除单个商家
+     */
+    @RequestMapping(value="deleteSellerInfoById",method=RequestMethod.POST)
+    public Object deleteSellerInfoById(@RequestParam int sellerId) {
+        boolean flag = sellerService.deleteSellerInfoById(sellerId);
+        return flag;
+    }
 }
