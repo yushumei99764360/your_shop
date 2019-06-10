@@ -10,12 +10,17 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-@RestController
+@Controller
 public class UserInfoController {
     @Autowired
     UserInfoService userInfoService;
 
+    @RequestMapping("init")
+    public Object init(){
+        return "login";
+    }
 
+    @ResponseBody
     @RequestMapping(value = "userInfoLogin",method = RequestMethod.POST)
     public Object userInfoLogin(@RequestBody UserInfoLoginVo userInfoLoginVo, HttpSession httpSession) {
         UserInfo userInfo = userInfoService.userInfoLogin(userInfoLoginVo);
@@ -26,6 +31,12 @@ public class UserInfoController {
         return false;
     }
 
+    /**
+     *通过Id查询用户详细信息
+     * @param httpSession
+     * @return
+     */
+    @ResponseBody
     @RequestMapping(value = "getUserInfoMessageById",method = RequestMethod.GET)
     public Object getUserInfoMessageById(HttpSession httpSession) {
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
