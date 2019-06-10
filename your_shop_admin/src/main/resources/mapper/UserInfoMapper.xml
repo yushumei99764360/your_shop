@@ -62,4 +62,8 @@
     WHERE o.id=od.o_orderid AND o.`userId`=#{userId}
     limit #{start}, #{length}
     </select>
+    <!--查询用户名是否存在-->
+    <select id="checkUserName" resultType="int" parameterType="String">
+        select count(*) from userinfo where username=#{username}
+    </select>
 </mapper>

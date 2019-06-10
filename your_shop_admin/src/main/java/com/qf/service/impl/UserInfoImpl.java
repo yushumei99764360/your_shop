@@ -121,4 +121,14 @@ public class UserInfoImpl implements UserInfoService {
         return userInfoMapper.pageOrder(parms);
     }
 
+    /**
+     * 查询用户是否存在
+     * @param username
+     * @return
+     */
+    @Override
+    public int checkUserName(String username) {
+        return userInfoMapper.checkUserName();
+    }
+
 }

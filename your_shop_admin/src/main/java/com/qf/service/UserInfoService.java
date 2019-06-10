@@ -36,4 +36,6 @@ public interface UserInfoService {
     int orderCount(int userId);
 
     List<OrderInfoDto> pageOrder(int start, int length, int userId);
+
+    int checkUserName(String username);
 }
