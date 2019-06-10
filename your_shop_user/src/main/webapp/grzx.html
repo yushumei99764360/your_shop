@@ -438,7 +438,7 @@ $(function(){
 		function getUserInfoMessageById() {
             $.ajax({
                 type: 'GET',
-                url: "/getUserInfoMessageById?userId="+1,
+                url: "getUserInfoMessageById",
                 contentType:"application/json",
                 success: function(data){
                     //alert(data)
@@ -454,8 +454,6 @@ $(function(){
                 },
                 error:function (data) {
                     console.error(data);
-                    //alert(1)
-                    //alert(data)
                 },
                 dataType: "json"
             });
