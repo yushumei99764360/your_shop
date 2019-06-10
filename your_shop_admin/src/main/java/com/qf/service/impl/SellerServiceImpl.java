@@ -65,4 +65,34 @@ public class SellerServiceImpl implements SellerService {
     public int insertSellerInfo(SellerInfo sellerInfo) {
         return sellerInfoMapper.insertSellerInfo(sellerInfo);
     }
+
+    @Override
+    public SellerInfo getSellerInfoById(int sellerId) {
+        return sellerInfoMapper.getSellerInfoById(sellerId);
+    }
+
+    @Override
+    public boolean updateIconBySellerId(int sellerId, String icon) {
+        int i = sellerInfoMapper.updateIconBySellerId(sellerId, icon);
+        if (i != 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 修改商家信息
+     * @param sellerInfo
+     * @return
+     */
+
+    @Override
+    public boolean updateSellerInfo(SellerInfo sellerInfo) {
+        int i = sellerInfoMapper.updateSellerInfo(sellerInfo);
+        if (i != 0) {
+            return true;
+        }
+        return false;
+    }
+
 }

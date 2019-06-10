@@ -105,23 +105,24 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="active"><a href="backSeller.html"><i class="fa fa-circle-o"></i> 商家列表</a></li>
-                        <li><a href="addGoods.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
+                        <li><a href="addSellers.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
                     </ul>
                 </li>
-            </ul><ul class="sidebar-menu" data-widget="tree">
-            <li class="active treeview">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>个人中心</span>
-                    <span class="pull-right-container">
+            </ul>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="active treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>个人中心</span>
+                        <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="active"><a href="adminList.html"><i class="fa fa-circle-o"></i> 管理员列表</a></li>
-                    <li><a href="addAdmin.html"><i class="fa fa-circle-o"></i> 管理员添加</a></li>
-                </ul>
-            </li>
-        </ul>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active"><a href="adminList.html"><i class="fa fa-circle-o"></i> 管理员列表</a></li>
+                        <li><a href="addAdmin.html"><i class="fa fa-circle-o"></i> 管理员添加</a></li>
+                    </ul>
+                </li>
+            </ul>
 
         </section>
     </aside>
@@ -134,7 +135,7 @@
         </section>
         <section class="content">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-lg-12  " >
                     <div class="wd">
                         <div class="up_avater">
                             <div class="warp_tip">
@@ -143,8 +144,15 @@
                                 </div>
                                 <div class="upload_main">
                                     <div class="up-left">
-                                        <div class="pic-show">
-                                            <div id="dropz" class="dropzone" style="width: 200px; height: 200px"></div>
+                                        <div class="pic-show" >
+                                            <div> <img src="#" alt="" id="sellerIcon" style="width: 180px; height: 220px"></div>
+                                            <form name="iconUpLoad" id="iconUpLoad"  enctype="multipart/form-data">
+                                                <input type="file" name="file" class="btn btn-sm  ">
+                                            </form>
+                                            <input type="submit" value="修改" class="btn btn-sm  btn-primary" onclick="iconUpload()"/>
+
+
+
                                         </div>
                                         <form role="form" id="commentForm">
                                             <div class="box-body">
@@ -168,6 +176,13 @@
                                                     <label for="s_desc">商家简介</label>
                                                     <input type="email" class="form-control"  id="s_desc" placeholder="商家简介" required>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="s_status">商家状态</label><br>
+                                                    <select id="s_status">
+                                                        <option id="online" value="1">在线</option>
+                                                        <option id="offline" value="0">下线</option>
+                                                    </select>
+                                                </div>
                                                 <!--<div class="checkbox">-->
                                                     <!--<label>-->
                                                         <!--<input type="checkbox"> Check me out-->
@@ -176,7 +191,7 @@
                                             </div>
                                             <!-- /.box-body -->
                                             <div class="box-footer">
-                                                <input type="submit" onclick="insertSellerInfo()" class="btn btn-primary" value="确定"/>
+                                                <input type="submit" onclick="updateSellerInfo()" class="btn btn-primary" value="修改"/>
                                             </div>
                                         </form>
                                     </div>
@@ -209,61 +224,85 @@
 <!--Dropzone-->
 <script src="plugins/dropzone/js/dropzone.min.js"></script>
 <script>
-    Dropzone.options.dropz={
-        url: "upload", // 文件提交地址
-        method: "post",  // 也可用put
-        paramName: "dropzFile", // 默认为file
-        maxFiles: 1,// 一次性上传的文件数量上限
-        maxFilesize: 2, // 文件大小，单位：MB
-        acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
-        addRemoveLinks: true,
-        parallelUploads: 1,// 一次上传的文件数量
-        //previewsContainer:"#preview", // 上传图片的预览窗口
-        dictDefaultMessage: '拖动文件至此或者点击上传',
-        dictMaxFilesExceeded: "您最多只能上传1个文件！",
-        dictResponseError: '文件上传失败!',
-        dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
-        dictFallbackMessage: "浏览器不受支持",
-        dictFileTooBig: "文件过大上传文件最大支持.",
-        dictRemoveLinks: "删除",
-        dictCancelUpload: "取消",
-        init: function () {
-            this.on("addedfile", function (file) {
-                // 上传文件时触发的事件
-            });
-            this.on("success", function (file, data) {
-                // 上传成功触发的事件
-                alert("上传成功")
-            });
-            this.on("error", function (file, data) {
-                // 上传失败触发的事件
-            });
-            this.on("removedfile", function (file) {
-                // 删除文件时触发的方法
-            });
-        }
-    };
-    /*商家信息添加*/
-    function insertSellerInfo() {
+
+    var sellerId;
+
+    (function () {
+        sellerId = window.location.search.split("=")[1];
         $.ajax({
             type:"POST",
-            url:"insertSellerInfo",
+            url: "getSellerInfoById?sellerId=" + sellerId,
             contentType:"application/json",
-            data: JSON.stringify({
-                "s_name":$("#s_name").val(),
-                "s_pwd":$("#s_pwd").val(),
-                "s_phone":$("#s_phone").val(),
-                "s_address":$("#s_address").val(),
-                "s_desc":$("#s_desc").val()
-            }),
+            data: {},
             success : function (data) {
-                window.location.href="backSeller.html";
+                $("#s_name").val(data.s_name);
+                $("#s_pwd").val(data.s_pwd);
+                $("#s_phone").val(data.s_phone);
+                $("#s_address").val(data.s_address);
+                $("#s_desc").val(data.s_desc);
+                $("#sellerIcon").attr("src", data.icon);
+                $("#s_status").val(data.s_status);
             },
             error : function (data) {
-                alert("新增失败")
+                alert("失败")
             },
             dataType: "json"
         });
+    })();
+
+    function iconUpload() {
+        var formData = new FormData($("#iconUpLoad")[0]);
+        $.ajax({
+            type: 'post',
+            url: "iconUpload?sellerId=" + sellerId,
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success : function (data) {
+                if (data) {
+                    window.location.reload();
+                } else {
+                    alert("修改失败！")
+                }
+            },
+            error : function (data) {
+                alert("请求失败！");
+            },
+            // dataType: "json"
+
+        });
+    }
+
+    function updateSellerInfo() {
+        var sellerInfo = {
+            "s_id":sellerId,
+            "s_name": $("#s_name").val(),
+            "s_pwd": $("#s_pwd").val(),
+            "s_phone": $("#s_phone").val(),
+            "s_address": $("#s_address").val(),
+            "s_desc": $("#s_desc").val(),
+            "s_status": $("#s_status").val(),
+        };
+        $.ajax({
+            type:"POST",
+            url: "updateSellerInfo",
+            contentType:"application/json",
+            data: JSON.stringify(sellerInfo),
+            success : function (data) {
+                if (data) {
+                    alert("修改成功！")
+                    window.location.reload();
+                } else {
+                    alert("修改失败！")
+                }
+            },
+            error : function (data) {
+                alert("失败")
+            },
+            dataType: "json"
+        });
+
     }
 
 

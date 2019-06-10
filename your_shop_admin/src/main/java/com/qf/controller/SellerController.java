@@ -1,19 +1,18 @@
 package com.qf.controller;
 
 
+import com.qf.dto.SellerInfoDto;
 import com.qf.pojo.SellerInfo;
 import com.qf.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 public class SellerController {
@@ -118,6 +117,51 @@ public class SellerController {
     @RequestMapping(value="deleteSellerInfoById",method=RequestMethod.POST)
     public Object deleteSellerInfoById(@RequestParam int sellerId) {
         boolean flag = sellerService.deleteSellerInfoById(sellerId);
+        return flag;
+    }
+
+    /**
+     * 查询单个商家信息
+     * @param sellerId
+     * @return
+     */
+    @RequestMapping(value="getSellerInfoById",method=RequestMethod.POST)
+    public Object getSellerInfoById(@RequestParam int sellerId) {
+        SellerInfo sellerInfo = sellerService.getSellerInfoById(sellerId);
+        return sellerInfo;
+    }
+
+    /**
+     * 头像上传
+     * @param file
+     * @param sellerId
+     * @return
+     */
+
+    @RequestMapping(value = "iconUpload", method = RequestMethod.POST)
+    public Object  iconUpload(@RequestParam("file") CommonsMultipartFile file, @RequestParam("sellerId") int sellerId) {
+
+        System.out.println("fileName："+file.getOriginalFilename());
+        String path="F:\\java1901\\第三阶段代码\\项目周\\your_shop\\your_shop_admin\\src\\main\\webapp\\images\\"+file.getOriginalFilename();
+
+        String icon = "images/"+file.getOriginalFilename();
+        File newFile=new File(path);
+        boolean flag = false;
+        try {
+            file.transferTo(newFile);
+             flag =  sellerService.updateIconBySellerId(sellerId, icon);
+            return flag;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+
+    @RequestMapping(value = "updateSellerInfo", method = RequestMethod.POST)
+    public Object updateSellerInfo(@RequestBody SellerInfo sellerInfo) {
+        boolean flag =  sellerService.updateSellerInfo(sellerInfo);
+        System.out.println(flag);
         return flag;
     }
 }
