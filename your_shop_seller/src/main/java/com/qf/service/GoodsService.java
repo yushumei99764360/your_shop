@@ -9,7 +9,7 @@ import java.util.List;
 public interface GoodsService {
 
     // 查询所有商品信息  商品列表页面
-    List<GoodsVo> getAllGoods();
+    List<GoodsVo> getAllGoods(int s_id);
 
     //    实现商品新增功能，1 先增加商品信息 2 再增加商品类别关系信息
     boolean addGoodsInfo(GoodsVo goodsVo);

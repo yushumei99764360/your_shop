@@ -19,9 +19,9 @@ public class GoodsController {
     // 查询所有商品信息  商品列表页面
     @ResponseBody
     @RequestMapping("getAllGoods")
-    public Object getAllGoodsInfo(){
+    public Object getAllGoodsInfo(@RequestParam int s_id){
 //        System.out.println(2222);
-        List<GoodsVo> goodsInfoList = goodsService.getAllGoods();
+        List<GoodsVo> goodsInfoList = goodsService.getAllGoods(s_id);
         System.out.println(goodsInfoList);
         return goodsInfoList;
     }
