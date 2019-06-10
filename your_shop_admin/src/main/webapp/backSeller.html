@@ -219,10 +219,10 @@
 
 
 
-    function deleteJump(userId) {
+    function deleteJump(sellerId) {
         $.ajax({
             type: "POST",
-            url:"/deleteUserInfoById?userId="+userId,
+            url:"deleteSellerInfoById?sellerId="+sellerId,
             contentType:"application/json",
             success: function (data) {
                 alert("删除成功")
@@ -241,8 +241,8 @@
         window.location.href=url;
     }
 
-    function updatejump(){
-        var url="editGoods.html";
+    function updatejump(sellerId){
+        var url = "editSeller.html?sellerId=" + sellerId;
         window.location.href=url;
     }
 
