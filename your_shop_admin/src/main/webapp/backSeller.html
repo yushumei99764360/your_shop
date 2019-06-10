@@ -222,7 +222,7 @@
     function deleteJump(userId) {
         $.ajax({
             type: "POST",
-            url:"/deleteUserInfoById?userId="+userId,
+            url:"deleteUserInfoById?userId="+userId,
             contentType:"application/json",
             success: function (data) {
                 alert("删除成功")

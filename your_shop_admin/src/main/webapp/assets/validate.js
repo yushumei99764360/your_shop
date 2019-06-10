@@ -5,12 +5,33 @@ var Validate =function () {
     /**
      * 初始化
      */
-    var handlerInitValidate =function () {
-        console.log("111")
+    var handlerInitValidate =function (url,ajaxurl) {
         $.validator.addMethod("phonenumber",function (value,element) {
             var length=value.length;
             var phonenumber = /^(((13[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
             return this.optional(element) || (length == 11 && phonenumber.test(value));
+        });
+        $.validator.setDefaults({
+            submitHandler: function() {
+                $.ajax({
+                    type:"POST",
+                    url:"/insertUserInfo",
+                    contentType:"application/json",
+                    data: JSON.stringify({
+                        "username":$("#username").val(),
+                        "password":$("#password").val(),
+                        "phonenumber":$("#phonenumber").val(),
+                        "email":$("#email").val()
+                    }),
+                    success : function (data) {
+                        window.location.href="login.html";
+                    },
+                    error : function (data) {
+                        window.location.href="Test.html";
+                    },
+                    dataType: "json"
+                });
+            }
         });
         $().ready(function() {
             $("#commentForm").validate({
@@ -19,16 +40,16 @@ var Validate =function () {
                     lastname: "required",
                     username: {
                         required: true,
-                        minlength: 2
-                   /*     remote:{
-                            url:"/checkUserName",
+                        minlength: 2,
+                      remote:{
+                            url:url,
                             type:"post",
                             data:{
                                 username:function () {
                                     return $("#username").val();
                                 }
                             }
-                        }*/
+                        }
                     },
                     password: {
                         required: true,

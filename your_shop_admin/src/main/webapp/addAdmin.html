@@ -159,31 +159,32 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
 
+<script src="assets/validate.js"></script>
 
 <script>
 
     function insertAdminInfo() {
-        $.ajax({
-            type:"POST",
-            url:"insertAdminInfo",
-            contentType:"application/json",
-            data: JSON.stringify({
-                "ausername":$("#ausername").val(),
-                "apassword":$("#apassword").val()
-            }),
-            success : function (data) {
 
-                window.location.href="backAdmin.html";
-
-            },
-            error : function (data) {
-                alert("新增失败")
-            },
-            dataType: "json"
-        });
     }
+    var ajaxurl=  $.ajax({
+        type:"POST",
+        url:"insertAdminInfo",
+        contentType:"application/json",
+        data: JSON.stringify({
+            "ausername":$("#ausername").val(),
+            "apassword":$("#apassword").val()
+        }),
+        success : function (data) {
 
+            window.location.href="backAdmin.html";
 
+        },
+        error : function (data) {
+            alert("新增失败")
+        },
+        dataType: "json"
+    });
+    Validate.init(ajaxurl)
 </script>
 
 </body>
