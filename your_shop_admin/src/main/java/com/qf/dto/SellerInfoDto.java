@@ -14,6 +14,17 @@ public class SellerInfoDto {
     String s_status;
     Date s_date;
     Date g_lastdate;
+    String icon;
+
+
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public SellerInfoDto() {
     }
@@ -129,6 +140,7 @@ public class SellerInfoDto {
                 ", s_status='" + s_status + '\'' +
                 ", s_date=" + s_date +
                 ", g_lastdate=" + g_lastdate +
+                ", icon='" + icon + '\'' +
                 '}';
     }
 }

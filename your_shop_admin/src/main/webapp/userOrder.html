@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="plugins/iCheck/all.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-
+    <!--validate-->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,7 +34,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     <header class="main-header">
-        <a href="index2.html" class="logo">
+        <a href="backMain.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>商</b>城</span>
             <!-- logo for regular state and mobile devices -->
@@ -94,28 +94,27 @@
                         <li><a href="addSellers.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
                     </ul>
                 </li>
-            </ul>
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="active treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>个人中心</span>
-                        <span class="pull-right-container">
+            </ul><ul class="sidebar-menu" data-widget="tree">
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>个人中心</span>
+                    <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active"><a href="adminList.html"><i class="fa fa-circle-o"></i> 管理员列表</a></li>
-                        <li><a href="addAdmin.html"><i class="fa fa-circle-o"></i> 管理员添加</a></li>
-                    </ul>
-                </li>
-            </ul>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a href="adminList.html"><i class="fa fa-circle-o"></i> 管理员列表</a></li>
+                    <li><a href="addAdmin.html"><i class="fa fa-circle-o"></i> 管理员添加</a></li>
+                </ul>
+            </li>
+        </ul>
         </section>
     </aside>
     <div class="content-wrapper">
         <section class="content-header">
             <h1>
-                商家
-                <small>商家列表</small>
+                用户
+                <small>用户列表</small>
             </h1>
         </section>
         <section class="content">
@@ -123,18 +122,12 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">商家</h3>
+                            <h3 class="box-title">用户</h3>
                         </div>
-
-                        <!--<form class="form-inline" role="form" style="margin-left: 10px; margin-top: 10px">-->
-                            <!--<div class="form-group has-feedback">-->
-                                <!--<div class="input-group">-->
-                                    <!--<div class="input-group-addon">名称</div>-->
-                                    <!--<input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入用户名">-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<button type="button" class="btn btn-warning" onclick="serchUserInfo()"><i class="glyphicon glyphicon-search"></i> 查询</button>-->
-                        <!--</form>-->
+                        <form class="form-inline" role="form" style="margin-left: 10px; margin-top: 10px">
+                            <div class="form-group has-feedback">
+                            </div>
+                        </form>
 
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -142,14 +135,12 @@
                                 <thead>
                                 <tr>
                                     <th><input type="checkbox" class="minimal icheck_master" value="no"/></th>
-                                    <th>商店编号</th>
-                                    <th>商店名</th>
-                                    <th>商店密码</th>
-                                    <th>电话号码</th>
+                                    <th>订单编号</th>
+                                    <th>收货人</th>
                                     <th>地址</th>
-                                    <th>描述</th>
-                                    <th>状态</th>
-                                    <th>操作</th>
+                                    <th>商品</th>
+                                    <th>下单日期</th>
+                                    <th>总价 </th>
                                 </tr>
                                 </thead>
                                 <tbody id="dataTable">
@@ -186,94 +177,40 @@
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="assets/app.js"></script>
 
+<script src="assets/app.js"></script>
 
 <script>
 
+    var userId;
+    function getUserId() {
+        userId = window.location.search.split("=")[1];
+    }
+    getUserId();
 
     $(function () {
         var columns=[
             {
-                "data":function (row) {
-                    return '<input type="checkbox" class="minimal" value="'+row.s_id+'"/>';
+                "data":function (row,type) {
+                    return '<input type="checkbox" class="minimal" value="'+row.userId+'"/>';
                 }
             },
-            { "data": "s_id" },
-            { "data": "s_name" },
-            { "data": "s_pwd" },
-            { "data": "s_phone" },
-            { "data": "s_address" },
-            { "data": "s_desc" },
-            { "data": "s_status" },
-            {  "data":function (row,type) {
-                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"lookJump('"+row.s_id+"','"+row.s_name+"','"+row.icon +"')\"><i class='fa fa-search'></i>查看</button>"+
-                        "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.s_id+")\"><i class='fa fa-trash'></i>删除</button>"+
-                        "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.s_id+")\"><i class='fa fa-edit'></i>修改</button>"+
-                        "<button type=\"button\" class=\"btn btn-sm  btn-success\" onclick = \"orderjump("+row.s_id+")\"><i class='fa  fa-align-justify'></i>订单</button>";
-                }
-            }
+            { "data": "o_orderid" },
+            { "data": "o_shperson" },
+            { "data": function (row) {
+                    return ''+row.o_province+row.o_city+row.o_district+row.o_shaddress+' '
+                } },
+            { "data": "g_name" },
+            { "data": "order_date" },
+            { "data": "g_total_price" }
         ];
-
-        APP.initDataTables("pageSellers",columns)
+        var url="pageOrdersById?userId="+userId;
+        APP.initDataTables(url,columns)
     });
 
 
 
 
-    function deleteJump(userId) {
-        $.ajax({
-            type: "POST",
-            url:"deleteUserInfoById?userId="+userId,
-            contentType:"application/json",
-            success: function (data) {
-                alert("删除成功")
-                window.location.href="backSeller.html";
-            },
-            error: function (data) {
-                alert("删除失败")
-            },
-            dataType: "json"
-        });
-    }
 
-
-    function jumptoadd(){
-        var url="addGoods.html";
-        window.location.href=url;
-    }
-
-    function updatejump(){
-        var url="editGoods.html";
-        window.location.href=url;
-    }
-
-    /*批量删除*/
-    var selectGoodsId = new Array();
-    function deletecheckUsers() {
-        $(":checkbox:checked").each(function (i) {
-            if ($(this).val() != '' && $(this).val() != "no") {
-                selectGoodsId.push($(this).val())
-            }
-        });
-        $.ajax({
-            type: "POST",
-            url: "/deleteGoodsInfo",
-            contentType: "application/json",
-            data: JSON.stringify(selectGoodsId),
-            success: function (data) {
-                window.location.href = "goodsList.html"
-            },
-            error: function (data) {
-                alert("执行失败")
-            },
-            dataType: "json"
-        });
-    }
-
-
-    function lookJump(sellerId,sName,icon) {
-
-        window.location.href = encodeURI("sellerDetail.html?sellerId="+sellerId+"="+sName+"="+icon);
-    }
 
 </script>
 

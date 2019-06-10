@@ -26,11 +26,11 @@ public class GoodsVo {
     //    商品照片
     String g_pic;
     //是否上架 1是 0不是
-    int g_status = 1;
+    int g_status ;
     // 商品录入时间
-    Date g_date;
+    String g_date;
     //    商品最后修改时间
-    Date g_lastdate;
+    String g_lastdate;
     // 商店id
     int s_id;
 //    商品子类
@@ -148,19 +148,19 @@ public class GoodsVo {
         this.g_status = g_status;
     }
 
-    public Date getG_date() {
+    public String getG_date() {
         return g_date;
     }
 
-    public void setG_date(Date g_date) {
+    public void setG_date(String g_date) {
         this.g_date = g_date;
     }
 
-    public Date getG_lastdate() {
+    public String getG_lastdate() {
         return g_lastdate;
     }
 
-    public void setG_lastdate(Date g_lastdate) {
+    public void setG_lastdate(String g_lastdate) {
         this.g_lastdate = g_lastdate;
     }
 

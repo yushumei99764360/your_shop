@@ -52,5 +52,18 @@
     <select id="getUserDetailById" parameterType="int" resultType="com.qf.pojo.UserDetailInfo">
         select * from userdetail where userId = #{userId}
     </select>
-
+    <!--查询订单总数-->
+    <select id="orderCount" resultType="int" parameterType="int">
+      SELECT COUNT(*) FROM orderinfo o,order_detail od WHERE userId=#{userId} AND o.id=od.o_orderid
+    </select>
+    <select id="pageOrder" parameterType="java.util.Map" resultType="com.qf.dto.OrderInfoDto">
+    SELECT o.`userId`,o.o_shperson,od.order_date,od.g_name,od.g_total_price,o.o_province,o.o_city,o_district,o_shaddress,od.o_orderid
+    FROM orderinfo o,order_detail od
+    WHERE o.id=od.o_orderid AND o.`userId`=#{userId}
+    limit #{start}, #{length}
+    </select>
+    <!--查询用户名是否存在-->
+    <select id="checkUserName" resultType="int" parameterType="String">
+        select count(*) from userinfo where username=#{username}
+    </select>
 </mapper>

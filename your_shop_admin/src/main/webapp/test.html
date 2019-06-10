@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+<input type="file" id="picture">
+<div class="box" style="margin-top: 10px"><img src="" alt=""></div>
+
+
+<script>
+
+    $("#picture").change(function(){
+        var file = $("#picture")[0].files[0]; //如果后台用 MultipartFile处理，直接传给后台file
+        if (window.FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //监听文件读取结束后事件
+            reader.onloadend = function (e) {
+                $(".box").find('img').attr("src",e.target.result);    //e.target.result就是最后的路径地址(base 64)
+            };
+        }
+    });
+
+</script>
+
+</body>
+</html>

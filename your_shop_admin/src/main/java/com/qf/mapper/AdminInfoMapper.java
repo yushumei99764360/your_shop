@@ -19,4 +19,6 @@ public interface AdminInfoMapper {
     AdminInfo getAdminInfoById(int aid);
 
     int updateAdminInfoById(AdminInfo adminInfo);
+
+    int checkAdminName(String username);
 }
