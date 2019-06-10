@@ -207,7 +207,8 @@
             {  "data":function (row,type) {
                     return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"lookJump('"+row.s_id+"','"+row.s_name+"')\"><i class='fa fa-search'></i>查看</button>"+
                         "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.s_id+")\"><i class='fa fa-trash'></i>删除</button>"+
-                        "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.s_id+")\"><i class='fa fa-edit'></i>修改</button>";
+                        "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.s_id+")\"><i class='fa fa-edit'></i>修改</button>"+
+                        "<button type=\"button\" class=\"btn btn-sm  btn-success\" onclick = \"orderjump("+row.s_id+")\"><i class='fa  fa-align-justify'></i>订单</button>";
                 }
             }
         ];
@@ -218,14 +219,14 @@
 
 
 
-    function deleteJump(userId) {
+    function deleteJump(sellerId) {
         $.ajax({
             type: "POST",
-            url:"/deleteUserInfoById?userId="+userId,
+            url:"deleteSellerInfoById?sellerId="+sellerId,
             contentType:"application/json",
             success: function (data) {
                 alert("删除成功")
-                window.location.href="backUser.html";
+                window.location.href="backSeller.html";
             },
             error: function (data) {
                 alert("删除失败")
@@ -240,8 +241,8 @@
         window.location.href=url;
     }
 
-    function updatejump(){
-        var url="editGoods.html";
+    function updatejump(sellerId){
+        var url = "editSeller.html?sellerId=" + sellerId;
         window.location.href=url;
     }
 
