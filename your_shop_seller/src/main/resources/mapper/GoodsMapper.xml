@@ -5,10 +5,10 @@
 <!-- namespace 命名空间 增删改查 节点 所对应的抽象方法 所在的接口位置-->
 <mapper namespace="com.qf.mapper.GoodsMapper">
     <!--查询所有商品信息  商品列表页面-->
-    <select id="getAllGoods" resultType="com.qf.vo.GoodsVo">
+    <select id="getAllGoods" resultType="com.qf.vo.GoodsVo" parameterType="int">
         SELECT g.*,c.fathername,c.c_name childname FROM goodsinfo g , goods_category gc ,
         (SELECT a.c_name fathername,b.*FROM category a ,category b WHERE a.c_parentid = 0 AND a.c_id = b.c_parentid ) c
-        WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id
+        WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id AND g.s_id = #{s_id}
     </select>
     <!--实现商品新增功能，1 先增加商品信息 2 再增加商品类别关系信息-->
     <!--新增商品信息 -->

@@ -19,8 +19,8 @@ public class GoodsServiceImpl implements GoodsService {
     GoodsMapper goodsMapper;
 
     // 查询所有商品信息  商品列表页面
-    public List<GoodsVo> getAllGoods() {
-        return goodsMapper.getAllGoods();
+    public List<GoodsVo> getAllGoods(int s_id) {
+        return goodsMapper.getAllGoods(s_id);
     }
 
     //    实现商品新增功能，1 先增加商品信息 2 再增加商品类别关系信息
