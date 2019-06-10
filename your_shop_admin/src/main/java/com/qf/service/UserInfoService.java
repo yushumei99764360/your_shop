@@ -1,6 +1,7 @@
 package com.qf.service;
 
 
+import com.qf.dto.OrderInfoDto;
 import com.qf.pojo.UserDetailInfo;
 import com.qf.dto.UserInfoDto;
 
@@ -32,4 +33,7 @@ public interface UserInfoService {
     UserDetailInfo getUserDetailById(int userId);
 
 
+    int orderCount(int userId);
+
+    List<OrderInfoDto> pageOrder(int start, int length, int userId);
 }

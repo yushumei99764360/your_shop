@@ -63,4 +63,9 @@ public class AdminInfoServiceImpl implements AdminInfoService {
     public int updateAdminInfoById(AdminInfo adminInfo) {
         return adminInfoMapper.updateAdminInfoById(adminInfo);
     }
+
+    @Override
+    public int checkAdminName(String username) {
+        return adminInfoMapper.checkAdminName(username);
+    }
 }

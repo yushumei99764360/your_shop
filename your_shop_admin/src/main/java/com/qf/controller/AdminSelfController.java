@@ -16,6 +16,11 @@ public class AdminSelfController {
     @Autowired
     AdminInfoService adminInfoService;
 
+    /**
+     * 管理员添加
+     * @param adminInfo
+     * @return
+     */
     @ResponseBody
     @RequestMapping("insertAdminInfo")
     public Object insertAdminInfo(@RequestBody AdminInfo adminInfo){
@@ -78,4 +83,17 @@ public class AdminSelfController {
     public Object updateAdminInfoById(@RequestBody AdminInfo adminInfo){
         return adminInfoService.updateAdminInfoById(adminInfo);
     }
+    /**
+     * 查询用户名是否存在
+     */
+    @ResponseBody
+    @RequestMapping("checkAdminName")
+    public Object checkAdminName(@RequestParam String username){
+        int i = adminInfoService.checkAdminName(username);
+        if (i==1){
+            return false;
+        }else {
+            return true;
+        }
+    };
 }

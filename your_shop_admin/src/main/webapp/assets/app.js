@@ -37,7 +37,7 @@ var APP=function () {
      * 初始化DataTables
      */
     var handlerInitDataTables=function (url,columns) {
-        var dataTable= $("#example1").DataTable({
+       $("#example1").DataTable({
             "paging":true,
             "info":true,
             "lengthChange":false,

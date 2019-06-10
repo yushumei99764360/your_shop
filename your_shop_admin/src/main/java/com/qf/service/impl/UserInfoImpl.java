@@ -1,5 +1,6 @@
 package com.qf.service.impl;
 
+import com.qf.dto.OrderInfoDto;
 import com.qf.pojo.UserDetailInfo;
 import com.qf.dto.UserInfoDto;
 import com.qf.mapper.UserInfoMapper;
@@ -104,6 +105,20 @@ public class UserInfoImpl implements UserInfoService {
     @Override
     public UserDetailInfo getUserDetailById(int userId) {
         return userInfoMapper.getUserDetailById(userId);
+    }
+
+    @Override
+    public int orderCount(int userId) {
+        return userInfoMapper.orderCount(userId);
+    }
+
+    @Override
+    public List<OrderInfoDto> pageOrder(int start, int length, int userId) {
+        Map<String, Object> parms = new HashMap<String, Object>();
+        parms.put("start",start);
+        parms.put("length",length);
+        parms.put("userId",userId);
+        return userInfoMapper.pageOrder(parms);
     }
 
 }

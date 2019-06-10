@@ -76,8 +76,8 @@ public class AdminController {
         String strstart = request.getParameter("start");
         String strlength = request.getParameter("length");
         int draw =strdraw==null?0:Integer.parseInt(strdraw);
-        int start =strdraw==null?0:Integer.parseInt(strstart);
-        int length =strdraw==null?10:Integer.parseInt(strlength);
+        int start =strstart==null?0:Integer.parseInt(strstart);
+        int length =strlength==null?10:Integer.parseInt(strlength);
         result.put("draw",draw);
         result.put("recordsTotal",userInfoService.count());
         result.put("recordsFiltered",userInfoService.count());
@@ -143,5 +143,26 @@ public class AdminController {
         return userInfoService.getUserDetailById(userId);
     }
 
-
+    /**
+     * 通过Id查询分页
+     */
+    @ResponseBody
+    @RequestMapping(value = "pageOrdersById",method = RequestMethod.GET)
+    public Map<String,Object> pageOrders(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<String, Object>();
+        String strdraw = request.getParameter("draw");
+        String strstart = request.getParameter("start");
+        String strlength = request.getParameter("length");
+        String struserId = request.getParameter("userId");
+        int draw =strdraw==null?0:Integer.parseInt(strdraw);
+        int start =strdraw==null?0:Integer.parseInt(strstart);
+        int length =strdraw==null?10:Integer.parseInt(strlength);
+        int userId =strdraw==null?10:Integer.parseInt(struserId);
+        result.put("draw",draw);
+        result.put("recordsTotal",userInfoService.orderCount(userId));
+        result.put("recordsFiltered",userInfoService.orderCount(userId));
+        result.put("data",userInfoService.pageOrder(start,length,userId));
+        result.put("error","");
+        return result;
+    }
 }

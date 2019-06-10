@@ -34,4 +34,9 @@
     <update id="updateAdminInfoById" parameterType="com.qf.pojo.AdminInfo">
       update admininfo set ausername=#{ausername},apassword=#{apassword} where aid=#{aid}
     </update>
+    <!--查询用户名是否存在-->
+    <select id="checkAdminName" parameterType="String" resultType="int">
+        select count(*) from admininfo where ausername=#{username}
+    </select>
+
 </mapper>

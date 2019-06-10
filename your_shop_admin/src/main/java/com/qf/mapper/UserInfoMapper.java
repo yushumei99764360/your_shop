@@ -1,6 +1,7 @@
 package com.qf.mapper;
 
 
+import com.qf.dto.OrderInfoDto;
 import com.qf.pojo.UserDetailInfo;
 import com.qf.dto.UserInfoDto;
 
@@ -33,4 +34,7 @@ public interface UserInfoMapper {
 
     UserDetailInfo getUserDetailById(int userId);
 
+    int orderCount(int userId);
+
+    List<OrderInfoDto> pageOrder(Map<String, Object> parms);
 }

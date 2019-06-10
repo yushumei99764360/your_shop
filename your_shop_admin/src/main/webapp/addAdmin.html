@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>我的商城</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -18,17 +21,60 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <!-- Morris chart -->
     <link rel="stylesheet" href="bower_components/morris.js/morris.css">
-    <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="plugins/iCheck/all.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- jQuery UI 1.11.4 -->
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <title>注册</title>
+    <script src="plugins/validate/jquery.validate.min.js"></script>
+    <script src="plugins/validate/additional-methods.min.js"></script>
+    <script src="plugins/validate/localization/messages_zh.js"></script>
+    <script src="assets/validate.js"></script>
+    <script>
+        $.validator.setDefaults({
+            submitHandler: function() {
+                $.ajax({
+                    type:"POST",
+                    url:"insertAdminInfo",
+                    contentType:"application/json",
+                    data: JSON.stringify({
+                        "ausername":$("#username").val(),
+                        "apassword":$("#password").val(),
+                    }),
+                    success : function (data) {
+                        window.location.href="adminList.html";
+                    },
+                    error : function (data) {
+                    },
+                    dataType: "json"
+                });
+            }
+        });
+        var url="checkAdminName";
+        Validate.init(url);
+
+    </script>
+
+    <style>
+        .error{
+            color:red;
+        }
+    </style>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -90,7 +136,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="active"><a href="backSeller.html"><i class="fa fa-circle-o"></i> 商家列表</a></li>
-                        <li><a href="addGoods.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
+                        <li><a href="addSellers.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
                     </ul>
                 </li>
             </ul><ul class="sidebar-menu" data-widget="tree">
@@ -120,72 +166,39 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <form class="form-horizontal">
-                        <div class="box-body">
+                    <form class="form-signin" id="commentForm">
+                        <fieldset>
+                            <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 管理员注册</h2>
                             <div class="form-group">
-                                <label for="ausername" class="col-sm-1 control-label">管理员账号</label>
-                                <div class="col-sm-11">
-                                    <input type="text" class="form-control" id="ausername" placeholder="管理员账号">
-                                </div>
+                                <p>
+                                    <label for="username">用户名 (必需, 最小两个字母)</label>
+                                    <input id="username" name="username" minlength="2" type="text" class="form-control" required>
+                                </p>
+                            </div>
+                            <div class="form-group ">
+                                <p>
+                                    <label for="password">密码 (必需)</label>
+                                    <input id="password" class="form-control" name="password" type="password" required>
+                                </p>
                             </div>
                             <div class="form-group">
-                                <label for="apassword" class="col-sm-1 control-label">管理员密码</label>
-                                <div class="col-sm-11">
-                                    <input type="password" class="form-control" id="apassword" placeholder="管理员密码">
-                                </div>
+                                <p>
+                                    <label for="confirm_password">再次输入密码 </label>
+                                    <input id="confirm_password" class="form-control" name="confirm_password" type="password" required>
+                                </p>
                             </div>
-                        </div>
-                        <div class="box-footer">
-                            <a href="adminList.html" type="submit" class="btn btn-default">返回</a>
-                            <button type="submit" onclick="insertAdminInfo()" class="btn btn-info pull-right">添加</button>
-                        </div>
+                            <div class="form-group has-success has-feedback">
+                                <p>
+                                    <input class="btn btn-success " type="submit" value="注册">
+                                </p>
+                            </div>
+                        </fieldset>
                     </form>
                 </div>
             </div>
         </section>
     </div>
 </div>
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button);
-</script>
-<!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
-<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
-
-<script src="assets/validate.js"></script>
-
-<script>
-
-    function insertAdminInfo() {
-
-    }
-    var ajaxurl=  $.ajax({
-        type:"POST",
-        url:"insertAdminInfo",
-        contentType:"application/json",
-        data: JSON.stringify({
-            "ausername":$("#ausername").val(),
-            "apassword":$("#apassword").val()
-        }),
-        success : function (data) {
-
-            window.location.href="backAdmin.html";
-
-        },
-        error : function (data) {
-            alert("新增失败")
-        },
-        dataType: "json"
-    });
-    Validate.init(ajaxurl)
-</script>
 
 </body>
 </html>
