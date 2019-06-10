@@ -88,7 +88,7 @@ WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id AND g.g_id = #{goodsId}
             and g.g_lastdate > #{minDate}
         </if>
         <if test="maxDate != null and maxDate !=''">
-            and g.g_lastdate < #{maxDate}
+--             and g.g_lastdate  #{maxDate}
         </if>
         <if test="categoryName != null and categoryName !=''">
             and( g.g_title like #{str} or  g.g_name like #{str} or g.g_desc like #{str} )

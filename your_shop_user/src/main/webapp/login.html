@@ -63,7 +63,7 @@
 						<a href="#" class="fl" target="_blank" title="忘记密码">忘记密码?</a> 
 					</div>
 				</div>
-				<input type="button" tabindex="5" value="登 录" class="btnnuw" onclick="login()">
+				<button type="submit" tabindex="5" onclick="userlogin()" class="btnnuw" >登录</button>
 			</div>
 			<div class="corp_login">
 				<div class="mingb_shoq"><a href="#">名榜授权登录！</a></div>
@@ -83,14 +83,15 @@
 	<script src="jquery/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript">
 		//用户登录
-		function login() {
-			//alert(1)
+		function userlogin() {
+
+			alert(1)
 			var userLogin = $("#userLogin").val()+"";
             var password = $("#password").val()+"";
             console.log("userLogin:"+userLogin+",password:"+password);
             $.ajax({
                 type: 'POST',
-                url: "/userInfoLogin",
+                url: "userInfoLogin",
                 contentType:"application/json",
                 data: JSON.stringify({
                     "userName":userLogin,
@@ -101,19 +102,18 @@
                 success: function(data){
                     console.log(data);
                     if(data){
-                        window.location.href = "index.html?userId=";
+                        window.location.href = "index.html";
                     }else {
                         var html = $("#span").html("你的用户名或密码有误，请重新输入！");
                     }
                 },
                 error:function (data) {
                     console.error(data);
-                    //alert(1)
-                    window.location.href = "login";
                 },
                 dataType: "json"
             });
         }
+
 	</script>
 </body>
 </html>
