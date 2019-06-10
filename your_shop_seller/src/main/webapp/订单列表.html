@@ -284,8 +284,8 @@
                         "<td>"+item.o_district+"</td>"+
                         "<td>"+
                        " <button type=\"button\" class=\"am-btn am-btn-default am-btn-xs am-text-success am-round\"   onclick=\"jumpToDetail("+item.id+")\"><span class=\"am-icon-search\" title=\"查看订单详情\"></span> </button>" +
-                        "<button type=\"button\" class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick=\"check()\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
-                        "<button type=\"button\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\"><span class=\"am-icon-trash-o\"></span></button>"+
+                        "<button type=\"button\" class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick=\"jumpToChange("+item.id+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
+                        "<button type=\"button\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\" onclick=\"jumpToDelete("+item.id+")\"><span class=\"am-icon-trash-o\"></span></button>"+
                         "</td>"+
                         "</tr>";
                     //console.log(trHtml); //  2pm
@@ -301,11 +301,30 @@
     //调用方法
     getAllOrderInfo();
 
-
+// 跳转详情页面
     function jumpToDetail(id) {
-        alert(id);
         var url = "订单详情表.html?id="+id;
         window.location.href = url;
+    }
+// 跳转修改页面
+    function jumpToChange(id) {
+        var url = "修改订单.html?id="+id;
+        window.location.href = url;
+    }
+// 删除订单信息
+    function jumpToDelete(id) {
+        alert(id)
+        $.ajax({
+            type: "POST",
+            url:"deleteOrderInfo?id="+id,
+            contentType:"application/json",
+            success: function (data) {
+                window.location.href = "订单列表.html"
+            },
+            error: function (data) {
+            },
+            dataType: "json"
+        });
     }
 
 

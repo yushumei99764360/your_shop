@@ -9,4 +9,8 @@ public interface OrderMapper {
     List<OrderVo> getAllOrderInfo() ;
 
     List<OrderVo> getOrderDetail(int id);
+
+    boolean updateOrderInfo(OrderVo orderVo);
+
+    boolean deleteOrderInfo(int id);
 }
