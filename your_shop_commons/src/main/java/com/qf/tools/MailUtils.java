@@ -56,7 +56,7 @@ public class MailUtils implements Runnable{
                     "<head>\n" +
                     "</head>\n" +
                     "<body>\n" +
-                    "<h1>您好!欢迎注册<h1 style=\"color: #00b8e2\">享受生活社区账号,</h1>这是一封激活邮件,您的验证码为</h1><br/>\n" +
+                    "<h1>您好!欢迎注册<h1 style=\"color: #00b8e2\">MyShop商城账号,</h1>这是一封激活邮件,您的验证码为</h1><br/>\n" +
                     "<h1 style=\"color: #1e6609\">"+code+"</h1>\n" +
                     "</body>\n" +
                     "</html>";
@@ -64,6 +64,7 @@ public class MailUtils implements Runnable{
             // 3.发送邮件
             Transport.send(message);
             System.out.println("邮件成功发送!");
+            System.out.println("验证码:"+code);
         } catch (Exception e) {
             e.printStackTrace();
         }
