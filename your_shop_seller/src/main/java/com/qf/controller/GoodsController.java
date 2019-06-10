@@ -19,14 +19,15 @@ public class GoodsController {
     // 查询所有商品信息  商品列表页面
     @ResponseBody
     @RequestMapping("getAllGoods")
-    public Object getAllGoodsInfo(){
-//        System.out.println(2222);
-        List<GoodsVo> goodsInfoList = goodsService.getAllGoods();
+    public Object getAllGoodsInfo(@RequestParam int s_id){
+        System.out.println(s_id);
+        List<GoodsVo> goodsInfoList = goodsService.getAllGoods(s_id);
         System.out.println(goodsInfoList);
         return goodsInfoList;
     }
 
     // 实现商品新增功能，1 先增加商品信息 2 再增加商品类别关系信息
+    @ResponseBody
     @RequestMapping("addGoods")
     public Object addGoods(@RequestBody GoodsVo goodsVo){
         System.out.println(goodsVo);
@@ -39,12 +40,17 @@ public class GoodsController {
     @ResponseBody
     @RequestMapping("getGoodsByGoodsId")
     public Object getGoodsByGoodsId(@RequestParam int goodsId){
+        System.out.println(goodsId);
         GoodsVo goodsInfoByGoodsId = goodsService.getGoodsInfoByGoodsId(goodsId);
+        System.out.println(goodsInfoByGoodsId);
         return goodsInfoByGoodsId;
     }
+    @ResponseBody
     @RequestMapping("updateGoodsByGoodsId")
-    public Object uodateGoodsInfo(@RequestBody GoodsVo goodsVo) {
+    public Object updateGoodsInfo(@RequestBody GoodsVo goodsVo) {
+        System.out.println(goodsVo);
         boolean uodateGoodsInfo = goodsService.uodateGoodsInfo(goodsVo);
+        System.out.println(uodateGoodsInfo);
         return uodateGoodsInfo;
     }
 
@@ -52,14 +58,19 @@ public class GoodsController {
     @ResponseBody
     @RequestMapping("getGoodsBys")
     public Object getGoodsBys(@RequestBody GoodsSelecteds goodsSelecteds) {
+        System.out.println(goodsSelecteds);
         List<GoodsVo> goodsVos = goodsService.selectGoodsBys(goodsSelecteds);
+        System.out.println(goodsVos);
         return goodsVos;
     }
 
     //根据商品id 删除商品信息
+    @ResponseBody
     @RequestMapping("delByGoodsId")
     public Object delByGoodsId(@RequestParam int goodsId) {
+        System.out.println(goodsId);
         boolean delByGoodsId = goodsService.delByGoodsId(goodsId);
+        System.out.println(delByGoodsId);
         return delByGoodsId;
     }
 

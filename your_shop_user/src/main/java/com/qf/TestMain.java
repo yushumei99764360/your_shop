@@ -1,6 +1,5 @@
 package com.qf;
 
-import com.qf.dto.UserInfoMessage;
 import com.qf.service.UserInfoService;
 import com.qf.vo.UserInfoLoginVo;
 import org.junit.Test;
@@ -12,7 +11,10 @@ public class TestMain {
     public void test1() {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-mybatis.xml", "spring-service.xml");
         UserInfoService userInfoService = applicationContext.getBean(UserInfoService.class);
-        UserInfoMessage userInfoMessageById = userInfoService.getUserInfoMessageById(1);
-        System.out.println(userInfoMessageById);
+        UserInfoLoginVo userInfoLoginVo = new UserInfoLoginVo();
+//        userInfoLoginVo.setEmail("zhangsan@qq.com");
+//        userInfoLoginVo.setPassword("123");
+        Boolean aBoolean = userInfoService.userInfoLogin(userInfoLoginVo);
+        System.out.println(aBoolean);
     }
 }
