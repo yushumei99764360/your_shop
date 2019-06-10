@@ -40,6 +40,7 @@ public class UserInfoController {
     @RequestMapping(value = "getUserInfoMessageById",method = RequestMethod.GET)
     public Object getUserInfoMessageById(HttpSession httpSession) {
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
+        
         System.out.println(userInfo.getUserId());
         UserInfoMessage userInfoMessageById = userInfoService.getUserInfoMessageById(userInfo.getUserId());
         System.out.println(userInfoMessageById);

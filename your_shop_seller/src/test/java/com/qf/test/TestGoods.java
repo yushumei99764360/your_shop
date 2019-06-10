@@ -16,7 +16,7 @@ public class TestGoods {
 
     @Test
     public void test1(){
-        List<GoodsVo> goods = goodsService.getAllGoods();
+        List<GoodsVo> goods = goodsService.getAllGoods(1);
 
         for (GoodsVo goods1: goods)
             System.out.println(goods1);

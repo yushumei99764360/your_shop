@@ -40,10 +40,16 @@ public class GoodsServiceImpl implements GoodsService {
     }
     @Transactional(propagation = Propagation.REQUIRED)
     public boolean uodateGoodsInfo(GoodsVo goodsVo) {
+        GoodsVo goodsInfoByGoodsId = goodsMapper.getGoodsInfoByGoodsId(goodsVo.getG_id());
         int updateGoodsInfo = goodsMapper.updateGoodsInfo(goodsVo);
-        int updateGoodsCategory = goodsMapper.updateGoodsCategory(goodsVo);
-        if (updateGoodsInfo>0&&updateGoodsCategory>0)
-            return true;
+        if (goodsInfoByGoodsId.getChildName().equals(goodsVo.getChildName())){
+            if (updateGoodsInfo>0)
+                return true;
+        }else {
+            int updateGoodsCategory = goodsMapper.updateGoodsCategory(goodsVo);
+            if (updateGoodsInfo > 0 && updateGoodsCategory > 0)
+                return true;
+        }
         return false;
     }
 

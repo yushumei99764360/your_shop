@@ -7,12 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import javax.servlet.http.HttpSession;
+
+@RestController
 public class SellersController {
 
     @Autowired
@@ -20,29 +19,32 @@ public class SellersController {
 
     //    店家后台登录
     @RequestMapping("loginSeller")
-    public Object loginSeller(@RequestBody SellerVo sellerVo) {
+    public Object loginSeller(@RequestBody SellerVo sellerVo, HttpSession httpSession) {
         System.out.println(sellerVo);
         SellerInfo sellerInfo = sellersService.loginSeller(sellerVo);
         if (sellerInfo!=null) {
 //        sellerInfo 入域, 并返回true
+            httpSession.setAttribute("sellerInfo",sellerInfo);
             return true;
         }
         return false;
     }
 
-    //    根据商家id 查询商家详细信息
-    @ResponseBody
+    //    根据商家登录时的信息 查询商家详细信息
     @RequestMapping("getSellerInfoById")
-    public Object getSellerInfoById(@RequestParam int s_id) {
-        System.out.println(s_id);
-        return sellersService.getSellerById(s_id);
+    public Object getSellerInfoById(HttpSession httpSession) {
+        SellerInfo sellerInfo = (SellerInfo) httpSession.getAttribute("sellerInfo");
+        System.out.println(sellerInfo);
+        return sellerInfo;
     }
 
     //    修改商家信息
     @RequestMapping("updateSellerInfo")
     public Object updateSellerInfo(@RequestBody SellerVo sellerVo) {
         System.out.println(sellerVo);
-        return sellersService.updateSeller(sellerVo);
+        boolean updateSeller = sellersService.updateSeller(sellerVo);
+        System.out.println(updateSeller);
+        return updateSeller;
     }
 
 }
