@@ -130,12 +130,8 @@
                     <th class="table-type">库存</th>
                     <th class="table-type">类别</th>
                     <th class="table-author am-hide-sm-only">上架/下架 <i class="am-icon-check am-text-warning"></i> <i class="am-icon-close am-text-primary"></i></th>
-                    <th class="table-date am-hide-sm-only" data-options="field:'validityDate',formatter:function(data){
-return format(data,'yyyy-MM-dd HH:mm:ss');
-}">录入日期</th>
-                    <th class="table-date am-hide-sm-only" data-options="field:'validityDate',formatter:function(data){
-return format(data,'yyyy-MM-dd HH:mm:ss');
-}">修改日期</th>
+                    <th class="table-date am-hide-sm-only" >录入日期</th>
+                    <th class="table-date am-hide-sm-only">修改日期</th>
                     <th width="163px" class="table-set">操作</th>
                 </tr>
                 </thead>
@@ -234,6 +230,7 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
             url: "getAllGoods",
             success: function(data){
                 //循环
+                alert(1111)
                 var tabObj = $("#dataTable");
                 $(data).each(function (index,item) {
 
@@ -244,14 +241,18 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
                         "                    <td>"+item.g_name+"</td>\n" +
                         "                    <td>"+item.g_price+"</td>\n" +
                         "                    <td>"+item.g_num+"</td>\n" +
-                        "                    <td>"+item.childName+"</td>\n" +
-                        "                    <td class=\"am-hide-sm-only\"><i class=\"am-icon-close am-text-primary\"></i></td>\n" +
-                        "                    <td class=\"am-hide-sm-only\">"+item.g_date+"</td>\n" +
+                        "                    <td>"+item.childName+"</td>\n"
+                            if(item.g_status==1){
+                                trHtml += "<td class=\"am-hide-sm-only\"><i class=\"am-icon-check am-text-warning\"></i></td>\n"
+                            }else {
+                                trHtml += "<td class=\"am-hide-sm-only\"><i class=\"am-icon-close am-text-primary\"></i></td>\n"
+                            }
+                            trHtml += "<td class=\"am-hide-sm-only\">"+item.g_date+"</td>\n" +
                         "                    <td class=\"am-hide-sm-only\">"+item.g_lastdate+"</td>\n" +
                         "                    <td><div class=\"am-btn-toolbar\">\n" +
                         "                        <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                            <button class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick = \"jumpToEdit("+item.g_id+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
-                        "                            <button class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\"><span class=\"am-icon-trash-o\"></span></button>\n" +
+                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick = \"jumpToEdit("+item.g_id+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
+                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\" onclick = \"delGoodsById("+item.g_id+")\"><span class=\"am-icon-trash-o\"></span></button>\n" +
                         "                        </div>\n" +
                         "                    </div></td>\n" +
                         "                </tr>"
@@ -259,12 +260,10 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
                     //将字符串添加到table中
                     tabObj.append(trHtml);
                 });
-
-
             },
             error:function (data) {
-                console.error(data);
-
+                // console.error(data);
+                alert(22222)
             },
             dataType: "json"
         });
@@ -273,13 +272,25 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
 
     function jumpToEdit(goodsId){
         alert(goodsId)
-        var url = "http://127.0.0.1:8080/seller/修改商品.html?goodsId="+goodsId;
+        var url = "修改商品.html?goodsId="+goodsId;
         window.location.href = url;
     }
 
-    function jumptoAssginRole(goodsId){
-        var url = "http://127.0.0.1:8080/assignRole.html?g_id="+goodsId;
-        window.location.href = url;
+    function delGoodsById(goodsId) {
+        alert(goodsId)
+        $.ajax({
+            type: "POST",
+            url:"delByGoodsId?goodsId="+goodsId,
+            contentType:"application/json",
+            success: function (data) {
+                alert("删除成功")
+                window.location.href="商品列表.html";
+            },
+            error: function (data) {
+                alert("删除失败")
+            },
+            dataType: "json"
+        });
     }
 
 </script>

@@ -88,38 +88,43 @@
       <form class="am-form">
           <div class="am-form-group am-cf">
               <div class="zuo">商品ID：</div>
-              <div class="you" id="">
-                  3
+              <div class="you" id="goodsId">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">商品品牌：</div>
               <div class="you">
-                  <input type="email" class="am-input-sm" id="titleName" placeholder="请输入商品品牌">
+                  <input type="text" class="am-input-sm" id="titleName">
               </div>
           </div>
         <div class="am-form-group am-cf">
           <div class="zuo">商品名称：</div>
           <div class="you">
-            <input type="email" class="am-input-sm" id="goodsName" placeholder="请输入商品名称">
+            <input type="text" class="am-input-sm" id="goodsName">
           </div>
         </div>
         <div class="am-form-group am-cf">
           <div class="zuo">商品售价：</div>
           <div class="you">
-            <input type="password" class="am-input-sm" id="goodsPrice" placeholder="请输入售价">
+            <input type="text" class="am-input-sm" id="goodsPrice" >
           </div>
         </div>
           <div class="am-form-group am-cf">
               <div class="zuo">商品折扣：</div>
               <div class="you">
-                  <input type="password" class="am-input-sm" id="goodsDiscount" placeholder="请输入折扣">
+                  <input type="text" class="am-input-sm" id="goodsDiscount">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">商品折扣价：</div>
               <div class="you">
-                  <input type="password" class="am-input-sm" id="DiscountPrice" placeholder="请输入折扣价">
+                  <input type="text" class="am-input-sm" id="DiscountPrice" >
+              </div>
+          </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">商品库存：</div>
+              <div class="you">
+                  <input type="text" class="am-input-sm" id="goodsNum" >
               </div>
           </div>
         <div class="am-form-group am-cf">
@@ -157,8 +162,8 @@
               <div class="zuo">产品状态：</div>
               <div class="you" style="height: 45px;">
                   <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="status">
-                      <option value="b">上架</option>
-                      <option value="o">下架</option>
+                      <option value="0">下架</option>
+                      <option value="1">上架</option>
                   </select>
               </div>
           </div>
@@ -207,7 +212,62 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
+<script>
+    var goodsId;
+    function getGoodsId() {
+        goodsId = window.location.search.split("=")[1];
+    }
+    getGoodsId();
+    function getGoodsByGoodsId() {
+        $.ajax({
+            type:"POST",
+            url:"getGoodsByGoodsId?goodsId="+goodsId,
+            contentType:"application/json",
+            success:function (data) {
+                alert(3333)
+                $("#goodsId").html(data.g_id);
+                $("#titleName").val(data.g_title);
+                $("#goodsName").val(data.g_name);
+                $("#goodsPrice").val(data.g_price);
+                $("#goodsDiscount").val(data.g_discount);
+                $("#DiscountPrice").val(data.g_disctprice);
+                $("#goodsNum").val(data.g_num);
+                $("#goodsDesc").val(data.g_desc);
+                $("#goodsPic").val(data.g_pic);
+                $("#status").val(data.g_status);
+                $("#childName").val(data.childName);
+                $("#fatherName").val(data.fatherName);
 
+            },
+            error:function (data) {
+            },
+            dataType: "json"
+        });
+    }
+    getGoodsByGoodsId();
+
+    //修改用户信息
+    function updateUserInfo() {
+        $.ajax({
+            type:"POST",
+            url:"updateUserInfoById",
+            contentType:"application/json",
+            data: JSON.stringify({
+                "userName":$("#username").val(),
+                "password":$("#password").val(),
+                "email":$("#email").val(),
+                "phoneNumber":$("#phonenumber").val(),
+                "userId":userId
+            }),
+            success : function (data) {
+                window.location.href="backUser.html";
+            },
+            error : function (data) {
+            },
+            dataType: "json"
+        });
+    }
+</script>
 
 
 </body>

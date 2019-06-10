@@ -1,6 +1,7 @@
 package com.qf.controller;
 
 
+import com.qf.pojo.SellerInfo;
 import com.qf.service.GoodsService;
 import com.qf.vo.GoodsSelecteds;
 import com.qf.vo.GoodsVo;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -19,7 +21,9 @@ public class GoodsController {
     // 查询所有商品信息  商品列表页面
     @ResponseBody
     @RequestMapping("getAllGoods")
-    public Object getAllGoodsInfo(@RequestParam int s_id){
+    public Object getAllGoodsInfo(HttpSession httpSession){
+        SellerInfo sellerInfo = (SellerInfo) httpSession.getAttribute("sellerInfo");
+        int s_id = sellerInfo.getS_id();
         System.out.println(s_id);
         List<GoodsVo> goodsInfoList = goodsService.getAllGoods(s_id);
         System.out.println(goodsInfoList);
@@ -29,7 +33,10 @@ public class GoodsController {
     // 实现商品新增功能，1 先增加商品信息 2 再增加商品类别关系信息
     @ResponseBody
     @RequestMapping("addGoods")
-    public Object addGoods(@RequestBody GoodsVo goodsVo){
+    public Object addGoods(@RequestBody GoodsVo goodsVo,HttpSession httpSession ){
+
+        SellerInfo sellerInfo = (SellerInfo) httpSession.getAttribute("sellerInfo");
+        goodsVo.setS_id(sellerInfo.getS_id());
         System.out.println(goodsVo);
         boolean addGoods = goodsService.addGoodsInfo(goodsVo);
         System.out.println(addGoods);
