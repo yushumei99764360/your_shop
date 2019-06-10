@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.AdminInfoMapper">
+    <!--管理员添加-->
+    <insert id="insertAdminInfo" parameterType="com.qf.pojo.AdminInfo">
+        insert into admininfo (ausername,apassword) values (#{ausername},#{apassword})
+    </insert>
+    <!--管理员总数查询-->
+    <select id="count" resultType="int">
+        select  count(*) from admininfo
+    </select>
+    <!--管理员分页查询-->
+    <select id="page" resultType="com.qf.pojo.AdminInfo" parameterType="java.util.Map">
+        select * from  admininfo  limit #{start}, #{length}
+    </select>
+    <!--通过Id删除-->
+    <delete id="deleteAdminInfoById" parameterType="int">
+        delete from admininfo where aid=#{aid}
+    </delete>
+    <!--批量删除-->
+    <delete id="deleteAdminInfo" parameterType="list">
+        delete from  admininfo where aid in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <!--通过Id查询管理员-->
+    <select id="getAdminInfoById" parameterType="int" resultType="com.qf.pojo.AdminInfo">
+        select * from admininfo where aid = #{aid}
+    </select>
+    <!--修改管理员-->
+    <update id="updateAdminInfoById" parameterType="com.qf.pojo.AdminInfo">
+      update admininfo set ausername=#{ausername},apassword=#{apassword} where aid=#{aid}
+    </update>
+</mapper>

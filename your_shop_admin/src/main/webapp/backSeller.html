@@ -90,11 +90,25 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="active"><a href="goodsList.html"><i class="fa fa-circle-o"></i> 商家列表</a></li>
-                        <li><a href="addGoods.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
+                        <li class="active"><a href="backSeller.html"><i class="fa fa-circle-o"></i> 商家列表</a></li>
+                        <li><a href="addSellers.html"><i class="fa fa-circle-o"></i> 商家添加</a></li>
                     </ul>
                 </li>
             </ul>
+            <ul class="sidebar-menu" data-widget="tree">
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>个人中心</span>
+                    <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a href="adminList.html"><i class="fa fa-circle-o"></i> 管理员列表</a></li>
+                    <li><a href="addAdmin.html"><i class="fa fa-circle-o"></i> 管理员添加</a></li>
+                </ul>
+            </li>
+        </ul>
         </section>
     </aside>
     <div class="content-wrapper">
@@ -111,10 +125,7 @@
                         <div class="box-header">
                             <h3 class="box-title">用户</h3>
                         </div>
-                        <div class="row" style="margin-left: 10px">
-                            <button  style="width: 70px; height: 30px" type="button" class="btn  btn-primary" onclick = "jumptoadd()">新增<i ></i></button>
-                            <button  style="width: 70px; height: 30px" type="button" class="btn  btn-danger" onclick = "deletecheckUsers()">删除<i ></i></button>
-                        </div>
+
                         <form class="form-inline" role="form" style="margin-left: 10px; margin-top: 10px">
                             <div class="form-group has-feedback">
                                 <div class="input-group">
@@ -137,6 +148,7 @@
                                     <th>电话号码</th>
                                     <th>地址</th>
                                     <th>描述</th>
+                                    <th>状态</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -174,14 +186,14 @@
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="assets/app.js"></script>
 
-<script src="assets/app.js"></script>
 
 <script>
+
 
     $(function () {
         var columns=[
             {
-                "data":function (row,type) {
+                "data":function (row) {
                     return '<input type="checkbox" class="minimal" value="'+row.s_id+'"/>';
                 }
             },
@@ -191,10 +203,12 @@
             { "data": "s_phone" },
             { "data": "s_address" },
             { "data": "s_desc" },
+            { "data": "s_status" },
             {  "data":function (row,type) {
-                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"deleteJump("+row.s_id+")\"><i class='fa fa-search'></i>查看</button>"+
+                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"lookJump('"+row.s_id+"','"+row.s_name+"')\"><i class='fa fa-search'></i>查看</button>"+
                         "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.s_id+")\"><i class='fa fa-trash'></i>删除</button>"+
-                        "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.s_id+")\"><i class='fa fa-edit'></i>修改</button>";
+                        "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.s_id+")\"><i class='fa fa-edit'></i>修改</button>"+
+                        "<button type=\"button\" class=\"btn btn-sm  btn-success\" onclick = \"orderjump("+row.s_id+")\"><i class='fa  fa-align-justify'></i>订单</button>";
                 }
             }
         ];
@@ -253,6 +267,12 @@
             },
             dataType: "json"
         });
+    }
+
+
+    function lookJump(sellerId,sName) {
+
+        window.location.href = encodeURI("sellerDetail.html?sellerId="+sellerId+"="+sName);
     }
 
 </script>

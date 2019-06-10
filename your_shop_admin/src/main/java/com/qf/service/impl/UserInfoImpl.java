@@ -1,5 +1,6 @@
 package com.qf.service.impl;
 
+import com.qf.pojo.UserDetailInfo;
 import com.qf.dto.UserInfoDto;
 import com.qf.mapper.UserInfoMapper;
 import com.qf.pojo.AdminInfo;
@@ -59,6 +60,7 @@ public class UserInfoImpl implements UserInfoService {
         return userInfoMapper.page(parms);
     }
 
+
     /**
      * 添加会员
      * @param
@@ -68,4 +70,40 @@ public class UserInfoImpl implements UserInfoService {
     public int insertUserInfo(UserInfoDto userInfoDto) {
         return userInfoMapper.insertUserInfo(userInfoDto);
     }
+
+    /**
+     * 批量删除
+     * @param selectUsersId
+     * @return
+     */
+    @Override
+    public int deleteUsersInfo(List<Integer> selectUsersId) {
+        return userInfoMapper.deleteUsersInfo(selectUsersId);
+    }
+
+    /**
+     * 通过id查询用户信息
+     * @param userId
+     * @return
+     */
+    @Override
+    public UserInfo getUserInfoById(int userId) {
+        return userInfoMapper.getUserInfoById(userId);
+    }
+
+    @Override
+    public int updateUserInfoById(UserInfo userInfo) {
+        return userInfoMapper.updateUserInfoById(userInfo);
+    }
+
+    /**
+     * 通过id查询用户详细信息
+     * @param userId
+     * @return
+     */
+    @Override
+    public UserDetailInfo getUserDetailById(int userId) {
+        return userInfoMapper.getUserDetailById(userId);
+    }
+
 }

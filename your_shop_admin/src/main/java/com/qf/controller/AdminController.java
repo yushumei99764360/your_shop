@@ -102,4 +102,46 @@ public class AdminController {
         }
         return userInfoService.insertUserInfo(userInfoDto);
     }
+    /**
+     * 批量删除
+     */
+    @ResponseBody
+    @RequestMapping("deleteUsersInfo")
+    public Object deleteUsersInfo(@RequestBody List<Integer>selectUsersId){
+        System.out.println(selectUsersId);
+        System.out.println(userInfoService.deleteUsersInfo(selectUsersId));
+        return userInfoService.deleteUsersInfo(selectUsersId);
+    }
+
+    /**
+     * 通过Id查询用户
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("getUserInfoById")
+    public Object getUserInfoById(@RequestParam int userId){
+        return userInfoService.getUserInfoById(userId);
+    }
+
+    /**
+     * 修改用户信息
+     */
+    @ResponseBody
+    @RequestMapping("updateUserInfoById")
+    public Object updateUserInfoById(@RequestBody UserInfo userInfo){
+        return userInfoService.updateUserInfoById(userInfo);
+    }
+
+    /**
+     * 查看用户详细信息
+     * @param userId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("getUserDetailById")
+    public Object getUserDetailById(@RequestParam int userId){
+        return userInfoService.getUserDetailById(userId);
+    }
+
+
 }

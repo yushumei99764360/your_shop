@@ -50,6 +50,7 @@
 			</div>
 			<div class="kengl_kuang">
 				<div class="txt_kuang">
+                    <span id="span" style="color: red"></span>
 					<input type="text" class="itxt"  placeholder="用户名" id="userLogin">
 					<input type="password" class="itxt"  placeholder="密码" id="password">
 				</div>
@@ -83,7 +84,7 @@
 	<script type="text/javascript">
 		//用户登录
 		function login() {
-			alert(1)
+			//alert(1)
 			var userLogin = $("#userLogin").val()+"";
             var password = $("#password").val()+"";
             console.log("userLogin:"+userLogin+",password:"+password);
@@ -101,12 +102,14 @@
                     console.log(data);
                     if(data){
                         window.location.href = "index.html?userId=";
+                    }else {
+                        var html = $("#span").html("你的用户名或密码有误，请重新输入！");
                     }
                 },
                 error:function (data) {
                     console.error(data);
-                    alert(1)
-                    window.location.href = "login.html";
+                    //alert(1)
+                    window.location.href = "login";
                 },
                 dataType: "json"
             });

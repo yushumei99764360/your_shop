@@ -16,11 +16,11 @@
     <delete id="deleteUserInfoById" parameterType="int">
         delete from userinfo where userId=#{userId}
     </delete>
-
+    <!--分页-->
     <select id="count" resultType="int">
       select count(*) from userinfo
     </select>
-    <!--分页-->
+
     <select id="page" parameterType="java.util.Map" resultType="com.qf.pojo.UserInfo">
       select * from  userinfo  limit #{start}, #{length}
     </select>
@@ -29,5 +29,28 @@
     <insert id="insertUserInfo" parameterType="com.qf.dto.UserInfoDto">
        insert into userinfo (username,password,email,phonenumber) values (#{username},#{password},#{email},#{phonenumber})
     </insert>
+
+    <!--批量删除-->
+    <delete id="deleteUsersInfo" parameterType="list">
+        delete from  userinfo where userId in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+<!--通过Id查询用户-->
+    <select id="getUserInfoById" parameterType="int" resultType="com.qf.pojo.UserInfo">
+        select * from userinfo where userId = #{userId}
+    </select>
+
+    <!--修改用户-->
+    <update id="updateUserInfoById" parameterType="com.qf.pojo.UserInfo">
+      update userinfo set username=#{userName},password=#{password},email=#{email},phonenumber=#{phoneNumber} where userId=#{userId}
+    </update>
+
+
+    <!--通过用户ID查询用户详细信息-->
+    <select id="getUserDetailById" parameterType="int" resultType="com.qf.pojo.UserDetailInfo">
+        select * from userdetail where userId = #{userId}
+    </select>
 
 </mapper>
