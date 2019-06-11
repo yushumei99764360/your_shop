@@ -13,6 +13,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
 
 @Controller
 public class UserInfoController {
@@ -138,21 +139,14 @@ public class UserInfoController {
      * 修改个人头像
      */
     @RequestMapping(value = "upDownload", method = RequestMethod.POST)
-    public Object  iconUpload(@RequestParam("file") CommonsMultipartFile file,HttpSession httpSession) {
+    public Object  iconUpload(@RequestParam("file") CommonsMultipartFile file, HttpSession httpSession) {
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
-        int userId = userInfo.getUserId();
-        System.out.println("fileName："+file.getOriginalFilename());
-        String path="D:\\j1901\\第三阶段代码\\your_shop\\your_shop_user\\src\\main\\webapp\\images";
+        int userId=userInfo.getUserId();
+        String path="D:\\j1901\\第三阶段代码\\your_shop\\your_shop_user\\src\\main\\webapp\\images\\"+file.getOriginalFilename();
         String icon = "images/"+file.getOriginalFilename();
         File newFile=new File(path);
         boolean flag = false;
         try {
-            if (!newFile.getParentFile().exists()) {
-                newFile.getParentFile().mkdirs();
-            }
-            if (!newFile.exists()) {
-                newFile.createNewFile();
-            }
             file.transferTo(newFile);
             flag =  userInfoService.updateIconByUserId(userId, icon);
             return flag;

@@ -4,6 +4,8 @@ import com.qf.dto.UserInfoMessage;
 import com.qf.pojo.UserInfo;
 import com.qf.vo.UserInfoVo;
 
+import java.util.HashMap;
+
 public interface UserInfoMapper {
     /**
      * 登录
@@ -44,11 +46,13 @@ public interface UserInfoMapper {
 
     int insertUserDetail(UserInfoMessage userInfoMessage);
 
+
     /**
      * 修改头像
-     * @param userId
-     * @param icon
+     * @param
      * @return
      */
-    int updateIconByUserId(int userId, String icon);
+    int updateIconByUserId(HashMap<String, Object> parms);
+
+
 }

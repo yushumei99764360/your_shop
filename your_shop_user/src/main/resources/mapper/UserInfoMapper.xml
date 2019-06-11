@@ -90,7 +90,7 @@
     </insert>
 
     <!--修改用户头像-->
-    <update id="updateIconByUserId">
+    <update id="updateIconByUserId" parameterType="map">
         update userdetail set icon=#{icon} where userId=#{userId}
     </update>
 

@@ -182,7 +182,7 @@
 					<div class="toux_kuang">
 						<div class="userImage">
 							<div class="myGome_userPhoto">
-								<img src="">
+								<img src="" id="icons">
 								<a class="edit_photo_bitton" href="shez_toux.html" target="_blank">编辑</a>
 							</div>
 						</div>
@@ -288,7 +288,7 @@
 								<div class="upload_main">
 									<div class="pic-show">
 											<div class="pic-wrap ">
-												<img src="images/7_170312181624_2.jpg">
+												<img src="" id="icon">
 											</div>
 									</div>
 									<form name="iconUpLoad" id="iconUpLoad"  enctype="multipart/form-data">
@@ -389,6 +389,24 @@
 	</div>
 </div>
 <script>
+	/*头像显示*/
+    function getUserInfoMessageById() {
+        $.ajax({
+            type: 'GET',
+            url: "getUserInfoMessageById",
+            contentType:"application/json",
+            success: function(data){
+                $("#icon").attr("src",data.icon);
+                $("#icons").attr("src",data.icon);
+            },
+            error:function (data) {
+                console.error(data);
+            },
+            dataType: "json"
+        });
+    }
+    getUserInfoMessageById();
+
 	function updownload() {
         var formData = new FormData($("#iconUpLoad")[0]);
         $.ajax({
@@ -399,14 +417,10 @@
             processData: false,
             contentType: false,
             success : function (data) {
-                if (data) {
-                    window.location.reload();
-                } else {
-                    alert("修改失败！")
-                }
+                 window.location.reload();
             },
             error : function (data) {
-                alert("请求失败！");
+                window.location.reload();
             },
             // dataType: "json"
         });
