@@ -22,6 +22,12 @@ public class UserInfoController {
         return "login";
     }
 
+    /**
+     * 登录
+     * @param userInfoVo
+     * @param httpSession
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "userInfoLogin",method = RequestMethod.POST)
     public Object userInfoLogin(@RequestBody UserInfoVo userInfoVo, HttpSession httpSession) {
@@ -46,7 +52,7 @@ public class UserInfoController {
     }
 
     /**
-     * 修改用户信息
+     * 修改/添加用户详细信息
      * @param userInfoMessage
      * @return
      */
@@ -55,11 +61,22 @@ public class UserInfoController {
     public Object updateUserInfo(@RequestBody UserInfoMessage userInfoMessage,HttpSession httpSession) {
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
         userInfoMessage.setUserId(userInfo.getUserId());
-        int count = userInfoService.updateUserInfo(userInfoMessage);
-        if (count > 1) {
-            return true;
+        System.out.println(userInfoMessage);
+        int i = userInfoService.search(userInfo.getUserId());
+        if (i!=0){
+            int count = userInfoService.updateUserInfo(userInfoMessage);
+            if (count > 0) {
+                return true;
+            }
+            return false;
+        }else {
+           int count = userInfoService.insertUserDetail(userInfoMessage);
+            if (count > 0) {
+                return true;
+            }
+            return false;
         }
-        return false;
+
     }
 
 

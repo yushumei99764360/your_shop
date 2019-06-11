@@ -15,6 +15,7 @@
         <module>your_shop_seller</module>
         <module>your_shop_user</module>
         <module>your_shop_api</module>
+        <module>your_shop_ui</module>
     </modules>
 
     <packaging>pom</packaging>
