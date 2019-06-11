@@ -64,7 +64,9 @@ public class GoodsController {
     //    根据 产品类别  修改日期区间 是否上架 还有 name title desc 关键词搜索 商品列表
     @ResponseBody
     @RequestMapping("getGoodsBys")
-    public Object getGoodsBys(@RequestBody GoodsSelecteds goodsSelecteds) {
+    public Object getGoodsBys(@RequestBody GoodsSelecteds goodsSelecteds , HttpSession httpSession) {
+        SellerInfo sellerInfo = (SellerInfo) httpSession.getAttribute("sellerInfo");
+        goodsSelecteds.setSellerId(sellerInfo.getS_id());
         System.out.println(goodsSelecteds);
         List<GoodsVo> goodsVos = goodsService.selectGoodsBys(goodsSelecteds);
         System.out.println(goodsVos);

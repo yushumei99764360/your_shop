@@ -56,7 +56,9 @@ public class GoodsServiceImpl implements GoodsService {
     //    根据 产品类别  修改日期区间 是否上架 还有 name title desc 关键词搜索 商品列表
     public List<GoodsVo> selectGoodsBys(GoodsSelecteds goodsSelecteds) {
         goodsSelecteds.setStr("%"+goodsSelecteds.getStr()+"%");
+        System.out.println(goodsSelecteds);
         List<GoodsVo> goodsVos = goodsMapper.selectGoodsBys(goodsSelecteds);
+        System.out.println(goodsVos);
         return goodsVos;
     }
 

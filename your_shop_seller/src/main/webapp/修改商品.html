@@ -88,55 +88,55 @@
       <form class="am-form">
           <div class="am-form-group am-cf">
               <div class="zuo">商品ID：</div>
-              <div class="you" id="goodsId">
+              <div class="you" id="g_id">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">商品品牌：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="titleName">
+                  <input type="text" class="am-input-sm" id="g_title">
               </div>
           </div>
         <div class="am-form-group am-cf">
           <div class="zuo">商品名称：</div>
           <div class="you">
-            <input type="text" class="am-input-sm" id="goodsName">
+            <input type="text" class="am-input-sm" id="g_name">
           </div>
         </div>
         <div class="am-form-group am-cf">
           <div class="zuo">商品售价：</div>
           <div class="you">
-            <input type="text" class="am-input-sm" id="goodsPrice" >
+            <input type="text" class="am-input-sm" id="g_price" >
           </div>
         </div>
           <div class="am-form-group am-cf">
               <div class="zuo">商品折扣：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="goodsDiscount">
+                  <input type="text" class="am-input-sm" id="g_discount">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">商品折扣价：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="DiscountPrice" >
+                  <input type="text" class="am-input-sm" id="g_disctprice" >
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">商品库存：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="goodsNum" >
+                  <input type="text" class="am-input-sm" id="g_num" >
               </div>
           </div>
         <div class="am-form-group am-cf">
           <div class="zuo">商品描述：</div>
           <div class="you">
-            <textarea class="" rows="2" id="goodsDesc"></textarea>
+            <textarea class="" rows="2" id="g_desc"></textarea>
           </div>
         </div>
         <div class="am-form-group am-cf">
           <div class="zuo">产品图片：</div>
           <div class="you" style="height: 45px;">
-            <input type="file" id="goodsPic">
+            <input type="file" id="g_pic">
             <p class="am-form-help">请选择要上传的产品图片...</p>
           </div>
         </div>
@@ -161,7 +161,7 @@
           <div class="am-form-group am-cf">
               <div class="zuo">产品状态：</div>
               <div class="you" style="height: 45px;">
-                  <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="status">
+                  <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="g_status">
                       <option value="0">下架</option>
                       <option value="1">上架</option>
                   </select>
@@ -170,9 +170,7 @@
 
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
-              <button type="submit" class="am-btn am-btn-success am-radius">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp;
-              <button type="submit" class="am-btn am-btn-secondary am-radius">发布并继续发布</button>
-
+              <button type="submit" class="am-btn am-btn-success am-radius" onclick="updateGoodsByGoodsId()">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp;
           </div>
         </div>
       </form>
@@ -225,16 +223,16 @@
             contentType:"application/json",
             success:function (data) {
                 alert(3333)
-                $("#goodsId").html(data.g_id);
-                $("#titleName").val(data.g_title);
-                $("#goodsName").val(data.g_name);
-                $("#goodsPrice").val(data.g_price);
-                $("#goodsDiscount").val(data.g_discount);
-                $("#DiscountPrice").val(data.g_disctprice);
-                $("#goodsNum").val(data.g_num);
-                $("#goodsDesc").val(data.g_desc);
-                $("#goodsPic").val(data.g_pic);
-                $("#status").val(data.g_status);
+                $("#g_id").html(data.g_id);
+                $("#g_title").val(data.g_title);
+                $("#g_name").val(data.g_name);
+                $("#g_price").val(data.g_price);
+                $("#g_discount").val(data.g_discount);
+                $("#g_disctprice").val(data.g_disctprice);
+                $("#g_num").val(data.g_num);
+                $("#g_desc").val(data.g_desc);
+                $("#g_pic").val(data.g_pic);
+                $("#g_status").val(data.g_status);
                 $("#childName").val(data.childName);
                 $("#fatherName").val(data.fatherName);
 
@@ -247,22 +245,30 @@
     getGoodsByGoodsId();
 
     //修改用户信息
-    function updateUserInfo() {
+    function updateGoodsByGoodsId() {
         $.ajax({
             type:"POST",
-            url:"updateUserInfoById",
+            url:"updateGoodsByGoodsId",
             contentType:"application/json",
             data: JSON.stringify({
-                "userName":$("#username").val(),
-                "password":$("#password").val(),
-                "email":$("#email").val(),
-                "phoneNumber":$("#phonenumber").val(),
-                "userId":userId
+                "g_id":goodsId,
+                "g_title":$("#g_title").val(),
+                "g_name":$("#g_name").val(),
+                "g_price":$("#g_price").val(),
+                "g_discount":$("#g_discount").val(),
+                "g_disctprice":$("#g_disctprice").val(),
+                "g_num":$("#g_num").val(),
+                "g_desc":$("#g_desc").val(),
+                "g_pic":$("#g_pic").val(),
+                "childName":$("#childName").val(),
+                "fatherName":$("#fatherName").val(),
+                "g_status":$("#g_status").val()
             }),
             success : function (data) {
-                window.location.href="backUser.html";
+                window.location.href="商品列表.html";
             },
             error : function (data) {
+                alert("失败")
             },
             dataType: "json"
         });

@@ -89,31 +89,31 @@
             <ul>
                 <li>
                     <div class="am-btn-group am-btn-group-xs">
-                        <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;">
-                            <option value="b">产品分类</option>
-                            <option value="o">手机</option>
+                        <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="categoryName">
+                            <option value="">产品分类</option>
+                            <option value="手机">手机</option>
                         </select>
                        </div>
                 </li>
                 <li style="margin-right: 0;">
                     <span class="tubiao am-icon-calendar"></span>
-                    <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" placeholder="开始日期" data-am-datepicker="{theme: 'success',}" readonly="">
+                    <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" id="minDate" placeholder="开始日期" data-am-datepicker="{theme: 'success',}" readonly="">
                 </li>
                 <li style="margin-left: -4px;">
                     <span class="tubiao am-icon-calendar"></span>
-                    <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" placeholder="最晚日期" data-am-datepicker="{theme: 'success',}" readonly="">
+                    <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" id="maxDate" placeholder="最晚日期" data-am-datepicker="{theme: 'success',}" readonly="">
                 </li>
 
                 <li style="margin-left: -10px;">
                     <div class="am-btn-group am-btn-group-xs">
-                        <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;">
-                            <option value="b">上架</option>
-                            <option value="o">下架</option>
+                        <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="g_status">
+                            <option value="1">上架</option>
+                            <option value="0">下架</option>
                         </select>
                     </div>
                 </li>
-                <li><input type="text" class="am-form-field am-input-sm am-input-xm" placeholder="关键词搜索"></li>
-                <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" style="margin-top: -1px;">搜索</button></li>
+                <li><input type="text" class="am-form-field am-input-sm am-input-xm" placeholder="关键词搜索" id="str"></li>
+                <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" style="margin-top: -1px;" onclick="selectGoodsBys()">搜索</button></li>
             </ul>
         </div>
 
@@ -230,7 +230,7 @@
             url: "getAllGoods",
             success: function(data){
                 //循环
-                alert(1111)
+                // alert(1111)
                 var tabObj = $("#dataTable");
                 $(data).each(function (index,item) {
 
@@ -288,6 +288,61 @@
             },
             error: function (data) {
                 alert("删除失败")
+            },
+            dataType: "json"
+        });
+    }
+
+    function selectGoodsBys() {
+        $("#dataTable").empty();
+        //1.发送ajax请求获取数据
+        $.ajax({
+            type: 'POST',
+            url: "getGoodsBys",
+            contentType:"application/json",
+            data:JSON.stringify({
+                "categoryName":$("#categoryName").val(),
+                "str":$("#str").val(),
+                "g_status":$("#g_status").val(),
+                "minDate":$("#minDate").val(),
+                "maxDate":$("#maxDate").val()
+            }),
+            success: function(data){
+                //循环
+                alert(3333)
+                var tabObj = $("#dataTable");
+                $(data).each(function (index,item) {
+
+                    var trHtml = "<tr>\n" +
+                        "                    <td><input type=\"checkbox\"></td>\n" +
+                        "                    <td>"+item.g_id+"</td>\n" +
+                        "                    <td>"+item.g_title+"</td>\n" +
+                        "                    <td>"+item.g_name+"</td>\n" +
+                        "                    <td>"+item.g_price+"</td>\n" +
+                        "                    <td>"+item.g_num+"</td>\n" +
+                        "                    <td>"+item.childName+"</td>\n"
+                    if(item.g_status==1){
+                        trHtml += "<td class=\"am-hide-sm-only\"><i class=\"am-icon-check am-text-warning\"></i></td>\n"
+                    }else {
+                        trHtml += "<td class=\"am-hide-sm-only\"><i class=\"am-icon-close am-text-primary\"></i></td>\n"
+                    }
+                    trHtml += "<td class=\"am-hide-sm-only\">"+item.g_date+"</td>\n" +
+                        "                    <td class=\"am-hide-sm-only\">"+item.g_lastdate+"</td>\n" +
+                        "                    <td><div class=\"am-btn-toolbar\">\n" +
+                        "                        <div class=\"am-btn-group am-btn-group-xs\">\n" +
+                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick = \"jumpToEdit("+item.g_id+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
+                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\" onclick = \"delGoodsById("+item.g_id+")\"><span class=\"am-icon-trash-o\"></span></button>\n" +
+                        "                        </div>\n" +
+                        "                    </div></td>\n" +
+                        "                </tr>"
+                    console.log(trHtml); //  2pm
+                    //将字符串添加到table中
+                    tabObj.append(trHtml);
+                });
+            },
+            error:function (data) {
+                // console.error(data);
+                alert(4444)
             },
             dataType: "json"
         });

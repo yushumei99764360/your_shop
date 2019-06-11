@@ -5,21 +5,31 @@ import java.util.Date;
 public class GoodsSelecteds {
 //    根据 产品类别  修改日期区间 是否上架 还有 name title desc 关键词搜索 商品列表
 
+    int sellerId;
     String categoryName;
     String str;
     int g_status;
-    Date minDate;
-    Date maxDate;
+    String minDate;
+    String maxDate;
 
     @Override
     public String toString() {
         return "GoodsSelecteds{" +
-                "categoryName='" + categoryName + '\'' +
+                "sellerId=" + sellerId +
+                ", categoryName='" + categoryName + '\'' +
                 ", str='" + str + '\'' +
                 ", g_status=" + g_status +
-                ", minDate=" + minDate +
-                ", maxDate=" + maxDate +
+                ", minDate='" + minDate + '\'' +
+                ", maxDate='" + maxDate + '\'' +
                 '}';
+    }
+
+    public int getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
     }
 
     public String getCategoryName() {
@@ -46,19 +56,19 @@ public class GoodsSelecteds {
         this.g_status = g_status;
     }
 
-    public Date getMinDate() {
+    public String getMinDate() {
         return minDate;
     }
 
-    public void setMinDate(Date minDate) {
+    public void setMinDate(String minDate) {
         this.minDate = minDate;
     }
 
-    public Date getMaxDate() {
+    public String getMaxDate() {
         return maxDate;
     }
 
-    public void setMaxDate(Date maxDate) {
+    public void setMaxDate(String maxDate) {
         this.maxDate = maxDate;
     }
 }
