@@ -19,12 +19,12 @@ var Validate =function () {
                     lastname: "required",
                     username: {
                         required: true,
-                        minlength: 2,
+                        minlength: 6,
                         remote:{
                             url:url,
                             type:"post",
                             data:{
-                                username:function () {
+                                userName:function () {
                                     return $("#username").val();
                                 }
                             }

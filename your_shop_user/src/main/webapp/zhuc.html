@@ -1,12 +1,64 @@
 <!DOCTYPE html>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
 <html>   
 <head>
-<meta charset="utf-8">
-<title>MyShop——个人注册</title>
-<link rel="stylesheet" type="text/css" href="css/index.css">
-<link rel="stylesheet" type="text/css" href="css/ziy.css">
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="keys" content="">
+	<meta name="author" content="">
+
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/ziy.css">
+	<!--表单验证-->
+	<script type="text/javascript" src="jquery/jquery-2.1.1.min.js"></script>
+
+	<title>MyShop——个人注册</title>
+	<script src="dist/jquery.validate.min.js"></script>
+	<script src="dist/additional-methods.min.js"></script>
+
+	<script src="dist/localization/messages_zh.js"></script>
+	<script src="assets/validate.js"></script>
+
+	<script>
+        $.validator.setDefaults({
+            submitHandler: function() {
+                $.ajax({
+                    type: 'POST',
+                    url: "RegisterUser",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({
+                        "userName": $("#username").val(),
+                        "password": $("#password").val(),
+                        "phoneNumber": $("#phonenumber").val(),
+                        "email": $("#email").val()
+                    }),
+                    success: function (data) {
+                        console.log(data);
+                        if (data == true) {
+                            window.location.href = "login.html";
+                        }
+                    },
+                    error: function (data) {
+                        alert("信息出错");
+                        debugger;
+                        console.error(data);
+                        // window.location.href = "zhuc.html";
+                    },
+                    dataType: "json"
+                })
+            }
+        });
+        var url="checkUserName";
+        Validate.init(url);
+	</script>
+
+	<style>
+		.error{
+			color:red;
+		}
+	</style>
 
 </head>
 <body>
@@ -29,139 +81,47 @@
 				<p>我已经注册，现在就<a class="ftx-05 ml10" href="login.html">登录</a></p>
 			</ul>
 		</div>
-		<form class="zhuc_biaod" id="RegisterCheck" method="post" onsubmit="Register()">
-			<div class="reg-items" >
-              	<span class="reg-label">
-                	<label for="userName">用户名：</label>
-              	</span>
-              	<input   class="i-text" type="text" id="userName" name="userName" value="">
-              	<!--备注————display使用 inline-block-->
-              	<div class="msg-box">
-                	<div class="msg-box" style="display: none;">
-	                  	<div class="msg-weak" style="display: inline-block;"> <i></i>
-	                    	<div class="msg-cont">4-20个字符，支持汉字、字母、数字及“-”、“_”组合</div>
-	                  	</div>
-                	</div>
-                	<div class="msg-weak err-tips"  style="display: none;"><div>请输入用户名</div></div>
-            	</div>
-            	<span class="suc-icon"></span>
-            </div>
-            <div class="reg-items" >
-              	<span class="reg-label">
-                	<label for="password">设置密码：</label>
-              	</span>
-              	<input   class="i-text" type="password" id="password" name="password">
-              	<!--备注————display使用 inline-block-->
-              	<div class="msg-box">
-                	<div class="msg-box" style="display: none;">
-	                  	<div class="msg-weak" style="display: inline-block;"> <i></i>
-	                    	<div class="msg-cont">键盘大写锁定已打开，请注意大小写!</div>
-	                  	</div>
-                	</div>
-                	<div class="msg-weak err-tips"  style="display:none;"><div>请输入密码</div></div>
-            	</div> 
-            </div>
-            <div class="reg-items" >
-              	<span class="reg-label">
-                	<label for="repassword">确认密码：</label>
-              	</span>
-              	<input   class="i-text" type="password" id="repassword" name="repassword">
-              	<!--备注————display使用 inline-block-->
-              	<div class="msg-box">
-                	<div class="msg-weak err-tips"  style="display: none;"><div>密码不一样</div></div>
-            	</div> 
-            </div>
-            <div class="reg-items" >
-              	<span class="reg-label">
-                	<label for="phoneNumber">手机号码：</label>
-              	</span>
-              	<input   class="i-text" type="text" id="phoneNumber" name="phoneNumber">
-              	<!--备注————display使用 inline-block-->
-              	<div class="msg-box"> 
-                	<div class="msg-weak err-tips"  style="display:none;"><div>手机号不能为空</div></div>
-            	</div> 
-            </div> 
-            <div class="reg-items" >
-              	<span class="reg-label">
-                	<label for="email">邮箱号码：</label>
-              	</span>
-              	<input   class="i-text" type="text" id="email" name="email">
-              	<div class="check check-border" style="position:relative;left:0">
-                   	<a class="check-phone" style="padding:11px 10px 14px 10px;*line-height:60px;">获取短信验证码</a>
-                  	<span class="check-phone disable" style="display: none;"><em>60</em>秒后重新获取</span>
-                  <a class="check-phone" style="display: none;padding:11px 10px 14px 10px">重新获取验证码</a>
-                </div>
-              	<!--备注————display使用 inline-block-->
-              	<div class="msg-box"> 
-                	<div class="msg-weak err-tips"  style="display:none;"><div>请输入短信验证码</div></div>
-            	</div> 
-            </div>
-            <div class="reg-items" >
-              	<div class="dag_biaod">
-              		<input type="checkbox" value="english" >
-              		阅读并同意
-              		<a href="#" class="ftx-05 ml10">《MyShop用户注册协议》</a>
-              		<a href="#" class="ftx-05 ml10">《隐私协议》</a>
-              	</div>
-            </div>
-            <div class="reg-items" >
-              	<!--<span class="reg-label">-->
-                	<!--<label for="J_Name"> </label>-->
-              	<!--</span>-->
-                <button class="reg-btn"  type="submit">立即注册</button>
-            </div>
+		<form class="form-signin" id="commentForm">
+			<fieldset>
+				<div class="reg-items">
+					<span class="reg-label">
+						<label for="username">用户名 (必需)</label>
+					</span>
+						<input id="username" name="username" minlength="6" type="text" class="i-text" required>
+				</div>
+				<div class="reg-items">
+					<span class="reg-label">
+						<label for="password">密码 (必需)</label>
+					</span>
+						<input id="password" class="i-text" name="password" type="password" required>
+				</div>
+				<div class="reg-items">
+					<p class="reg-label">
+						<label for="confirm_password">再次输入密码 </label>
+					</p>
+						<input id="confirm_password" class="i-text" name="confirm_password" type="password" required>
+				</div>
+				<div class="reg-items">
+					<p class="reg-label">
+						<label for="confirm_password">手机号 </label>
+					</p>
+						<input id="phonenumber" class="i-text" name="phonenumber" type="text" required>
+				</div>
+				<div class="reg-items">
+					<p class="reg-label">
+						<label for="confirm_password">邮箱 </label>
+					</p>
+						<input id="email" class="i-text" name="email" type="email" required>
+				</div>
+				<div class="reg-items" >
+					<input class="reg-btn" value="立即注册"  type="submit">
+				</div>
+			</fieldset>
 		</form>
         <div class="xiaogg">
             <img src="images/cdsgfd.jpg">
         </div>
 	</div>
 </div>
-
-
-<div class="jianj_dib jianj_dib_1">
-	<div class="beia_hao">
-		<p>京ICP备：123456789号  </p>
-		<p class="gonga_bei">京公网安备：123456789号</p>
-	</div>
-</div>
-
 </body>
-<script type="text/javascript" src="jquery/jquery-2.1.1.min.js"></script>
-<script type="text/javascript">
-	var userName=$("#userName").val();
-	var password=$("#password").val();
-	var phoneNumber=$("#phoneNumber").val();
-	var email=$("#email").val();
-    function Register() {
-    	alert(1)
-		alert(userName)
-		alert(password)
-		alert(phoneNumber)
-		alert(email)
-        $.ajax({
-            type: 'POST',
-            url: "RegisterUser",
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-                "userName": userName,
-                "password": password,
-                "phoneNumber": phoneNumber,
-                "email": email
-            }),
-            success: function (data) {
-                console.log(data);
-                if (data == true) {
-                    window.location.href = "login.html";
-                }
-            },
-            error: function (data) {
-                alert("信息出错");
-                debugger;
-                console.error(data);
-                // window.location.href = "zhuc.html";
-            },
-            dataType: "json"
-        });
-    }
-</script>
 </html>

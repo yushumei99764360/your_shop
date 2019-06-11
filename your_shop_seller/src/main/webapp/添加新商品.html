@@ -121,6 +121,12 @@
                   <input type="text" class="am-input-sm" id="g_disctprice" placeholder="请输入折扣价">
               </div>
           </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">商品库存：</div>
+              <div class="you">
+                  <input type="text" class="am-input-sm" id="g_num" placeholder="请输入库存">
+              </div>
+          </div>
         <div class="am-form-group am-cf">
           <div class="zuo">商品描述：</div>
           <div class="you">
@@ -166,7 +172,7 @@
 
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
-              <button type="submit" class="am-btn am-btn-success am-radius" onclick="addGoodsInfo()">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp;
+              <button type="button" class="am-btn am-btn-success am-radius" onclick="addGoodsInfo()">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp;
           </div>
         </div>
       </form>
@@ -209,7 +215,6 @@
 <script>
     function addGoodsInfo(num) {
         alert("添加新商品")
-        var sellerId =
         $.ajax({
             type:"POST",
             url:"addGoods",
@@ -220,6 +225,7 @@
                 "g_price":$("#g_price").val(),
                 "g_discount":$("#g_discount").val(),
                 "g_disctprice":$("#g_disctprice").val(),
+                "g_num":$("#g_num").val(),
                 "g_desc":$("#g_desc").val(),
                 "g_pic":$("#g_pic").val(),
                 "childName":$("#childName").val(),

@@ -46,16 +46,16 @@
     <!--<tx:annotation-driven transaction-manager="transactionManager" />-->
     <!-- 6、xml配置事务扩散(传播)机制 -->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="delete*" propagation="REQUIRED" />
-            <tx:method name="insert*" propagation="REQUIRED" />
-            <tx:method name="update*" propagation="REQUIRED" />
-            <tx:method name="*" propagation="SUPPORTS" read-only="true"/>
-        </tx:attributes>
+    <tx:attributes>
+    <tx:method name="delete*" propagation="REQUIRED" />
+    <tx:method name="insert*" propagation="REQUIRED" />
+    <tx:method name="update*" propagation="REQUIRED" />
+    <tx:method name="*" propagation="SUPPORTS" read-only="true"/>
+    </tx:attributes>
     </tx:advice>
 
     <aop:config>
-        <aop:pointcut expression="execution(* com.qf.service.*.*.*(..))" id="serviceCutPoint"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceCutPoint"/>
+    <aop:pointcut expression="execution(* com.qf.service.*.*.*(..))" id="serviceCutPoint"/>
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceCutPoint"/>
     </aop:config>
 </beans>
