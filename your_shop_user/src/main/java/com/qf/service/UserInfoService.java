@@ -43,4 +43,6 @@ public interface UserInfoService {
     int search(int userId);
 
     int insertUserDetail(UserInfoMessage userInfoMessage);
+
+    boolean updateIconByUserId(int userId, String icon);
 }

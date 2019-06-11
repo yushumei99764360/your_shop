@@ -8,6 +8,8 @@ import com.qf.vo.UserInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
 
@@ -66,5 +68,17 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public int insertUserDetail(UserInfoMessage userInfoMessage) {
         return userInfoMapper.insertUserDetail(userInfoMessage);
+    }
+
+    @Override
+    public boolean updateIconByUserId(int userId, String icon) {
+        HashMap<String, Object> parms = new HashMap<>();
+        parms.put("userId",userId);
+        parms.put("icon",icon);
+        int i = userInfoMapper.updateIconByUserId(parms);
+        if (i != 0) {
+            return true;
+        }
+        return false;
     }
 }

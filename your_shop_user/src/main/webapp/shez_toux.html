@@ -4,13 +4,13 @@
 <html>   
 <head> 
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 <title>MyShop——设置头像</title>
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="css/ziy.css">
-	<link rel="stylesheet" type="text/css" href="css/mavatar.css">
-	<script src="js/magnifier.js"></script>
-	<script src="js/index.js"></script>
+
+
+<script src="dropzone/js/dropzone.min.js"></script>
+<script src="jquery/jquery-2.1.1.min.js"></script>
 <!--  <script src="js/jquery-1.11.3.min.js" ></script>
 <script src="js/index.js" ></script>  -->
 <!-- <script type="text/javascript" src="js/jquery1.42.min.js"></script> -->
@@ -182,7 +182,7 @@
 					<div class="toux_kuang">
 						<div class="userImage">
 							<div class="myGome_userPhoto">
-								<img src="images/toux.png">
+								<img src="" id="icons">
 								<a class="edit_photo_bitton" href="shez_toux.html" target="_blank">编辑</a>
 							</div>
 						</div>
@@ -286,23 +286,19 @@
 						<div class="up_avater">
 							<div class="warp_tip">
 								<div class="upload_main">
-									<div class="up-left">
-										<div class="pic-show">
+									<div class="pic-show">
 											<div class="pic-wrap ">
-												<div class="avatarbox" >
-													<div id="avatar"></div>
-													<div class="botton-box">
-														<button onclick="clip()" class="button button-info" style="float: left">裁剪</button>
-														<button onclick="reset()" class="button" style="float: right">重置</button>
-													</div>
-												</div>
+												<img src="" id="icon">
 											</div>
-										</div>
+									</div>
+									<form name="iconUpLoad" id="iconUpLoad"  enctype="multipart/form-data">
+										<input type="file" name="file" class="btn btn-enter">
+									</form>
+									<div class="upload_btn_box">
+										<button id="up_avater_btn" onclick="updownload()" class="avater_btn" type="button">上传头像</button>
 									</div>
 								</div>
-							</div>
-							<div class="upload_btn_box">
-								<input type="button" value="保存" class="save-btn">
+
 							</div>
 						</div>
 					</div>
@@ -311,8 +307,6 @@
 		</div>
 	</div>
 </div>
- 
-
 <!--底部-->
 <div class="dib_beij dib_beij_ger_zhongx">
 	<div class="dib_jvz_beij">
@@ -395,39 +389,42 @@
 	</div>
 </div>
 <script>
-    var avatar = new Mavatar({el: '#avatar',backgroundColor: '#fff', fileOnchange: function (e) {
-            console.log(e)
-        }});
-    function clip() {
-        avatar.imageClipper(function (data) {
-            alert('裁剪成功，生成的图片已覆盖在上传框内');
-            console.log(data);
-            //  将图片上传至后台
-            avatar.upload({
-                url: 'http://localhost:3080/profile',
-                name: 'avatar',
-                data: {userName: 'hzy0913', info: 'someInfo'},
-                success: function (data) {
-                    console.log(data)
-                },
-                error: function (error) {
-                    console.log(error)
-                },
-            });
-        })
+	/*头像显示*/
+    function getUserInfoMessageById() {
+        $.ajax({
+            type: 'GET',
+            url: "getUserInfoMessageById",
+            contentType:"application/json",
+            success: function(data){
+                $("#icon").attr("src",data.icon);
+                $("#icons").attr("src",data.icon);
+            },
+            error:function (data) {
+                console.error(data);
+            },
+            dataType: "json"
+        });
     }
-    function reset() {
-        avatar.resetImage();
-    }
-    //获取上传前信息
-    function getInfo() {
-        var fileInfo = avatar.getfileInfo();
-        console.log(fileInfo);
-    }
-    //获取base64
-    function getdata() {
-        var urldata = avatar.getDataUrl();
-        console.log(urldata);
+    getUserInfoMessageById();
+
+
+	function updownload() {
+        var formData = new FormData($("#iconUpLoad")[0]);
+        $.ajax({
+            type: 'post',
+            url: "upDownload",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success : function (data) {
+                 window.location.href="shez_toux.html";
+            },
+            error : function (data) {
+                window.location.href="shez_toux.html";
+            },
+            // dataType: "json"
+        });
     }
 </script>
 </body>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.SellerInfoMapper">
+    <!--注册商家-->
+    <insert id="RegisterSellerInfo" parameterType="com.qf.vo.SellerInfoVo">
+        insert into sellerinfo(s_name,s_pwd,s_phone,s_address,s_desc)
+        values (<trim suffixOverrides=",">
+        <if test="s_name !=null and s_name !=''">
+            #{s_name},
+        </if>
+        <if test="s_pwd !=null and s_pwd !=''">
+            #{s_pwd},
+        </if>
+        <if test="s_phone !=null and s_phone !=''">
+            #{s_phone},
+        </if>
+        <if test="s_address !=null and s_address !=''">
+            #{s_address},
+        </if>
+        <if test="s_desc !=null and s_desc !=''">
+            #{s_desc},
+        </if>
+    </trim>
+        )
+    </insert>
+    <!--查询商家名称是否存在-->
+    <select id="checkSellerName" parameterType="java.lang.String" resultType="int">
+        select count(1) from sellerinfo where s_name = #{s_name}
+    </select>
+</mapper>

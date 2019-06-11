@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -81,6 +83,16 @@ public class GoodsController {
         boolean delByGoodsId = goodsService.delByGoodsId(goodsId);
         System.out.println(delByGoodsId);
         return delByGoodsId;
+    }
+
+    // 删除选中的，批量删除
+    @ResponseBody
+    @RequestMapping("delCheckGoods")
+    public Object delCheckGoods(@RequestBody List<Integer> selectedGoodsId){
+        System.out.println(selectedGoodsId);
+        boolean delCheckGoods = goodsService.delCheckGoods(selectedGoodsId);
+        System.out.println(delCheckGoods);
+        return delCheckGoods;
     }
 
 
