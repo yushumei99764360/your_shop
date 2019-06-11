@@ -3,17 +3,61 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html>   
 <head>
-<meta charset="utf-8">
-<title>MyShop——个人注册</title>
-<link rel="stylesheet" type="text/css" href="css/index.css">
-<link rel="stylesheet" type="text/css" href="css/ziy.css">
-<!--  <script src="js/jquery-1.11.3.min.js" ></script>
-<script src="js/index.js" ></script>  --> 
-<!-- <script type="text/javascript" src="js/jquery1.42.min.js"></script> -->
-<!-- 
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
- <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.source.js"></script> -->
- 
+<
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="keys" content="">
+	<meta name="author" content="">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/ziy.css">
+	<!--表单验证-->
+	<script type="text/javascript" src="jquery/jquery-2.1.1.min.js"></script>
+
+	<title>MyShop——个人注册</title>
+	<script src="dist/jquery.validate.min.js"></script>
+	<script src="dist/additional-methods.min.js"></script>
+	<script src="dist/localization/messages_zh.js"></script>
+	<script src="assets/Sellervalidate.js"></script>
+	<script>
+		$.validator.setDefaults({
+			submitHandler: function() {
+				$.ajax({
+					type: 'POST',
+					url: "RegisterSeller",
+					contentType: "application/json; charset=utf-8",
+					data: JSON.stringify({
+						"s_name": $("#username").val(),
+						"s_pwd": $("#password").val(),
+						"s_phone": $("#phonenumber").val(),
+						"s_address": $("#address").val(),
+						"s_desc":$("#desc").val()
+					}),
+					success: function (data) {
+						console.log(data);
+						if (data == true) {
+							window.location.href = "login.html";
+						}
+					},
+					error: function (data) {
+						alert("信息出错");
+						debugger;
+						console.error(data);
+						// window.location.href = "zhuc.html";
+					},
+					dataType: "json"
+				})
+			}
+		});
+		var url="checkSellerName";
+		SellerValidate.init(url);
+	</script>
+	<style>
+		.error{
+			color:red;
+		}
+	</style>
 </head>
 <body>
 <!--dengl-->
@@ -31,46 +75,51 @@
 			<ul>
 				<li><a href="zhuc.html">个人注册</a></li>
 				<i>丨</i>
-				<li class="ger_border_color"><a href="shenq_ruz.html">申请入驻</a></li>
-				<p>我已经入驻，现在就<a class="ftx-05 ml10" href="dengl.html">登录</a></p>
+				<li class="ger_border_color"><a href="shenq_ruz.html">申请商家入驻</a></li>
+				<p>我已经入驻，现在就<a class="ftx-05 ml10" href="login.html">登录</a></p>
 			</ul>
 		</div>
 		<div class="zhuc_biaod zhuc_biaod_liuy">
-			<form action="#" method="get" class="messages">
-				<h2>联系人信息</h2>
+			<form  class="messages" id="SellerForm">
+				<h2>商家信息</h2>
 			     <div class="messlist">
-			      <label><em>*</em> 联系人姓名</label>
-			      <input type="text" placeholder="姓名" />
+			      <label><em>*</em> 商家名称</label>
+			      <input type="text" id="username" name="username" minlength="3" placeholder="商家名称"  required/>
 			      <div class="clears"></div>
 			     </div>
+				<div class="messlist">
+					<label><em>*</em> 登录密码</label>
+					<input type="password" id="password" name="password" placeholder="登录密码" required/>
+					<div class="clears"></div>
+				</div>
+				<div class="messlist">
+					<label><em>*</em> 确认密码</label>
+					<input id="confirm_password" name="confirm_password" type="password" placeholder="确认密码" required>
+					<div class="clears"></div>
+				</div>
 			     <div class="messlist"> 
 			      <label><em>*</em> 手机号码</label>
-			      <input type="text" placeholder="手机号码" />
+					 <input id="phonenumber"  name="phonenumber" type="text" placeholder="手机号码" required>
 			      <div class="clears"></div>
 			     </div>
-			     <div class="messlist">
-			      <label><em>*</em> 联系邮箱</label>
-			      <input type="text" placeholder="邮箱" />
-			      <div class="clears"></div>
-			     </div>
-			     <div class="messlist">
-			      <label><em>*</em> 所属行业</label>
-			      <input type="text" placeholder="所属行业" />
-			      <div class="clears"></div>
-			     </div>
+				<div class="messlist">
+					<label><em>*</em> 商家地址</label>
+					<input id="address" name="address" type="text" placeholder="商家地址" required/>
+					<div class="clears"></div>
+				</div>
 			     <div class="messlist textareas">
-			      <label><em>*</em> 详情内容</label>
-			      <textarea placeholder="详情内容"></textarea>
+			      <label><em>*</em>商家介绍</label>
+			      <textarea id="desc" name="desc" placeholder="商家介绍" required></textarea>
 			      <div class="clears"></div>
 			     </div>
-			     <div class="messlist yzms">
+			     <!--<div class="messlist yzms">
 			      <label><em>*</em> 验证码</label>
-			      <input type="text" placeholder="验证码" />
+			      <input type="text" placeholder="验证码" id="checkCode"/>
 			      <img src="" width="64" height="27" class="yzmimg" />
 			      <div class="clears"></div>
-			     </div>
+			     </div>-->
 			     <div class="messsub">
-			      <input class="reg-btn type="submit" x value="提交"/> 
+			      <input class="reg-btn" type="submit"  value="提交"/>
 			     </div>
 			</form>	
 			<div class="fuw_teh_kuang">
