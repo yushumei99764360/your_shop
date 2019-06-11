@@ -4,6 +4,7 @@ import com.qf.mapper.GoodsMapper;
 import com.qf.mapper.OrderMapper;
 import com.qf.service.OrderService;
 import com.qf.vo.GoodsVo;
+import com.qf.vo.OrderSelected;
 import com.qf.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
@@ -34,7 +35,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean deleteOrderInfo(int id) {
+
         return orderMapper.deleteOrderInfo( id);
+    }
+
+    @Override
+    public List<OrderVo> selectOrderBy(OrderSelected orderSelected) {
+        return orderMapper.selectOrderBy(orderSelected);
     }
 
 

@@ -76,10 +76,13 @@
     <!--根据 产品类别  日期区间 是否上架 还有 name title desc 关键词搜索 商品列表-->
     <select id="selectGoodsBys" resultType="com.qf.vo.GoodsVo" parameterType="com.qf.vo.GoodsSelecteds">
         SELECT g.*,c.fathername,c.c_name childname FROM goodsinfo g , goods_category gc ,
-        (SELECT a.c_name fathername,b.*FROM category a ,category b WHERE a.c_parentid = 0 AND a.c_id = b.c_parentid ) c
-        WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id  AND g.s_id = #{sellerId} and g.g_status = #{g_status}
+        (SELECT a.c_name fathername,b.* FROM category a ,category b WHERE a.c_parentid = 0 AND a.c_id = b.c_parentid ) c
+        WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id and g.s_id = #{s_id}
         <if test="categoryName != null and categoryName !=''">
            and c.c_name = #{categoryName}
+        </if>
+        <if test="g_status != null and g_status !=''">
+            and g.g_status = #{g_status}
         </if>
         <if test="minDate != null and minDate !=''">
             and g.g_lastdate &gt; #{minDate}
@@ -87,23 +90,14 @@
         <if test="maxDate != null and maxDate !=''">
             and  g.g_lastdate &lt; #{maxDate}
         </if>
-        <if test="str != null and str !=''">
+        <if test="categoryName != null and categoryName !=''">
             and( g.g_title like #{str} or  g.g_name like #{str} or g.g_desc like #{str} )
         </if>
-
     </select>
 
     <!--根据商品id 删除商品信息 -->
     <delete id="delByGoodsId" parameterType="int">
         DELETE FROM goodsinfo WHERE g_id = #{goodsId}
-    </delete>
-
-    <!--批量删除-->
-    <delete id="delCheckGoods" parameterType="list">
-        delete from goodsinfo where g_id in
-        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
-            #{item}
-        </foreach>
     </delete>
 
 </mapper>

@@ -80,7 +80,7 @@
     <div class="listbiaoti am-cf">
       <ul class="am-icon-flag on"> 修改商品 </ul>
       
-      <dl class="am-icon-home" style="float: right;"> 当前位置 > 商品修改 </dl>
+      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">商品修改</a></dl>
 
     </div>
 
@@ -144,8 +144,8 @@
               <div class="zuo">产品子类：</div>
               <div class="you" style="height: 45px;">
                   <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="childName">
-                      <option value="电脑">电脑</option>
-                      <option value="手机">手机</option>
+                      <option value="b">产品子类</option>
+                      <option value="o">手机</option>
                   </select>
               </div>
           </div>
@@ -153,8 +153,8 @@
               <div class="zuo">产品父类：</div>
               <div class="you" style="height: 45px;">
                   <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="fatherName">
-                      <option value="食品">食品</option>
-                      <option value="电子产品">电子产品</option>
+                      <option value="b">产品父类</option>
+                      <option value="o">电子产品</option>
                   </select>
               </div>
           </div>
@@ -162,15 +162,15 @@
               <div class="zuo">产品状态：</div>
               <div class="you" style="height: 45px;">
                   <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="g_status">
-                      <option value="1">上架</option>
                       <option value="0">下架</option>
+                      <option value="1">上架</option>
                   </select>
               </div>
           </div>
 
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
-              <button type="button" class="am-btn am-btn-success am-radius" onclick="updateGoodsByGoodsId()">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp;
+              <button type="submit" class="am-btn am-btn-success am-radius" onclick="updateGoodsByGoodsId()">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp;
           </div>
         </div>
       </form>
@@ -180,7 +180,7 @@
  
  <div class="foods">
   <ul>
-      版权所有@2019.  <a href="http://www.cssmoban.com/" target="_blank" title="">商铺之家</a> -  More Shop <a href="http://www.cssmoban.com/" title="" target="_blank"></a>
+    版权所有@2015. 模板收集自 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> -  More Templates<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
   </ul>
   <dl>
     <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
@@ -222,7 +222,7 @@
             url:"getGoodsByGoodsId?goodsId="+goodsId,
             contentType:"application/json",
             success:function (data) {
-                // alert(3333)
+                alert(3333)
                 $("#g_id").html(data.g_id);
                 $("#g_title").val(data.g_title);
                 $("#g_name").val(data.g_name);
@@ -265,7 +265,6 @@
                 "g_status":$("#g_status").val()
             }),
             success : function (data) {
-                alert("修改成功")
                 window.location.href="商品列表.html";
             },
             error : function (data) {

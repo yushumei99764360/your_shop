@@ -2,13 +2,11 @@ package com.qf.test;
 
 import com.qf.pojo.GoodsInfo;
 import com.qf.service.GoodsService;
-import com.qf.vo.GoodsSelecteds;
 import com.qf.vo.GoodsVo;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TestGoods {
@@ -38,28 +36,15 @@ public class TestGoods {
     @Test
     public void test3(){
 
-        GoodsSelecteds goodsSelecteds = new GoodsSelecteds();
-        goodsSelecteds.setSellerId(1);
-        goodsSelecteds.setStr("果");
-//        goodsSelecteds.setCategoryName("手机");
-        goodsSelecteds.setG_status(0);
-//        goodsSelecteds.setMinDate("");
-//        goodsSelecteds.setMaxDate("");
 
-        List<GoodsVo> goods = goodsService.selectGoodsBys(goodsSelecteds);
-
-        for (GoodsVo goods1: goods)
-            System.out.println(goods1);
 
     }
 
     @Test
     public void test4(){
-        List<Integer> list = new ArrayList<Integer>();
-        list.add(17);
-        list.add(19);
-        boolean delCheckGoods = goodsService.delCheckGoods(list);
-        System.out.println(delCheckGoods);
+
+
+
     }
 
     @Test

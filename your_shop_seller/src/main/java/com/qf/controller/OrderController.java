@@ -2,7 +2,9 @@ package com.qf.controller;
 
 import com.qf.service.OrderService;
 
+import com.qf.vo.GoodsSelecteds;
 import com.qf.vo.GoodsVo;
+import com.qf.vo.OrderSelected;
 import com.qf.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,6 +53,14 @@ public Object deleteOrderInfo(@RequestParam int id) {
     boolean deleteOrder = orderService.deleteOrderInfo(id);
     return deleteOrder;
 }
+
+//    根据 创建修改日期    关键词搜索 订单列表
+    @ResponseBody
+    @RequestMapping("selectOrderBy")
+    public Object selectOrderBy(@RequestBody OrderSelected orderSelected) {
+        List<OrderVo> orderVos = orderService.selectOrderBy(orderSelected);
+        return orderVos;
+    }
 
 
 

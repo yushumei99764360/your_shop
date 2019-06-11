@@ -8,6 +8,10 @@ public class OrderVo {
   int id;
 //    快递公司
     String o_sendtype;
+//订单创建
+   String o_orderdate;
+//   订单修改
+   String o_checkdate;
 //    支付类型
     String o_paytype;
 //    支付金额
@@ -32,8 +36,10 @@ public class OrderVo {
 
 //卖家id
     int s_id;
-//    订单创建日期
+//    详情订单创建日期
     String order_date;
+    //   详情订单修改日期
+    String order_modified;
 //    订单id
     int o_orderid;
 //    商品id
@@ -48,16 +54,16 @@ public class OrderVo {
     int g_num;
 //    订单总价
     Double g_total_price;
-//    修改日期
-    String order_modified;
 
 
     public OrderVo() {
     }
 
-    public OrderVo(int id, String o_sendtype, String o_paytype, double o_paycount, int userId, String o_shperson, String o_shphone, String o_shaddress, String o_province, String o_city, String o_district, int s_id, String order_date, int o_orderid, int g_id, String g_name, Double g_disctprice, String g_desc, int g_num, Double g_total_price, String order_modified) {
+    public OrderVo(int id, String o_sendtype, String o_orderdate, String o_checkdate, String o_paytype, double o_paycount, int userId, String o_shperson, String o_shphone, String o_shaddress, String o_province, String o_city, String o_district, int s_id, String order_date, String order_modified, int o_orderid, int g_id, String g_name, Double g_disctprice, String g_desc, int g_num, Double g_total_price) {
         this.id = id;
         this.o_sendtype = o_sendtype;
+        this.o_orderdate = o_orderdate;
+        this.o_checkdate = o_checkdate;
         this.o_paytype = o_paytype;
         this.o_paycount = o_paycount;
         this.userId = userId;
@@ -69,6 +75,7 @@ public class OrderVo {
         this.o_district = o_district;
         this.s_id = s_id;
         this.order_date = order_date;
+        this.order_modified = order_modified;
         this.o_orderid = o_orderid;
         this.g_id = g_id;
         this.g_name = g_name;
@@ -76,6 +83,6 @@ public class OrderVo {
         this.g_desc = g_desc;
         this.g_num = g_num;
         this.g_total_price = g_total_price;
-        this.order_modified = order_modified;
     }
 }
+
