@@ -1,5 +1,6 @@
 package com.qf.mapper;
 
+import com.qf.vo.OrderSelected;
 import com.qf.vo.OrderVo;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface OrderMapper {
     boolean updateOrderInfo(OrderVo orderVo);
 
     boolean deleteOrderInfo(int id);
+
+    List<OrderVo> selectOrderBy(OrderSelected orderSelected);
 }

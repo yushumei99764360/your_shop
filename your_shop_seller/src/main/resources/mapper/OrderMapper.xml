@@ -15,8 +15,7 @@
 
     <!--根据订单号修改订单信息-->
     <update id="updateOrderInfo" parameterType="com.qf.vo.OrderVo">
-        UPDATE orderinfo
-        <set>
+        UPDATE orderinfo set
             <if test="o_sendtype != null and o_sendtype !=''">
                 o_sendtype = #{o_sendtype},
             </if>
@@ -35,7 +34,7 @@
             <if test="o_shaddress != null and o_shaddress !=''">
                 o_shaddress = #{o_shaddress},
             </if>
-        </set>
+        o_checkdate = default
         WHERE id = #{id}
     </update>
 
@@ -43,5 +42,39 @@
     <delete id="deleteOrderInfo" parameterType="int">
         DELETE FROM orderinfo WHERE id = #{id}
     </delete>
+
+
+    <!--条件查询-->
+    <select id="selectOrderBy" resultType="com.qf.vo.OrderVo" parameterType="com.qf.vo.OrderSelected">
+        SELECT * FROM orderinfo
+
+        <where>
+            <if test="changeStartTime != null and changeStartTime !=''">
+                and o_checkdate &gt; #{changeStartTime}
+            </if>
+            <if test="changeEndTime != null and changeEndTime !=''">
+                and  #{changeEndTime} &gt; o_checkdate
+            </if>
+            <if test="startTime != null and startTime !=''">
+                and o_orderdate &gt; #{startTime}
+            </if>
+            <if test="endTime != null and endTime !=''">
+                and  #{endTime} &gt; o_orderdate
+            </if>
+            <if test="str != null and str !=''">
+                and (id like "%"#{str}"%" or
+                o_sendtype like "%"#{str}"%" or
+                o_paytype like "%"#{str}"%" or
+                userId like "%"#{str}"%" or
+                o_shperson like "%"#{str}"%" or
+                o_shphone like "%"#{str}"%" or
+                o_shaddress like "%"#{str}"%"or
+                o_province like "%"#{str}"%" or
+                o_city like "%"#{str}"%" or
+                o_district like "%"#{str}"%"
+                )
+            </if>
+    </where>
+    </select>
 
 </mapper>

@@ -123,42 +123,19 @@
                 returnDefault:true //鼠标从.sideMen移走后返回默认状态（默认false）
             });
         </script>
-
-
-
-
-
-
-
-
     </div>
+
+
+
+
 
     <div class=" admin-content">
 
         <div class="daohang">
             <ul>
-
             </ul>
-
-
-
-
         </div>
-
-
         <div class="am-popup am-popup-inner" id="my-popup"></div>
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="admin-biaogelist">
 
             <div class="listbiaoti am-cf">
@@ -166,12 +143,38 @@
 
                 <dl class="am-icon-home" style="float: right;">当前位置： 首页 > <a href="#">订单列表</a></dl>
 
-                <dl>
-                    <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" > 添加订单</button>
-                </dl>
+
                 <!--这里打开的是新页面-->
 
             </div>
+
+            <div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
+                <ul>
+
+                    <li style="margin-right: 0;">
+                        <span class="tubiao am-icon-calendar"></span>
+                        <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" placeholder="开始创建日期" data-am-datepicker="{theme: 'success',}" readonly="" id="startTime" >
+                    </li>
+                    <li style="margin-left: -4px;">
+                        <span class="tubiao am-icon-calendar"></span>
+                        <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" placeholder="结束创建日期" data-am-datepicker="{theme: 'success',}" readonly="" id="endTime" >
+                    </li>
+
+                    <li style="margin-right: 0;">
+                        <span class="tubiao am-icon-calendar"></span>
+                        <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" placeholder="开始修改日期" data-am-datepicker="{theme: 'success',}" readonly="" id="changeStartTime" >
+                    </li>
+                    <li style="margin-left: -4px;">
+                        <span class="tubiao am-icon-calendar"></span>
+                        <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" placeholder="结束修改日期" data-am-datepicker="{theme: 'success',}" readonly="" id="changeEndTime" >
+                    </li>
+
+
+                    <li><input type="text" class="am-form-field am-input-sm am-input-xm" placeholder="关键词搜索" id="str"></li>
+                    <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" style="margin-top: -1px;"  onclick="searchOrderInfo()">搜索</button></li>
+                </ul>
+            </div>
+
 
 
             <form class="am-form am-g">
@@ -180,6 +183,12 @@
                     <tr class="am-success">
                         <th class="table-check"><input type="checkbox" /></th>
                         <th class="table-id">订单ID</th>
+                        <th class="table-date am-hide-sm-only" data-options="field:'validityDate',formatter:function(data){
+return format(data,'yyyy-MM-dd HH:mm:ss');
+}">创建日期</th>
+                        <th class="table-date am-hide-sm-only" data-options="field:'validityDate',formatter:function(data){
+return format(data,'yyyy-MM-dd HH:mm:ss');
+}">修改日期</th>
                         <th class="table-type">快递公司</th>
                         <th class="table-type">支付方式</th>
                         <th class="table-type">支付金额</th>
@@ -272,6 +281,8 @@
                     var trHtml ="<tr>"+
                         "<td><input type=\"checkbox\" value="+item.id+"></td>"+
                         "<td>"+item.id+"</td>"+
+                        "<td>"+item.o_orderdate+"</td>"+
+                        "<td>"+item.o_checkdate+"</td>"+
                         "<td>"+item.o_sendtype+"</td>"+
                         "<td>"+item.o_paytype+"</td>"+
                         "<td>"+item.o_paycount+"</td>"+
@@ -327,7 +338,60 @@
         });
     }
 
+    //订单条件查询
+    function searchOrderInfo() {
+        $("#dataTable").empty();
+        var startTime=$("#startTime").val();
+        var endTime=$("#endTime").val();
+        var str=$("#str").val();
+        var changeStartTime = $("#changeStartTime").val();
+        var changeEndTime =$("#changeEndTime").val();
 
+        $.ajax({
+            type :"POST",
+            url :"selectOrderBy",
+            data:JSON.stringify({
+                "startTime": startTime,
+                "endTime":endTime,
+                "str" : str,
+                "changeStartTime":changeStartTime,
+                "changeEndTime":changeEndTime
+            }),
+            contentType : "application/json",
+            success : function (data) {
+                var tabObj = $("#dataTable");
+                $(data).each(function (i,item) {
+                    var trHtml ="<tr>"+
+                        "<td><input type=\"checkbox\" value="+item.id+"></td>"+
+                        "<td>"+item.id+"</td>"+
+                        "<td>"+item.o_orderdate+"</td>"+
+                        "<td>"+item.o_checkdate+"</td>"+
+                        "<td>"+item.o_sendtype+"</td>"+
+                        "<td>"+item.o_paytype+"</td>"+
+                        "<td>"+item.o_paycount+"</td>"+
+                        "<td>"+item.userId+"</td>"+
+                        "<td>"+item.o_shperson+"</td>"+
+                        "<td>"+item.o_shphone+"</td>"+
+                        "<td>"+item.o_shaddress+"</td>"+
+                        "<td>"+item.o_province+"</td>"+
+                        "<td>"+item.o_city+"</td>"+
+                        "<td>"+item.o_district+"</td>"+
+                        "<td>"+
+                        " <button type=\"button\" class=\"am-btn am-btn-default am-btn-xs am-text-success am-round\"   onclick=\"jumpToDetail("+item.id+")\"><span class=\"am-icon-search\" title=\"查看订单详情\"></span> </button>" +
+                        "<button type=\"button\" class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick=\"jumpToChange("+item.id+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
+                        "<button type=\"button\" class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\" onclick=\"jumpToDelete("+item.id+")\"><span class=\"am-icon-trash-o\"></span></button>"+
+                        "</td>"+
+                        "</tr>";
+                    //console.log(trHtml); //  2pm
+                    //将字符串添加到table中
+                    tabObj.append(trHtml);
+                });
+            },
+            error:function (data) {
+                alert("执行失败")
+            }
+        });
+    }
 
 
 </script>

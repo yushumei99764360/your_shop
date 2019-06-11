@@ -1,5 +1,6 @@
 package com.qf.service;
 
+import com.qf.vo.OrderSelected;
 import com.qf.vo.OrderVo;
 
 import java.util.List;
@@ -13,4 +14,6 @@ public interface OrderService {
      boolean updateOrderInfo(OrderVo orderVo);
 //删除订单
      boolean deleteOrderInfo(int id);
+//模糊查询订单
+     List<OrderVo> selectOrderBy(OrderSelected orderSelected);
 }
