@@ -52,7 +52,7 @@
     </update>
 
     <!--注册用户-->
-    <insert id="RegisterUserInfo" parameterType="com.qf.vo.RegisterUserVo">
+    <insert id="RegisterUserInfo" parameterType="com.qf.vo.UserInfoVo">
         insert into userinfo(userName,password,phoneNumber,email)
         values (<trim suffixOverrides=",">
         <if test="userName !=null and userName !=''">
