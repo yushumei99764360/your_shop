@@ -61,9 +61,7 @@ public class UserInfoController {
     public Object updateUserInfo(@RequestBody UserInfoMessage userInfoMessage,HttpSession httpSession) {
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
         userInfoMessage.setUserId(userInfo.getUserId());
-//        System.out.println(userInfoMessage);
         int i = userInfoService.search(userInfo.getUserId());
-        System.out.println("-----------"+i);
         if (i!= 0){
             int count = userInfoService.updateUserInfo(userInfoMessage);
             if (count > 0) {
@@ -123,4 +121,15 @@ public class UserInfoController {
         new Thread(new MailUtils(email,code)).start();
         return code;
     }
+
+    /**
+     * 退出
+     */
+    @RequestMapping("exit")
+    public Object exit(HttpSession httpSession){
+        httpSession.removeAttribute("userInfo");
+        httpSession.invalidate();
+        return "login";
+    }
+
 }
