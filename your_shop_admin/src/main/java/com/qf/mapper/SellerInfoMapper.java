@@ -65,4 +65,19 @@ public interface SellerInfoMapper {
      */
 
     int updateSellerInfo(SellerInfo sellerInfo);
+
+    /**
+     * 商店订单总数
+     * @param sellerId
+     * @return
+     */
+
+    int countOrderOfSeller(int sellerId);
+
+    /**
+     * 商店订单分页
+     * @return
+     */
+
+    List<SellerInfo> pageOrdersOfSeller(Map<String, Object> param);
 }

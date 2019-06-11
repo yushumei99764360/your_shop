@@ -46,4 +46,13 @@
     <update id="updateSellerInfo" parameterType="com.qf.pojo.SellerInfo" >
         update sellerinfo set s_name =#{s_name} ,s_pwd=#{s_pwd} ,s_phone=#{s_phone},s_address=#{s_address},s_desc=#{s_desc},s_status=#{s_status} where s_id=#{s_id};
     </update>
+
+    <!--商店订单总数-->
+    <select id="countOrderOfSeller" resultType="int" parameterType="int">
+        SELECT COUNT(*) FROM orderinfo WHERE s_id = #{sellerId}
+    </select>
+    <!--商店订单分页查询-->
+    <select id="pageOrdersOfSeller" parameterType="java.util.Map" resultType="com.qf.pojo.OrderInfo">
+        SELECT * FROM orderinfo WHERE s_id = #{sellerId} limit #{start}, #{length}
+    </select>
 </mapper>

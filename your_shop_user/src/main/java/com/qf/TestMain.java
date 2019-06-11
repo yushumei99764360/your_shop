@@ -14,7 +14,7 @@ public class TestMain {
         UserInfoLoginVo userInfoLoginVo = new UserInfoLoginVo();
 //        userInfoLoginVo.setEmail("zhangsan@qq.com");
 //        userInfoLoginVo.setPassword("123");
-        Boolean aBoolean = userInfoService.userInfoLogin(userInfoLoginVo);
-        System.out.println(aBoolean);
+//        Boolean aBoolean = userInfoService.userInfoLogin(userInfoLoginVo);
+//        System.out.println(aBoolean);
     }
 }

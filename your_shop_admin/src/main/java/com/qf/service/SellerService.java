@@ -37,4 +37,22 @@ public interface SellerService {
      * @return
      */
     boolean updateSellerInfo(SellerInfo sellerInfo);
+
+    /**
+     * 该商店的订单总数
+     * @param sellerId
+     * @return
+     */
+
+    int countOrderOfSeller(int sellerId);
+
+    /**
+     * 商店的订单分页查询
+     * @param start
+     * @param length
+     * @param sellerId
+     * @return
+     */
+
+    List<SellerInfo> pageOrdersOfSeller(int start, int length, int sellerId);
 }

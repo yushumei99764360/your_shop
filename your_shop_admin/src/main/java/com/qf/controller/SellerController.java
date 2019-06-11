@@ -158,10 +158,37 @@ public class SellerController {
 
     }
 
+    /**
+     * 修改商家信息
+     * @param sellerInfo
+     * @return
+     */
+
     @RequestMapping(value = "updateSellerInfo", method = RequestMethod.POST)
     public Object updateSellerInfo(@RequestBody SellerInfo sellerInfo) {
         boolean flag =  sellerService.updateSellerInfo(sellerInfo);
         System.out.println(flag);
         return flag;
     }
+
+    @RequestMapping(value = "listOrdersOfSellerById")
+    public Map<String,Object> listOrdersOfSellerById(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<String, Object>();
+        String strdraw = request.getParameter("draw");
+        String strstart = request.getParameter("start");
+        String strlength = request.getParameter("length");
+        String strsellerId = request.getParameter("sellerId");
+        int draw =strdraw==null?0:Integer.parseInt(strdraw);
+        int start =strdraw==null?0:Integer.parseInt(strstart);
+        int length =strdraw==null?10:Integer.parseInt(strlength);
+        int sellerId =strdraw==null?0:Integer.parseInt(strsellerId);
+        result.put("draw",draw);
+        result.put("recordsTotal",sellerService.countOrderOfSeller(sellerId));
+        result.put("recordsFiltered",sellerService.countOrderOfSeller(sellerId));
+        result.put("data",sellerService.pageOrdersOfSeller(start,length,sellerId));
+        result.put("error","");
+        return result;
+    }
+
+
 }

@@ -95,4 +95,31 @@ public class SellerServiceImpl implements SellerService {
         return false;
     }
 
+    /**
+     * 商店订单总数
+     * @param sellerId
+     * @return
+     */
+
+    @Override
+    public int countOrderOfSeller(int sellerId) {
+        return sellerInfoMapper.countOrderOfSeller(sellerId);
+    }
+
+    /**
+     * 商店订单分页
+     * @param start
+     * @param length
+     * @param sellerId
+     * @return
+     */
+    @Override
+    public List<SellerInfo> pageOrdersOfSeller(int start, int length, int sellerId) {
+        Map<String, Object> parms = new HashMap<String, Object>();
+        parms.put("start",start);
+        parms.put("length",length);
+        parms.put("sellerId",sellerId);
+        return sellerInfoMapper.pageOrdersOfSeller(parms);
+    }
+
 }

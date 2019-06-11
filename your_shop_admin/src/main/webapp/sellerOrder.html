@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,7 +34,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     <header class="main-header">
-        <a href="index2.html" class="logo">
+        <a href="backMain.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>商</b>城</span>
             <!-- logo for regular state and mobile devices -->
@@ -113,9 +113,8 @@
     </aside>
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>
-                商家
-                <small>商家列表</small>
+            <h1 id="sellerName"  xml:lang="zh">
+
             </h1>
         </section>
         <section class="content">
@@ -123,17 +122,21 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">商家</h3>
+                            <h3 class="box-title">商店头像</h3>
+                        </div>
+
+                        <div class="pic-show "  >
+                            <div><img src="#" alt="头像" style="height: 200px ; width: 200px" id = "sellerIcon"></div>
                         </div>
 
                         <!--<form class="form-inline" role="form" style="margin-left: 10px; margin-top: 10px">-->
-                            <!--<div class="form-group has-feedback">-->
-                                <!--<div class="input-group">-->
-                                    <!--<div class="input-group-addon">名称</div>-->
-                                    <!--<input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入用户名">-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<button type="button" class="btn btn-warning" onclick="serchUserInfo()"><i class="glyphicon glyphicon-search"></i> 查询</button>-->
+                        <!--<div class="form-group has-feedback">-->
+                        <!--<div class="input-group">-->
+                        <!--<div class="input-group-addon">名称</div>-->
+                        <!--<input class="form-control has-success" id="searchGoodsName" type="text" placeholder="请输入用户名">-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<button type="button" class="btn btn-warning" onclick="serchUserInfo()"><i class="glyphicon glyphicon-search"></i> 查询</button>-->
                         <!--</form>-->
 
                         <!-- /.box-header -->
@@ -141,15 +144,18 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+
                                     <th><input type="checkbox" class="minimal icheck_master" value="no"/></th>
-                                    <th>商店编号</th>
-                                    <th>商店名</th>
-                                    <th>商店密码</th>
-                                    <th>电话号码</th>
+                                    <th>订单编号</th>
+                                    <th>快递方式</th>
+                                    <th>支付方式</th>
+                                    <th>交易金额</th>
+                                    <th>收货人</th>
+                                    <th>手机号</th>
                                     <th>地址</th>
-                                    <th>描述</th>
-                                    <th>状态</th>
-                                    <th>操作</th>
+
+
+
                                 </tr>
                                 </thead>
                                 <tbody id="dataTable">
@@ -186,34 +192,35 @@
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="assets/app.js"></script>
 
-
 <script>
-
+    var sellerId;
+    var sellerName;
+    var icon;
+    (function () {
+        sellerId = window.location.search.split("=")[1];
+        sellerName = decodeURI(window.location.search.split("=")[2]);
+        icon = decodeURI(window.location.search.split("=")[3]);
+        $("#sellerName").text(sellerName)
+        $("#sellerIcon").attr("src", icon);
+    })();
 
     $(function () {
         var columns=[
             {
                 "data":function (row) {
-                    return '<input type="checkbox" class="minimal" value="'+row.s_id+'"/>';
+                    return '<input type="checkbox" class="minimal" value="'+row.id+'"/>';
                 }
             },
-            { "data": "s_id" },
-            { "data": "s_name" },
-            { "data": "s_pwd" },
-            { "data": "s_phone" },
-            { "data": "s_address" },
-            { "data": "s_desc" },
-            { "data": "s_status" },
-            {  "data":function (row,type) {
-                    return" <button type=\"button\" class=\"btn btn-sm  btn-default\" onclick = \"lookJump('"+row.s_id+"','"+row.s_name+"','"+row.icon +"')\"><i class='fa fa-search'></i>查看</button>"+
-                        "<button type=\"button\" class=\"btn btn-sm  btn-danger\" onclick = \"deleteJump("+row.s_id+")\"><i class='fa fa-trash'></i>删除</button>"+
-                        "<button type=\"button\" class=\"btn btn-sm  btn-primary\" onclick = \"updatejump("+row.s_id+")\"><i class='fa fa-edit'></i>修改</button>"+
-                        "<button type=\"button\" class=\"btn btn-sm  btn-success\" onclick = \"orderjump('"+row.s_id+"','"+row.s_name+"','"+row.icon +"')\"><i class='fa  fa-align-justify'></i>订单</button>";
-                }
-            }
+            { "data": "id" },
+            { "data": "o_sendtype" },
+            { "data": "o_paytype" },
+            { "data": "o_paycount" },
+            { "data": "o_shperson" },
+            { "data": "o_shphone" },
+            { "data": "o_shaddress" },
         ];
-
-        APP.initDataTables("pageSellers",columns)
+        var url = "listOrdersOfSellerById?sellerId=" + sellerId;
+        APP.initDataTables(url,columns)
     });
 
 
@@ -225,7 +232,7 @@
             url:"deleteUserInfoById?userId="+userId,
             contentType:"application/json",
             success: function (data) {
-                alert("删除成功")
+                alert("删除成功");
                 window.location.href="backSeller.html";
             },
             error: function (data) {
@@ -236,19 +243,14 @@
     }
 
 
-    // function jumptoadd(){
-    //     var url="addGoods.html";
-    //     window.location.href=url;
-    // }
+    function jumptoadd(){
+        var url="addUser.html";
+        window.location.href=url;
+    }
 
     function updatejump(){
         var url="editGoods.html";
         window.location.href=url;
-    }
-    function orderjump(sellerId,sName,icon) {
-
-        window.location.href = encodeURI("sellerOrder.html?sellerId="+sellerId+"="+sName+"="+icon);
-
     }
 
     /*批量删除*/
@@ -272,12 +274,6 @@
             },
             dataType: "json"
         });
-    }
-
-
-    function lookJump(sellerId,sName,icon) {
-
-        window.location.href = encodeURI("sellerDetail.html?sellerId="+sellerId+"="+sName+"="+icon);
     }
 
 </script>
