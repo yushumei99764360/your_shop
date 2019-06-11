@@ -35,6 +35,6 @@
             <if test="s_status != null and s_status !=''">
                 s_status = #{s_status},
             </if>
-        g_lastdate = default where s_id = #{s_id}
+        s_lastdate = default where s_id = #{s_id}
     </update>
 </mapper>

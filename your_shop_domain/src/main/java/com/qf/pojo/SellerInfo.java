@@ -14,8 +14,8 @@ public class SellerInfo {
     String s_address;
     String s_desc;
     int s_status;
-    Date s_date;
-    Date g_lastdate;
+    String s_date;
+    String s_lastdate;
     String icon;
 
     @Override
@@ -30,7 +30,7 @@ public class SellerInfo {
                 ", s_desc='" + s_desc + '\'' +
                 ", s_status=" + s_status +
                 ", s_date=" + s_date +
-                ", g_lastdate=" + g_lastdate +
+                ", s_lastdate=" + s_lastdate +
                 ", icon='" + icon + '\'' +
                 '}';
     }
@@ -99,20 +99,20 @@ public class SellerInfo {
         this.s_status = s_status;
     }
 
-    public Date getS_date() {
+    public String getS_date() {
         return s_date;
     }
 
-    public void setS_date(Date s_date) {
+    public void setS_date(String s_date) {
         this.s_date = s_date;
     }
 
-    public Date getG_lastdate() {
-        return g_lastdate;
+    public String getS_lastdate() {
+        return s_lastdate;
     }
 
-    public void setG_lastdate(Date g_lastdate) {
-        this.g_lastdate = g_lastdate;
+    public void setS_lastdate(String s_lastdate) {
+        this.s_lastdate = s_lastdate;
     }
 
     public String getIcon() {
