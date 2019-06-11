@@ -19,7 +19,7 @@ var Validate =function () {
                     lastname: "required",
                     username: {
                         required: true,
-                        minlength: 6,
+                        minlength: 2,
                         remote:{
                             url:url,
                             type:"post",
