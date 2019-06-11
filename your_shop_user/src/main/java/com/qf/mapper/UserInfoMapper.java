@@ -7,7 +7,7 @@ import com.qf.vo.UserInfoVo;
 public interface UserInfoMapper {
     /**
      * 登录
-     * @param userInfoLoginVo 用户名/密码/手机号/邮箱
+     * @param userInfoVo 用户名/密码/手机号/邮箱
      * @return
      */
     public UserInfo userInfoLogin(UserInfoVo userInfoVo);
