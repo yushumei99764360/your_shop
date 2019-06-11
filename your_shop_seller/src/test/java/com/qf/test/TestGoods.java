@@ -2,6 +2,7 @@ package com.qf.test;
 
 import com.qf.pojo.GoodsInfo;
 import com.qf.service.GoodsService;
+import com.qf.vo.GoodsSelecteds;
 import com.qf.vo.GoodsVo;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -36,7 +37,18 @@ public class TestGoods {
     @Test
     public void test3(){
 
+        GoodsSelecteds goodsSelecteds = new GoodsSelecteds();
+        goodsSelecteds.setSellerId(1);
+        goodsSelecteds.setStr("");
+        goodsSelecteds.setCategoryName("手机");
+        goodsSelecteds.setG_status(0);
+        goodsSelecteds.setMinDate("");
+        goodsSelecteds.setMaxDate("");
 
+        List<GoodsVo> goods = goodsService.selectGoodsBys(goodsSelecteds);
+
+        for (GoodsVo goods1: goods)
+            System.out.println(goods1);
 
     }
 

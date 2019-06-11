@@ -144,8 +144,8 @@
               <div class="zuo">产品子类：</div>
               <div class="you" style="height: 45px;">
                   <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="childName">
-                      <option value="b">产品子类</option>
-                      <option value="o">手机</option>
+                      <option value="电脑">电脑</option>
+                      <option value="手机">手机</option>
                   </select>
               </div>
           </div>
@@ -153,8 +153,8 @@
               <div class="zuo">产品父类：</div>
               <div class="you" style="height: 45px;">
                   <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="fatherName">
-                      <option value="b">产品父类</option>
-                      <option value="o">电子产品</option>
+                      <option value="食品">食品</option>
+                      <option value="电子产品">电子产品</option>
                   </select>
               </div>
           </div>
@@ -170,7 +170,7 @@
 
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
-              <button type="submit" class="am-btn am-btn-success am-radius" onclick="updateGoodsByGoodsId()">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp;
+              <button type="button" class="am-btn am-btn-success am-radius" onclick="updateGoodsByGoodsId()">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp;
           </div>
         </div>
       </form>
@@ -265,6 +265,7 @@
                 "g_status":$("#g_status").val()
             }),
             success : function (data) {
+                alert("修改成功")
                 window.location.href="商品列表.html";
             },
             error : function (data) {

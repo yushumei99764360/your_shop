@@ -85,7 +85,6 @@
 
     <!--添加用户详细信息-->
     <insert id="insertUserDetail" parameterType="com.qf.dto.UserInfoMessage">
-
         insert into userdetail (nickName,gender,age,realname,userId)
         values (#{nickName},#{gender},#{age},#{realName},#{userId})
     </insert>
