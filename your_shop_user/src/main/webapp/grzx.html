@@ -475,8 +475,13 @@ $(function(){
                     "realName":$("#realName").val()
                 }),
                 success: function(data){
-                    alert("修改成功")
-                    window.location.href="grzx.html"
+                    if (data) {
+                        alert("修改成功！");
+                        window.location.href = "grzx.html";
+                    } else {
+                        alert("修改失败！")
+                    }
+
                 },
                 error:function (data) {
                     console.error(data);
