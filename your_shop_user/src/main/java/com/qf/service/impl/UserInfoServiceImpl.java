@@ -24,6 +24,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoMapper.getUserInfoMessageById(userId);
     }
 
+    /**
+     * 修改添加
+     * @param userInfoMessage   用户信息
+     * @return
+     */
     @Override
     public int updateUserInfo(UserInfoMessage userInfoMessage) {
         return userInfoMapper.updateUserInfo(userInfoMessage);
@@ -41,5 +46,25 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public Integer checkUserName(String userName) {
         return userInfoMapper.checkUserName(userName);
+    }
+
+    /**
+     * 查看用户详细信息是否填写
+     * @param userId
+     * @return
+     */
+    @Override
+    public int search(int userId) {
+        return userInfoMapper.search(userId);
+    }
+
+    /**
+     * 用户详细信息添加
+     * @param userInfoMessage
+     * @return
+     */
+    @Override
+    public int insertUserDetail(UserInfoMessage userInfoMessage) {
+        return userInfoMapper.insertUserDetail(userInfoMessage);
     }
 }

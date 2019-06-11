@@ -39,4 +39,8 @@ public interface UserInfoMapper {
      * @return
      */
     public Integer checkUserName(String userName);
+
+    int search(int userId);
+
+    int insertUserDetail(UserInfoMessage userInfoMessage);
 }

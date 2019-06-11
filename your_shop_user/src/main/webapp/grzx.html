@@ -446,7 +446,7 @@ $(function(){
                     $("#userName").html(data.userName);
                     $("#nickName").val(data.nickName);
                     $("#gender").val(data.gender);
-                    $("#age").val(data.age);
+                    $("#selectAge").val(data.age);
                     $("#email").val(data.email);
                     $("#icon").attr("src",data.icon);
                     $("#realName").val(data.realName);
@@ -470,7 +470,7 @@ $(function(){
                 data: JSON.stringify({
                     "nickName":$("#nickName").val(),
                     "gender":$("#gender").val(),
-                    "selectAge":$("#selectAge").val(),
+                    "age":$("#selectAge").val(),
                     "email":$("#email").val(),
                     "realName":$("#realName").val()
                 }),
