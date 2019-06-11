@@ -14,19 +14,6 @@ public class  UserInfo implements Serializable {
    int flag;
    int checkState;
 
-   @Override
-   public String toString() {
-      return "UserInfo{" +
-              "userId=" + userId +
-              ", userName='" + userName + '\'' +
-              ", password='" + password + '\'' +
-              ", phoneNumber='" + phoneNumber + '\'' +
-              ", email='" + email + '\'' +
-              ", flag=" + flag +
-              ", checkState=" + checkState +
-              '}';
-   }
-
    public int getUserId() {
       return userId;
    }
