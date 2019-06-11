@@ -4,12 +4,13 @@
 <html>   
 <head> 
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 <title>MyShop——设置头像</title>
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="css/ziy.css">
-<link rel="stylesheet" href="dropzone/css/dropzone.min.css">
-<script src="dropzone/js/dropzone.min.js"></script>
-<script src="jquery/jquery-2.1.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/mavatar.css">
+	<script src="js/magnifier.js"></script>
+	<script src="js/index.js"></script>
 <!--  <script src="js/jquery-1.11.3.min.js" ></script>
 <script src="js/index.js" ></script>  -->
 <!-- <script type="text/javascript" src="js/jquery1.42.min.js"></script> -->
@@ -288,38 +289,12 @@
 									<div class="up-left">
 										<div class="pic-show">
 											<div class="pic-wrap ">
-												<div id="dropzoneDiv" class="dropzone" style="width: 230px;height: 230px"></div>
-											</div>
-										</div>
-									</div>
-									<div class="up-right">
-										<div class="up-right-title">
-											<h5>效果预览</h5>
-											<p>你上传的图片会自动生成3种尺寸，请注意小尺寸的图片是否清晰</p>
-										</div>
-										<div class="up-top">
-											<div class="pic-100-box">
-												<div class="pic-100 ">
-													<img src="images/7_170312181624_2.jpg">
-												</div>
-												<span class="pic-tip">100X100像素</span>
-											</div>
-										</div>
-										<div class="uc_container">
-											<div class="up-bottom uc-pic-img">
-												<div class="pic-60-box">
-													<div class="pic-60 ">
-														<img src="images/7_170312181624_2.jpg">
+												<div class="avatarbox" >
+													<div id="avatar"></div>
+													<div class="botton-box">
+														<button onclick="clip()" class="button button-info" style="float: left">裁剪</button>
+														<button onclick="reset()" class="button" style="float: right">重置</button>
 													</div>
-													<span class="pic-tip">60X60像素</span>
-												</div>
-											</div>
-											<div class="uc-min uc-pic-img">
-												<div class="pic-30-box">
-													<div class="pic-30 ">
-														<img src="images/7_170312181624_2.jpg">
-													</div>
-													<span class="pic-tip">30X30像素</span>
 												</div>
 											</div>
 										</div>
@@ -419,42 +394,42 @@
 		</div>
 	</div>
 </div>
-	<script type="text/javascript">
-        Dropzone.options.dropzoneDiv = {
-            url: "upload", // 文件提交地址
-            method: "post",  // 也可用put
-            paramName: "dropzFile", // 默认为file
-            maxFiles: 1,// 一次性上传的文件数量上限
-            maxFilesize: 2, // 文件大小，单位：MB
-            acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
-            addRemoveLinks: true,
-            parallelUploads: 1,// 一次上传的文件数量
-            //previewsContainer:"#preview", // 上传图片的预览窗口
-            dictDefaultMessage: '拖动文件至此或者点击上传',
-            dictMaxFilesExceeded: "您最多只能上传1个文件！",
-            dictResponseError: '文件上传失败!',
-            dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
-            dictFallbackMessage: "浏览器不受支持",
-            dictFileTooBig: "文件过大上传文件最大支持.",
-            dictRemoveLinks: "删除",
-            dictCancelUpload: "取消",
-            init: function () {
-                this.on("addedfile", function (file) {
-                    // 上传文件时触发的事件
-                });
-                this.on("success", function (file, data) {
-                    // 上传成功触发的事件
-                });
-                this.on("error", function (file, data) {
-                    // 上传失败触发的事件
-                });
-                this.on("removedfile", function (file) {
-                    // 删除文件时触发的方法
-					//删除文件时触发的方法
-                });
-            }
-        }
-	</script>
+<script>
+    var avatar = new Mavatar({el: '#avatar',backgroundColor: '#fff', fileOnchange: function (e) {
+            console.log(e)
+        }});
+    function clip() {
+        avatar.imageClipper(function (data) {
+            alert('裁剪成功，生成的图片已覆盖在上传框内');
+            console.log(data);
+            //  将图片上传至后台
+            avatar.upload({
+                url: 'http://localhost:3080/profile',
+                name: 'avatar',
+                data: {userName: 'hzy0913', info: 'someInfo'},
+                success: function (data) {
+                    console.log(data)
+                },
+                error: function (error) {
+                    console.log(error)
+                },
+            });
+        })
+    }
+    function reset() {
+        avatar.resetImage();
+    }
+    //获取上传前信息
+    function getInfo() {
+        var fileInfo = avatar.getfileInfo();
+        console.log(fileInfo);
+    }
+    //获取base64
+    function getdata() {
+        var urldata = avatar.getDataUrl();
+        console.log(urldata);
+    }
+</script>
 </body>
 
 </html>
