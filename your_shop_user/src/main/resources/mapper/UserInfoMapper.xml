@@ -47,8 +47,8 @@
             <if test="realName != null and realName != '' ">
                 realname=#{realName}
             </if>
-            where u.userId=ud.userId and u.userId=#{userId};
         </set>
+        where u.userId=ud.userId and u.userId=#{userId};
     </update>
 
     <!--注册用户-->

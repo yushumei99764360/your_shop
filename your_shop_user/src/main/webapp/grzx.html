@@ -463,37 +463,33 @@ $(function(){
 		/**/
 
 		function updateUserInfo() {
-		    var nickNameVal = $("#nickName").val();
-		    var genderVal =  $("#gender").val();
-		    var ageVal = $("#selectAge").val();
-		    var emailVal = $("#email").val();
-		    var realNameVal = $("#realName").val();
-			alert(nickNameVal);
-			alert(genderVal);
-			alert(ageVal);
-			alert(emailVal);
-			alert(realNameVal);
-
+		    // var nickNameVal = $("#nickName").val();
+		    // var genderVal =  $("#gender").val();
+		    // var ageVal = $("#selectAge").val();
+		    // var emailVal = $("#email").val();
+		    // var realNameVal = $("#realName").val();
+			// alert(nickNameVal);
+			// alert(genderVal);
+			// alert(ageVal);
+			// alert(emailVal);
+			// alert(realNameVal);
             $.ajax({
                 type: 'POST',
                 url: "updateUserInfo",
                 contentType:"application/json",
                 data: JSON.stringify({
-                    "userName":$("#userName").val(),
-                    "password":$("#password").val(),
+                    "nickName":$("#nickName").val(),
+                    "gender":$("#gender").val(),
+                    "selectAge":$("#selectAge").val(),
                     "email":$("#email").val(),
-                    "phone":$("#phone").val(),
-                    "userId":userId
+                    "realName":$("#realName").val()
                 }),
                 success: function(data){
                     console.log(data);
-                    //alert(1)
-                    window.location.href = "user.html";
+                    alert("修改成功")
                 },
                 error:function (data) {
                     console.error(data);
-                    //alert(data)
-                    window.location.href = "edit.html";
                 },
                 dataType: "json"
             });
