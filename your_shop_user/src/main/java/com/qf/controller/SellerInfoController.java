@@ -20,7 +20,6 @@ public class SellerInfoController {
     @RequestMapping(value = "RegisterSeller",method = RequestMethod.POST)
     public String RegisterSeller(@RequestBody(required = false)SellerInfoVo sellerInfoVo){
         Boolean aBoolean = sellerInfosService.RegisterSellerInfo(sellerInfoVo);
-        System.out.println(aBoolean);
         return aBoolean.toString();
     }
 

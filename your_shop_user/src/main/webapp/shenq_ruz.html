@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
 <html>   
 <head>
-<
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="keys" content="">
 	<meta name="author" content="">
+
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" type="text/css" href="css/ziy.css">
-	<!--表单验证-->
 	<script type="text/javascript" src="jquery/jquery-2.1.1.min.js"></script>
 
 	<title>MyShop——个人注册</title>
+	<!--表单验证-->
 	<script src="dist/jquery.validate.min.js"></script>
 	<script src="dist/additional-methods.min.js"></script>
 	<script src="dist/localization/messages_zh.js"></script>
 	<script src="assets/Sellervalidate.js"></script>
+
 	<script>
 		$.validator.setDefaults({
 			submitHandler: function() {
@@ -37,6 +37,7 @@
 					success: function (data) {
 						console.log(data);
 						if (data == true) {
+						    alert("我们将在48小时之内通过审核，届时你可以进行商家登录")
 							window.location.href = "login.html";
 						}
 					},
@@ -80,22 +81,21 @@
 			</ul>
 		</div>
 		<div class="zhuc_biaod zhuc_biaod_liuy">
-			<form  class="messages" id="SellerForm">
+			<form class="messages" id="SellerForm" style="width: 600px">
+
 				<h2>商家信息</h2>
 			     <div class="messlist">
 			      <label><em>*</em> 商家名称</label>
 			      <input type="text" id="username" name="username" minlength="3" placeholder="商家名称"  required/>
-			      <div class="clears"></div>
 			     </div>
 				<div class="messlist">
 					<label><em>*</em> 登录密码</label>
 					<input type="password" id="password" name="password" placeholder="登录密码" required/>
-					<div class="clears"></div>
 				</div>
 				<div class="messlist">
 					<label><em>*</em> 确认密码</label>
 					<input id="confirm_password" name="confirm_password" type="password" placeholder="确认密码" required>
-					<div class="clears"></div>
+
 				</div>
 			     <div class="messlist"> 
 			      <label><em>*</em> 手机号码</label>
@@ -105,39 +105,17 @@
 				<div class="messlist">
 					<label><em>*</em> 商家地址</label>
 					<input id="address" name="address" type="text" placeholder="商家地址" required/>
-					<div class="clears"></div>
 				</div>
 			     <div class="messlist textareas">
 			      <label><em>*</em>商家介绍</label>
-			      <textarea id="desc" name="desc" placeholder="商家介绍" required></textarea>
-			      <div class="clears"></div>
+			      <textarea id="desc" name="desc" placeholder="商家介绍" required style="width: 300px;height: 50px"></textarea>
 			     </div>
-			     <!--<div class="messlist yzms">
-			      <label><em>*</em> 验证码</label>
-			      <input type="text" placeholder="验证码" id="checkCode"/>
-			      <img src="" width="64" height="27" class="yzmimg" />
-			      <div class="clears"></div>
-			     </div>-->
 			     <div class="messsub">
-			      <input class="reg-btn" type="submit"  value="提交"/>
+			      <input class="reg-btn" type="submit" value="提交"/>
 			     </div>
-			</form>	
-			<div class="fuw_teh_kuang">
-				<h2>联系人信息</h2>
-				<ul>
-					<li>1.大批采购特价优惠</li>
-					<li>2.一站式购齐订购服务</li>
-					<li>3.灵活的支付方式</li>
-					<li>4.优质配送服务</li>
-					<li>5.无忧售后服务</li>
-				</ul>
-				<h2>联系人信息</h2>
-				<ul>
-					<li>1.直接拨打电话：400-0250-250</li>
-					<li>2.服务邮箱：topsale@vip.qq.com</li>
-				</ul>
-			</div>
-		</div> 
+
+			</form>
+		</div>
 	</div>
 </div>
 
@@ -148,6 +126,5 @@
 		<p class="gonga_bei">京公网安备：123456789号</p>
 	</div>
 </div>
-
 </body>
 </html>

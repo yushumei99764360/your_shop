@@ -67,4 +67,13 @@ public class UserInfoServiceImpl implements UserInfoService {
     public int insertUserDetail(UserInfoMessage userInfoMessage) {
         return userInfoMapper.insertUserDetail(userInfoMessage);
     }
+
+    @Override
+    public boolean updateIconByUserId(int userId, String icon) {
+        int i = userInfoMapper.updateIconByUserId(userId, icon);
+        if (i != 0) {
+            return true;
+        }
+        return false;
+    }
 }

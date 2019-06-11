@@ -58,7 +58,7 @@
         &lt;!&ndash;配置登录拦截器&ndash;&gt;
         <mvc:interceptor>
             <mvc:mapping path="/*.html"/>
-            <bean class="com.alan.interceptor.LoginInterceptor"/>
+            <bean class="com.qf.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>-->
 </beans>

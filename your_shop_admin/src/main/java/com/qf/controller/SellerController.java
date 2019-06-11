@@ -149,13 +149,12 @@ public class SellerController {
         boolean flag = false;
         try {
             file.transferTo(newFile);
-             flag =  sellerService.updateIconBySellerId(sellerId, icon);
+            flag =  sellerService.updateIconBySellerId(sellerId, icon);
             return flag;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
-
     }
 
     /**

@@ -43,4 +43,12 @@ public interface UserInfoMapper {
     int search(int userId);
 
     int insertUserDetail(UserInfoMessage userInfoMessage);
+
+    /**
+     * 修改头像
+     * @param userId
+     * @param icon
+     * @return
+     */
+    int updateIconByUserId(int userId, String icon);
 }

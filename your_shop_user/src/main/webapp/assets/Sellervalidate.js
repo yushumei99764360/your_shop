@@ -13,7 +13,7 @@ var SellerValidate =function () {
             return this.optional(element) || (length == 11 && phonenumber.test(value));
         });
         $().ready(function() {
-            $("#commentForm").validate({
+            $("#SellerForm").validate({
                 rules: {
                     firstname: "required",
                     lastname: "required",
@@ -53,7 +53,6 @@ var SellerValidate =function () {
                     },
                     address: {
                         required: true,
-                        checkEnter:true
                     },
                     desc:{
                         required:true,
@@ -83,12 +82,12 @@ var SellerValidate =function () {
                         phonenumber: "手机号格式不正确"
                     },
                     address: {
-                        required: "详细地址不能为空！",
-                        checkEnter:'请输入正确地址'
+                        required: "不能为空！",
+
                     },
                     desc:{
-                        required:"商家介绍不能为空",
-                        minlength:"商家信息不少于10个字符"
+                        required:"不能为空",
+                        minlength:"不少于10个字符"
                     },
                     email: "请输入一个正确的邮箱",
                     agree: "请接受我们的声明",

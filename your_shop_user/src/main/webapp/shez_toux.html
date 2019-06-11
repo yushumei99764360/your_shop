@@ -7,7 +7,8 @@
 <title>MyShop——设置头像</title>
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <link rel="stylesheet" type="text/css" href="css/ziy.css">
-<link rel="stylesheet" href="dropzone/css/dropzone.min.css">
+
+
 <script src="dropzone/js/dropzone.min.js"></script>
 <script src="jquery/jquery-2.1.1.min.js"></script>
 <!--  <script src="js/jquery-1.11.3.min.js" ></script>
@@ -181,7 +182,7 @@
 					<div class="toux_kuang">
 						<div class="userImage">
 							<div class="myGome_userPhoto">
-								<img src="images/toux.png">
+								<img src="">
 								<a class="edit_photo_bitton" href="shez_toux.html" target="_blank">编辑</a>
 							</div>
 						</div>
@@ -285,49 +286,19 @@
 						<div class="up_avater">
 							<div class="warp_tip">
 								<div class="upload_main">
-									<div class="up-left">
-										<div class="pic-show">
+									<div class="pic-show">
 											<div class="pic-wrap ">
-												<div id="dropzoneDiv" class="dropzone" style="width: 230px;height: 230px"></div>
+												<img src="images/7_170312181624_2.jpg">
 											</div>
-										</div>
 									</div>
-									<div class="up-right">
-										<div class="up-right-title">
-											<h5>效果预览</h5>
-											<p>你上传的图片会自动生成3种尺寸，请注意小尺寸的图片是否清晰</p>
-										</div>
-										<div class="up-top">
-											<div class="pic-100-box">
-												<div class="pic-100 ">
-													<img src="images/7_170312181624_2.jpg">
-												</div>
-												<span class="pic-tip">100X100像素</span>
-											</div>
-										</div>
-										<div class="uc_container">
-											<div class="up-bottom uc-pic-img">
-												<div class="pic-60-box">
-													<div class="pic-60 ">
-														<img src="images/7_170312181624_2.jpg">
-													</div>
-													<span class="pic-tip">60X60像素</span>
-												</div>
-											</div>
-											<div class="uc-min uc-pic-img">
-												<div class="pic-30-box">
-													<div class="pic-30 ">
-														<img src="images/7_170312181624_2.jpg">
-													</div>
-													<span class="pic-tip">30X30像素</span>
-												</div>
-											</div>
-										</div>
+									<form name="iconUpLoad" id="iconUpLoad"  enctype="multipart/form-data">
+										<input type="file" name="file" class="btn btn-enter">
+									</form>
+									<div class="upload_btn_box">
+										<button id="up_avater_btn" onclick="updownload()" class="avater_btn" type="button">上传头像</button>
 									</div>
 								</div>
-							</div>
-							<div class="upload_btn_box">
-								<input type="button" value="保存" class="save-btn">
+
 							</div>
 						</div>
 					</div>
@@ -336,8 +307,6 @@
 		</div>
 	</div>
 </div>
- 
-
 <!--底部-->
 <div class="dib_beij dib_beij_ger_zhongx">
 	<div class="dib_jvz_beij">
@@ -419,42 +388,30 @@
 		</div>
 	</div>
 </div>
-	<script type="text/javascript">
-        Dropzone.options.dropzoneDiv = {
-            url: "upload", // 文件提交地址
-            method: "post",  // 也可用put
-            paramName: "dropzFile", // 默认为file
-            maxFiles: 1,// 一次性上传的文件数量上限
-            maxFilesize: 2, // 文件大小，单位：MB
-            acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
-            addRemoveLinks: true,
-            parallelUploads: 1,// 一次上传的文件数量
-            //previewsContainer:"#preview", // 上传图片的预览窗口
-            dictDefaultMessage: '拖动文件至此或者点击上传',
-            dictMaxFilesExceeded: "您最多只能上传1个文件！",
-            dictResponseError: '文件上传失败!',
-            dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
-            dictFallbackMessage: "浏览器不受支持",
-            dictFileTooBig: "文件过大上传文件最大支持.",
-            dictRemoveLinks: "删除",
-            dictCancelUpload: "取消",
-            init: function () {
-                this.on("addedfile", function (file) {
-                    // 上传文件时触发的事件
-                });
-                this.on("success", function (file, data) {
-                    // 上传成功触发的事件
-                });
-                this.on("error", function (file, data) {
-                    // 上传失败触发的事件
-                });
-                this.on("removedfile", function (file) {
-                    // 删除文件时触发的方法
-					//删除文件时触发的方法
-                });
-            }
-        }
-	</script>
+<script>
+	function updownload() {
+        var formData = new FormData($("#iconUpLoad")[0]);
+        $.ajax({
+            type: 'post',
+            url: "upDownload",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success : function (data) {
+                if (data) {
+                    window.location.reload();
+                } else {
+                    alert("修改失败！")
+                }
+            },
+            error : function (data) {
+                alert("请求失败！");
+            },
+            // dataType: "json"
+        });
+    }
+</script>
 </body>
 
 </html>

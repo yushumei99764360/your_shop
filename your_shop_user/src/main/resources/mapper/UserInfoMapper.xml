@@ -89,4 +89,9 @@
         values (#{nickName},#{gender},#{age},#{realName},#{userId})
     </insert>
 
+    <!--修改用户头像-->
+    <update id="updateIconByUserId">
+        update userdetail set icon=#{icon} where userId=#{userId}
+    </update>
+
 </mapper>
