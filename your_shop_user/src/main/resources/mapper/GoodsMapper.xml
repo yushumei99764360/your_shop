@@ -2,6 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
-    <update id=""></update>
+<mapper namespace="com.qf.mapper.UserInfoMapper">
+    <select id="getAllGoods" parameterType="com.qf.mapper.GoodsMapper">
+
+    </select>
 </mapper>
