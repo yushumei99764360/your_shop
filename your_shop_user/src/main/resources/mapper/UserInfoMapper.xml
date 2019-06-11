@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.mapper.UserInfoMapper">
     <!--登录-->
-    <select id="userInfoLogin" resultType="com.qf.pojo.UserInfo" parameterType="com.qf.vo.UserInfoLoginVo">
+    <select id="userInfoLogin" resultType="com.qf.pojo.UserInfo" parameterType="com.qf.vo.UserInfoVo">
         select * from userinfo
         <where>
             <if test="userId != null and userId != '' ">
@@ -29,5 +29,49 @@
     <!--根据id获取用户信息-->
     <select id="getUserInfoMessageById" resultType="com.qf.dto.UserInfoMessage" parameterType="int">
         SELECT u.userId,u.userName,u1.nickName,u1.gender,u1.age,u.email,u1.realname,u1.icon FROM userinfo u,userdetail u1 WHERE u.userId=u1.userID AND u.userId =#{userId};
+    </select>
+
+    <!--根据用户id修改用户信息-->
+    <update id="updateUserInfo" parameterType="com.qf.dto.UserInfoMessage">
+        update userinfo u,userdetail ud
+        <set>
+            <if test="nickName != null and nickName != '' ">
+                nickName=#{nickName},
+            </if>
+            <if test="gender != null and gender != '' ">
+                gender=#{gender},
+            </if>
+            <if test="email != null and email != '' ">
+                email=#{email},
+            </if>
+            <if test="realName != null and realName != '' ">
+                realname=#{realName}
+            </if>
+            where u.userId=ud.userId and u.userId=#{userId};
+        </set>
+    </update>
+
+    <!--注册用户-->
+    <insert id="RegisterUserInfo" parameterType="com.qf.vo.RegisterUserVo">
+        insert into userinfo(userName,password,phoneNumber,email)
+        values (<trim suffixOverrides=",">
+        <if test="userName !=null and userName !=''">
+            #{userName},
+        </if>
+        <if test="password !=null and password !=''">
+            #{password},
+        </if>
+        <if test="phoneNumber !=null and phoneNumber !=''">
+            #{phoneNumber},
+        </if>
+        <if test="email !=null and email !=''">
+            #{email},
+        </if>
+    </trim>
+        )
+    </insert>
+    <!--查询用户名是否存在-->
+    <select id="checkUserName" parameterType="java.lang.String" resultType="int">
+        select count(1) from userinfo where userName = #{userName}
     </select>
 </mapper>

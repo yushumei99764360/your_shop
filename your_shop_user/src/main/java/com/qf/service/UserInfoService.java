@@ -2,9 +2,7 @@ package com.qf.service;
 
 import com.qf.dto.UserInfoMessage;
 import com.qf.pojo.UserInfo;
-import com.qf.vo.UserInfoLoginVo;
-
-import java.util.List;
+import com.qf.vo.UserInfoVo;
 
 public interface UserInfoService {
     /**
@@ -12,7 +10,7 @@ public interface UserInfoService {
      * @param userInfoLoginVo 用户名/密码/手机号/邮箱
      * @return
      */
-    public UserInfo userInfoLogin(UserInfoLoginVo userInfoLoginVo);
+    public UserInfo userInfoLogin(UserInfoVo userInfoLoginVo);
 
     /**
      * 根据id获取用户信息
@@ -20,4 +18,25 @@ public interface UserInfoService {
      * @return
      */
     public UserInfoMessage getUserInfoMessageById(int userId);
+
+    /**
+     * 根据用户id修改用户信息
+     * @param userInfoMessage   用户信息
+     * @return
+     */
+    public int updateUserInfo(UserInfoMessage userInfoMessage);
+
+    /**
+     *  用户注册
+     * @param userInfoVo
+     * @return
+     */
+    public Boolean RegisterUserInfo(UserInfoVo userInfoVo);
+
+    /**
+     * 判断用户名是否存在
+     * @param userName  用户名
+     * @return
+     */
+    public Integer checkUserName(String userName);
 }

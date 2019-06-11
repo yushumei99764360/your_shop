@@ -4,11 +4,9 @@ import com.qf.dto.UserInfoMessage;
 import com.qf.mapper.UserInfoMapper;
 import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
-import com.qf.vo.UserInfoLoginVo;
+import com.qf.vo.UserInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
@@ -17,12 +15,31 @@ public class UserInfoServiceImpl implements UserInfoService {
     UserInfoMapper userInfoMapper;
 
     @Override
-    public UserInfo userInfoLogin(UserInfoLoginVo userInfoLoginVo) {
+    public UserInfo userInfoLogin(UserInfoVo userInfoLoginVo) {
         return userInfoMapper.userInfoLogin(userInfoLoginVo);
     }
 
     @Override
     public UserInfoMessage getUserInfoMessageById(int userId) {
         return userInfoMapper.getUserInfoMessageById(userId);
+    }
+
+    @Override
+    public int updateUserInfo(UserInfoMessage userInfoMessage) {
+        return userInfoMapper.updateUserInfo(userInfoMessage);
+    }
+
+    @Override
+    public Boolean RegisterUserInfo(UserInfoVo userInfoVo) {
+        Integer count = userInfoMapper.RegisterUserInfo(userInfoVo);
+        if(count>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Integer checkUserName(String userName) {
+        return userInfoMapper.checkUserName(userName);
     }
 }

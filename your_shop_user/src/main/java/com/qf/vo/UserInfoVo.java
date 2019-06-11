@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UserInfoLoginVo {
+public class UserInfoVo {
     private Integer userId;
     private String userName;
     private String password;
