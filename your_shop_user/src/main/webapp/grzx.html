@@ -323,7 +323,7 @@
                             <div class="item_meic">
                                 <span class="label_meic"> </span>
                                 <div class="fl_e">
-                                    <input type="button" value="保存" class="savebtn">
+									<button type="submit" onclick="updateUserInfo()" class="savebtn">保存</button>
                                 </div>
                             </div>
 						</div>
@@ -462,8 +462,41 @@ $(function(){
 
 		/**/
 
-		function update() {
-			
+		function updateUserInfo() {
+		    var nickNameVal = $("#nickName").val();
+		    var genderVal =  $("#gender").val();
+		    var ageVal = $("#selectAge").val();
+		    var emailVal = $("#email").val();
+		    var realNameVal = $("#realName").val();
+			alert(nickNameVal);
+			alert(genderVal);
+			alert(ageVal);
+			alert(emailVal);
+			alert(realNameVal);
+
+            $.ajax({
+                type: 'POST',
+                url: "updateUserInfo",
+                contentType:"application/json",
+                data: JSON.stringify({
+                    "userName":$("#userName").val(),
+                    "password":$("#password").val(),
+                    "email":$("#email").val(),
+                    "phone":$("#phone").val(),
+                    "userId":userId
+                }),
+                success: function(data){
+                    console.log(data);
+                    //alert(1)
+                    window.location.href = "user.html";
+                },
+                error:function (data) {
+                    console.error(data);
+                    //alert(data)
+                    window.location.href = "edit.html";
+                },
+                dataType: "json"
+            });
         }
 	</script>
 </body>
