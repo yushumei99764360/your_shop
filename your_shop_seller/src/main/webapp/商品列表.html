@@ -35,11 +35,10 @@
     <div class="nav-navicon admin-main admin-sidebar">
         <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;"> 欢迎本店管理员：清风抚雪</div>
         <div class="sideMenu">
-            <h3 class="am-icon-flag"><em></em> <a href="#">商品管理</a></h3>
+            <h3 class="am-icon-flag"><em></em> <a href="index.html">商品管理</a></h3>
             <ul>
                 <li><a href="商品列表.html">商品列表</a></li>
-                <li class="func" dataType='html' dataLink='msn.htm' iconImg='images/msn.gif'><a href="添加新商品.html">添加新商品</a></li>
-                <li><a href="修改商品.html">修改商品</a></li>
+                <li><a href="添加新商品.html">添加新商品</a></li>
             </ul>
             <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
             <ul>
@@ -76,7 +75,7 @@
         <div class="listbiaoti am-cf">
             <ul class="am-icon-flag on"> 本店商品信息列表</ul>
 
-            <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 &gt; <a href="#">商品列表</a></dl>
+            <dl class="am-icon-home" style="float: right;"> 当前位置： &gt; 商品列表</dl>
 
             <dl>
                 <a type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" href="添加新商品.html"> 添加产品</a>
@@ -161,14 +160,7 @@
             </table>
 
             <div class="am-btn-group am-btn-group-xs">
-                <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 删除</button>
-                <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 上架</button>
-                <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 下架</button>
-                <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 移动</button>
-                <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
-                <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 保存</button>
-                <button type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span> 移动</button>
-                <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>
+             <button type="button" class="am-btn am-btn-default" onclick="delCheckGoods()"><span class="am-icon-trash-o"></span> 删除</button>
             </div>
 
             <ul class="am-pagination am-fr">
@@ -180,12 +172,7 @@
                 <li><a href="#">5</a></li>
                 <li><a href="#">»</a></li>
             </ul>
-
-
-
-
             <hr>
-            <p>注：.....</p>
         </form>
 
 
@@ -193,7 +180,7 @@
 
         <div class="foods">
             <ul>
-                版权所有@2015. 模板收集自 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> -  More Templates<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+                版权所有@2019.  <a href="http://www.cssmoban.com/" target="_blank" title="">商铺之家</a> -  More Shop <a href="http://www.cssmoban.com/" title="" target="_blank"></a>
             </ul>
             <dl>
                 <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
@@ -235,7 +222,7 @@
                 $(data).each(function (index,item) {
 
                     var trHtml = "<tr>\n" +
-                        "                    <td><input type=\"checkbox\"></td>\n" +
+                        "                    <td><input type=\"checkbox\" value="+item.g_id+"></td>\n" +
                         "                    <td>"+item.g_id+"</td>\n" +
                         "                    <td>"+item.g_title+"</td>\n" +
                         "                    <td>"+item.g_name+"</td>\n" +
@@ -314,7 +301,7 @@
                 $(data).each(function (index,item) {
 
                     var trHtml = "<tr>\n" +
-                        "                    <td><input type=\"checkbox\"></td>\n" +
+                        "                    <td><input type=\"checkbox\" value="+item.g_id+"></td>\n" +
                         "                    <td>"+item.g_id+"</td>\n" +
                         "                    <td>"+item.g_title+"</td>\n" +
                         "                    <td>"+item.g_name+"</td>\n" +
@@ -343,6 +330,32 @@
             error:function (data) {
                 // console.error(data);
                 alert(4444)
+            },
+            dataType: "json"
+        });
+    }
+
+    var selectedGoodsId = new  Array();
+    //删除选中的
+    function delCheckGoods() {
+
+        $(":checkbox:checked").each(function (i) {
+            if ($(this).val() != '') {
+                selectedGoodsId.push($(this).val())
+            }
+        });
+        alert(selectedGoodsId);
+        $.ajax({
+            type: "POST",
+            url: "delCheckGoods",
+            contentType: "application/json",
+            data: JSON.stringify(selectedGoodsId),
+            success: function (data) {
+                alert(data)
+                window.location.href = "商品列表.html"
+            },
+            error: function (data) {
+                alert("执行失败")
             },
             dataType: "json"
         });
