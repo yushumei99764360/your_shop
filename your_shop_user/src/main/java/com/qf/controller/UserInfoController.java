@@ -45,9 +45,15 @@ public class UserInfoController {
         return userInfoService.getUserInfoMessageById(userInfo.getUserId());
     }
 
+    /**
+     * 修改用户信息
+     * @param userInfoMessage
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "updateUserInfo",method = RequestMethod.POST)
     public Object updateUserInfo(@RequestBody UserInfoMessage userInfoMessage) {
+        System.out.println();
         int count = userInfoService.updateUserInfo(userInfoMessage);
         if (count > 1) {
             return true;
