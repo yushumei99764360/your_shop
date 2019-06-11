@@ -52,8 +52,9 @@ public class UserInfoController {
      */
     @ResponseBody
     @RequestMapping(value = "updateUserInfo",method = RequestMethod.POST)
-    public Object updateUserInfo(@RequestBody UserInfoMessage userInfoMessage) {
-        System.out.println();
+    public Object updateUserInfo(@RequestBody UserInfoMessage userInfoMessage,HttpSession httpSession) {
+        UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
+        userInfoMessage.setUserId(userInfo.getUserId());
         int count = userInfoService.updateUserInfo(userInfoMessage);
         if (count > 1) {
             return true;
