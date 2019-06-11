@@ -58,7 +58,7 @@ public class GoodsServiceImpl implements GoodsService {
         goodsSelecteds.setStr("%"+goodsSelecteds.getStr()+"%");
         System.out.println(goodsSelecteds);
         List<GoodsVo> goodsVos = goodsMapper.selectGoodsBys(goodsSelecteds);
-        System.out.println(goodsVos);
+//        System.out.println(goodsVos);
         return goodsVos;
     }
 
@@ -67,6 +67,15 @@ public class GoodsServiceImpl implements GoodsService {
     public boolean delByGoodsId(int goodsId) {
         int delByGoodsId = goodsMapper.delByGoodsId(goodsId);
         if (delByGoodsId>0)
+            return true;
+        return false;
+    }
+
+    //选中删除，批量删除
+    @Transactional(propagation = Propagation.REQUIRED)
+    public boolean delCheckGoods(List<Integer> selectedGoodsId) {
+        int delCheckGoods = goodsMapper.delCheckGoods(selectedGoodsId);
+        if (delCheckGoods==selectedGoodsId.size())
             return true;
         return false;
     }

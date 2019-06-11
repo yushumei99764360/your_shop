@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestGoods {
@@ -39,11 +40,11 @@ public class TestGoods {
 
         GoodsSelecteds goodsSelecteds = new GoodsSelecteds();
         goodsSelecteds.setSellerId(1);
-        goodsSelecteds.setStr("");
-        goodsSelecteds.setCategoryName("手机");
+        goodsSelecteds.setStr("果");
+//        goodsSelecteds.setCategoryName("手机");
         goodsSelecteds.setG_status(0);
-        goodsSelecteds.setMinDate("");
-        goodsSelecteds.setMaxDate("");
+//        goodsSelecteds.setMinDate("");
+//        goodsSelecteds.setMaxDate("");
 
         List<GoodsVo> goods = goodsService.selectGoodsBys(goodsSelecteds);
 
@@ -54,9 +55,11 @@ public class TestGoods {
 
     @Test
     public void test4(){
-
-
-
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(17);
+        list.add(19);
+        boolean delCheckGoods = goodsService.delCheckGoods(list);
+        System.out.println(delCheckGoods);
     }
 
     @Test

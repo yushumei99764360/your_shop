@@ -24,4 +24,7 @@ public interface GoodsService {
     //根据商品id 删除商品信息
     boolean delByGoodsId(int goodsId);
 
+    // 选中删除，批量删除
+    boolean delCheckGoods(List<Integer> selectedGoodsId);
+
 }
