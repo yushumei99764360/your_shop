@@ -7,10 +7,10 @@ import com.qf.vo.UserInfoVo;
 public interface UserInfoService {
     /**
      * 用户登录
-     * @param userInfoLoginVo 用户名/密码/手机号/邮箱
+     * @param  用户名/密码/手机号/邮箱
      * @return
      */
-    public UserInfo userInfoLogin(UserInfoVo userInfoLoginVo);
+    public UserInfo userInfoLogin(UserInfoVo userInfoVo);
 
     /**
      * 根据id获取用户信息

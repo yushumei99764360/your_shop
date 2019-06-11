@@ -24,8 +24,8 @@ public class UserInfoController {
 
     @ResponseBody
     @RequestMapping(value = "userInfoLogin",method = RequestMethod.POST)
-    public Object userInfoLogin(@RequestBody UserInfoVo userInfoLoginVo, HttpSession httpSession) {
-        UserInfo userInfo = userInfoService.userInfoLogin(userInfoLoginVo);
+    public Object userInfoLogin(@RequestBody UserInfoVo userInfoVo, HttpSession httpSession) {
+        UserInfo userInfo = userInfoService.userInfoLogin(userInfoVo);
         if (userInfo != null) {
             httpSession.setAttribute("userInfo",userInfo);
             return true;

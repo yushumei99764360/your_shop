@@ -15,8 +15,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     UserInfoMapper userInfoMapper;
 
     @Override
-    public UserInfo userInfoLogin(UserInfoVo userInfoLoginVo) {
-        return userInfoMapper.userInfoLogin(userInfoLoginVo);
+    public UserInfo userInfoLogin(UserInfoVo userInfoVo) {
+        return userInfoMapper.userInfoLogin(userInfoVo);
     }
 
     @Override
