@@ -11,7 +11,6 @@
         <module name="your_shop_commons" />
         <module name="your_shop_domain" />
         <module name="your_shop_seller" />
-        <module name="your_shop_ui" />
         <module name="your_shop_user" />
       </profile>
     </annotationProcessing>
