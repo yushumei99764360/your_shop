@@ -89,31 +89,31 @@
           <div class="am-form-group am-cf">
               <div class="zuo">商家编号：</div>
               <div class="you" id="s_code">
-                  s100000002
+
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">商家名称：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="s_name" value="张家小店">
+                  <input type="text" class="am-input-sm" id="s_name" value="">
               </div>
           </div>
         <div class="am-form-group am-cf">
           <div class="zuo">店家密码：</div>
           <div class="you">
-            <input type="text" class="am-input-sm" id="s_pwd" value="zy1234">
+            <input type="text" class="am-input-sm" id="s_pwd" value="">
           </div>
         </div>
         <div class="am-form-group am-cf">
           <div class="zuo">商家联系电话：</div>
           <div class="you">
-            <input type="text" class="am-input-sm" id="s_phone" value="13305913846">
+            <input type="text" class="am-input-sm" id="s_phone" value="">
           </div>
         </div>
           <div class="am-form-group am-cf">
               <div class="zuo">店家地址：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="s_address" value="广东省广州市天河区汇通产业园B8栋">
+                  <input type="text" class="am-input-sm" id="s_address" value="">
               </div>
           </div>
         <div class="am-form-group am-cf">
@@ -133,21 +133,21 @@
               <div class="zuo">店家状态：</div>
               <div class="you" style="height: 45px;">
                   <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="s_status">
-                      <option value="b">启用</option>
-                      <option value="o">禁止</option>
+                      <option value="1">启用</option>
+                      <option value="0">禁止</option>
                   </select>
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">开店时间：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="s_date" value="13305913846">
+                  <input type="text" class="am-input-sm" id="s_date" value="">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">最后修改时间：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="g_lastdate" value="13305913846">
+                  <input type="text" class="am-input-sm" id="s_lastdate" value="">
               </div>
           </div>
 
@@ -193,7 +193,66 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
+<script>
 
+    function getSellerInfoById() {
+        $.ajax({
+            type:"POST",
+            url:"getSellerInfoById",
+            contentType:"application/json",
+            success:function (data) {
+                alert(3333)
+                $("#s_code").html(data.s_code);
+                $("#s_name").val(data.s_name);
+                $("#s_pwd").val(data.s_pwd);
+                $("#s_phone").val(data.s_phone);
+                $("#s_address").val(data.s_address);
+                $("#s_desc").val(data.s_desc);
+                $("#s_status").val(data.s_status);
+                $("#icon").val(data.icon),
+                $("#s_date").val(data.s_date);
+                $("#s_lastdate").val(data.s_lastdate);
+
+            },
+            error:function (data) {
+            },
+            dataType: "json"
+        });
+    }
+    getSellerInfoById();
+
+    //修改用户信息
+    function updateGoodsByGoodsId() {
+        $.ajax({
+            type:"POST",
+            url:"updateGoodsByGoodsId",
+            contentType:"application/json",
+            data: JSON.stringify({
+                "g_id":goodsId,
+                "g_title":$("#g_title").val(),
+                "g_name":$("#g_name").val(),
+                "g_price":$("#g_price").val(),
+                "g_discount":$("#g_discount").val(),
+                "g_disctprice":$("#g_disctprice").val(),
+                "g_num":$("#g_num").val(),
+                "g_desc":$("#g_desc").val(),
+                "g_pic":$("#g_pic").val(),
+                "childName":$("#childName").val(),
+                "fatherName":$("#fatherName").val(),
+                "g_status":$("#g_status").val()
+            }),
+            success : function (data) {
+                alert("修改成功")
+                window.location.href="商品列表.html";
+            },
+            error : function (data) {
+                alert("失败")
+            },
+            dataType: "json"
+        });
+    }
+
+</script>
 
 
 </body>
