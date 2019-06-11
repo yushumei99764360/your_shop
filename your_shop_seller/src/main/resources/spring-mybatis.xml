@@ -29,6 +29,9 @@
         <!--3.3别名  value值 为实体类所在的 包名
         即在mapper文件夹下的 xml 文件中需要引用 该包类的 实例类时 只需写类名就可以了，不用写全类名-->
         <property name="typeAliasesPackage" value="com.qf.pojo"></property>
+        <!--载入mybatis配置文件-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+
     </bean>
 
     <!-- 4、配置mybatis接口扫描器 -->

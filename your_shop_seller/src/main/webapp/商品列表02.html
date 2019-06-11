@@ -213,14 +213,13 @@
 
 
     function f(){
-        var page =1;
         //1.发送ajax请求获取数据
         $.ajax({
-            type: 'GET',
-            url: "list?pageNo="+page,
+            type: 'POST',
+            url: "getAllGoods",
             success: function(data){
                 //循环
-                alert(data)
+                // alert(1111)
                 var tabObj = $("#dataTable");
                 $(data).each(function (index,item) {
 
@@ -370,7 +369,7 @@
     function selectAll() {
         var isCheck = $("#all").is(":checked"); //
         $("input[type='checkbox']").each(function () {
-            this.checked = isCheck ; //
+            this.checked = isCheck ;
         })
     }
 
