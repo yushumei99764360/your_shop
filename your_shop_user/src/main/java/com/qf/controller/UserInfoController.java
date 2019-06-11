@@ -61,7 +61,6 @@ public class UserInfoController {
     public Object updateUserInfo(@RequestBody UserInfoMessage userInfoMessage,HttpSession httpSession) {
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
         userInfoMessage.setUserId(userInfo.getUserId());
-        System.out.println(userInfoMessage);
         int i = userInfoService.search(userInfo.getUserId());
         if (i!=0){
             int count = userInfoService.updateUserInfo(userInfoMessage);
