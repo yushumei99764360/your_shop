@@ -37,4 +37,7 @@ public interface UserInfoMapper {
     int orderCount(int userId);
 
     List<OrderInfoDto> pageOrder(Map<String, Object> parms);
+
+    int checkUserName();
+
 }

@@ -13,5 +13,35 @@
         SELECT * FROM order_detail WHERE o_orderid=#{id};
     </select>
 
+    <!--根据订单号修改订单信息-->
+    <update id="updateOrderInfo" parameterType="com.qf.vo.OrderVo">
+        UPDATE orderinfo
+        <set>
+            <if test="o_sendtype != null and o_sendtype !=''">
+                o_sendtype = #{o_sendtype},
+            </if>
+            <if test="o_shperson != null and o_shperson !=''">
+                o_shperson = #{o_shperson},
+            </if>
+            <if test="o_province != null and o_province !=''">
+                o_province = #{o_province},
+            </if>
+            <if test="o_city != null and o_city !=''">
+                o_city = #{o_city},
+            </if>
+            <if test="o_district != null and o_district !=''">
+                o_district = #{o_district},
+            </if>
+            <if test="o_shaddress != null and o_shaddress !=''">
+                o_shaddress = #{o_shaddress},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--删除订单-->
+    <delete id="deleteOrderInfo" parameterType="int">
+        DELETE FROM orderinfo WHERE id = #{id}
+    </delete>
 
 </mapper>

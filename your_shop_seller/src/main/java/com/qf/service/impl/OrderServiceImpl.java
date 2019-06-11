@@ -26,5 +26,16 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.getOrderDetail(id);
     }
 
+    @Override
+    public boolean updateOrderInfo(OrderVo orderVo) {
+
+        return orderMapper.updateOrderInfo(orderVo);
+    }
+
+    @Override
+    public boolean deleteOrderInfo(int id) {
+        return orderMapper.deleteOrderInfo( id);
+    }
+
 
 }

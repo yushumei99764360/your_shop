@@ -323,7 +323,7 @@
                             <div class="item_meic">
                                 <span class="label_meic"> </span>
                                 <div class="fl_e">
-                                    <input type="button" value="保存" class="savebtn">
+									<button type="submit" onclick="updateUserInfo()" class="savebtn">保存</button>
                                 </div>
                             </div>
 						</div>
@@ -438,7 +438,7 @@ $(function(){
 		function getUserInfoMessageById() {
             $.ajax({
                 type: 'GET',
-                url: "/getUserInfoMessageById?userId="+1,
+                url: "getUserInfoMessageById",
                 contentType:"application/json",
                 success: function(data){
                     //alert(data)
@@ -454,13 +454,36 @@ $(function(){
                 },
                 error:function (data) {
                     console.error(data);
-                    //alert(1)
-                    //alert(data)
                 },
                 dataType: "json"
             });
         }
         getUserInfoMessageById();
+
+		/**/
+
+		function updateUserInfo() {
+            $.ajax({
+                type: 'POST',
+                url: "updateUserInfo",
+                contentType:"application/json",
+                data: JSON.stringify({
+                    "nickName":$("#nickName").val(),
+                    "gender":$("#gender").val(),
+                    "selectAge":$("#selectAge").val(),
+                    "email":$("#email").val(),
+                    "realName":$("#realName").val()
+                }),
+                success: function(data){
+                    alert("修改成功")
+                    window.location.href="grzx.html"
+                },
+                error:function (data) {
+                    console.error(data);
+                },
+                dataType: "json"
+            });
+        }
 	</script>
 </body>
 </html>

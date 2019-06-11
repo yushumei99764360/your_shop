@@ -9,4 +9,8 @@ public interface OrderService {
      List<OrderVo> getAllOrderInfo();
 //查询订单详情
      List<OrderVo> getOrderDetail( int id);
+//修改订单
+     boolean updateOrderInfo(OrderVo orderVo);
+//删除订单
+     boolean deleteOrderInfo(int id);
 }

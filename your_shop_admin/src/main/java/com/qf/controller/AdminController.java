@@ -165,4 +165,18 @@ public class AdminController {
         result.put("error","");
         return result;
     }
+    /**
+     * 查询用户名是否存在
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("checkUserName")
+    public Object checkUserName(@RequestParam String username){
+        int i = userInfoService.checkUserName(username);
+        if (i==1){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }
