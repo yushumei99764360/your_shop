@@ -19,7 +19,7 @@
     <!--新增商品列表关系信息-->
     <insert id="addGoodsCategory" parameterType="com.qf.vo.GoodsVo">
         INSERT INTO goods_category VALUES
-        (DEFAULT,  (SELECT c_id FROM category WHERE c_name = #{childName}) ,
+        (DEFAULT, #{childId} ,
         (select g_id from goodsinfo WHERE g_name = #{g_name} AND g_title = #{g_title} AND s_id =#{s_id}))
     </insert>
 
@@ -27,7 +27,7 @@
     <!--根据商品id查询商品详情信息-->
     <select id="getGoodsInfoByGoodsId" parameterType="int" resultType="com.qf.vo.GoodsVo">
         SELECT g.*,c.fathername,c.c_name childname FROM goodsinfo g , goods_category gc ,
-        (SELECT a.c_name fathername,b.*FROM category a ,category b WHERE a.c_parentid = 0 AND a.c_id = b.c_parentid ) c
+        (SELECT a.c_name fathername,b.* FROM category a ,category b WHERE a.c_parentid = 0 AND a.c_id = b.c_parentid ) c
         WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id AND g.g_id = #{goodsId}
     </select>
     <!--修改商品信息-->
@@ -68,7 +68,7 @@
     </update>
     <!--修改关系信息-->
     <update id="updateGoodsCategory" parameterType="com.qf.vo.GoodsVo">
-        UPDATE goods_category set c_id = (SELECT c_id FROM category WHERE c_name = #{childName})
+        UPDATE goods_category set c_id = #{childId}
         WHERE g_id = #{g_id}
 
     </update>

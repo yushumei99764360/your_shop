@@ -1,19 +1,14 @@
 package com.qf.controller;
 
 
-import com.qf.mapper.CategoryMapper;
+
 import com.qf.pojo.Category;
-import com.qf.pojo.SellerInfo;
 import com.qf.service.CategoryService;
-import com.qf.service.GoodsService;
 import com.qf.vo.CategoryVo;
-import com.qf.vo.GoodsSelecteds;
-import com.qf.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -49,20 +44,23 @@ public class CategoryController {
     //修改商品类别信息
     @RequestMapping("updateCategoryInfo")
     public Object updateCategoryInfo(@RequestBody CategoryVo categoryVo) {
+        System.out.println(categoryVo);
         boolean updateCategoryInfo = categoryService.updateCategoryInfo(categoryVo);
+        System.out.println(updateCategoryInfo);
         return updateCategoryInfo;
     }
 
     //    根据 关键词搜索 商品类别列表
     @RequestMapping("selectCategoryBys")
     public Object selectCategoryBys(@RequestParam String str) {
+        System.out.println(str);
         List<CategoryVo> categoryVos = categoryService.selectCategoryBys(str);
         return categoryVos;
     }
 
     //根据商品子类类别id 删除商品类别信息
     @RequestMapping("delByCid")
-    public Object delByCid(int childId) {
+    public boolean delByCid(int childId) {
         boolean delByCid = categoryService.delByCid(childId);
         return delByCid;
     }
@@ -72,6 +70,40 @@ public class CategoryController {
     public boolean delCheckCategoryIds(@RequestBody List<Integer> selectedCId) {
         boolean checkCategoryIds = categoryService.delCheckCategoryIds(selectedCId);
         return checkCategoryIds;
+    }
+
+    // 查询所有一级类别
+    @RequestMapping("getAllCategoryFather")
+    public Object getAllCategoryFather(){
+        List<Category> fatherInfos = categoryService.getFatherInfo();
+        return fatherInfos;
+    }
+
+    // 查询所有一级类别
+    @RequestMapping("getAllChildInfo")
+    public Object getAllChildInfo(){
+        List<Category> childInfos = categoryService.getChildInfo();
+        return childInfos;
+    }
+
+    // 根据父类id 查询它所包含的所有子类信息
+    @RequestMapping("getChildCategoryInfo")
+    public Object getChildCategoryInfo(@RequestParam int fatherId) {
+        CategoryVo categoryVo = categoryService.getChildCategoryInfo(fatherId);
+        return categoryVo;
+    }
+
+    // 根据 所有父类 和 它所包含的所有子类信息
+    @RequestMapping("getAllChildCategoryInfo")
+    public Object getAllChildCategoryInfo() {
+        List<CategoryVo> categoryVoList = new ArrayList<>();
+        List<Category> fatherInfo = categoryService.getFatherInfo();
+        for (int i = 0 ; i<fatherInfo.size();i++){
+            CategoryVo categoryVo = categoryService.getChildCategoryInfo(fatherInfo.get(i).getC_id());
+            categoryVoList.add(categoryVo);
+            System.out.println(categoryVo);
+        }
+        return categoryVoList;
     }
 
 }

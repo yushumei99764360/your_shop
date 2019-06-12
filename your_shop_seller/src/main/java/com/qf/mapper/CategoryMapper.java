@@ -29,6 +29,11 @@ public interface CategoryMapper {
 
     // 选中删除 ，批量删除
     int delCheckCategoryIds(List<Integer> list);
+
     // 查询所有一级类别信息
     List<Category> getFatherInfo();
+//    查询所有的二级类别信息
+    List<Category> getChildInfo();
+    // 根据父类id 查询它所包含的所有子类信息
+    CategoryVo getChildCategoryInfo(int fatherId);
 }

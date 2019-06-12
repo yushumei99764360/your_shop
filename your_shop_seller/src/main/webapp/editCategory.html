@@ -101,16 +101,16 @@
 
           <div class="am-form-group am-cf">
               <div class="zuo">商品一级类：</div>
-              <div class="you" style="height: 45px;">
-                  <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="father">
-
+              <div class="you" style="height: 40px;">
+                  <select id="father">
+                    <option value="0">--请选择--</option>
                   </select>
               </div>
           </div>
 
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
-              <button type="submit" class="am-btn am-btn-success am-radius" onclick="updateGoodsByGoodsId()">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp;
+              <button type="button" class="am-btn am-btn-success am-radius" onclick="updateCategoryInfo()">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp;
           </div>
         </div>
       </form>
@@ -157,21 +157,23 @@
     }
     getGoodsId();
     function getCategoryById() {
+        if(childId!=undefined){
         $.ajax({
             type:"POST",
             url:"getCategoryById?childId="+childId,
             contentType:"application/json",
             success:function (data) {
-
+                var selectObj = $("#father");
                 $("#childId").html(data.childId);
                 $("#childName").val(data.childName);
-
-                var selectObj = $("#father");
+                $("#father option").html(data.fatherName);
+                $("#father option").val(data.fatherId);
                 $(data.categoryList).each(function (index,item) {
                     var opHtml = "<option value="+item.c_id+">"+item.c_name+"</option>";
-                    console.log(opHtml)
-                    selectObj.append(opHtml)
+                    console.log(opHtml);
+                    selectObj.append(opHtml);
                 })
+
             },
             error:function (data) {
                 console.log(data)
@@ -179,37 +181,37 @@
             },
             dataType: "json"
         });
+        }
     }
     getCategoryById();
 
     //修改用户信息
-    function updateGoodsByGoodsId() {
+    function updateCategoryInfo() {
+        var childName = $("#childName").val();
+        var fatherId = $("#father").val();
+        // alert("inner updateCategoryInfo"+childName+"--"+fatherId);
         $.ajax({
             type:"POST",
-            url:"updateGoodsByGoodsId",
+            url:"updateCategoryInfo",
             contentType:"application/json",
             data: JSON.stringify({
-                "g_id":goodsId,
-                "g_title":$("#g_title").val(),
-                "g_name":$("#g_name").val(),
-                "g_price":$("#g_price").val(),
-                "g_discount":$("#g_discount").val(),
-                "g_disctprice":$("#g_disctprice").val(),
-                "g_num":$("#g_num").val(),
-                "g_desc":$("#g_desc").val(),
-                "g_pic":$("#g_pic").val(),
-                "childName":$("#childName").val(),
-                "fatherName":$("#fatherName").val(),
-                "g_status":$("#g_status").val()
+                "childId":childId,
+                "childName":childName,
+                "fatherId":fatherId
             }),
-            success : function (data) {
-                window.location.href="商品列表.html";
+            success: function (data) {
+                // alert("修改成功"+data);
+                window.location.href="categoryList.html";
+
             },
             error : function (data) {
-                alert("失败")
+                alert("失败");
+                console.log(data);
             },
             dataType: "json"
-        });
+        }
+
+        );
     }
 </script>
 

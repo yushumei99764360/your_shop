@@ -59,4 +59,21 @@
     <select id="getFatherInfo" resultType="com.qf.pojo.Category">
         select * from category where c_parentid = 0
     </select>
+    <!--查询所有的二级类别信息-->
+    <select id="getChildInfo" resultType="com.qf.pojo.Category">
+        select * from category where c_parentid != 0
+    </select>
+    <!--根据父类id 查询它所包含的所有子类信息-->
+    <resultMap id="categoryMap" type="com.qf.vo.CategoryVo">
+        <id column="fatherid" property="fatherId"></id>
+        <result column="fathername" property="fatherName"></result>
+        <collection property="categoryList" ofType="com.qf.pojo.Category">
+            <id column="childid" property="c_id"></id>
+            <result column="childname" property="c_name"></result>
+        </collection>
+    </resultMap>
+    <select id="getChildCategoryInfo" resultMap="categoryMap" parameterType="int">
+        SELECT  a.c_parentid fatherid,  b.c_name fathername ,a.c_id childid, a.c_name childname
+        FROM category a , category b WHERE a.c_parentid = b.c_id and a.c_parentid = #{fatherId}
+    </select>
 </mapper>

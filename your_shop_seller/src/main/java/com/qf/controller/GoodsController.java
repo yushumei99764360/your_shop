@@ -1,7 +1,9 @@
 package com.qf.controller;
 
 
+import com.qf.pojo.Category;
 import com.qf.pojo.SellerInfo;
+import com.qf.service.CategoryService;
 import com.qf.service.GoodsService;
 import com.qf.vo.GoodsSelecteds;
 import com.qf.vo.GoodsVo;
@@ -17,6 +19,8 @@ public class GoodsController {
 
     @Autowired
     GoodsService goodsService;
+    @Autowired
+    CategoryService categoryService;
 
     // 查询所有商品信息  商品列表页面
     @ResponseBody
@@ -49,6 +53,8 @@ public class GoodsController {
     public Object getGoodsByGoodsId(@RequestParam int goodsId){
         System.out.println(goodsId);
         GoodsVo goodsInfoByGoodsId = goodsService.getGoodsInfoByGoodsId(goodsId);
+        List<Category> categoryList = categoryService.getChildInfo();
+        goodsInfoByGoodsId.setCategoryList(categoryList);
         System.out.println(goodsInfoByGoodsId);
         return goodsInfoByGoodsId;
     }

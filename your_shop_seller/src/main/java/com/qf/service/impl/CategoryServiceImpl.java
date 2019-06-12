@@ -78,4 +78,15 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getFatherInfo() {
         return categoryMapper.getFatherInfo();
     }
+
+    //    查询所有二级类别信息
+    public List<Category> getChildInfo() {
+        return categoryMapper.getChildInfo();
+    }
+
+    // 根据父类id 查询它所包含的所有子类信息
+    public CategoryVo getChildCategoryInfo(int fatherId) {
+        CategoryVo categoryVo = categoryMapper.getChildCategoryInfo(fatherId);
+        return categoryVo;
+    }
 }

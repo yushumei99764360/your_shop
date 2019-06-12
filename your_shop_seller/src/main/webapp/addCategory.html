@@ -104,12 +104,14 @@
             <input type="text" class="am-input-sm" id="c_core" placeholder="请输入商品类别编码">
           </div>
         </div>
-        <div class="am-form-group am-cf">
-          <div class="zuo">商品类别父类：</div>
-          <div class="you">
-            <input type="text" class="am-input-sm" id="c_parentid" placeholder="请输入类别父类">
+          <div class="am-form-group am-cf">
+              <div class="zuo">商品一级类：</div>
+              <div class="you" style="height: 40px;">
+                  <select id="father">
+                      <option value="0">--请选择--</option>
+                  </select>
+              </div>
           </div>
-        </div>
 
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
@@ -154,6 +156,28 @@
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
 <script>
+    $(function () {
+        $.ajax({
+            type:"POST",
+            url:"getAllCategoryFather",
+            contentType:"application/json",
+            success:function (data) {
+                alert("option father")
+                var selectObj = $("#father");
+                $(data).each(function (index,item) {
+                    var opHtml = "<option value="+item.c_id+">"+item.c_name+"</option>";
+                    console.log(opHtml);
+                    selectObj.append(opHtml);
+                })
+
+            },
+            error:function (data) {
+                console.log(data);
+                alert(data)
+            },
+            dataType: "json"
+        });
+    });
     function addCategory() {
         alert("添加新商品")
         $.ajax({
@@ -163,7 +187,7 @@
             data: JSON.stringify({
                 "c_name":$("#c_name").val(),
                 "c_core":$("#c_core").val(),
-                "c_parentid":$("#c_parentid").val()
+                "c_parentid":$("#father").val()
             }),
             success : function (data) {
                 alert("添加成功")

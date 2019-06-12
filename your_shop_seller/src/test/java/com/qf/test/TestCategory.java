@@ -18,7 +18,7 @@ public class TestCategory {
 
     @Test
     public void test1(){
-        List<CategoryVo> categoryVos = categoryService.getAllCategory();
+        List<CategoryVo> categoryVos = categoryService.selectCategoryBys("电子");
 
         for (CategoryVo categoryVo: categoryVos)
             System.out.println(categoryVo);
@@ -66,5 +66,18 @@ public class TestCategory {
         list.add(33);
         boolean delCheckCategoryIds = categoryService.delCheckCategoryIds(list);
         System.out.println(delCheckCategoryIds);
+    }
+
+    @Test
+    public void test7(){
+        CategoryVo categoryVo = categoryService.getChildCategoryInfo(1);
+        System.out.println(categoryVo);
+    }
+
+    @Test
+    public void test8(){
+        List<Category> categoryList = categoryService.getChildInfo();
+        for (Category category: categoryList)
+            System.out.println(category);
     }
 }

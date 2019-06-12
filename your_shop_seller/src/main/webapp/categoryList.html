@@ -156,7 +156,7 @@
 
 
 <!-- DataTables -->
-<script src="datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/jquery.dataTables.js"></script>
 <script src="datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
 
@@ -229,20 +229,20 @@
     f();
 
     function jumpToEdit(childId){
-        alert(childId)
+        // alert(childId)
         var url = "editCategory.html?childId="+childId;
         window.location.href = url;
     }
 
     // 单个删除
     function delCategoryById(childId) {
-        alert(childId)
+        // alert(childId)
         $.ajax({
             type: "POST",
             url:"delByCid?childId="+childId,
             contentType:"application/json",
             success: function (data) {
-                alert("删除成功")
+                // alert("删除成功")
                 window.location.href="categoryList.html";
             },
             error: function (data) {
@@ -256,19 +256,18 @@
     function selectCategoryBys() {
         $("#dataTable").empty();
         //1.发送ajax请求获取数据
+        var str = $("#str").val();
+        alert(str);
         $.ajax({
-            type: 'POST',
+            type: "GET",
             url: "selectCategoryBys",
             contentType:"application/json",
-            data:JSON.stringify({
-                "str":$("#str").val()
-            }),
+            data:{str},
             success: function(data){
                 //循环
                 alert(3333)
                 var tabObj = $("#dataTable");
                 $(data).each(function (index,item) {
-
                     var trHtml = "<tr>\n" +
                         "                    <td><input type=\"checkbox\" value="+item.childId+"></td>\n" +
                         "                    <td>"+item.childId+"</td>\n" +
@@ -287,7 +286,7 @@
                 });
             },
             error:function (data) {
-                // console.error(data);
+                console.log(data);
                 alert(4444)
             },
             dataType: "json"

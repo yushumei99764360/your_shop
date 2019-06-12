@@ -27,8 +27,10 @@ public class GoodsServiceImpl implements GoodsService {
     @Transactional(propagation = Propagation.REQUIRED)
     public boolean addGoodsInfo(GoodsVo goodsVo) {
         int goodsInfo = goodsMapper.addGoodsInfo(goodsVo);
+//        System.out.println(goodsInfo);
         int goodsCategory = goodsMapper.addGoodsCategory(goodsVo);
-        if (goodsInfo>0&&goodsCategory>0)
+//        System.out.println(goodsCategory);
+        if (goodsInfo>0 && goodsCategory>0)
             return true;
         return false;
     }

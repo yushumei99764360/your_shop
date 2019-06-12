@@ -143,21 +143,10 @@
                     </div>
 
                     <div class="am-form-group am-cf">
-                        <div class="zuo">产品子类：</div>
-                        <div class="you" style="height: 45px;">
-                            <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="childName">
-                                <option value="三只松鼠">三只松鼠</option>
-                                <option value="手机">手机</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="am-form-group am-cf">
-                        <div class="zuo">产品父类：</div>
-                        <div class="you" style="height: 45px;">
-                            <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="fatherName">
-                                <option value="食品">食品</option>
-                                <option value="电子产品">电子产品</option>
+                        <div class="zuo">商品类别：</div>
+                        <div class="you" style="height: 40px;">
+                            <select id="child">
+                                <option value="0">--请选择--</option>
                             </select>
                         </div>
                     </div>
@@ -214,8 +203,29 @@
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
 <script>
+    $(function () {
+        $.ajax({
+            type:"POST",
+            url:"getAllChildInfo",
+            contentType:"application/json",
+            success:function (data) {
+                // alert("option All")
+                var childObj = $("#child");
+                $(data).each(function (index,item) {
+                    var childHtml = "<option value="+item.c_id+">"+item.c_name+"</option>";
+                    console.log(childHtml);
+                    childObj.append(childHtml);
+                });
+            },
+            error:function (data) {
+                console.log(data);
+                alert(data)
+            },
+            dataType: "json"
+        });
+    });
     function addGoodsInfo(num) {
-        alert("添加新商品")
+        // alert("添加新商品")
         $.ajax({
             type:"POST",
             url:"addGoodsInfo",
@@ -229,13 +239,12 @@
                 "g_num":$("#g_num").val(),
                 "g_desc":$("#g_desc").val(),
                 "g_pic":$("#g_pic").val(),
-                "childName":$("#childName").val(),
-                "fatherName":$("#fatherName").val(),
+                "childId":$("#child").val(),
                 "g_status":$("#g_status").val()
             }),
             success : function (data) {
                 alert("添加成功")
-                window.location.href="商品列表.html";
+                window.location.href="goodsList.html";
 
             },
             error : function (data) {

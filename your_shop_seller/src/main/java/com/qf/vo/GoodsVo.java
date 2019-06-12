@@ -1,7 +1,10 @@
 package com.qf.vo;
 
 
+import com.qf.pojo.Category;
+
 import java.util.Date;
+import java.util.List;
 
 public class GoodsVo {
 
@@ -33,10 +36,15 @@ public class GoodsVo {
     String g_lastdate;
     // 商店id
     int s_id;
-//    商品子类
+//    商品类别
     String childName;
-    // 商品父类
+    // 商品类别id
+    int childId;
+    // 商品一级类别
     String fatherName;
+
+    //所有的二级类别
+    List<Category> categoryList;
 
     @Override
     public String toString() {
@@ -51,12 +59,14 @@ public class GoodsVo {
                 ", g_num=" + g_num +
                 ", g_desc='" + g_desc + '\'' +
                 ", g_pic='" + g_pic + '\'' +
-                ", g_status=" + g_status +
-                ", g_date=" + g_date +
-                ", g_lastdate=" + g_lastdate +
+                ", g_status='" + g_status + '\'' +
+                ", g_date='" + g_date + '\'' +
+                ", g_lastdate='" + g_lastdate + '\'' +
                 ", s_id=" + s_id +
                 ", childName='" + childName + '\'' +
+                ", childId=" + childId +
                 ", fatherName='" + fatherName + '\'' +
+                ", categoryList=" + categoryList +
                 '}';
     }
 
@@ -180,11 +190,28 @@ public class GoodsVo {
         this.childName = childName;
     }
 
+    public int getChildId() {
+        return childId;
+    }
+
+    public void setChildId(int childId) {
+        this.childId = childId;
+    }
+
     public String getFatherName() {
         return fatherName;
     }
 
     public void setFatherName(String fatherName) {
         this.fatherName = fatherName;
+    }
+
+
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
 }
