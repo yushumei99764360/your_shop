@@ -1,6 +1,7 @@
 package com.qf.mapper;
 
-import com.qf.dto.Category;
+import com.qf.dto.CategoryDto;
+import com.qf.pojo.Category;
 import com.qf.pojo.GoodsInfo;
 
 import java.util.List;

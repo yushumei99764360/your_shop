@@ -1,7 +1,8 @@
 package com.qf.controller;
 
 import com.qf.dto.AddressInfoDto;
-import com.qf.dto.UserInfoMessage;
+import com.qf.dto.UserInfoMessageDto;
+import com.qf.dto.UserInfoMessageDto;
 import com.qf.pojo.AddressInfo;
 import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
@@ -58,23 +59,23 @@ public class UserInfoController {
 
     /**
      * 修改/添加用户详细信息
-     * @param userInfoMessage
+     * @param userInfoMessageDto
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "updateUserInfo",method = RequestMethod.POST)
-    public Object updateUserInfo(@RequestBody UserInfoMessage userInfoMessage,HttpSession httpSession) {
+    public Object updateUserInfo(@RequestBody UserInfoMessageDto userInfoMessageDto, HttpSession httpSession) {
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
-        userInfoMessage.setUserId(userInfo.getUserId());
+        userInfoMessageDto.setUserId(userInfo.getUserId());
         int i = userInfoService.search(userInfo.getUserId());
         if (i!= 0){
-            int count = userInfoService.updateUserInfo(userInfoMessage);
+            int count = userInfoService.updateUserInfo(userInfoMessageDto);
             if (count > 0) {
                 return true;
             }
             return false;
         }else {
-           int count = userInfoService.insertUserDetail(userInfoMessage);
+           int count = userInfoService.insertUserDetail(userInfoMessageDto);
             if (count > 0) {
                 return true;
             }

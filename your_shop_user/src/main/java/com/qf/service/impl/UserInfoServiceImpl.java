@@ -1,7 +1,8 @@
 package com.qf.service.impl;
 
 import com.qf.dto.AddressInfoDto;
-import com.qf.dto.UserInfoMessage;
+import com.qf.dto.UserInfoMessageDto;
+import com.qf.dto.UserInfoMessageDto;
 import com.qf.mapper.UserInfoMapper;
 import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
@@ -24,18 +25,18 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserInfoMessage getUserInfoMessageById(int userId) {
+    public UserInfoMessageDto getUserInfoMessageById(int userId) {
         return userInfoMapper.getUserInfoMessageById(userId);
     }
 
     /**
      * 修改添加
-     * @param userInfoMessage   用户信息
+     * @param userInfoMessageDto   用户信息
      * @return
      */
     @Override
-    public int updateUserInfo(UserInfoMessage userInfoMessage) {
-        return userInfoMapper.updateUserInfo(userInfoMessage);
+    public int updateUserInfo(UserInfoMessageDto userInfoMessageDto) {
+        return userInfoMapper.updateUserInfo(userInfoMessageDto);
     }
 
     @Override
@@ -64,12 +65,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     /**
      * 用户详细信息添加
-     * @param userInfoMessage
+     * @param userInfoMessageDto
      * @return
      */
     @Override
-    public int insertUserDetail(UserInfoMessage userInfoMessage) {
-        return userInfoMapper.insertUserDetail(userInfoMessage);
+    public int insertUserDetail(UserInfoMessageDto userInfoMessageDto) {
+        return userInfoMapper.insertUserDetail(userInfoMessageDto);
     }
 
     /**

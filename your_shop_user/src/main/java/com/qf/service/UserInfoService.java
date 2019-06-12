@@ -1,7 +1,8 @@
 package com.qf.service;
 
 import com.qf.dto.AddressInfoDto;
-import com.qf.dto.UserInfoMessage;
+import com.qf.dto.UserInfoMessageDto;
+import com.qf.dto.UserInfoMessageDto;
 import com.qf.pojo.AddressInfo;
 import com.qf.pojo.UserInfo;
 import com.qf.vo.UserInfoVo;
@@ -23,14 +24,14 @@ public interface UserInfoService {
      * @param userId 用户id
      * @return
      */
-    public UserInfoMessage getUserInfoMessageById(int userId);
+    public UserInfoMessageDto getUserInfoMessageById(int userId);
 
     /**
      * 根据用户id修改用户信息
-     * @param userInfoMessage   用户信息
+     * @param userInfoMessageDto   用户信息
      * @return
      */
-    public int updateUserInfo(UserInfoMessage userInfoMessage);
+    public int updateUserInfo(UserInfoMessageDto userInfoMessageDto);
 
     /**
      *  用户注册
@@ -48,7 +49,7 @@ public interface UserInfoService {
 
     int search(int userId);
 
-    int insertUserDetail(UserInfoMessage userInfoMessage);
+    int insertUserDetail(UserInfoMessageDto userInfoMessage);
 
     boolean updateIconByUserId(int userId, String icon);
 

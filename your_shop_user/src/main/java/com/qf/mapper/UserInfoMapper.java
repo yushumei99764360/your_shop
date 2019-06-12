@@ -1,7 +1,8 @@
 package com.qf.mapper;
 
 import com.qf.dto.AddressInfoDto;
-import com.qf.dto.UserInfoMessage;
+import com.qf.dto.UserInfoMessageDto;
+import com.qf.dto.UserInfoMessageDto;
 import com.qf.pojo.AddressInfo;
 import com.qf.pojo.UserInfo;
 import com.qf.vo.UserInfoVo;
@@ -22,14 +23,14 @@ public interface UserInfoMapper {
      * @param userId    用户id
      * @return
      */
-    public UserInfoMessage getUserInfoMessageById(int userId);
+    public UserInfoMessageDto getUserInfoMessageById(int userId);
 
     /**
      * 根据用户id修改用户信息
      * @param userInfoMessage   用户信息
      * @return
      */
-    public int updateUserInfo(UserInfoMessage userInfoMessage);
+    public int updateUserInfo(UserInfoMessageDto userInfoMessageDto);
 
     /**
      * 注册用户
@@ -47,7 +48,7 @@ public interface UserInfoMapper {
 
     int search(int userId);
 
-    int insertUserDetail(UserInfoMessage userInfoMessage);
+    int insertUserDetail(UserInfoMessageDto userInfoMessage);
 
 
     /**

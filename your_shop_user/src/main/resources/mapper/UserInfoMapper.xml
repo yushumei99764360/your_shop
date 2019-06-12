@@ -27,12 +27,12 @@
     </select>
 
     <!--根据id获取用户信息-->
-    <select id="getUserInfoMessageById" resultType="com.qf.dto.UserInfoMessage" parameterType="int">
+    <select id="getUserInfoMessageById" resultType="com.qf.dto.UserInfoMessageDto" parameterType="int">
         SELECT u.userId,u.userName,u1.nickName,u1.gender,u1.age,u.email,u1.realname,u1.icon FROM userinfo u,userdetail u1 WHERE u.userId=u1.userID AND u.userId =#{userId};
     </select>
 
     <!--根据用户id修改用户信息-->
-    <update id="updateUserInfo" parameterType="com.qf.dto.UserInfoMessage">
+    <update id="updateUserInfo" parameterType="com.qf.dto.UserInfoMessageDto">
         update userinfo u,userdetail ud
         <set>
             <if test="nickName != null and nickName != '' ">
@@ -84,7 +84,7 @@
     </select>
 
     <!--添加用户详细信息-->
-    <insert id="insertUserDetail" parameterType="com.qf.dto.UserInfoMessage">
+    <insert id="insertUserDetail" parameterType="com.qf.dto.UserInfoMessageDto">
         insert into userdetail (nickName,gender,age,realname,userId)
         values (#{nickName},#{gender},#{age},#{realName},#{userId})
     </insert>
