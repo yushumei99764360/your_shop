@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.OrderInfoMapper">
+
+    <resultMap id="ordersOfUser" type="com.qf.dto.OrdersOfUserDto">
+        <id property="id" column="id"/>
+        <result property="o_sendtype" column="o_sendtype"/>
+        <result property="o_paytype" column="o_paytype"/>
+        <result property="o_paycount" column="o_paycount"/>
+        <result property="userId" column="userId"/>
+        <result property="o_shperson" column="o_shperson"/>
+        <result property="o_shphone" column="o_shphone"/>
+        <result property="o_shaddress" column="o_shaddress"/>
+        <result property="o_province" column="o_province"/>
+        <result property="o_city" column="o_city"/>
+        <result property="o_district" column="o_district"/>
+        <result property="s_id" column="s_id"/>
+        <result property="o_orderdate" column="o_orderdate"/>
+        <result property="o_checkdate" column="o_checkdate"/>
+        <result property="o_status" column="o_status"/>
+        <collection property="order_details" ofType="com.qf.dto.Order_DetailDto"  column="id">
+            <id property="id" column="odid"/>
+            <result property="g_id" column="g_id"/>
+            <result property="g_name" column="g_name"/>
+            <result property="g_disctprice" column="g_disctprice"/>
+            <result property="g_desc" column="g_desc"/>
+            <result property="g_pic" column="g_pic"/>
+            <result property="g_num" column="g_num"/>
+            <result property="g_total_price" column="g_total_price"/>
+        </collection>
+
+    </resultMap>
+
+    <!--od.`g_disctprice`,od.`g_id`,od.`g_name`,od.`g_num`,od.`g_pic`,od.`g_total_price`,od.`id` odid-->
+
+    <!--id	order_date	o_orderid	g_id	g_name	g_disctprice	g_desc	g_pic	g_num	g_total_price	order_modified-->
+
+
+    <!--id	o_sendtype	o_paytype	o_paycount	userId	o_shperson	o_shphone	o_shaddress	o_province	o_city	o_district	s_id	o_orderdate	o_checkdate	o_status	id	order_date	o_orderid	g_id	g_name	g_disctprice	g_desc	g_pic	g_num	g_total_price	order_modified-->
+    <!--2232073	顺丰	微信	3344	2	狗子	13829779615	花板湖小区	浙江省	杭州市	西湖区	1	2019-06-12 10:18:38	2019-06-12 14:58:40	1	41	2017-04-22	2232073	8	开心果	5768.00	荣耀手机m20	images/三只松鼠 开心果.jpg	2	11520.00	2019-06-10-->
+    <!--2232373	顺丰	微信	3344	2	狗子	13829779615	花板湖小区	湖南省	岳阳市	岳阳楼区	1	2019-06-12 10:18:31	2019-06-12 10:18:31	1	42	2019-06-12	2232373	7	华为P30Pro	5768.00	华为手机p20	images/华为P30Pro.jpg	1	5768.00	2019-06-12-->
+
+
+<select id="getOrdersOfUser" resultMap="ordersOfUser" parameterType="int">
+    SELECT tb1.*,od.`g_disctprice`,od.`g_id`,od.`g_name`,od.`g_num`,od.`g_pic`,od.`g_total_price`,od.`id` odid FROM (SELECT * FROM `orderinfo` o WHERE o.`userId`=#{userId} ) AS tb1 LEFT JOIN `order_detail` od ON od.`o_orderid`= tb1.id
+
+</select>
+
+</mapper>
