@@ -1,6 +1,9 @@
 package com.qf.service;
 
+import com.qf.pojo.GoodsInfo;
 import com.qf.vo.SellerInfoVo;
+
+import java.util.List;
 
 public interface SellerInfosService {
     /**
@@ -15,4 +18,12 @@ public interface SellerInfosService {
      * @return
      */
     public Integer checkSellerName(String s_name);
+
+    /**
+     * 根据商家ID找出所有商品信息
+     * @param s_id
+     * @return
+     */
+    public List<GoodsInfo> SelectGoodsBySellerID(Integer s_id);
+
 }

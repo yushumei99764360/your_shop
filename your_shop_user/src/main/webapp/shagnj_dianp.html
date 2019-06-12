@@ -13,7 +13,35 @@
 
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
  <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.source.js"></script>
-
+<script type="text/javascript">
+	var SellerId=window.location.search.split("=");
+	var Id=1;
+	function showGoodsInfo() {
+		$("#showDetail>li").empty();
+		$.ajax({
+			type: "POST",
+			url: "GoodsInfoById?s_id="+Id,
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success:function (response) {
+				var ulObject = $("#showDetail");
+				$(response).each(function (index, item) {
+					var ulHtml = "<li id='"+item.g_id+"'>\n"+
+					"<a href=\"shangp_xiangq.html?g_id='"+item.g_id+"'\" class=\"jngp_img\"><img src='"+item.g_pic+"'></a>\n"+
+							"<a href=\"shangp_xiangq.html?g_id='"+item.g_id+"'\" class=\"jinp_biaot\">"+item.g_name+"</a>\n"+
+							"<span>"+item.g_disctprice+"</span>\n"+
+					"</li>\n"
+					ulObject.append(ulHtml)
+				})
+			},
+			error:function (data) {
+				console.log(data);
+				alert("数据显示失败");
+			}
+		});
+	}
+	showGoodsInfo();
+</script>
  
 </head> 
 <body>
@@ -257,10 +285,10 @@
 					</div>
 				</li>
 				<li class="dp_dh_li"><a href="#" class="lin_color">分销商品</a></li>
-				<li class="dp_dh_li"><a href="#" class="lin_color">化妆镜</a></li>
+				<!--<li class="dp_dh_li"><a href="#" class="lin_color">化妆镜</a></li>
 				<li class="dp_dh_li"><a href="#" class="lin_color">摆件</a></li>
-				<li class="dp_dh_li"><a href="#" class="lin_color">连衣裙</a></li>
-				<li class="dp_dh_li"><a href="shagnj_dianp_jies.html" class="lin_color">店铺简介</a></li>
+				<li class="dp_dh_li"><a href="#" class="lin_color">连衣裙</a></li>-->
+				<li class="dp_dh_li"><a href="shagnj_dianp_jie.html" class="lin_color">店铺简介</a></li>
 			</ul>
 		</div>
 	</div>
@@ -298,14 +326,15 @@ jQuery(".slideBox_dianp").slide({mainCell:".bd ul",autoPlay:true});
 			<div class="zuoy_xian"></div>
 		</div>
 	</div>
-	<div class="jinp_tuij_lb">
-		<ul>
-			<li>
-				<a href="#" class="jngp_img"><img src="images/dianp_anli1.jpg"></a>
+	<div class="jinp_tuij_lb" >
+		<ul id="showDetail">
+		<!--	<li>
+				&lt;!&ndash;<a href="#" class="jngp_img"><img src="images/dianp_anli1.jpg"></a>
 				<a href="#" class="jinp_biaot">思莱德SELECTED夏季新款纯棉撞色饰边翻领</a>
-				<span>￥139.00</span>
-			</li>
-			<li>
+				<span>￥139.00</span>&ndash;&gt;
+			</li>-->
+
+			<!--<li>
 				<a href="#" class="jngp_img"><img src="images/dianp_anli2.jpg"></a>
 				<a href="#" class="jinp_biaot">思莱德SELECTED夏季新款纯棉撞色饰边翻领</a>
 				<span>￥139.00</span>
@@ -329,11 +358,11 @@ jQuery(".slideBox_dianp").slide({mainCell:".bd ul",autoPlay:true});
 				<a href="#" class="jngp_img"><img src="images/dianp_anli2.jpg"></a>
 				<a href="#" class="jinp_biaot">思莱德SELECTED夏季新款纯棉撞色饰边翻领</a>
 				<span>￥139.00</span>
-			</li>
+			</li>-->
 		</ul>
 	</div>
 </div>
-<div class="beij_center">
+<!--<div class="beij_center">
 	<div class="dp_sy_biaot">
 		<div class="dis_jvz">
 			<div class="zuoy_xian"></div>
@@ -386,9 +415,9 @@ jQuery(".slideBox_dianp").slide({mainCell:".bd ul",autoPlay:true});
 		jQuery(".picScroll_left_dianp").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:true,effect:"left",autoPlay:true,vis:3,scroll:1,trigger:"click"});
 		</script> 
 	</div>
-</div>
+</div>-->
 
-<div class="beij_center">
+<!--<div class="beij_center">
 	 <div class="dp_sy_biaot">
 		<div class="dis_jvz">
 			<div class="zuoy_xian"></div>
@@ -438,7 +467,7 @@ jQuery(".slideBox_dianp").slide({mainCell:".bd ul",autoPlay:true});
 			</div> 
 		</div>
 	</div>
-</div>
+</div>-->
 
 <!--底部-->
 <div class="dib_beij">

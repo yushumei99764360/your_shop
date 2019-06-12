@@ -1,6 +1,9 @@
 package com.qf.mapper;
 
+import com.qf.pojo.GoodsInfo;
 import com.qf.vo.SellerInfoVo;
+
+import java.util.List;
 
 public interface SellerInfoMapper {
     /**
@@ -16,4 +19,11 @@ public interface SellerInfoMapper {
      * @return
      */
     public Integer checkSellerName(String s_name);
+
+    /**
+     * 根据商家ID找出所有商品信息
+     * @param s_id
+     * @return
+     */
+    public List<GoodsInfo> SelectGoodsBySellerID(Integer s_id);
 }

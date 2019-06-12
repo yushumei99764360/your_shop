@@ -1,10 +1,13 @@
 package com.qf.controller;
 
+import com.qf.pojo.GoodsInfo;
 import com.qf.service.SellerInfosService;
 import com.qf.vo.SellerInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class SellerInfoController {
@@ -36,5 +39,20 @@ public class SellerInfoController {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 根据商家ID找出所有商品信息
+     * @param s_id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "GoodsInfoById",method = RequestMethod.POST)
+    public Object GoodsInfoBySellerID(@RequestParam Integer s_id){
+        List<GoodsInfo> goodsInfos = sellerInfosService.SelectGoodsBySellerID(s_id);
+        for (GoodsInfo goodsInfo: goodsInfos) {
+            System.out.println(goodsInfo);
+        }
+        return goodsInfos;
     }
 }
