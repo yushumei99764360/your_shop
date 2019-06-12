@@ -55,7 +55,7 @@
 
         <h3 class="am-icon-users"><em></em> <a href="#">个人中心</a></h3>
         <ul>
-            <li><a href="商家信息.html">修改信息</a></li>
+            <li><a href="">修改信息</a></li>
         </ul>
 
     </div>
@@ -75,86 +75,45 @@
 </div>
 
 <div class=" admin-content">
+	
 		<div class="daohang"></div>
+	
+	
+
+
 <div class="admin-biaogelist">
 	
     <div class="listbiaoti am-cf">
-      <ul class="am-icon-flag on"> 商家信息 </ul>
+      <ul class="am-icon-flag on"> 添加商品类别 </ul>
       
-      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">商家信息</a></dl>
+      <dl class="am-icon-home" style="float: right;"> 当前位置 > 商品类别添加</dl>
 
     </div>
 
     <div class="fbneirong">
       <form class="am-form">
           <div class="am-form-group am-cf">
-              <div class="zuo">商家编号：</div>
-              <div class="you" id="s_code">
-                  s100000002
-              </div>
-          </div>
-          <div class="am-form-group am-cf">
-              <div class="zuo">商家名称：</div>
+              <div class="zuo">商品类别名称：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="s_name" value="张家小店">
+                  <input type="text" class="am-input-sm" id="c_name" placeholder="请输入商品类别名称">
               </div>
           </div>
         <div class="am-form-group am-cf">
-          <div class="zuo">店家密码：</div>
+          <div class="zuo">商品类别编码：</div>
           <div class="you">
-            <input type="text" class="am-input-sm" id="s_pwd" value="zy1234">
+            <input type="text" class="am-input-sm" id="c_core" placeholder="请输入商品类别编码">
           </div>
         </div>
         <div class="am-form-group am-cf">
-          <div class="zuo">商家联系电话：</div>
+          <div class="zuo">商品类别父类：</div>
           <div class="you">
-            <input type="text" class="am-input-sm" id="s_phone" value="13305913846">
+            <input type="text" class="am-input-sm" id="c_parentid" placeholder="请输入类别父类">
           </div>
         </div>
-          <div class="am-form-group am-cf">
-              <div class="zuo">店家地址：</div>
-              <div class="you">
-                  <input type="text" class="am-input-sm" id="s_address" value="广东省广州市天河区汇通产业园B8栋">
-              </div>
-          </div>
-        <div class="am-form-group am-cf">
-          <div class="zuo">店家描述：</div>
-          <div class="you">
-            <textarea class="" rows="2" id="s_desc"></textarea>
-          </div>
-        </div>
-        <div class="am-form-group am-cf">
-          <div class="zuo">店家头像：</div>
-          <div class="you" style="height: 45px;">
-            <input type="file" id="goodsPic">
-            <p class="am-form-help">请选择要上传的产品图片...</p>
-          </div>
-        </div>
-          <div class="am-form-group am-cf">
-              <div class="zuo">店家状态：</div>
-              <div class="you" style="height: 45px;">
-                  <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="s_status">
-                      <option value="b">启用</option>
-                      <option value="o">禁止</option>
-                  </select>
-              </div>
-          </div>
-          <div class="am-form-group am-cf">
-              <div class="zuo">开店时间：</div>
-              <div class="you">
-                  <input type="text" class="am-input-sm" id="s_date" value="13305913846">
-              </div>
-          </div>
-          <div class="am-form-group am-cf">
-              <div class="zuo">最后修改时间：</div>
-              <div class="you">
-                  <input type="text" class="am-input-sm" id="g_lastdate" value="13305913846">
-              </div>
-          </div>
 
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
-              <button type="submit" class="am-btn am-btn-success am-radius">修改</button>&nbsp;  &raquo; &nbsp;
+              <button type="button" class="am-btn am-btn-success am-radius" onclick="addCategory()">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp;
           </div>
         </div>
       </form>
@@ -194,7 +153,32 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
+<script>
+    function addCategory() {
+        alert("添加新商品")
+        $.ajax({
+            type:"POST",
+            url:"addCategoryInfo",
+            contentType:"application/json",
+            data: JSON.stringify({
+                "c_name":$("#c_name").val(),
+                "c_core":$("#c_core").val(),
+                "c_parentid":$("#c_parentid").val()
+            }),
+            success : function (data) {
+                alert("添加成功")
+                window.location.href="categoryList.html";
 
+            },
+            error : function (data) {
+                alert("失败")
+            },
+            dataType: "json"
+        });
+    }
+
+
+</script>
 
 
 </body>

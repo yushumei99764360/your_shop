@@ -1,10 +1,16 @@
 package com.qf.vo;
 
+import com.qf.pojo.Category;
+
+import java.util.List;
+
 public class CategoryVo {
     int fatherId;
     String fatherName;
     int childId;
     String childName;
+    List<Category> categoryList;
+
 
     @Override
     public String toString() {
@@ -13,6 +19,7 @@ public class CategoryVo {
                 ", fatherName='" + fatherName + '\'' +
                 ", childId=" + childId +
                 ", childName='" + childName + '\'' +
+                ", categoryList=" + categoryList +
                 '}';
     }
 
@@ -46,5 +53,13 @@ public class CategoryVo {
 
     public void setChildName(String childName) {
         this.childName = childName;
+    }
+
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
 }

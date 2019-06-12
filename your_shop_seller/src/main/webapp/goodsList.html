@@ -38,8 +38,10 @@
         <div class="sideMenu">
             <h3 class="am-icon-flag"><em></em> <a href="index.html">商品管理</a></h3>
             <ul>
-                <li><a href="商品列表.html">商品列表</a></li>
-                <li><a href="添加新商品.html">添加新商品</a></li>
+                <li><a href="goodsList.html">商品列表</a></li>
+                <li ><a href="addGoods.html">添加新商品</a></li>
+                <li><a href="categoryList.html">商品类别</a></li>
+                <li ><a href="addCategory.html">添加新商品类别</a></li>
             </ul>
             <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
             <ul>
@@ -152,7 +154,7 @@
                 <li><a href="#">4</a></li>
                 <li><a href="#">5</a></li>
                 <li><a href="#">»</a></li>-->
-                <select data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="pageNo">
+                <!--<select data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="pageNo">
                     <option value="5">每页显示数据</option>
                     <option value="5">5</option>
                     <option value="10">10</option>
@@ -165,7 +167,7 @@
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-                </select>
+                </select>-->
 
             </ul>
             <hr>
@@ -205,14 +207,14 @@
 
 
     function f(){
-        var page =1;
+        // var page =$("#pageNo").val();
         //1.发送ajax请求获取数据
         $.ajax({
             type: 'GET',
             url: "list",
             data:{
-              "pageNo" : $("#pageNo").val(),
-              "pageSize"  : $("#pageSize").val()
+              "pageNo" : 3,
+              "pageSize"  : 4
             },
             success: function(data){
                 //循环

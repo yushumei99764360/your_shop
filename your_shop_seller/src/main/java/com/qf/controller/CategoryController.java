@@ -41,7 +41,8 @@ public class CategoryController {
     @RequestMapping("getCategoryById")
     public Object getCategoryById(@RequestParam int childId) {
         CategoryVo categoryById = categoryService.getCategoryById(childId);
-
+        List<Category> fatherInfo = categoryService.getFatherInfo();
+        categoryById.setCategoryList(fatherInfo);
         return categoryById;
     }
 
@@ -68,8 +69,8 @@ public class CategoryController {
 
     // 选中删除 ，批量删除
     @RequestMapping("delCheckCategoryIds")
-    public boolean delCheckCategoryIds(@RequestBody List<Integer> list) {
-        boolean checkCategoryIds = categoryService.delCheckCategoryIds(list);
+    public boolean delCheckCategoryIds(@RequestBody List<Integer> selectedCId) {
+        boolean checkCategoryIds = categoryService.delCheckCategoryIds(selectedCId);
         return checkCategoryIds;
     }
 

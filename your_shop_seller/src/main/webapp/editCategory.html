@@ -55,7 +55,7 @@
 
         <h3 class="am-icon-users"><em></em> <a href="#">个人中心</a></h3>
         <ul>
-            <li><a href="商家信息.html">修改信息</a></li>
+            <li><a href="">修改信息</a></li>
         </ul>
 
     </div>
@@ -79,82 +79,38 @@
 <div class="admin-biaogelist">
 	
     <div class="listbiaoti am-cf">
-      <ul class="am-icon-flag on"> 商家信息 </ul>
+      <ul class="am-icon-flag on"> 修改商品类别 </ul>
       
-      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">商家信息</a></dl>
+      <dl class="am-icon-home" style="float: right;"> 当前位置 > 商品类别修改</dl>
 
     </div>
 
     <div class="fbneirong">
       <form class="am-form">
           <div class="am-form-group am-cf">
-              <div class="zuo">商家编号：</div>
-              <div class="you" id="s_code">
-                  s100000002
+              <div class="zuo">商品类别ID：</div>
+              <div class="you" id="childId">
               </div>
           </div>
           <div class="am-form-group am-cf">
-              <div class="zuo">商家名称：</div>
+              <div class="zuo">商品类别名称：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="s_name" value="张家小店">
+                  <input type="text" class="am-input-sm" id="childName">
               </div>
           </div>
-        <div class="am-form-group am-cf">
-          <div class="zuo">店家密码：</div>
-          <div class="you">
-            <input type="text" class="am-input-sm" id="s_pwd" value="zy1234">
-          </div>
-        </div>
-        <div class="am-form-group am-cf">
-          <div class="zuo">商家联系电话：</div>
-          <div class="you">
-            <input type="text" class="am-input-sm" id="s_phone" value="13305913846">
-          </div>
-        </div>
+
           <div class="am-form-group am-cf">
-              <div class="zuo">店家地址：</div>
-              <div class="you">
-                  <input type="text" class="am-input-sm" id="s_address" value="广东省广州市天河区汇通产业园B8栋">
-              </div>
-          </div>
-        <div class="am-form-group am-cf">
-          <div class="zuo">店家描述：</div>
-          <div class="you">
-            <textarea class="" rows="2" id="s_desc"></textarea>
-          </div>
-        </div>
-        <div class="am-form-group am-cf">
-          <div class="zuo">店家头像：</div>
-          <div class="you" style="height: 45px;">
-            <input type="file" id="goodsPic">
-            <p class="am-form-help">请选择要上传的产品图片...</p>
-          </div>
-        </div>
-          <div class="am-form-group am-cf">
-              <div class="zuo">店家状态：</div>
+              <div class="zuo">商品一级类：</div>
               <div class="you" style="height: 45px;">
-                  <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="s_status">
-                      <option value="b">启用</option>
-                      <option value="o">禁止</option>
+                  <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="father">
+
                   </select>
-              </div>
-          </div>
-          <div class="am-form-group am-cf">
-              <div class="zuo">开店时间：</div>
-              <div class="you">
-                  <input type="text" class="am-input-sm" id="s_date" value="13305913846">
-              </div>
-          </div>
-          <div class="am-form-group am-cf">
-              <div class="zuo">最后修改时间：</div>
-              <div class="you">
-                  <input type="text" class="am-input-sm" id="g_lastdate" value="13305913846">
               </div>
           </div>
 
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
-              <button type="submit" class="am-btn am-btn-success am-radius">修改</button>&nbsp;  &raquo; &nbsp;
+              <button type="submit" class="am-btn am-btn-success am-radius" onclick="updateGoodsByGoodsId()">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp;
           </div>
         </div>
       </form>
@@ -194,7 +150,68 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
+<script>
+    var childId;
+    function getGoodsId() {
+        childId = window.location.search.split("=")[1];
+    }
+    getGoodsId();
+    function getCategoryById() {
+        $.ajax({
+            type:"POST",
+            url:"getCategoryById?childId="+childId,
+            contentType:"application/json",
+            success:function (data) {
 
+                $("#childId").html(data.childId);
+                $("#childName").val(data.childName);
+
+                var selectObj = $("#father");
+                $(data.categoryList).each(function (index,item) {
+                    var opHtml = "<option value="+item.c_id+">"+item.c_name+"</option>";
+                    console.log(opHtml)
+                    selectObj.append(opHtml)
+                })
+            },
+            error:function (data) {
+                console.log(data)
+                alert(data)
+            },
+            dataType: "json"
+        });
+    }
+    getCategoryById();
+
+    //修改用户信息
+    function updateGoodsByGoodsId() {
+        $.ajax({
+            type:"POST",
+            url:"updateGoodsByGoodsId",
+            contentType:"application/json",
+            data: JSON.stringify({
+                "g_id":goodsId,
+                "g_title":$("#g_title").val(),
+                "g_name":$("#g_name").val(),
+                "g_price":$("#g_price").val(),
+                "g_discount":$("#g_discount").val(),
+                "g_disctprice":$("#g_disctprice").val(),
+                "g_num":$("#g_num").val(),
+                "g_desc":$("#g_desc").val(),
+                "g_pic":$("#g_pic").val(),
+                "childName":$("#childName").val(),
+                "fatherName":$("#fatherName").val(),
+                "g_status":$("#g_status").val()
+            }),
+            success : function (data) {
+                window.location.href="商品列表.html";
+            },
+            error : function (data) {
+                alert("失败")
+            },
+            dataType: "json"
+        });
+    }
+</script>
 
 
 </body>

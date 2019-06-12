@@ -73,4 +73,9 @@ public class CategoryServiceImpl implements CategoryService {
             return true;
         return false;
     }
+
+//    查询所有一级类别信息
+    public List<Category> getFatherInfo() {
+        return categoryMapper.getFatherInfo();
+    }
 }

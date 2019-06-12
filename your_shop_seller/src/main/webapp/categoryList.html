@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!-- DataTables -->
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.css">
+
     <link rel="icon" type="image/png" href="assets/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
@@ -39,13 +42,13 @@
             <h3 class="am-icon-flag"><em></em> <a href="index.html">商品管理</a></h3>
             <ul>
                 <li><a href="goodsList.html">商品列表</a></li>
-                <li><a href="addGoods.html">添加新商品</a></li>
-                <li><a href="categoryList.html">商品类别列表</a></li>
-                <li><a href="addCategory.html">添加新类别</a></li>
+                <li ><a href="addGoods.html">添加新商品</a></li>
+                <li><a href="categoryList.html">商品类别</a></li>
+                <li ><a href="addCategory.html">添加新商品类别</a></li>
             </ul>
             <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
             <ul>
-                <li><a href="">订单列表</a></li>
+                <li><a href="订单列表.html">订单列表</a></li>
                 <li><a href="">订单展示</a></li>
                 <li><a href="">添加新订单</a></li>
                 <li><a href="">修改订单</a></li>
@@ -76,12 +79,12 @@
     <div class="admin-biaogelist">
 
         <div class="listbiaoti am-cf">
-            <ul class="am-icon-flag on"> 本店商品信息列表</ul>
+            <ul class="am-icon-flag on"> 本店商品类别信息列表</ul>
 
-            <dl class="am-icon-home" style="float: right;"> 当前位置： &gt; 商品列表</dl>
+            <dl class="am-icon-home" style="float: right;"> 当前位置： &gt; 商品类别列表</dl>
 
             <dl>
-                <a type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" href="添加新商品.html"> 添加产品</a>
+                <a type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" href="addCategory.html"> 添加产品类别</a>
             </dl>
 
 
@@ -89,51 +92,21 @@
 
         <div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
             <ul>
-                <li>
-                    <div class="am-btn-group am-btn-group-xs">
-                        <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="categoryName">
-                            <option value="">产品分类</option>
-                            <option value="手机">手机</option>
-                        </select>
-                       </div>
-                </li>
-                <li style="margin-right: 0;">
-                    <span class="tubiao am-icon-calendar"></span>
-                    <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" id="minDate" placeholder="开始日期" data-am-datepicker="{theme: 'success',}" readonly="">
-                </li>
-                <li style="margin-left: -4px;">
-                    <span class="tubiao am-icon-calendar"></span>
-                    <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" id="maxDate" placeholder="最晚日期" data-am-datepicker="{theme: 'success',}" readonly="">
-                </li>
-
-                <li style="margin-left: -10px;">
-                    <div class="am-btn-group am-btn-group-xs">
-                        <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="g_status">
-                            <option value="1">上架</option>
-                            <option value="0">下架</option>
-                        </select>
-                    </div>
-                </li>
                 <li><input type="text" class="am-form-field am-input-sm am-input-xm" placeholder="关键词搜索" id="str"></li>
-                <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" style="margin-top: -1px;" onclick="selectGoodsBys()">搜索</button></li>
+                <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" style="margin-top: -1px;" onclick="selectCategoryBys()">搜索</button></li>
             </ul>
         </div>
 
 
         <form class="am-form am-g">
-            <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
+            <table width="100%" id="table" class="am-table am-table-bordered am-table-radius am-table-striped">
                 <thead>
                 <tr class="am-success">
                     <th class="table-check"><input type="checkbox" id="all" onchange="selectAll()"/></th>
-                    <th class="table-id">商品ID</th>
-                    <th class="table-title">商品品牌</th>
-                    <th class="table-type">商品名称</th>
-                    <th class="table-type">商品售价</th>
-                    <th class="table-type">库存</th>
-                    <th class="table-type">类别</th>
-                    <th class="table-author am-hide-sm-only">上架/下架 <i class="am-icon-check am-text-warning"></i> <i class="am-icon-close am-text-primary"></i></th>
-                    <th class="table-date am-hide-sm-only" >录入日期</th>
-                    <th class="table-date am-hide-sm-only">修改日期</th>
+                    <th class="table-id">商品二级类别ID</th>
+                    <th class="table-title">商品二级类别</th>
+                    <th class="table-type">商品一级类别ID</th>
+                    <th class="table-type">商品一级类别</th>
                     <th width="163px" class="table-set">操作</th>
                 </tr>
                 </thead>
@@ -143,34 +116,9 @@
             </table>
 
             <div class="am-btn-group am-btn-group-xs">
-             <button type="button" class="am-btn am-btn-default" onclick="delCheckGoods()"><span class="am-icon-trash-o"></span> 删除</button>
+             <button type="button" class="am-btn am-btn-default" onclick="delCheckCategory()"><span class="am-icon-trash-o"></span> 删除</button>
             </div>
 
-            <ul class="am-pagination am-fr" id="page">
-                <!--<li class="am-disabled"><a href="#">«</a></li>
-                <li class="am-active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>-->
-                <select data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="pageNo">
-                    <option value="5">每页显示数据</option>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                </select>
-                <select data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="pageSize">
-                    <option value="1">页数</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-
-            </ul>
-            <hr>
         </form>
 
 
@@ -206,50 +154,69 @@
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
 
+
+<!-- DataTables -->
+<script src="datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
 
 
     function f(){
-        var page =1;
         //1.发送ajax请求获取数据
         $.ajax({
-            type: 'GET',
-            url: "list",
-            data:{
-              "pageNo" : $("#pageNo").val(),
-              "pageSize"  : $("#pageSize").val()
-            },
+            type: 'POST',
+            url: "getAllCategory",
             success: function(data){
                 //循环
                 var tabObj = $("#dataTable");
-                console.log(data.list);
-                $(data.list).each(function (index,item) {
+                console.log(data);
+                $(data).each(function (index,item) {
 
                     var trHtml = "<tr>\n" +
-                        "                    <td><input type=\"checkbox\" value="+item.g_id+"></td>\n" +
-                        "                    <td>"+item.g_id+"</td>\n" +
-                        "                    <td>"+item.g_title+"</td>\n" +
-                        "                    <td>"+item.g_name+"</td>\n" +
-                        "                    <td>"+item.g_price+"</td>\n" +
-                        "                    <td>"+item.g_num+"</td>\n" +
-                        "                    <td>"+item.childName+"</td>\n"
-                            if(item.g_status==1){
-                                trHtml += "<td class=\"am-hide-sm-only\"><i class=\"am-icon-check am-text-warning\"></i></td>\n"
-                            }else {
-                                trHtml += "<td class=\"am-hide-sm-only\"><i class=\"am-icon-close am-text-primary\"></i></td>\n"
-                            }
-                            trHtml += "<td class=\"am-hide-sm-only\">"+item.g_date+"</td>\n" +
-                        "                    <td class=\"am-hide-sm-only\">"+item.g_lastdate+"</td>\n" +
+                        "                    <td><input type=\"checkbox\" value="+item.childId+"></td>\n" +
+                        "                    <td>"+item.childId+"</td>\n" +
+                        "                    <td>"+item.childName+"</td>\n" +
+                        "                    <td>"+item.fatherId+"</td>\n" +
+                        "                    <td>"+item.fatherName+"</td>\n" +
                         "                    <td><div class=\"am-btn-toolbar\">\n" +
                         "                        <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick = \"jumpToEdit("+item.g_id+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
-                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\" onclick = \"delGoodsById("+item.g_id+")\"><span class=\"am-icon-trash-o\"></span></button>\n" +
+                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick = \"jumpToEdit("+item.childId+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
+                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\" onclick = \"delCategoryById("+item.childId+")\"><span class=\"am-icon-trash-o\"></span></button>\n" +
                         "                        </div>\n" +
                         "                    </div></td>\n" +
                         "                </tr>"
                     console.log(trHtml); //  2pm
                     //将字符串添加到table中
                     tabObj.append(trHtml);
+                });
+                $("#table").DataTable({
+                    "paging":true,
+                    "info":true,
+                    "lengthChange":false,
+                    "ordering":false,
+                    "processing": true,
+                    "searching": false,
+                    "deferRender": true,
+                    "language": {
+                        "sProcessing": "处理中...",
+                        "sLengthMenu": "显示 _MENU_ 项结果",
+                        "sZeroRecords": "没有匹配结果",
+                        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                        "sInfoPostFix": "",
+                        "sSearch": "搜索:",
+                        "sUrl": "",
+                        "sEmptyTable": "表中数据为空",
+                        "sLoadingRecords": "载入中...",
+                        "sInfoThousands": ",",
+                        "oPaginate": {
+                            "sFirst": "首页",
+                            "sPrevious": "上页",
+                            "sNext": "下页",
+                            "sLast": "末页"
+                        },
+                    }
                 });
             },
             error:function (data) {
@@ -261,22 +228,22 @@
     }
     f();
 
-    function jumpToEdit(goodsId){
-        alert(goodsId)
-        var url = "修改商品.html?goodsId="+goodsId;
+    function jumpToEdit(childId){
+        alert(childId)
+        var url = "editCategory.html?childId="+childId;
         window.location.href = url;
     }
 
     // 单个删除
-    function delGoodsById(goodsId) {
-        alert(goodsId)
+    function delCategoryById(childId) {
+        alert(childId)
         $.ajax({
             type: "POST",
-            url:"delByGoodsId?goodsId="+goodsId,
+            url:"delByCid?childId="+childId,
             contentType:"application/json",
             success: function (data) {
                 alert("删除成功")
-                window.location.href="商品列表.html";
+                window.location.href="categoryList.html";
             },
             error: function (data) {
                 alert("删除失败")
@@ -286,19 +253,15 @@
     }
 
     // 条件查询
-    function selectGoodsBys() {
+    function selectCategoryBys() {
         $("#dataTable").empty();
         //1.发送ajax请求获取数据
         $.ajax({
             type: 'POST',
-            url: "getGoodsBys",
+            url: "selectCategoryBys",
             contentType:"application/json",
             data:JSON.stringify({
-                "categoryName":$("#categoryName").val(),
-                "str":$("#str").val(),
-                "g_status":$("#g_status").val(),
-                "minDate":$("#minDate").val(),
-                "maxDate":$("#maxDate").val()
+                "str":$("#str").val()
             }),
             success: function(data){
                 //循环
@@ -307,28 +270,18 @@
                 $(data).each(function (index,item) {
 
                     var trHtml = "<tr>\n" +
-                        "                    <td><input type=\"checkbox\" value="+item.g_id+" ></td>\n" +
-                        "                    <td>"+item.g_id+"</td>\n" +
-                        "                    <td>"+item.g_title+"</td>\n" +
-                        "                    <td>"+item.g_name+"</td>\n" +
-                        "                    <td>"+item.g_price+"</td>\n" +
-                        "                    <td>"+item.g_num+"</td>\n" +
-                        "                    <td>"+item.childName+"</td>\n"
-                    if(item.g_status==1){
-                        trHtml += "<td class=\"am-hide-sm-only\"><i class=\"am-icon-check am-text-warning\"></i></td>\n"
-                    }else {
-                        trHtml += "<td class=\"am-hide-sm-only\"><i class=\"am-icon-close am-text-primary\"></i></td>\n"
-                    }
-                    trHtml += "<td class=\"am-hide-sm-only\">"+item.g_date+"</td>\n" +
-                        "                    <td class=\"am-hide-sm-only\">"+item.g_lastdate+"</td>\n" +
+                        "                    <td><input type=\"checkbox\" value="+item.childId+"></td>\n" +
+                        "                    <td>"+item.childId+"</td>\n" +
+                        "                    <td>"+item.childName+"</td>\n" +
+                        "                    <td>"+item.fatherId+"</td>\n" +
+                        "                    <td>"+item.fatherName+"</td>\n" +
                         "                    <td><div class=\"am-btn-toolbar\">\n" +
                         "                        <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick = \"jumpToEdit("+item.g_id+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
-                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\" onclick = \"delGoodsById("+item.g_id+")\"><span class=\"am-icon-trash-o\"></span></button>\n" +
+                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick = \"jumpToEdit("+item.childId+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
+                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\" onclick = \"delCategoryById("+item.childId+")\"><span class=\"am-icon-trash-o\"></span></button>\n" +
                         "                        </div>\n" +
                         "                    </div></td>\n" +
                         "                </tr>"
-                    console.log(trHtml); //  2pm
                     //将字符串添加到table中
                     tabObj.append(trHtml);
                 });
@@ -341,24 +294,24 @@
         });
     }
 
-    var selectedGoodsId = new  Array();
+    var selectedCId = new  Array();
     //删除选中的 批量删除
-    function delCheckGoods() {
+    function delCheckCategory() {
 
         $(":checkbox:checked").each(function (i) {
             if ($(this).val() != '') {
-                selectedGoodsId.push($(this).val())
+                selectedCId.push($(this).val())
             }
         });
-        alert(selectedGoodsId);
+        alert(selectedCId);
         $.ajax({
             type: "POST",
-            url: "delCheckGoods",
+            url: "delCheckCategoryIds",
             contentType: "application/json",
-            data: JSON.stringify(selectedGoodsId),
+            data: JSON.stringify(selectedCId),
             success: function (data) {
                 alert(data)
-                window.location.href = "商品列表.html"
+                window.location.href = "categoryList.html"
             },
             error: function (data) {
                 alert("执行失败")
