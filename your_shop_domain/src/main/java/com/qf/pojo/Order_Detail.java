@@ -23,7 +23,7 @@ public class Order_Detail implements Serializable {
   `order_modified` date DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`),
   KEY `FK_ORDER` (`o_orderid`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8
+)
 
 
      */
