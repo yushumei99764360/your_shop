@@ -14,15 +14,8 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
     <link rel="stylesheet" href="assets/css/admin.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/app.js"></script>
-
-
-    <!-- DataTables -->
-    <script src="datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 </head>
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
@@ -45,8 +38,10 @@
         <div class="sideMenu">
             <h3 class="am-icon-flag"><em></em> <a href="index.html">商品管理</a></h3>
             <ul>
-                <li><a href="商品列表.html">商品列表</a></li>
-                <li><a href="添加新商品.html">添加新商品</a></li>
+                <li><a href="goodsList.html">商品列表</a></li>
+                <li><a href="addGoods.html">添加新商品</a></li>
+                <li><a href="categoryList.html">商品类别列表</a></li>
+                <li><a href="addCategory.html">添加新类别</a></li>
             </ul>
             <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
             <ul>
@@ -114,7 +109,6 @@
                 <li style="margin-left: -10px;">
                     <div class="am-btn-group am-btn-group-xs">
                         <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="g_status">
-                            <option value="">商品状态</option>
                             <option value="1">上架</option>
                             <option value="0">下架</option>
                         </select>
@@ -127,7 +121,7 @@
 
 
         <form class="am-form am-g">
-            <table width="100%" id="datable" class="am-table am-table-bordered am-table-radius am-table-striped">
+            <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
                 <thead>
                 <tr class="am-success">
                     <th class="table-check"><input type="checkbox" id="all" onchange="selectAll()"/></th>
@@ -152,16 +146,31 @@
              <button type="button" class="am-btn am-btn-default" onclick="delCheckGoods()"><span class="am-icon-trash-o"></span> 删除</button>
             </div>
 
-         <!--   <ul class="am-pagination am-fr" id="page">
-                <li class="am-disabled"><a href="#">«</a></li>
+            <ul class="am-pagination am-fr" id="page">
+                <!--<li class="am-disabled"><a href="#">«</a></li>
                 <li class="am-active"><a href="#">1</a></li>
                 <li><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
                 <li><a href="#">4</a></li>
                 <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-            </ul>-->
-            <!--<hr>-->
+                <li><a href="#">»</a></li>-->
+                <select data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="pageNo">
+                    <option value="5">每页显示数据</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                <select data-am-selected="{btnWidth: 100, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="pageSize">
+                    <option value="1">页数</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+            </ul>
+            <hr>
         </form>
 
 
@@ -191,8 +200,6 @@
 <script src="assets/js/polyfill/rem.min.js"></script>
 <script src="assets/js/polyfill/respond.min.js"></script>
 <script src="assets/js/amazeui.legacy.js"></script>
-
-
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -201,20 +208,22 @@
 
 <script>
 
-    $(function () {
-
-    })
 
     function f(){
+        var page =1;
         //1.发送ajax请求获取数据
         $.ajax({
-            type: 'POST',
-            url: "getAllGoods",
+            type: 'GET',
+            url: "list",
+            data:{
+              "pageNo" : $("#pageNo").val(),
+              "pageSize"  : $("#pageSize").val()
+            },
             success: function(data){
                 //循环
-                // alert(1111)
                 var tabObj = $("#dataTable");
-                $(data).each(function (index,item) {
+                console.log(data.list);
+                $(data.list).each(function (index,item) {
 
                     var trHtml = "<tr>\n" +
                         "                    <td><input type=\"checkbox\" value="+item.g_id+"></td>\n" +
@@ -241,36 +250,6 @@
                     console.log(trHtml); //  2pm
                     //将字符串添加到table中
                     tabObj.append(trHtml);
-
-                });
-                $("#datable").DataTable({
-                    "paging":true,
-                    "info":true,
-                    "lengthChange":false,
-                    "ordering":false,
-                    "processing": true,
-                    "searching": false,
-                    "deferRender": true,
-                    "language": {
-                        "sProcessing": "处理中...",
-                        "sLengthMenu": "显示 _MENU_ 项结果",
-                        "sZeroRecords": "没有匹配结果",
-                        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                        "sInfoPostFix": "",
-                        "sSearch": "搜索:",
-                        "sUrl": "",
-                        "sEmptyTable": "表中数据为空",
-                        "sLoadingRecords": "载入中...",
-                        "sInfoThousands": ",",
-                        "oPaginate": {
-                            "sFirst": "首页",
-                            "sPrevious": "上页",
-                            "sNext": "下页",
-                            "sLast": "末页"
-                        }
-                    }
                 });
             },
             error:function (data) {
@@ -392,7 +371,7 @@
     function selectAll() {
         var isCheck = $("#all").is(":checked"); //
         $("input[type='checkbox']").each(function () {
-            this.checked = isCheck ;
+            this.checked = isCheck ; //
         })
     }
 

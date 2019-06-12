@@ -83,5 +83,15 @@ public class GoodsController {
         return delByGoodsId;
     }
 
+    // 删除选中的，批量删除
+    @ResponseBody
+    @RequestMapping("delCheckGoods")
+    public Object delCheckGoods(@RequestBody List<Integer> selectedGoodsId){
+        System.out.println(selectedGoodsId);
+        boolean delCheckGoods = goodsService.delCheckGoods(selectedGoodsId);
+        System.out.println(delCheckGoods);
+        return delCheckGoods;
+    }
+
 
 }

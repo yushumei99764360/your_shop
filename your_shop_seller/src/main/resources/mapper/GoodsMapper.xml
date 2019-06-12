@@ -100,4 +100,12 @@
         DELETE FROM goodsinfo WHERE g_id = #{goodsId}
     </delete>
 
+    <!--批量删除-->
+    <delete id="delCheckGoods" parameterType="list">
+        delete from goodsinfo where g_id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
 </mapper>

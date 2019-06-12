@@ -71,4 +71,13 @@ public class GoodsServiceImpl implements GoodsService {
         return false;
     }
 
+    //选中删除，批量删除
+    @Transactional(propagation = Propagation.REQUIRED)
+    public boolean delCheckGoods(List<Integer> selectedGoodsId) {
+        int delCheckGoods = goodsMapper.delCheckGoods(selectedGoodsId);
+        if (delCheckGoods==selectedGoodsId.size())
+            return true;
+        return false;
+    }
+
 }

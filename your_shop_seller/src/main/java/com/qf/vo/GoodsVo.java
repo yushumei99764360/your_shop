@@ -26,7 +26,7 @@ public class GoodsVo {
     //    商品照片
     String g_pic;
     //是否上架 1是 0不是
-    int g_status ;
+    String g_status ;
     // 商品录入时间
     String g_date;
     //    商品最后修改时间
@@ -140,11 +140,11 @@ public class GoodsVo {
         this.g_pic = g_pic;
     }
 
-    public int getG_status() {
+    public String getG_status() {
         return g_status;
     }
 
-    public void setG_status(int g_status) {
+    public void setG_status(String g_status) {
         this.g_status = g_status;
     }
 
