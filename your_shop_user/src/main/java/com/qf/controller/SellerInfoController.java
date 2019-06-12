@@ -1,6 +1,7 @@
 package com.qf.controller;
 
 import com.qf.pojo.GoodsInfo;
+import com.qf.pojo.SellerInfo;
 import com.qf.service.SellerInfosService;
 import com.qf.vo.SellerInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,20 @@ public class SellerInfoController {
             System.out.println(goodsInfo);
         }
         return goodsInfos;
+    }
+    /**
+     * 根据商家ID找出对应商家信息
+     * @param s_id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "selectSeller",method = RequestMethod.POST)
+    public Object SelectSellerById(@RequestParam Integer s_id){
+        System.out.println(s_id);
+        List<SellerInfo> sellerInfos = sellerInfosService.SelectSeller(s_id);
+        for (SellerInfo sellerInfo: sellerInfos) {
+            System.out.println(sellerInfo);
+        }
+        return sellerInfos;
     }
 }

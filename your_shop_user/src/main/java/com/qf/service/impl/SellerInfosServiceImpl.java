@@ -2,6 +2,7 @@ package com.qf.service.impl;
 
 import com.qf.mapper.SellerInfoMapper;
 import com.qf.pojo.GoodsInfo;
+import com.qf.pojo.SellerInfo;
 import com.qf.service.SellerInfosService;
 import com.qf.vo.SellerInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,14 @@ public class SellerInfosServiceImpl implements SellerInfosService {
     @Override
     public List<GoodsInfo> SelectGoodsBySellerID(Integer s_id) {
         return sellerInfoMapper.SelectGoodsBySellerID(s_id);
+    }
+    /**
+     * 根据商家ID找出对应商家信息
+     * @param s_id
+     * @return
+     */
+    @Override
+    public List<SellerInfo> SelectSeller(Integer s_id) {
+        return this.sellerInfoMapper.SelectSeller(s_id);
     }
 }

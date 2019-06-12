@@ -41,6 +41,50 @@
 		});
 	}
 	showGoodsInfo();
+	function ShowSeller() {
+		$("#showSeller>div").empty();
+		$.ajax({
+			type: "POST",
+			url: "selectSeller?s_id="+Id,
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success:function (response) {
+				var SellerObj=$("#showSeller");
+				$(response).each(function (index, item) {
+					var SellerHtml=
+				"<div class=\"dianp_minc\">"+
+							"<p>"+item.s_name+"</p>"+
+							"<div class=\"services-stars f_f1\">"+
+							"<span class=\"star\"><i style=\"width:81.2819333333%\">星星</i></span>"+
+					"<span class=\"score\">4.0</span>分"+
+							"</div>"+
+							"<div class=\"dianp_sc\">"+
+							"<a href=\"#\" class=\"btn-collect\"><i class=\"sprite-enter\"></i>收藏店铺</a>"+
+					"</div>"+
+					"<div class=\"dianp_sc\">"+
+							"<a href=\"#\" class=\"btn-collect\"><i class=\"sprite_3\"></i>联系商家</a>"+
+					"</div>"+
+					"<div class=\"jingr_guanw_anniu\">"+
+							"<a href=\"#\">进入官网</a>"+
+							"</div>"+
+							"</div>"+
+							"<div class=\"dianp_diz\">"+
+							"<div class=\"zuo_diz\">"+"<p>地址："+item.s_address+"</p></div>"+
+					"<div class=\"zuo_diz_2\">"+
+							"<span>"+'商家授权码：'+item.s_code+"</span>"+
+					"<span>电话："+item.s_phone+"</span>"+
+					"</div>"+
+					"</div>"
+					SellerObj.append(SellerHtml);
+				})
+			},
+			error:function (data) {
+				alert("数据传输错误");
+				console.error(data);
+			}
+		});
+	}
+	ShowSeller();
 </script>
  
 </head> 
@@ -172,32 +216,7 @@
 		<img src="images/dianp_logo_beij.jpg">
 	</div>
 	<div class="beij_center dianp_xianq_fud_beij">
-		<div class="dianp_mingx">
-			<div class="dianp_minc">
-				<p>智汇礼品官方旗舰店</p>
-				<div class="services-stars f_f1"> 
-                    <span class="star"><i style="width:81.2819333333%">星星</i></span>
-                    <span class="score">4.0</span>分
-                </div>
-                <div class="dianp_sc">
-                	<a href="#" class="btn-collect"><i class="sprite-enter"></i>收藏店铺</a>
-                </div>
-                <div class="dianp_sc">
-                	<a href="#" class="btn-collect"><i class="sprite_3"></i>联系商家</a>
-                </div>
-                <div class="jingr_guanw_anniu">
-                	<a href="#">进入官网</a>
-                </div>
-			</div>
-			<div class="dianp_diz">
-				<div class="zuo_diz"><p>地址：贵州省贵阳市云岩区大亨大厦16层</p></div>
-				<div class="zuo_diz_2">
-					<span>电话：0852-8667011</span>
-					<span>联系人：潘中全</span>
-					<span>营业时间：09:00至18:00</span>
-				</div>
-			</div>
-		</div>
+		<div class="dianp_mingx" id="showSeller"></div>
 	</div>
 </div>
 

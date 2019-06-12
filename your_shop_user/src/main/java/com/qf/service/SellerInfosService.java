@@ -1,6 +1,7 @@
 package com.qf.service;
 
 import com.qf.pojo.GoodsInfo;
+import com.qf.pojo.SellerInfo;
 import com.qf.vo.SellerInfoVo;
 
 import java.util.List;
@@ -25,5 +26,11 @@ public interface SellerInfosService {
      * @return
      */
     public List<GoodsInfo> SelectGoodsBySellerID(Integer s_id);
+    /**
+     * 根据商家ID找出对应商家
+     * @param s_id
+     * @return
+     */
+    public List<SellerInfo> SelectSeller(Integer s_id);
 
 }

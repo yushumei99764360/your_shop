@@ -34,4 +34,8 @@
         SELECT g.* FROM sellerinfo s,seller_goods sg,goodsinfo g
         WHERE s.s_id=sg.sid and sg.gid=g.g_id and s.s_id=#{s_id}
     </select>
+    <!--根据商家Id显示商家信息-->
+    <select id="SelectSeller" resultType="com.qf.pojo.SellerInfo" parameterType="INTEGER">
+        SELECT * FROM sellerinfo WHERE s_id=#{s_id} and s_status=1
+    </select>
 </mapper>
