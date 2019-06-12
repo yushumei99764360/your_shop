@@ -1,10 +1,13 @@
 package com.qf.mapper;
 
+import com.qf.dto.AddressInfoDto;
 import com.qf.dto.UserInfoMessage;
+import com.qf.pojo.AddressInfo;
 import com.qf.pojo.UserInfo;
 import com.qf.vo.UserInfoVo;
 
 import java.util.HashMap;
+import java.util.List;
 
 public interface UserInfoMapper {
     /**
@@ -55,4 +58,9 @@ public interface UserInfoMapper {
     int updateIconByUserId(HashMap<String, Object> parms);
 
 
+    List<AddressInfoDto> getUserInfoAddressById(int userId);
+
+    int insertUserAddress(AddressInfoDto addressInfoDto);
+
+    int deleteAddressByUserId(int adsId);
 }

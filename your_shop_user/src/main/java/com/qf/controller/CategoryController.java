@@ -4,10 +4,7 @@ import com.qf.dto.Category;
 import com.qf.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,4 +24,14 @@ public class CategoryController {
         System.out.println(categories);
         return categories;
     }
+
+    /**
+     * 商品信息展示
+     */
+    @ResponseBody
+    @RequestMapping("getGoodsInfoById")
+    public Object getGoodsInfoById(@RequestParam int g_id){
+        return categoryService.getGoodsInfoById(g_id);
+    }
+
 }

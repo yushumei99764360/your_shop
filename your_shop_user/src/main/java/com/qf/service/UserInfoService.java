@@ -1,10 +1,16 @@
 package com.qf.service;
 
+import com.qf.dto.AddressInfoDto;
 import com.qf.dto.UserInfoMessage;
+import com.qf.pojo.AddressInfo;
 import com.qf.pojo.UserInfo;
 import com.qf.vo.UserInfoVo;
 
+import java.util.List;
+
 public interface UserInfoService {
+
+
     /**
      * 用户登录
      * @param  userInfoVo 用户名/密码/手机号/邮箱
@@ -45,4 +51,11 @@ public interface UserInfoService {
     int insertUserDetail(UserInfoMessage userInfoMessage);
 
     boolean updateIconByUserId(int userId, String icon);
+
+
+    List<AddressInfoDto> getUserInfoAddressById(int userId);
+
+    Object insertUserAddress(AddressInfoDto addressInfoDto);
+
+    int deleteAddressByUserId(int adsId);
 }

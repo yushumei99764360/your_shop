@@ -1,16 +1,15 @@
-package com.qf.pojo;
-
+package com.qf.dto;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class AddressInfo implements Serializable {
+public class AddressInfoDto {
     int adsId;
     int userId;
     String province;
     String city;
     String district;
     String street;
+    String shphone;
+    String shname;
 }

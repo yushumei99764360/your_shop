@@ -65,21 +65,21 @@ var SellerValidate =function () {
                     lastname: "请输入您的姓氏",
                     username: {
                         required: "请输入商家名称",
-                        minlength: "商家名称至少由三个字组成",
+                        minlength: "至少由三个字",
                         remote:"商家名称已存在"
                     },
                     password: {
                         required: "请输入密码",
-                        minlength: "密码长度不能小于 6 个字母"
+                        minlength: "不小于 6 个字母"
                     },
                     confirm_password: {
                         required: "请输入密码",
-                        minlength: "密码长度不能小于 6 个字母",
-                        equalTo: "两次密码输入不一致"
+                        minlength: "不小于 6 个字母",
+                        equalTo: "两次输入不一致"
                     },
                     phonenumber: {
                         required: "请输入手机号",
-                        phonenumber: "手机号格式不正确"
+                        phonenumber: "格式不正确"
                     },
                     address: {
                         required: "不能为空！",
@@ -89,7 +89,7 @@ var SellerValidate =function () {
                         required:"不能为空",
                         minlength:"不少于10个字符"
                     },
-                    email: "请输入一个正确的邮箱",
+                    email: "请输入正确的邮箱",
                     agree: "请接受我们的声明",
                     topic: "请选择两个主题"
                 }
