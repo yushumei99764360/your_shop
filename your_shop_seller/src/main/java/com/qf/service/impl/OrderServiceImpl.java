@@ -40,8 +40,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderVo> selectOrderBy(OrderSelected orderSelected) {
+    public List<OrderVo> selectOrderBy(
+            OrderSelected orderSelected) {
         return orderMapper.selectOrderBy(orderSelected);
+    }
+
+    @Override
+    public Object deleteSelectOrder(List<Integer> selectOrderId) {
+        return orderMapper.deleteSelectOrder(selectOrderId);
     }
 
 

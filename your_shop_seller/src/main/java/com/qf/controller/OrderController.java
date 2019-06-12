@@ -62,6 +62,13 @@ public Object deleteOrderInfo(@RequestParam int id) {
         return orderVos;
     }
 
+//    批量删除
+@ResponseBody
+@RequestMapping("deleteSelectOrder")
+public Object deleteSelectOrder(@RequestBody List<Integer> selectOrderId){
+
+    return orderService.deleteSelectOrder(selectOrderId);
+}
 
 
 }

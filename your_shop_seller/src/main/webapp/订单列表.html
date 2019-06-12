@@ -172,7 +172,11 @@
 
                     <li><input type="text" class="am-form-field am-input-sm am-input-xm" placeholder="关键词搜索" id="str"></li>
                     <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" style="margin-top: -1px;"  onclick="searchOrderInfo()">搜索</button></li>
+
+                    <a type="button" class="am-btn am-btn-danger am-round am-btn-xs "  onclick="deleteCheckOrder()" > 批量删除</a>
+
                 </ul>
+
             </div>
 
 
@@ -181,7 +185,7 @@
                 <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
                     <thead>
                     <tr class="am-success">
-                        <th class="table-check"><input type="checkbox" /></th>
+                        <th class="table-check"><input type="checkbox"  id="all" /></th>
                         <th class="table-id">订单ID</th>
                         <th class="table-date am-hide-sm-only" data-options="field:'validityDate',formatter:function(data){
 return format(data,'yyyy-MM-dd HH:mm:ss');
@@ -279,7 +283,7 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
                 var tabObj = $("#dataTable");
                 $(data).each(function (i,item) {
                     var trHtml ="<tr>"+
-                        "<td><input type=\"checkbox\" value="+item.id+"></td>"+
+                        "<td><input type=\"checkbox\"    value="+item.id+"></td>"+
                         "<td>"+item.id+"</td>"+
                         "<td>"+item.o_orderdate+"</td>"+
                         "<td>"+item.o_checkdate+"</td>"+
@@ -392,6 +396,43 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
             }
         });
     }
+// 全选反选
+    $("#all").click(function(){
+
+        var isCheck = $("#all").is(":checked"); //
+        $("input[type='checkbox']").each(function () {
+            this.checked = isCheck ;
+        })
+    });
+// 批量删除
+
+    var selectUserId = new Array();
+
+    function deleteCheckOrder() {
+        $(":checkbox:checked").each(function (i) {
+            if ($(this).val() != '') {
+                selectUserId.push($(this).val())
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "deleteSelectOrder",
+            contentType: "application/json",
+            data: JSON.stringify(selectUserId),
+            success: function (data) {
+                window.location.href = "订单列表.html"
+            },
+            error: function (data) {
+                window.location.reload();
+            },
+            dataType: "json"
+        });
+    }
+
+
+
+
 
 
 </script>

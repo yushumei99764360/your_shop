@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.dataTables.css">
+
+    <!-- jQuery -->
+
+
+    <!--或者下载到本地，下面有下载地址-->
+    <!-- DataTables CSS -->
+
+
+</head>
+<body>
+
+<table id="table" class="display">
+    <thead>
+    <tr>
+        <th>狗子</th>
+        <th>例子</th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+    <tr>
+        <td>阿斯顿撒多多撒啊</td>
+        <td>212312312</td>
+
+    </tr>
+    <tr>
+        <td>1312阿萨德</td>
+        <td>啊飒飒的阿萨德</td>
+
+    </tr>
+    <tr>
+        <td>1312阿萨德</td>
+        <td>啊飒飒的阿萨德</td>
+
+    </tr>
+    </tbody>
+
+
+</table>
+
+
+
+
+
+
+<!-- jQuery -->
+<script type="text/javascript" charset="utf8" src="assets/js/jquery-1.10.2.min.js"></script>
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="assets/js/jquery.dataTables.js"></script>
+
+<script>
+
+
+    $(function () {
+        $("#table").DataTable({
+            "paging":true,
+            "info":true,
+            "lengthChange":false,
+            "ordering":false,
+            "processing": true,
+            "searching": false,
+            "deferRender": true,
+            "language": {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                },
+            }
+        });
+    })
+</script>
+
+
+</body>
+</html>

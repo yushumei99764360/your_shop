@@ -77,4 +77,12 @@
     </where>
     </select>
 
+    <!--批量删除-->
+    <delete id="deleteSelectOrder" parameterType="list">
+        delete from orderinfo where id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
 </mapper>

@@ -16,4 +16,6 @@ public interface OrderMapper {
     boolean deleteOrderInfo(int id);
 
     List<OrderVo> selectOrderBy(OrderSelected orderSelected);
+
+    Object deleteSelectOrder(List<Integer> selectOrderId);
 }

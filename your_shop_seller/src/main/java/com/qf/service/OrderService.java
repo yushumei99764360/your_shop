@@ -16,4 +16,6 @@ public interface OrderService {
      boolean deleteOrderInfo(int id);
 //模糊查询订单
      List<OrderVo> selectOrderBy(OrderSelected orderSelected);
+
+    Object deleteSelectOrder(List<Integer> selectOrderId);
 }
