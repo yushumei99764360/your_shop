@@ -55,4 +55,8 @@
         </foreach>
     </delete>
 
+    <!--查询所有一级类别信息-->
+    <select id="getFatherInfo" resultType="com.qf.pojo.Category">
+        select * from category where c_parentid = 0
+    </select>
 </mapper>

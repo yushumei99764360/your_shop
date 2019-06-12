@@ -29,4 +29,7 @@ public interface CategoryService {
     // 选中删除 ，批量删除
     boolean delCheckCategoryIds(List<Integer> list);
 
+    // 查询所有一级类别信息
+    List<Category> getFatherInfo();
+
 }

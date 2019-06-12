@@ -32,7 +32,7 @@ public class GoodsController {
 
     // 实现商品新增功能，1 先增加商品信息 2 再增加商品类别关系信息
     @ResponseBody
-    @RequestMapping("addGoods")
+    @RequestMapping("addGoodsInfo")
     public Object addGoods(@RequestBody GoodsVo goodsVo,HttpSession httpSession ){
 
         SellerInfo sellerInfo = (SellerInfo) httpSession.getAttribute("sellerInfo");
