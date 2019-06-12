@@ -5,6 +5,11 @@
 <mapper namespace="com.qf.mapper.CategoryMapper">
     <!--商品分类-->
     <select id="findByAllGoods" parameterType="com.qf.dto.Category">
-        SELECT c.c_id,c.c_name,c1.c_name FROM category c,category c1 WHERE c.c_id=c1.c_parentid;
+        SELECT
+        c.c_id,c.c_name,c1.c_name,c1.c_parentid
+        FROM
+        category c,category c1
+        WHERE
+        c.c_id=c1.c_parentid and c.cid=1;
     </select>
 </mapper>
