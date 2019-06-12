@@ -94,4 +94,21 @@
         update userdetail set icon=#{icon} where userId=#{userId}
     </update>
 
+    <!--个人详细地址查询-->
+    <select id="getUserInfoAddressById" parameterType="int" resultType="com.qf.dto.AddressInfoDto">
+    SELECT *
+    FROM addressinfo
+    WHERE userId=#{userId}
+    </select>
+
+    <!--添加收货地址-->
+    <insert id="insertUserAddress" parameterType="com.qf.dto.AddressInfoDto">
+        insert into addressinfo (province,city,district,street,shname,shphone,userId) values (#{province},#{city},#{district},#{street},#{shname},#{shphone},#{userId})
+    </insert>
+
+    <!--删除收货地址-->
+    <delete id="deleteAddressByUserId" parameterType="int">
+        delete from addressinfo where adsId = #{adsId}
+    </delete>
+
 </mapper>

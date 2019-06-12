@@ -12,4 +12,10 @@
         WHERE
         c.c_id=c1.c_parentid and c.cid=1;
     </select>
+
+    <!--查询商品详细信息-->
+    <select id="getGoodsInfoById" parameterType="int" resultType="com.qf.pojo.GoodsInfo">
+        select * from goodsinfo where g_id=#{g_id}
+    </select>
+
 </mapper>

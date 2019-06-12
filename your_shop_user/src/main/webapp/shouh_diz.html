@@ -264,99 +264,9 @@
 			<div class="mod_main">
 				<div class="jib_xinx_kuang">
 					<div class="shand_piaot">收货地址</div>
-					<div class="shouh_diz_beij">
-						<div class="shouh_diz_kuang shouh_diz_kuang_mor">
-							<div class="item">
-								<span class="labal">收件人：</span>
-								<p>艾丽西亚</p>
-							</div>
-							<div class="item">
-								<span class="labal">所在地区：</span>
-								<p>贵州省贵阳市云岩区</p>
-							</div>
-							<div class="item">
-								<span class="labal">地址：</span>
-								<p>下合群路达亨大厦16层</p>
-							</div>
-							<div class="item">
-								<span class="labal">手机：</span>
-								<p>182*****710</p>
-							</div>
-							<div class="item">
-								<span class="labal">固定电话：</span>
-								<p> </p>
-							</div>
-							<div class="item">
-								<span class="labal">电子邮箱：</span>
-								<p>22******88@qq.com</p>
-							</div>
-							<div class="bianj_yv_shanc">
-								<a href="#" class="mor_color">当前默认地址</a>
-								<a href="#"  data-reveal-id="myModal_1">编辑</a>
-								<a href="#">删除</a>
-							</div>
-						</div>
-						<div class="shouh_diz_kuang">
-							<div class="item">
-								<span class="labal">收件人：</span>
-								<p>艾丽西亚</p>
-							</div>
-							<div class="item">
-								<span class="labal">所在地区：</span>
-								<p>贵州省贵阳市云岩区</p>
-							</div>
-							<div class="item">
-								<span class="labal">地址：</span>
-								<p>下合群路达亨大厦16层</p>
-							</div>
-							<div class="item">
-								<span class="labal">手机：</span>
-								<p>182*****710</p>
-							</div>
-							<div class="item">
-								<span class="labal">固定电话：</span>
-								<p> </p>
-							</div>
-							<div class="item">
-								<span class="labal">电子邮箱：</span>
-								<p>22******88@qq.com</p>
-							</div>
-							<div class="bianj_yv_shanc">
-								<a href="#">设为默认</a>
-								<a href="#">编辑</a>
-								<a href="#">删除</a>
-							</div>
-						</div>
-						<form class="wd">
-							<div data-toggle="distpicker" class="user_set">
-								<div class="reg-items">
-								<span class="reg-label">
-								<label for="province1">省</label>
-								</span>
-									<select class="i-text" id="province1"></select>
-								</div>
-								<div class="reg-items">
-								<span class="reg-label">
-								<label for="city1">市</label>
-								</span>
-									<select class="i-text" id="city1"></select>
-								</div>
-								<div class="reg-items">
-								<span class="reg-label">
-								<label for="district1">区</label>
-								</span>
-									<select class="i-text" id="district1"></select>
-								</div>
-								<div class="reg-items">
-								<span class="reg-label">
-								<label for="adress">详细地址</label>
-								</span>
-									<input id="adress" class="i-text" name="password" type="text" required>
-								</div>
-							</div>
-						</form>
-						<div class="xinz_shouh_dz_ann"><a onclick="addAddress()">新增收货地址</a></div>
-					</div> 
+					<div class="shouh_diz_beij" id="addressInfo">
+					</div>
+                    <div class="xinz_shouh_dz_ann"><a href="addAdress.html">新增收货地址</a></div>
 				</div>
 			</div>
 			<!--左边内容结束-->
@@ -459,6 +369,8 @@
             success: function(data){
                 $("#img").attr("src",data.icon);
                 $("#span").html(data.nickName);
+                $("#realname").html(data.realname);
+
             },
             error:function (data) {
                 console.error(data);
@@ -468,10 +380,64 @@
     }
     getUserInfoMessageById();
 
-	function addAddress(){
-        alert(1)
-	}
+    /**
+     * 地址显示
+     */
+    function getUserInfoAddressById() {
+        $.ajax({
+            type: 'GET',
+            url: "getUserInfoAddressById",
+            contentType:"application/json",
+            success: function(data){
+              var obj=$("#addressInfo");
+              $(data).each(function (i,item) {
+                  var trHtml ="<div class=\"shouh_diz_kuang \" >" +
+                      "<div class=\"item\">\n" +
+                      "\t\t\t\t\t\t\t\t<span class=\"labal\">收件人：</span>\n" +
+                      "\t\t\t\t\t\t\t\t<p>"+item.shname+"</p>\n" +
+                      "\t\t\t\t\t\t\t</div>\n" +
+                      "\t\t\t\t\t\t\t<div class=\"item\">\n" +
+                      "\t\t\t\t\t\t\t\t<span class=\"labal\">所在地区：</span>\n" +
+                      "\t\t\t\t\t\t\t\t<p >"+item.province+item.city+item.district+"</p>\n" +
+                      "\t\t\t\t\t\t\t</div>\n" +
+                      "\t\t\t\t\t\t\t<div class=\"item\">\n" +
+                      "\t\t\t\t\t\t\t\t<span class=\"labal\">地址：</span>\n" +
+                      "\t\t\t\t\t\t\t\t<p >"+item.street+"</p>\n" +
+                      "\t\t\t\t\t\t\t</div>\n" +
+                      "\t\t\t\t\t\t\t<div class=\"item\">\n" +
+                      "\t\t\t\t\t\t\t\t<span class=\"labal\">手机：</span>\n" +
+                      "\t\t\t\t\t\t\t\t<p>"+item.shphone+"</p>\n" +
+                      "\t\t\t\t\t\t\t</div>" +
+                      "\t\t\t\t\t\t\t<div class=\"bianj_yv_shanc\">" +
+                      "\t\t\t\t\t\t\t\t<button type='button'  id='addressId' onclick='deleteAddress("+item.adsId+")'>删除</button>\n" +
+                      "\t\t\t\t\t\t\t</div>"+
+                      "</div>";
+                  obj.append(trHtml);
+              })
+            },
+            error:function (data) {
+                console.error(data);
+            },
+            dataType: "json"
+        });
+    }
+    getUserInfoAddressById();
 
+
+	function deleteAddress(adsId) {
+        $.ajax({
+            type: 'POST',
+            url: "deleteAddressById?adsId="+adsId,
+            contentType:"application/json",
+            success: function(data){
+                window.location.href="shouh_diz.html";
+            },
+            error:function (data) {
+                console.error(data);
+            },
+            dataType: "json"
+        });
+    }
 
 </script>
 

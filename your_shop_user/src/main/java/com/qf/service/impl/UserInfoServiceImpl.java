@@ -1,5 +1,6 @@
 package com.qf.service.impl;
 
+import com.qf.dto.AddressInfoDto;
 import com.qf.dto.UserInfoMessage;
 import com.qf.mapper.UserInfoMapper;
 import com.qf.pojo.UserInfo;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
@@ -70,6 +72,12 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoMapper.insertUserDetail(userInfoMessage);
     }
 
+    /**
+     * 个人头像修改
+     * @param userId
+     * @param icon
+     * @return
+     */
     @Override
     public boolean updateIconByUserId(int userId, String icon) {
         HashMap<String, Object> parms = new HashMap<>();
@@ -80,5 +88,39 @@ public class UserInfoServiceImpl implements UserInfoService {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 地址查询
+     * @param
+     * @return
+     */
+    @Override
+    public List<AddressInfoDto> getUserInfoAddressById(int userId) {
+        return userInfoMapper.getUserInfoAddressById(userId);
+    }
+
+    /**
+     * 添加收货地址
+     * @param addressInfoDto
+     * @return
+     */
+    @Override
+    public Object insertUserAddress(AddressInfoDto addressInfoDto) {
+        int i= userInfoMapper.insertUserAddress(addressInfoDto);
+        if (i!=0){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 删除收货地址
+     * @param adsId
+     * @return
+     */
+    @Override
+    public int deleteAddressByUserId(int adsId) {
+        return userInfoMapper.deleteAddressByUserId(adsId);
     }
 }

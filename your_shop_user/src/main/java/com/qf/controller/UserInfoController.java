@@ -1,6 +1,8 @@
 package com.qf.controller;
 
+import com.qf.dto.AddressInfoDto;
 import com.qf.dto.UserInfoMessage;
+import com.qf.pojo.AddressInfo;
 import com.qf.pojo.UserInfo;
 import com.qf.service.UserInfoService;
 import com.qf.tools.CodeUtils;
@@ -103,9 +105,7 @@ public class UserInfoController {
     @ResponseBody
     @RequestMapping(value = "checkUserName",method = RequestMethod.POST)
     public Object checkUserName(@RequestParam String userName){
-        System.out.println("用户名为"+userName);
         Integer count = userInfoService.checkUserName(userName);
-        System.out.println("查到的为"+count);
         if(count>=1){
             return false;
         }
@@ -139,7 +139,7 @@ public class UserInfoController {
      * 修改个人头像
      */
     @RequestMapping(value = "upDownload", method = RequestMethod.POST)
-    public Object  iconUpload(@RequestParam("file") CommonsMultipartFile file, HttpSession httpSession) {
+    public Object iconUpload(@RequestParam("file") CommonsMultipartFile file, HttpSession httpSession) {
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
         int userId=userInfo.getUserId();
         String path="D:\\j1901\\第三阶段代码\\your_shop\\your_shop_user\\src\\main\\webapp\\images\\"+file.getOriginalFilename();
@@ -154,5 +154,34 @@ public class UserInfoController {
             e.printStackTrace();
         }
         return false;
+    }
+    /**
+     * 个人收货地址查询
+     */
+    @ResponseBody
+    @RequestMapping("getUserInfoAddressById")
+   public Object getUserInfoAddressById(HttpSession httpSession){
+        UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
+        return userInfoService.getUserInfoAddressById(userInfo.getUserId());
+   }
+
+    /**
+     * 收货地址添加
+     */
+    @ResponseBody
+    @RequestMapping("insertUserAddress")
+    public Object insertUserAddress(@RequestBody AddressInfoDto addressInfoDto,HttpSession httpSession){
+        UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
+        addressInfoDto.setUserId(userInfo.getUserId());
+        return userInfoService.insertUserAddress(addressInfoDto);
+    }
+    /**
+     * 通过Id删除用户收货地址
+     */
+    @ResponseBody
+    @RequestMapping("deleteAddressById")
+    public Object deleteAddressByUserId(@RequestParam int adsId){
+        System.out.println(adsId);
+        return userInfoService.deleteAddressByUserId(adsId);
     }
 }
