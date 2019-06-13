@@ -3,50 +3,26 @@
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.mapper.CategoryMapper">
-
-    <!--<resultMap id="findAllKidGoods" type="com.qf.dto.CategoryDto">-->
-        <!--<id property="c_id" column="c_id"></id>-->
-        <!--<result property="c_name" column="c_name"/>-->
-        <!--<collection property="categories" ofType="com.qf.pojo.Category">-->
-            <!--<id column="c_id" property="c_id"></id>-->
-            <!--<result property="c_name" column="c_name"></result>-->
-        <!--</collection>-->
-    <!--</resultMap>-->
-    <!--<select id="categoryList" resultMap="findAllKidGoods">-->
-        <!--SELECT-->
-        <!--c.c_id,c1.c_name,c1.c_parentid-->
-        <!--FROM-->
-        <!--category c,category c1-->
-        <!--WHERE-->
-        <!--c.`c_id`=c1.`c_parentid`;-->
-    <!--</select>-->
-
-    <select id="categoryList" resultType="com.qf.dto.CategoryDto" parameterType="com.qf.dto.CategoryDto">
-        SELECT
-        c_id,c_name
-        FROM
-        category
-        WHERE
-        c_parentid=0;
+    <!--查询所有一级类别信息-->
+    <select id="getFatherInfo" resultType="com.qf.pojo.Category">
+        select * from category where c_parentid = 0
     </select>
-
-    <select id="categoryListOne" resultType="com.qf.dto.CategoryDto" parameterType="com.qf.dto.CategoryDto">
-        SELECT
-        ca.c_name,c.c_name
-        FROM
-        category c,category ca
-        WHERE
-        ca.c_parentid =c.c_id and ca.c_parentid;
+    <!--查询所有的二级类别信息-->
+    <select id="getChildInfo" resultType="com.qf.pojo.Category">
+        select * from category where c_parentid != 0
     </select>
-
-
-    <select id="findByAllGoods" parameterType="com.qf.dto.Category">
-        SELECT
-        c.c_id,c.c_name,c1.c_name,c1.c_parentid
-        FROM
-        category c,category c1
-        WHERE
-        c.c_id=c1.c_parentid and c.cid=1;
+    <!--根据父类id 查询它所包含的所有子类信息-->
+    <resultMap id="categoryMap" type="com.qf.vo.CategoryVo">
+        <id column="fatherid" property="fatherId"></id>
+        <result column="fathername" property="fatherName"></result>
+        <collection property="categoryList" ofType="com.qf.pojo.Category">
+            <id column="childid" property="c_id"></id>
+            <result column="childname" property="c_name"></result>
+        </collection>
+    </resultMap>
+    <select id="getChildCategoryInfo" resultMap="categoryMap" parameterType="int">
+        SELECT  a.c_parentid fatherid,  b.c_name fathername ,a.c_id childid, a.c_name childname
+        FROM category a , category b WHERE a.c_parentid = b.c_id and a.c_parentid = #{fatherId};
     </select>
 
     <!--查询商品详细信息-->
