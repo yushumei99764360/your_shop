@@ -26,12 +26,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 
-    @Override
-    public List<CategoryDto> categoryListOne() {
-        System.out.println(2);
-        return categoryMapper.categoryListOne();
-    }
-
     /**
      * 商品信息查询
      * @param g_id

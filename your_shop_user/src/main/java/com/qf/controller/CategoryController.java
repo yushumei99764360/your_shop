@@ -1,7 +1,6 @@
 package com.qf.controller;
 
-import com.qf.dto.CategoryDto;
-import com.qf.pojo.Category;
+
 import com.qf.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,14 +27,6 @@ public class CategoryController {
         return categoryService.categoryList();
     }
 
-    @ResponseBody
-    @RequestMapping(value = "categoryListOne",method = RequestMethod.GET)
-    public Object categoryListOne() {
-        System.out.println(1);
-        List<CategoryDto> categoryDtos = categoryService.categoryListOne();
-        System.out.println(categoryDtos);
-        return categoryDtos;
-    }
 
     /**
      * 商品信息展示

@@ -15,7 +15,6 @@ public interface CategoryMapper {
      */
     public List<CategoryDto> categoryList();
 
-    public List<CategoryDto> categoryListOne();
 
     GodsInfoDetail getGoodsInfoById(int g_id);
 }
