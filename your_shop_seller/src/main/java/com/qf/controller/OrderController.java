@@ -59,6 +59,7 @@ public Object deleteOrderInfo(@RequestParam int id) {
     @RequestMapping("selectOrderBy")
     public Object selectOrderBy(@RequestBody OrderSelected orderSelected) {
         List<OrderVo> orderVos = orderService.selectOrderBy(orderSelected);
+        System.out.println(orderVos);
         return orderVos;
     }
 
