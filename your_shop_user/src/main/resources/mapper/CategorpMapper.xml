@@ -32,11 +32,11 @@
 
     <select id="categoryListOne" resultType="com.qf.dto.CategoryDto" parameterType="com.qf.dto.CategoryDto">
         SELECT
-        c.c_id,c.c_name,ca.c_name
+        ca.c_name,c.c_name
         FROM
         category c,category ca
         WHERE
-        c.c_id=ca.c_parentid and ca.c_parentid=c.c_id;
+        ca.c_parentid =c.c_id and ca.c_parentid;
     </select>
 
 

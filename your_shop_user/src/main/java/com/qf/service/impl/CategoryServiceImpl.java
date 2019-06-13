@@ -21,13 +21,14 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryDto> categoryList() {
-        System.out.println(3);
+        //System.out.println(3);
         return categoryMapper.categoryList();
     }
 
 
     @Override
     public List<CategoryDto> categoryListOne() {
+        System.out.println(2);
         return categoryMapper.categoryListOne();
     }
 

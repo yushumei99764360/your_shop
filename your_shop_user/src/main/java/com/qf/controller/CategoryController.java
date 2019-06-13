@@ -31,8 +31,10 @@ public class CategoryController {
     @ResponseBody
     @RequestMapping(value = "categoryListOne",method = RequestMethod.GET)
     public Object categoryListOne() {
-        System.out.println(2);
-        return categoryService.categoryListOne();
+        System.out.println(1);
+        List<CategoryDto> categoryDtos = categoryService.categoryListOne();
+        System.out.println(categoryDtos);
+        return categoryDtos;
     }
 
     /**
