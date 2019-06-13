@@ -14,6 +14,10 @@
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
 <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
 <link rel="stylesheet" href="assets/css/admin.css">
+    <!--图片上传-->
+    <link rel="stylesheet" href="dropzone/css/basic.min.css" />
+    <link rel="stylesheet" href="dropzone/css/dropzone.min.css"/>
+
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/app.js"></script>
 </head>
@@ -148,7 +152,7 @@
             </div>-->
             <div class="you" >
                 <div>
-                    <img src="images/timg.jpg" alt="" id="GPicId" style="width: 180px; height: 150px">
+                    <img src="" alt="" id="g_pic" style="width: 180px; height: 150px">
                 </div>
                 <form name="GPicUpload" id="GPicUpload"  enctype="multipart/form-data">
                     <input type="file" name="file" class="btn btn-sm  ">
@@ -217,6 +221,9 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
+
+!--Dropzone-->
+<script src="dropzone/js/dropzone.min.js"></script>
 <script>
     var goodsId;
     function getGoodsId() {
@@ -238,8 +245,9 @@
                 $("#g_disctprice").val(data.g_disctprice);
                 $("#g_num").val(data.g_num);
                 $("#g_desc").val(data.g_desc);
-                // $("#g_pic").val(data.g_pic);
+
                 $("#g_pic").attr("src",data.g_pic);
+
                 $("#g_status option[value="+data.g_status+"]").attr("selected","selected");
                 $("#child option").html(data.childName);
                 var childObj = $("#child");
@@ -273,7 +281,6 @@
                 "g_disctprice":$("#g_disctprice").val(),
                 "g_num":$("#g_num").val(),
                 "g_desc":$("#g_desc").val(),
-                "g_pic":$("#g_pic").val(),
                 "childId":$("#child").val(),
                 "g_status":$("#g_status").val()
             }),
@@ -290,14 +297,17 @@
 
     function GPicUpload() {
         var formData = new FormData($("#GPicUpload")[0]);
+        alert(formData)
         $.ajax({
-            type: 'post',
+            type: "POST",
             url: "GPicUpload?goodsId=" + goodsId,
             data: formData,
             cache: false,
             processData: false,
             contentType: false,
             success : function (data) {
+                alert(8888)
+                console.log(data)
                 if (data) {
                     window.location.reload();
                 } else {
@@ -305,6 +315,7 @@
                 }
             },
             error : function (data) {
+                console.log(data)
                 alert("请求失败！");
             },
             // dataType: "json"

@@ -145,7 +145,7 @@
                             <input type="file" id="g_pic">
                             <p class="am-form-help">请选择要上传的产品图片...</p>
                         </div>-->
-                        <div class="you">
+                        <div class="you" id="g_pic">
                             <div id="dropz" class="dropzone" style="width: 200px; height: 200px"></div>
                         </div>
                     </div>
@@ -261,6 +261,8 @@
             this.on("success", function (file, data) {
                 // 上传成功触发的事件
                 alert("上传成功")
+                $("#g_pic").val(file.getName());
+
             });
             this.on("error", function (file, data) {
                 // 上传失败触发的事件
@@ -272,7 +274,7 @@
     };
 
     function addGoodsInfo(num) {
-        alert($("#g_status").val() + ";;" +$("#child").val())
+        alert($("#g_status").val() + ";;" +$("#g_pic").val())
         $.ajax({
             type:"POST",
             url:"addGoodsInfo",

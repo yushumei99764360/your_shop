@@ -46,6 +46,7 @@ public class GoodsController {
 
         SellerInfo sellerInfo = (SellerInfo) httpSession.getAttribute("sellerInfo");
         goodsVo.setS_id(sellerInfo.getS_id());
+        goodsVo.setG_pic("images/"+icon);
         System.out.println(goodsVo);
         boolean addGoods = goodsService.addGoodsInfo(goodsVo);
         System.out.println(addGoods);
@@ -107,7 +108,7 @@ public class GoodsController {
 
     // 商品图片上传修改替换
     @RequestMapping(value = "GPicUpload", method = RequestMethod.POST)
-    public Object  GPicUpload(@RequestParam("file") CommonsMultipartFile file, @RequestParam("GId") int GId) {
+    public Object  GPicUpload(@RequestParam("file") CommonsMultipartFile file, @RequestParam("goodsId") int goodsId) {
 
         System.out.println("fileName："+file.getOriginalFilename());
         String path="D:\\Java1901\\your_shop\\your_shop_seller\\src\\main\\webapp\\images"+file.getOriginalFilename();
@@ -115,9 +116,10 @@ public class GoodsController {
         String icon = "images/"+file.getOriginalFilename();
         File newFile=new File(path);
         boolean flag = false;
+        System.out.println(goodsId+": "+icon);
         try {
             file.transferTo(newFile);
-            flag =  goodsService.updateIconByGId(GId, icon);
+            flag =  goodsService.updateIconByGId(goodsId, icon);
             return flag;
         } catch (Exception e) {
             e.printStackTrace();
