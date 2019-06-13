@@ -196,8 +196,8 @@
 	<div class="order_summary">
 		<div class="qianq_mx">
 			<div class="jiaq_meih">
-				<span class="xiangq_leib"><em class="goumai_ges">1</em> 件商品，总商品金额：</span>
-				<em class="goum_zongj">￥529.00</em>
+				<span class="xiangq_leib"><em class="goumai_ges" id="num"></em> 件商品，总商品金额：</span>
+				<em class="goum_zongj" id="totalPrice"></em>
 			</div>
 			<div class="jiaq_meih">
 				<span class="xiangq_leib">返现：</span>
@@ -218,13 +218,13 @@
 			<div class="qianq_mx">
 				<div class="jiaq_meih">
 					<span class="xiangq_leib"> 应付总额：</span>
-					<em class="goum_zongj zhongf_jine">￥529.00</em>
+					<em class="goum_zongj zhongf_jine" id="price"></em>
 				</div> 
 			</div>
 		</div>
 		<div class="zuiz_diz">
-			<span>寄送至： 贵州 贵阳市 云岩区 城区 下合群路达亨大厦1606</span>
-			<span> 收货人：艾丽西亚 182****0710</span>
+			<span class="address"></span>
+			<span class="shperson"> </span>
 		</div>
 	</div>
 	<div class="tij_dingd_ann">
@@ -354,7 +354,6 @@
 
     var g_id;
     var num;
-    var value = $("#sum").val();
     function getUserId() {
         g_id = window.location.search.split("=")[1];
       	num=window.location.search.split("=")[2];
@@ -379,6 +378,8 @@
                         "        \t\t\t<span>"+item.shphone+"</span>\n" +
                         "        \t\t</li>";
                     obj.append(trHtml);
+                    $(".address").html("寄送至： "+item.province+item.city+item.district+item.street)
+                    $(".shperson").html("收货人："+item.shname+"       "+item.shphone)
                 })
             },
             error:function (data) {
@@ -400,14 +401,12 @@
             contentType:"application/json",
             success: function(data){
                 $("#img").attr("src",data.g_pic);
-                $("#g_title").html(data.g_title);
                 $("#g_name").html(data.g_name);
-                $("#g_core").html(data.g_core);
-                $("#g_desc").html(data.g_desc);
-                $("#g_price").html("￥"+data.g_price);
-                $("#g_disctprice").html(data.g_disctprice);
-                $("#s_name").html(data.s_name+"旗舰店");
-                $("#g_num").html(data.g_num);
+                $("#num").html(num);
+                $("#totalPrice").html("￥"+num*data.g_disctprice);
+                $("#price").html("￥"+num*data.g_disctprice);
+                $("#g_price").html("￥"+data.g_disctprice);
+                $("#s_name").html(data.s_name+"旗舰店");m
             },
             error:function (data) {
                 console.error(data);
