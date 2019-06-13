@@ -111,4 +111,15 @@
         delete from addressinfo where adsId = #{adsId}
     </delete>
 
+<!--首页查询个人用户留言信息-->
+    <select id="selectUserByMessage" parameterType="int" resultType="com.qf.dto.MessageDto">
+      SELECT m.g_id,m.context,m.userid,u.nickName,u.gender,u.icon FROM message m,userdetail u WHERE m.`userId`=u.`userId` and m.g_id=#{g_id};
+    </select>
+
+<!--添加用户留言-->
+    <insert id="insertUserAddress" parameterType="com.qf.dto.AddressInfoDto">
+      INSERT INTO message (g_id,userId,context) VALUES (#{g_id},#{userId},#{message});
+    </insert>
+
+
 </mapper>

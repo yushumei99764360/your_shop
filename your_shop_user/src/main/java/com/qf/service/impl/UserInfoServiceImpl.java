@@ -1,6 +1,7 @@
 package com.qf.service.impl;
 
 import com.qf.dto.AddressInfoDto;
+import com.qf.dto.MessageDto;
 import com.qf.dto.UserInfoMessageDto;
 import com.qf.dto.UserInfoMessageDto;
 import com.qf.mapper.UserInfoMapper;
@@ -123,5 +124,17 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public int deleteAddressByUserId(int adsId) {
         return userInfoMapper.deleteAddressByUserId(adsId);
+    }
+
+    @Override
+    public List<MessageDto> selectUserByMessage(int g_id) {
+        return userInfoMapper.selectUserByMessage(g_id);
+    }
+
+
+//    增加留言
+    @Override
+    public Object insertMessageByGoods(MessageDto messageDto) {
+        return userInfoMapper.insertMessageByGoods(messageDto);
     }
 }

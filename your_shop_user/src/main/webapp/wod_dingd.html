@@ -478,6 +478,7 @@
 
 <script src="jquery/jquery-2.1.1.min.js"></script>
 <script>
+	var g_id ;
     $(function () {
 
         $.ajax({
@@ -533,6 +534,7 @@
                             "\t\t\t\t\t\t\t\t\t\t</div>\n" +
                             "\t\t\t\t\t\t\t\t\t</div>\n" +
                             "\t\t\t\t\t\t\t\t\t<div class=\"goods-number\">x" + e.g_num + "</div>";
+							g_id=e.g_id;
                     });
 
                     html += "</td>\n" +
@@ -556,14 +558,15 @@
                         "\t\t\t\t\t\t\t\t</td> \n" +
                         "\t\t\t\t\t\t\t\t<td rowspan=\"1\">\n" +
                         "\t\t\t\t\t\t\t\t\t<div class=\"operate\">\n" +
-                        "\t\t\t\t\t\t\t\t\t\t<a href=\"#\" target=\"_blank\" class=\"a-link\">评价</a>丨<a href=\"#\" target=\"_blank\" class=\"a-link\">晒单</a><br>\n" +
+                        "\t\t\t\t\t\t\t\t\t\t<a onclick='jumpToMessage()' target=\"_blank\" class=\"a-link\" >评价</a>丨<a href=\"#\" target=\"_blank\" class=\"a-link\">晒单</a><br>\n" +
                         "\t\t\t\t\t\t\t\t\t\t<a href=\"#\" target=\"_blank\" class=\"btn-def\">立即购买</a>\n" +
                         "\t\t\t\t\t\t\t\t\t</div>\n" +
                         "\t\t\t\t\t\t\t\t</td>\n" +
                         "\t\t\t\t\t\t\t</tr> \n" +
                         "\t\t\t\t\t\t</tbody>";
-                });
 
+
+                });
 
                 $("#myOrders").append(html);
 
@@ -582,6 +585,11 @@
         } else {
             return "已完成";
         }
+    }
+
+    function jumpToMessage() {
+        var url = "pingj.html?g_id="+g_id;
+        window.location.href = url;
     }
 </script>
 
