@@ -117,7 +117,7 @@
     </select>
 
 <!--添加用户留言-->
-    <insert id="insertUserAddress" parameterType="com.qf.dto.AddressInfoDto">
+    <insert id="insertUser" parameterType="com.qf.dto.AddressInfoDto">
       INSERT INTO message (g_id,userId,context) VALUES (#{g_id},#{userId},#{message});
     </insert>
 

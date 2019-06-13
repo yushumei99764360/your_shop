@@ -1,9 +1,6 @@
 package com.qf.controller;
 
-import com.qf.dto.AddressInfoDto;
-import com.qf.dto.CategoryDto;
-import com.qf.dto.CreateOrderDto;
-import com.qf.dto.OrdersOfUserDto;
+import com.qf.dto.*;
 import com.qf.pojo.AddressInfo;
 import com.qf.pojo.Category;
 import com.qf.service.CategoryService;
@@ -30,14 +27,14 @@ public class CategoryController {
     public Object categoryList() {
         //System.out.println(1);
         //System.out.println(categories1);
-        return categoryService.categoryList();
+        return "";
     }
 
     @ResponseBody
     @RequestMapping(value = "categoryListOne",method = RequestMethod.GET)
     public Object categoryListOne() {
-        List<CategoryDto> categoryDtos = categoryService.categoryListOne();
-        return categoryDtos;
+
+        return "";
     }
 
     /**
@@ -49,7 +46,6 @@ public class CategoryController {
         return categoryService.getGoodsInfoById(g_id);
     }
 
-
     /**
      * 订单创建
      */
@@ -58,14 +54,39 @@ public class CategoryController {
     public Object createOrder(@RequestBody CreateOrderDto createOrderDto){
         System.out.println(createOrderDto);
         int adsId = createOrderDto.getAddress();
+        //查询选择的地址
         AddressInfoDto addressInfoDto = categoryService.searchAddress(adsId);
         //订单编号
-        int id = (int) new Random().nextInt(100000);
+        int id = (int) new Random().nextInt(1000000);
+        //快递公司
         addressInfoDto.setO_sendtype(createOrderDto.getExpress());
+        //快递编号
         addressInfoDto.setId(id);
-        //下单
+        //店铺编号
+        addressInfoDto.setS_id(createOrderDto.getS_id());
+        //总价
+        addressInfoDto.setPrice(createOrderDto.getPrice()*createOrderDto.getNum());
+        System.out.println(addressInfoDto);
+        //下订单
         int i= categoryService.insertOrder(addressInfoDto);
+        System.out.println(i);
+        //获取商品信息
+        GodsInfoDetail goodsInfoDetail = categoryService.searchGoods(createOrderDto.getG_id());
 
-        return "";
+        Order_DetailDto order_detailDto = new Order_DetailDto();
+        order_detailDto.setG_total_price(createOrderDto.getPrice()*createOrderDto.getNum());
+        order_detailDto.setO_orderid(id);
+        order_detailDto.setG_disctprice(goodsInfoDetail.getG_disctprice());
+        order_detailDto.setG_id(createOrderDto.getG_id());
+        order_detailDto.setG_num(createOrderDto.getNum());
+        order_detailDto.setG_desc(goodsInfoDetail.getG_desc());
+        order_detailDto.setG_pic(goodsInfoDetail.getG_pic());
+        order_detailDto.setG_name(goodsInfoDetail.getG_name());
+        //添加订单详情表
+        int j = categoryService.insertOrderDetail(order_detailDto);
+        if (j!=0&&i!=0){
+            return true;
+        }
+        return false;
     }
 }

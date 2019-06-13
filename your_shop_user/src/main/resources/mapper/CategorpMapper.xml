@@ -4,22 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.mapper.CategoryMapper">
 
-    <!--<resultMap id="findAllKidGoods" type="com.qf.dto.CategoryDto">-->
-        <!--<id property="c_id" column="c_id"></id>-->
-        <!--<result property="c_name" column="c_name"/>-->
-        <!--<collection property="categories" ofType="com.qf.pojo.Category">-->
-            <!--<id column="c_id" property="c_id"></id>-->
-            <!--<result property="c_name" column="c_name"></result>-->
-        <!--</collection>-->
-    <!--</resultMap>-->
-    <!--<select id="categoryList" resultMap="findAllKidGoods">-->
-        <!--SELECT-->
-        <!--c.c_id,c1.c_name,c1.c_parentid-->
-        <!--FROM-->
-        <!--category c,category c1-->
-        <!--WHERE-->
-        <!--c.`c_id`=c1.`c_parentid`;-->
-    <!--</select>-->
+
 
     <select id="categoryList" resultType="com.qf.dto.CategoryDto" parameterType="com.qf.dto.CategoryDto">
         SELECT
@@ -51,7 +36,18 @@
     </select>
     <!--添加订单-->
     <insert id="insertOrder" parameterType="com.qf.dto.AddressInfoDto">
-        insert into orderinfo (id,o_sendtype,o_paycount,province,city,district,street,shname,shphone,userId)
-        values (#{id},#{o_sendtype},#{o_paycount},#{province},#{city},#{district},#{street},#{shname},#{o_shphone},#{userId})
+        insert into orderinfo (id,o_sendtype,o_paycount,o_province,o_city,o_district,o_shaddress,o_shperson,o_shphone,userId,o_paytype,s_id)
+        values (#{id},#{o_sendtype},#{price},#{province},#{city},#{district},#{street},#{shname},#{shphone},#{userId},'支付宝',#{s_id})
     </insert>
+
+    <!--查找购买的商品-->
+    <select id="searchGoods" parameterType="int" resultType="com.qf.dto.GodsInfoDetail">
+        select *  from goodsinfo where g_id=#{g_id}
+    </select>
+    <!--添加订单详情-->
+    <insert id="insertOrderDetail" parameterType="com.qf.dto.Order_DetailDto">
+        insert into order_detail (o_orderid,g_id,g_name,g_disctprice,g_desc,g_pic,g_num,g_total_price)
+        values (#{o_orderid},#{g_id},#{g_name},#{g_disctprice},#{g_desc},#{g_pic},#{g_num},#{g_total_price})
+    </insert>
+
 </mapper>
