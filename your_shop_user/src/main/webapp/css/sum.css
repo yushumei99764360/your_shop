@@ -1,0 +1,49 @@
+/*购买商品数量*/
+#goods-sale-info dd.goods-num{
+    border-top:1px solid #eaeaea;
+    margin-top: 10px;
+    padding-top: 30px;
+}
+#goods-sale-info dd{
+    line-height: 29px;
+    width: 100%;
+    overflow: hidden;
+
+}
+#goods-sale-info dd.goods-num span {
+    display: inline;
+    position: relative;
+    float: left;
+}
+#goods-sale-info dd.goods-num span a.del-num{
+    cursor:not-allowed;
+    color: #ccc;
+    background: #ededed;
+}
+#goods-sale-info dd.goods-num span a{
+    display: block;
+    float: left;
+    width: 26px;
+    height: 26px;
+    border: 1px solid #cccccc;
+    line-height: 26px;
+    outline: 0px;
+    vertical-align:top;
+    text-align: center;
+    overflow: hidden;
+}
+
+#goods-sale-info dd.goods-num span #buy-num{
+    /*输入购买数量框*/
+    display: inline;
+    float: left;
+    width: 48px;
+    height: 26px;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    color: #666;
+    border: 1px solid #ccc;
+    outline: 0px;
+    background: #fff;
+}

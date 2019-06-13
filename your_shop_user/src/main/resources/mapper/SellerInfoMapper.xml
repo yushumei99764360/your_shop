@@ -31,8 +31,9 @@
     </select>
     <!--根据商家ID找出所有商品信息-->
     <select id="SelectGoodsBySellerID" parameterType="INTEGER" resultType="com.qf.pojo.GoodsInfo">
-        SELECT g.* FROM sellerinfo s,seller_goods sg,goodsinfo g
-        WHERE s.s_id=sg.sid and sg.gid=g.g_id and s.s_id=#{s_id}
+        SELECT *
+        FROM goodsinfo
+        WHERE s_id=#{id}
     </select>
     <!--根据商家Id显示商家信息-->
     <select id="SelectSeller" resultType="com.qf.pojo.SellerInfo" parameterType="INTEGER">

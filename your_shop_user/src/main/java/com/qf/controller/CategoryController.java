@@ -37,5 +37,4 @@ public class CategoryController {
     public Object getGoodsInfoById(@RequestParam int g_id){
         return categoryService.getGoodsInfoById(g_id);
     }
-
 }

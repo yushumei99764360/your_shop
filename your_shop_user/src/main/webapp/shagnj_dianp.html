@@ -27,7 +27,7 @@
 				var ulObject = $("#showDetail");
 				$(response).each(function (index, item) {
 					var ulHtml = "<li id='"+item.g_id+"'>\n"+
-					"<a href=\"shangp_xiangq.html?g_id='"+item.g_id+"'\" class=\"jngp_img\"><img src='"+item.g_pic+"'></a>\n"+
+					"<a href=\"shangp_xiangq.html?g_id="+item.g_id+"\" class=\"jngp_img\"><img src='"+item.g_pic+"'></a>\n"+
 							"<a href=\"shangp_xiangq.html?g_id='"+item.g_id+"'\" class=\"jinp_biaot\">"+item.g_name+"</a>\n"+
 							"<span>"+'￥'+item.g_disctprice+"</span>\n"+
 					"</li>\n"

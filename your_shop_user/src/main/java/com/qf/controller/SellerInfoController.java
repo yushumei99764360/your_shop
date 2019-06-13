@@ -50,11 +50,7 @@ public class SellerInfoController {
     @ResponseBody
     @RequestMapping(value = "GoodsInfoById",method = RequestMethod.POST)
     public Object GoodsInfoBySellerID(@RequestParam Integer s_id){
-        List<GoodsInfo> goodsInfos = sellerInfosService.SelectGoodsBySellerID(s_id);
-        for (GoodsInfo goodsInfo: goodsInfos) {
-            System.out.println(goodsInfo);
-        }
-        return goodsInfos;
+        return  sellerInfosService.SelectGoodsBySellerID(s_id);
     }
     /**
      * 根据商家ID找出对应商家信息
@@ -64,11 +60,6 @@ public class SellerInfoController {
     @ResponseBody
     @RequestMapping(value = "selectSeller",method = RequestMethod.POST)
     public Object SelectSellerById(@RequestParam Integer s_id){
-        System.out.println(s_id);
-        List<SellerInfo> sellerInfos = sellerInfosService.SelectSeller(s_id);
-        for (SellerInfo sellerInfo: sellerInfos) {
-            System.out.println(sellerInfo);
-        }
-        return sellerInfos;
+        return   sellerInfosService.SelectSeller(s_id);
     }
 }
