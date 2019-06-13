@@ -745,8 +745,8 @@
 					<input type="button" value="+" onclick="add()"  style="width: 20px">
 	    </div>
 		<div class="prd_buttons">
-		<a href="#" class="btn-product btn-addcart">立即购买</a>
-		<a href="gouw_che.html" class="btn-product">加入购物车</a>
+			<a type="button" onclick="jumptocart()"  class="btn-product btn-addcart">加入购物车</a>
+			<a type="button" onclick="jumptopay()"  class="btn-product"> 立即购买</a>
 		</div>
         <!---->
         <div class="prd-tips wenxintishi_wrap clearfix">
@@ -1385,6 +1385,7 @@
 </script>
 <script>
     var g_id;
+    var value = $("#sum").val();
     function getUserId() {
         g_id = window.location.search.split("=")[1];
     }
@@ -1408,7 +1409,6 @@
                 $("#g_disctprice").html(data.g_disctprice);
                 $("#s_name").html(data.s_name);
                 $("#g_num").html(data.g_num);
-
             },
             error:function (data) {
                 console.error(data);
@@ -1419,14 +1419,9 @@
     getGoodsInfoById();
 
 
-
-</script>
-
-<script>
-
-	var max=10;
-	function add() {
-        var value = $("#sum").val();
+    var max=10;
+    function add() {
+        value = $("#sum").val();
         if(value < max){
             //vlaue值为String类型,必须转换成int类型
             $("#sum").val(parseInt(value)+1);
@@ -1435,8 +1430,10 @@
         }
     }
 
-	function sub() {
-        var value = $("#sum").val();
+
+
+    function sub() {
+       value = $("#sum").val();
         //判断数量是否在合理的范围内
         if(value > 1){
             //vlaue值为String类型,必须转换成int类型
@@ -1445,9 +1442,27 @@
             $("#sum").val(1);
         }
     }
+
+    function jumptocart() {
+        var values=$("#sum").val();
+
+        var url ="gouw_che.html?g_id="+g_id+"&num="+values;
+        window.location.href=url;
+    }
+
+    function jumptopay() {
+        var values=$("#sum").val();
+        var url ="tij_dingd.html?g_id="+g_id+"="+values;
+        window.location.href=url;
+    }
+
+
 </script>
 
 </body>
+<script>
+
+</script>
 </html>
 
 

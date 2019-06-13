@@ -39,19 +39,11 @@
         ca.c_parentid =c.c_id and ca.c_parentid;
     </select>
 
-
-    <select id="findByAllGoods" parameterType="com.qf.dto.Category">
-        SELECT
-        c.c_id,c.c_name,c1.c_name,c1.c_parentid
-        FROM
-        category c,category c1
-        WHERE
-        c.c_id=c1.c_parentid and c.cid=1;
-    </select>
-
     <!--查询商品详细信息-->
     <select id="getGoodsInfoById" parameterType="int" resultType="com.qf.dto.GodsInfoDetail">
          SELECT g.*,s.`s_name`  FROM goodsinfo g ,sellerinfo s
          WHERE g.`s_id`=s.`s_id` AND g.`g_id`=#{g_id}
     </select>
+
+
 </mapper>
