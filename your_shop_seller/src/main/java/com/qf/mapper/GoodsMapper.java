@@ -30,8 +30,4 @@ public interface GoodsMapper {
 
     //根据商品id 删除商品信息
     int delByGoodsId(int goodsId);
-
-    // 选中删除 ，批量删除
-    int delCheckGoods(List<Integer> list);
-
 }

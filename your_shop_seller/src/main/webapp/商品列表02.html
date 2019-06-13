@@ -21,7 +21,8 @@
 
 
     <!-- DataTables -->
-    <script src="assets/js/jquery.dataTables.js"></script>
+    <script src="datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 </head>
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
@@ -113,7 +114,6 @@
                 <li style="margin-left: -10px;">
                     <div class="am-btn-group am-btn-group-xs">
                         <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="g_status">
-                            <option value="">商品状态</option>
                             <option value="1">上架</option>
                             <option value="0">下架</option>
                         </select>
@@ -201,7 +201,35 @@
 <script>
 
     $(function () {
-
+        $("#datable").DataTable({
+            "paging":true,
+            "info":true,
+            "lengthChange":false,
+            "ordering":false,
+            "processing": true,
+            "searching": false,
+            "deferRender": true,
+            "language": {
+                "sProcessing": "处理中...",
+                "sLengthMenu": "显示 _MENU_ 项结果",
+                "sZeroRecords": "没有匹配结果",
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix": "",
+                "sSearch": "搜索:",
+                "sUrl": "",
+                "sEmptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands": ",",
+                "oPaginate": {
+                    "sFirst": "首页",
+                    "sPrevious": "上页",
+                    "sNext": "下页",
+                    "sLast": "末页"
+                }
+            }
+        });
     })
 
     function f(){
@@ -241,35 +269,6 @@
                     //将字符串添加到table中
                     tabObj.append(trHtml);
 
-                });
-                $("#datable").DataTable({
-                    "paging":true,
-                    "info":true,
-                    "lengthChange":false,
-                    "ordering":false,
-                    "processing": true,
-                    "searching": false,
-                    "deferRender": true,
-                    "language": {
-                        "sProcessing": "处理中...",
-                        "sLengthMenu": "显示 _MENU_ 项结果",
-                        "sZeroRecords": "没有匹配结果",
-                        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                        "sInfoPostFix": "",
-                        "sSearch": "搜索:",
-                        "sUrl": "",
-                        "sEmptyTable": "表中数据为空",
-                        "sLoadingRecords": "载入中...",
-                        "sInfoThousands": ",",
-                        "oPaginate": {
-                            "sFirst": "首页",
-                            "sPrevious": "上页",
-                            "sNext": "下页",
-                            "sLast": "末页"
-                        }
-                    }
                 });
             },
             error:function (data) {
