@@ -11,6 +11,7 @@ public class CreateOrderDto {
     String express;
     int g_id;
     int num;
+    int s_id;
 
     int adsId;
     int userId;
@@ -21,4 +22,6 @@ public class CreateOrderDto {
 
     String shphone;
     String shname;
+
+    int price;
 }

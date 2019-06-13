@@ -22,5 +22,6 @@ public class Order_DetailDto implements Serializable {
     public double g_total_price;
     public String g_pic;
 
-
+    int o_orderid;
+    String g_desc;
 }

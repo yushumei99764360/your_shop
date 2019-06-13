@@ -124,61 +124,12 @@
             </div>
         </div>
         <div class="jies_y_shouh_diz shiq_1">
-        	<ul>
-        		<li class="cur">
-        			<div class="dangq_xuanz_diz">当前地址</div>
-        			<span>艾丽西亚</span>
-        			<span>贵州省 贵阳市 云岩区 下合群路 达亨大厦16层</span>
-        			<span>182*****710</span>
-        			<div class="bianji_yv_shanc">
-        				<a href="#">设为默认</a>
-        				<a href="#">编辑</a>
-        			</div>
-        		</li>
-        		<li>
-        			<div class="dangq_xuanz_diz">当前地址</div>
-        			<span>艾丽西亚</span>
-        			<span>贵州省 贵阳市 云岩区 下合群路 达亨大厦16层</span>
-        			<span>182*****710</span>
-        			<div class="bianji_yv_shanc">
-        				<a href="#">设为默认</a>
-        				<a href="#">编辑</a>
-        			</div>
-        		</li> 
-        		<li>
-        			<div class="dangq_xuanz_diz">当前地址</div>
-        			<span>艾丽西亚</span>
-        			<span>贵州省 贵阳市 云岩区 下合群路 达亨大厦16层</span>
-        			<span>182*****710</span>
-        			<div class="bianji_yv_shanc">
-        				<a href="#">设为默认</a>
-        				<a href="#">编辑</a>
-        			</div>
-        		</li>
-        		<li>
-        			<div class="dangq_xuanz_diz">当前地址</div>
-        			<span>艾丽西亚</span>
-        			<span>贵州省 贵阳市 云岩区 下合群路 达亨大厦16层</span>
-        			<span>182*****710</span>
-        			<div class="bianji_yv_shanc">
-        				<a href="#">设为默认</a>
-        				<a href="#">编辑</a>
-        			</div>
-        		</li>
+        	<ul id="address">
         	</ul>
-        	<div class="addr-switch cur_e">
-                <p><span>更多地址</span><b></b></p>
-                <p class="jiant_xiangs"><span>收起更多</span><b></b></p>
-            </div> 
         </div>
         <div class="jies_y_shouh_diz shiq_2">
         	<ul>
         		<li class="zhif_fangs cur"><div class="dangq_xuanz_diz">在线支付</div></li>
-        		<li class="zhif_fangs"><div class="dangq_xuanz_diz">货到付款</div></li>
-        		<div class="addr-switch addr_switch_1 cur_e_1">
-	                <p><span>更多 >></span></p>
-	                <p><span>收起 <<</span></p>
-	            </div> 
         	</ul>  
         </div>
         <div class="step-tit">
@@ -196,11 +147,6 @@
                 <div>
                 	<div class="jies_y_shouh_diz jies_y_shouh_diz_kuaid">
 			        	<ul>
-
-			        		<li class="zhif_fangs cur"><div class="dangq_xuanz_diz">申通快递</div></li>
-			        		<li class="zhif_fangs"><div class="dangq_xuanz_diz">圆通快递</div></li> 
-			        	</ul>  
-
 			        		<li id="hh" class="zhif_fangs"><input type="checkbox" class="express" value="申通快递"><div class="dangq_xuanz_diz">申通快递</div></li>
 			        		<li id="dd" class="zhif_fangs"><input type="checkbox" class="express" value="圆通快递"><div class="dangq_xuanz_diz">圆通快递</div></li>
 			        	</ul>
@@ -217,26 +163,16 @@
         	</div>
         	<div class="goods_list">
         		<div class="goods_list_neik">
-        			<h4 class="vendor_name_h">商家：塔里服装旗舰店</h4>
+        			<h4 class="vendor_name_h" id="s_name"></h4>
         			<div class="goods_item">
-
-        				<div class="p_img"><a href="#"><img src="images/lieb_tupi1.jpg"></a></div>
-        				<div class="goods_msg">
-        					<div class="p_name">
-        						<a href="#">探路者TOREAD 情侣款男士三合一套绒冲锋衣 TAWB91603 黑色 M</a>
-        					</div>
-
         				<div class="p_img"><a href="#"><img src="" id="img" style="height: 80px"></a></div>
         				<div class="goods_msg">
 							<div class="p_name">
 								<a href="#" id="g_name"></a>
 							</div>
-
         					<div class="p_price">
-        						<span class="jq_price">￥ 529.00</span>
-        						<span>x1</span>
+                                <span id="g_price"></span>
         						<span>有货</span>
-        						<span>1.170kg</span>
         					</div>
         				</div>
         			</div>
@@ -259,8 +195,8 @@
 	<div class="order_summary">
 		<div class="qianq_mx">
 			<div class="jiaq_meih">
-				<span class="xiangq_leib"><em class="goumai_ges">1</em> 件商品，总商品金额：</span>
-				<em class="goum_zongj">￥529.00</em>
+				<span class="xiangq_leib"><em class="goumai_ges" id="num"></em> 件商品，总商品金额：</span>
+				<em class="goum_zongj" id="totalPrice"></em>
 			</div>
 			<div class="jiaq_meih">
 				<span class="xiangq_leib">返现：</span>
@@ -280,14 +216,10 @@
 		<div class="dsgs">
 			<div class="qianq_mx">
 				<div class="jiaq_meih">
-					<span class="xiangq_leib"> 应付总额：</span>
-					<em class="goum_zongj zhongf_jine">￥529.00</em>
+					<span class="xiangq_leib" id="price"> 应付总额：</span>
+					<em class="goum_zongj zhongf_jine"></em>
 				</div> 
 			</div>
-		</div>
-		<div class="zuiz_diz">
-			<span>寄送至： 贵州 贵阳市 云岩区 城区 下合群路达亨大厦1606</span>
-			<span> 收货人：艾丽西亚 182****0710</span>
 		</div>
 	</div>
 	<div class="tij_dingd_ann">
@@ -418,6 +350,8 @@
     var g_id;
     var num;
     var o_paycount;
+    var s_id;
+	var price;
     function getUserId() {
         g_id = window.location.search.split("=")[1];
       	num=window.location.search.split("=")[2];
@@ -426,7 +360,6 @@
     /**
 	 * 查询收货地址
      */
-
     function getUserInfoAddressById() {
         $.ajax({
             type: 'GET',
@@ -471,7 +404,8 @@
                 $("#price").html("￥"+num*data.g_disctprice);
                 $("#g_price").html("￥"+data.g_disctprice);
                 $("#s_name").html("商家："+data.s_name+"旗舰店");
-                o_paycount=num*data.g_disctprice;
+                s_id=data.s_id;
+                price=data.g_disctprice
             },
             error:function (data) {
                 console.error(data);
@@ -485,10 +419,10 @@
     var express;
 	function ToPay() {
         if($("#addressDetail").is(":checked")){//选中
-            address= $("#addressDetail").val();//打印选中的值
+            address= $("#addressDetail").val();//选中的值
         }
         if($(".express").is(":checked")){//选中
-            express= $(".express").val();//打印选中的值
+            express= $(".express").val();//选中的值
         }
         $.ajax({
             type: "POST",
@@ -498,8 +432,9 @@
 				"address":address,
 				"express":express,
 				"g_id":g_id,
-				"o_paycount":o_paycount,
-				"num":num
+				"num":num,
+				"s_id":s_id,
+				"price":price
 			}),
             success: function (data) {
                 window.location.href = "dingd_xiangq.html"

@@ -1,10 +1,7 @@
 package com.qf.mapper;
 
 
-import com.qf.dto.AddressInfoDto;
-import com.qf.dto.CategoryDto;
-import com.qf.dto.CreateOrderDto;
-import com.qf.dto.GodsInfoDetail;
+import com.qf.dto.*;
 import com.qf.pojo.AddressInfo;
 import com.qf.pojo.GoodsInfo;
 
@@ -25,4 +22,8 @@ public interface CategoryMapper {
     AddressInfoDto searchAddress(int adsId);
 
     int insertOrder(AddressInfoDto addressInfoDto);
+
+    GodsInfoDetail searchGoods(int g_id);
+
+    int insertOrderDetail(Order_DetailDto order_detailDto);
 }

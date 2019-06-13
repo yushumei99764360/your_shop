@@ -15,4 +15,6 @@ public class AddressInfoDto {
     String o_sendtype;
     String o_paycount;
     int id;
+    int s_id;
+    int price;
 }
