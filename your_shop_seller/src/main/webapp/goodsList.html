@@ -96,12 +96,17 @@
         <div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
             <ul>
                 <li>
-                    <div class="am-btn-group am-btn-group-xs">
+                    <!--<div class="am-btn-group am-btn-group-xs">
                         <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="categoryName">
                             <option value="">产品分类</option>
                             <option value="手机">手机</option>
                         </select>
-                       </div>
+                       </div>-->
+                    <div class="am-btn-group am-btn-group-xs">
+                            <select  id="categoryName">
+                                <option value="0">--商品类别--</option>
+                            </select>
+                    </div>
                 </li>
                 <li style="margin-right: 0;">
                     <span class="tubiao am-icon-calendar"></span>
@@ -115,6 +120,7 @@
                 <li style="margin-left: -10px;">
                     <div class="am-btn-group am-btn-group-xs">
                         <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="g_status">
+                            <option value="">--商品状态--</option>
                             <option value="1">上架</option>
                             <option value="0">下架</option>
                         </select>
@@ -187,7 +193,27 @@
 <script src="assets/js/jquery.dataTables.js"></script>
 <script src="datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
-
+    $(function () {
+        $.ajax({
+            type:"POST",
+            url:"getAllChildInfo",
+            contentType:"application/json",
+            success:function (data) {
+                // alert("option All")
+                var childObj = $("#categoryName");
+                $(data).each(function (index,item) {
+                    var childHtml = "<option value="+item.c_name+">"+item.c_name+"</option>";
+                    console.log(childHtml);
+                    childObj.append(childHtml);
+                });
+            },
+            error:function (data) {
+                console.log(data);
+                alert(data)
+            },
+            dataType: "json"
+        });
+    });
     function f(){
         //1.发送ajax请求获取数据
         $.ajax({

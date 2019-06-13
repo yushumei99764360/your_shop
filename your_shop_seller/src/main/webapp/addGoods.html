@@ -87,7 +87,7 @@
             <div class="listbiaoti am-cf">
                 <ul class="am-icon-flag on"> 添加商品 </ul>
 
-                <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">商品添加</a></dl>
+                <dl class="am-icon-home" style="float: right;"> 当前位置  > 商品添加 </dl>
 
             </div>
 
@@ -144,17 +144,17 @@
                     </div>
 
                     <div class="am-form-group am-cf">
-                        <div class="zuo">商品类别：</div>
-                        <div class="you" style="height: 40px;">
-                            <select id="child">
-                                <option value="0">--请选择--</option>
-                            </select>
-                        </div>
+                    <div class="zuo">商品类别：</div>
+                    <div class="you" style="height: 40px;">
+                        <select id="child">
+                            <option value="0">--请选择--</option>
+                        </select>
                     </div>
+                </div>
                     <div class="am-form-group am-cf">
                         <div class="zuo">产品状态：</div>
                         <div class="you" style="height: 45px;">
-                            <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="status">
+                            <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="g_status">
                                 <option value="1">上架</option>
                                 <option value="0">下架</option>
                             </select>
@@ -173,7 +173,7 @@
 
             <div class="foods">
                 <ul>
-                    版权所有@2015. 模板收集自 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> -  More Templates<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+                    版权所有@2019.  <a href="http://www.cssmoban.com/" target="_blank" title="">商铺之家</a> -  More Shop <a href="http://www.cssmoban.com/" title="" target="_blank"></a>
                 </ul>
                 <dl>
                     <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
@@ -226,7 +226,7 @@
         });
     });
     function addGoodsInfo(num) {
-        // alert("添加新商品")
+        alert($("#g_status").val() + ";;" +$("#child").val())
         $.ajax({
             type:"POST",
             url:"addGoodsInfo",

@@ -154,7 +154,7 @@
           <div class="am-form-group am-cf">
               <div class="zuo">产品状态：</div>
               <div class="you" style="height: 45px;">
-                  <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="g_status">
+                  <select id="g_status">
                       <option value="0">下架</option>
                       <option value="1">上架</option>
                   </select>
@@ -173,7 +173,7 @@
  
  <div class="foods">
   <ul>
-    版权所有@2015. 模板收集自 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> -  More Templates<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+      版权所有@2019.  <a href="http://www.cssmoban.com/" target="_blank" title="">商铺之家</a> -  More Shop <a href="http://www.cssmoban.com/" title="" target="_blank"></a>
   </ul>
   <dl>
     <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
@@ -225,7 +225,8 @@
                 $("#g_num").val(data.g_num);
                 $("#g_desc").val(data.g_desc);
                 $("#g_pic").val(data.g_pic);
-                $("#g_status option").val(data.g_status);
+
+                $("#g_status option[value="+data.g_status+"]").attr("selected","selected");
                 $("#child option").html(data.childName);
                 var childObj = $("#child");
                 $(data.categoryList).each(function (index,item) {
@@ -244,6 +245,7 @@
 
     //修改用户信息
     function updateGoodsByGoodsId() {
+        // alert($("#g_status").val())
         $.ajax({
             type:"POST",
             url:"updateGoodsByGoodsId",
