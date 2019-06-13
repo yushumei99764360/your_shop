@@ -50,20 +50,5 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.deleteSelectOrder(selectOrderId);
     }
 
-    @Override
-    public List<OrderVo> selectByPlace() {
-        return orderMapper.selectByPlace();
-    }
-
-    @Override
-    public OrderVo selectByOrderNum() {
-        return orderMapper.selectByOrderNum();
-    }
-
-    @Override
-    public OrderVo selectByGoodsNum() {
-        return orderMapper.selectByGoodsNum();
-    }
-
 
 }

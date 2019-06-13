@@ -1,7 +1,9 @@
 package com.qf.controller;
 
 
+import com.qf.pojo.Category;
 import com.qf.pojo.SellerInfo;
+import com.qf.service.CategoryService;
 import com.qf.service.GoodsService;
 import com.qf.vo.GoodsSelecteds;
 import com.qf.vo.GoodsVo;
@@ -17,6 +19,8 @@ public class GoodsController {
 
     @Autowired
     GoodsService goodsService;
+    @Autowired
+    CategoryService categoryService;
 
     // 查询所有商品信息  商品列表页面
     @ResponseBody
@@ -32,7 +36,7 @@ public class GoodsController {
 
     // 实现商品新增功能，1 先增加商品信息 2 再增加商品类别关系信息
     @ResponseBody
-    @RequestMapping("addGoods")
+    @RequestMapping("addGoodsInfo")
     public Object addGoods(@RequestBody GoodsVo goodsVo,HttpSession httpSession ){
 
         SellerInfo sellerInfo = (SellerInfo) httpSession.getAttribute("sellerInfo");
@@ -49,6 +53,8 @@ public class GoodsController {
     public Object getGoodsByGoodsId(@RequestParam int goodsId){
         System.out.println(goodsId);
         GoodsVo goodsInfoByGoodsId = goodsService.getGoodsInfoByGoodsId(goodsId);
+        List<Category> categoryList = categoryService.getChildInfo();
+        goodsInfoByGoodsId.setCategoryList(categoryList);
         System.out.println(goodsInfoByGoodsId);
         return goodsInfoByGoodsId;
     }
@@ -81,6 +87,16 @@ public class GoodsController {
         boolean delByGoodsId = goodsService.delByGoodsId(goodsId);
         System.out.println(delByGoodsId);
         return delByGoodsId;
+    }
+
+    // 删除选中的，批量删除
+    @ResponseBody
+    @RequestMapping("delCheckGoods")
+    public Object delCheckGoods(@RequestBody List<Integer> selectedGoodsId){
+        System.out.println(selectedGoodsId);
+        boolean delCheckGoods = goodsService.delCheckGoods(selectedGoodsId);
+        System.out.println(delCheckGoods);
+        return delCheckGoods;
     }
 
 

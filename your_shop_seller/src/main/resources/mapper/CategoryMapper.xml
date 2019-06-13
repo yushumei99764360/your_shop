@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 命名空间 增删改查 节点 所对应的抽象方法 所在的接口位置-->
+<mapper namespace="com.qf.mapper.CategoryMapper">
+    <!--查询所有商品类别信息  商品类别列表页面-->
+    <select id="getAllCategory" resultType="com.qf.vo.CategoryVo" >
+       SELECT  a.c_parentid fatherid,  b.c_name fathername ,a.c_id childid, a.c_name childname
+       FROM category a , category b WHERE a.c_parentid = b.c_id
+    </select>
+    <!--新增商品类别信息 -->
+    <insert id="addCategoryInfo" parameterType="com.qf.pojo.Category">
+        INSERT INTO category VALUES
+        (DEFAULT,#{c_name}, #{c_core} , #{c_parentid})
+    </insert>
+
+    <!--实现商品类别修改功能； 1 先查询展示商品类别详情 2 再 修改商品类别信息 -->
+    <!--根据商品子类类别id查询商品类别详情信息-->
+    <select id="getCategoryById" parameterType="int" resultType="com.qf.vo.CategoryVo">
+        SELECT  a.c_parentid fatherid,  b.c_name fathername ,a.c_id childid, a.c_name childname
+       FROM category a , category b WHERE a.c_parentid = b.c_id and a.c_id = #{c_id}
+    </select>
+    <!--修改商品类别信息-->
+    <update id="updateCategoryInfo" parameterType="com.qf.vo.CategoryVo">
+        UPDATE category
+        <set>
+            <if test="childName != null and childName !=''">
+                c_name = #{childName},
+            </if>
+            <if test="fatherId != null and fatherId !=''">
+                c_parentid = #{fatherId},
+            </if>
+        </set>
+        WHERE c_id = #{childId}
+    </update>
+
+    <!--根据 关键词搜索 商品类别列表-->
+    <select id="selectCategoryBys" resultType="com.qf.vo.CategoryVo" parameterType="String">
+        SELECT  a.c_parentid fatherid,  b.c_name fathername ,a.c_id childid, a.c_name childname
+        FROM category a , category b WHERE a.c_parentid = b.c_id
+        and ( b.c_name like #{str} or a.c_name like #{str} )
+    </select>
+
+    <!--根据商品子类类别id 删除商品类别信息 -->
+    <delete id="delByCid" parameterType="int">
+        DELETE FROM category WHERE c_id = #{childId}
+    </delete>
+
+    <!--批量删除-->
+    <delete id="delCheckCategoryIds" parameterType="list">
+        delete from category where c_id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!--查询所有一级类别信息-->
+    <select id="getFatherInfo" resultType="com.qf.pojo.Category">
+        select * from category where c_parentid = 0
+    </select>
+    <!--查询所有的二级类别信息-->
+    <select id="getChildInfo" resultType="com.qf.pojo.Category">
+        select * from category where c_parentid != 0
+    </select>
+    <!--根据父类id 查询它所包含的所有子类信息-->
+    <resultMap id="categoryMap" type="com.qf.vo.CategoryVo">
+        <id column="fatherid" property="fatherId"></id>
+        <result column="fathername" property="fatherName"></result>
+        <collection property="categoryList" ofType="com.qf.pojo.Category">
+            <id column="childid" property="c_id"></id>
+            <result column="childname" property="c_name"></result>
+        </collection>
+    </resultMap>
+    <select id="getChildCategoryInfo" resultMap="categoryMap" parameterType="int">
+        SELECT  a.c_parentid fatherid,  b.c_name fathername ,a.c_id childid, a.c_name childname
+        FROM category a , category b WHERE a.c_parentid = b.c_id and a.c_parentid = #{fatherId}
+    </select>
+</mapper>

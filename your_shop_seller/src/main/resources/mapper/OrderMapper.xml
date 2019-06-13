@@ -61,12 +61,6 @@
             <if test="endTime != null and endTime !=''">
                 and  #{endTime} &gt; o_orderdate
             </if>
-            <if test="endTime != null and endTime !=''">
-                and  #{endTime} &gt; o_orderdate
-            </if>
-            <if test="o_status != null and o_status !=''">
-                and  #{o_status} = o_status
-            </if>
             <if test="str != null and str !=''">
                 and (id like "%"#{str}"%" or
                 o_sendtype like "%"#{str}"%" or
@@ -90,24 +84,5 @@
             #{item}
         </foreach>
     </delete>
-
-    <!--echartsb表图-->
-    <select id="selectByPlace" resultType="com.qf.vo.OrderVo">
-       SELECT o_province , COUNT(*) AS COUNT
-      FROM orderinfo
-      GROUP BY o_province
-    </select>
-
-    <!--销售总额-->
-    <select id="selectByOrderNum" resultType="com.qf.vo.OrderVo">
-      SELECT COUNT(*) AS allcount,SUM(o_paycount) AS allmoeny FROM orderinfo
-    </select>
-
-    <!--销售商品数量-->
-    <select id="selectByGoodsNum" resultType="com.qf.vo.OrderVo">
-SELECT SUM(g_num) AS allgoods FROM order_detail;
-
-    </select>
-
 
 </mapper>

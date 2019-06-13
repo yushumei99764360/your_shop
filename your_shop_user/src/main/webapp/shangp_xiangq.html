@@ -745,8 +745,8 @@
 					<input type="button" value="+" onclick="add()"  style="width: 20px">
 	    </div>
 		<div class="prd_buttons">
-			<a type="button" onclick="jumptocart()"  class="btn-product btn-addcart">加入购物车</a>
-			<a type="button" onclick="jumptopay()"  class="btn-product"> 立即购买</a>
+		<a href="#" class="btn-product btn-addcart">立即购买</a>
+		<a href="gouw_che.html" class="btn-product">加入购物车</a>
 		</div>
         <!---->
         <div class="prd-tips wenxintishi_wrap clearfix">
@@ -1024,7 +1024,9 @@
 										<span class="detail-star bgiprd">
 											<b style="width:100%" class="bgiprd"></b>
 										</span>
+										<p>收货后1天评论</p>
 										<p><a target="_blank" href="//review.gome.com.cn/P136937461.html">2017-09-22 12:44</a></p>
+										<p><span>白色 M码</span></p>
 									</div>
 									<div class="reply-center">
 										<p>正品行货，很棒</p>
@@ -1037,8 +1039,48 @@
 										<p class="profileGrade"><span class="viplevel">V2会员</span><span class="area">石家庄市</span></p> 
 									</div>
 								</li>
-
-
+								<li class="oh_de">
+									<div class="reply-left">
+										<span class="detail-star bgiprd">
+											<b style="width:20%" class="bgiprd"></b>
+										</span>
+										<p>收货后1天评论</p>
+										<p><a target="_blank" href="//review.gome.com.cn/P136937461.html">2017-09-22 12:44</a></p>
+										<p><span>白色 M码</span></p>
+									</div>
+									<div class="reply-center">
+										<p>正品行货，很棒</p>
+										
+					
+									</div>
+									<div class="reply-right">
+										<div class="reply_avatar">
+										<img src="images/7_170312181624_2.jpg">
+										<span class="reply_avatar_userName">祢夏了夏天</span>
+										</div>
+										<p class="profileGrade"><span class="viplevel">V2会员</span><span class="area">石家庄市</span></p> 
+									</div>
+								</li> 
+								<li class="oh_de">
+									<div class="reply-left">
+										<span class="detail-star bgiprd">
+											<b style="width:80%" class="bgiprd"></b>
+										</span>
+										<p>收货后1天评论</p>
+										<p><a target="_blank" href="//review.gome.com.cn/P136937461.html">2017-09-22 12:44</a></p>
+										<p><span>白色 M码</span></p>
+									</div>
+									<div class="reply-center">
+										<p>正品行货，很棒</p>
+									</div>
+									<div class="reply-right">
+										<div class="reply_avatar">
+										<img src="images/7_170312181624_2.jpg">
+										<span class="reply_avatar_userName">祢夏了夏天</span>
+										</div>
+										<p class="profileGrade"><span class="viplevel">V2会员</span><span class="area">石家庄市</span></p> 
+									</div>
+								</li>
 							</ol>
 							<div class="com-table-footer">
 								<div class="ui-page-wrap">
@@ -1343,7 +1385,6 @@
 </script>
 <script>
     var g_id;
-    var value = $("#sum").val();
     function getUserId() {
         g_id = window.location.search.split("=")[1];
     }
@@ -1367,6 +1408,7 @@
                 $("#g_disctprice").html(data.g_disctprice);
                 $("#s_name").html(data.s_name);
                 $("#g_num").html(data.g_num);
+
             },
             error:function (data) {
                 console.error(data);
@@ -1377,9 +1419,14 @@
     getGoodsInfoById();
 
 
-    var max=10;
-    function add() {
-        value = $("#sum").val();
+
+</script>
+
+<script>
+
+	var max=10;
+	function add() {
+        var value = $("#sum").val();
         if(value < max){
             //vlaue值为String类型,必须转换成int类型
             $("#sum").val(parseInt(value)+1);
@@ -1388,10 +1435,8 @@
         }
     }
 
-
-
-    function sub() {
-       value = $("#sum").val();
+	function sub() {
+        var value = $("#sum").val();
         //判断数量是否在合理的范围内
         if(value > 1){
             //vlaue值为String类型,必须转换成int类型
@@ -1400,29 +1445,9 @@
             $("#sum").val(1);
         }
     }
-
-    function jumptocart() {
-        var values=$("#sum").val();
-
-        var url ="gouw_che.html?g_id="+g_id+"&num="+values;
-        window.location.href=url;
-    }
-
-    function jumptopay() {
-        var values=$("#sum").val();
-        var url ="tij_dingd.html?g_id="+g_id+"="+values;
-        window.location.href=url;
-    }
-
-
-
-
 </script>
 
 </body>
-<script>
-
-</script>
 </html>
 
 

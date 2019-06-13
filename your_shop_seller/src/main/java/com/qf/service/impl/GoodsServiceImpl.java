@@ -27,8 +27,10 @@ public class GoodsServiceImpl implements GoodsService {
     @Transactional(propagation = Propagation.REQUIRED)
     public boolean addGoodsInfo(GoodsVo goodsVo) {
         int goodsInfo = goodsMapper.addGoodsInfo(goodsVo);
+//        System.out.println(goodsInfo);
         int goodsCategory = goodsMapper.addGoodsCategory(goodsVo);
-        if (goodsInfo>0&&goodsCategory>0)
+//        System.out.println(goodsCategory);
+        if (goodsInfo>0 && goodsCategory>0)
             return true;
         return false;
     }
@@ -67,6 +69,15 @@ public class GoodsServiceImpl implements GoodsService {
     public boolean delByGoodsId(int goodsId) {
         int delByGoodsId = goodsMapper.delByGoodsId(goodsId);
         if (delByGoodsId>0)
+            return true;
+        return false;
+    }
+
+    //选中删除，批量删除
+    @Transactional(propagation = Propagation.REQUIRED)
+    public boolean delCheckGoods(List<Integer> selectedGoodsId) {
+        int delCheckGoods = goodsMapper.delCheckGoods(selectedGoodsId);
+        if (delCheckGoods==selectedGoodsId.size())
             return true;
         return false;
     }

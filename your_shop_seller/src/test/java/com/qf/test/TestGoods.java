@@ -35,8 +35,13 @@ public class TestGoods {
 
     @Test
     public void test3(){
-
-
+        GoodsVo goodsVo = new GoodsVo();
+        goodsVo.setS_id(1);
+        goodsVo.setChildId(23);
+        goodsVo.setG_title("cedds");
+        goodsVo.setG_name("cedss11");
+        boolean goodsInfo = goodsService.addGoodsInfo(goodsVo);
+        System.out.println(goodsInfo);
 
     }
 

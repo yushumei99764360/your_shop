@@ -1,0 +1,254 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Amaze UI Admin index Examples</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
+<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+<link rel="stylesheet" href="assets/css/admin.css">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/app.js"></script>
+</head>
+<!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
+
+</head>
+
+<body>
+<header class="am-topbar admin-header">
+    <div class="am-topbar-brand"><img src="assets/i/logo.png"></div>
+    <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+        <ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
+            <li class="kuanjie">
+                <a href="sellerInfo.html">个人中心</a>
+                <a href="login.html">退出</a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<div class="am-cf admin-main"> 
+
+<div class="nav-navicon admin-main admin-sidebar">
+    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;"> 欢迎本店管理员：清风抚雪</div>
+    <div class="sideMenu">
+        <h3 class="am-icon-flag"><em></em> <a href="#">商品管理</a></h3>
+        <ul>
+            <li><a href="goodsList.html">商品列表</a></li>
+            <li ><a href="addGoods.html">添加新商品</a></li>
+            <li><a href="categoryList.html">商品类别</a></li>
+            <li ><a href="addCategory.html">添加新商品类别</a></li>
+        </ul>
+        <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
+        <ul>
+            <li><a href="">订单列表</a></li>
+            <li><a href="">订单展示</a></li>
+            <li><a href="">添加新订单</a></li>
+            <li><a href="">修改订单</a></li>
+        </ul>
+
+        <h3 class="am-icon-users"><em></em> <a href="sellerInfo.html">个人中心</a></h3>
+        <ul>
+            <li><a href="sellerInfo.html">修改信息</a></li>
+        </ul>
+
+    </div>
+    <!-- sideMenu End -->
+    <script type="text/javascript">
+        jQuery(".sideMenu").slide({
+            titCell:"h3", //鼠标触发对象
+            targetCell:"ul", //与titCell一一对应，第n个titCell控制第n个targetCell的显示隐藏
+            effect:"slideDown", //targetCell下拉效果
+            delayTime:300 , //效果时间
+            triggerTime:150, //鼠标延迟触发时间（默认150）
+            defaultPlay:true,//默认是否执行效果（默认true）
+            returnDefault:true //鼠标从.sideMen移走后返回默认状态（默认false）
+        });
+    </script>
+
+</div>
+
+<div class=" admin-content">
+		<div class="daohang"></div>
+<div class="admin-biaogelist">
+	
+    <div class="listbiaoti am-cf">
+      <ul class="am-icon-flag on"> 商家信息 </ul>
+      
+      <dl class="am-icon-home" style="float: right;"> 当前位置 > 商家信息</dl>
+
+    </div>
+
+    <div class="fbneirong">
+      <form class="am-form">
+          <div class="am-form-group am-cf">
+              <div class="zuo">商家编号：</div>
+              <div class="you" id="s_code">
+
+              </div>
+          </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">商家名称：</div>
+              <div class="you">
+                  <input type="text" class="am-input-sm" id="s_name" value="">
+              </div>
+          </div>
+        <div class="am-form-group am-cf">
+          <div class="zuo">店家密码：</div>
+          <div class="you">
+            <input type="text" class="am-input-sm" id="s_pwd" value="">
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="zuo">商家联系电话：</div>
+          <div class="you">
+            <input type="text" class="am-input-sm" id="s_phone" value="">
+          </div>
+        </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">店家地址：</div>
+              <div class="you">
+                  <input type="text" class="am-input-sm" id="s_address" value="">
+              </div>
+          </div>
+        <div class="am-form-group am-cf">
+          <div class="zuo">店家描述：</div>
+          <div class="you">
+            <textarea class="" rows="2" id="s_desc"></textarea>
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="zuo">店家头像：</div>
+          <div class="you" style="height: 45px;">
+            <input type="file" id="icon">
+            <p class="am-form-help">请选择要上传的商家头像...</p>
+          </div>
+        </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">店家状态：</div>
+              <div class="you" style="height: 45px;">
+                  <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="s_status">
+                      <option value="1">启用</option>
+                      <option value="0">禁止</option>
+                  </select>
+              </div>
+          </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">开店时间：</div>
+              <div class="you">
+                  <input type="text" class="am-input-sm" id="s_date" value="">
+              </div>
+          </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">最后修改时间：</div>
+              <div class="you">
+                  <input type="text" class="am-input-sm" id="s_lastdate" value="">
+              </div>
+          </div>
+
+        <div class="am-form-group am-cf">
+          <div class="you" style="margin-left: 11%;">
+              <button type="button" class="am-btn am-btn-success am-radius" onclick="updateSellerInfo()">修改</button>&nbsp;  &raquo; &nbsp;
+          </div>
+        </div>
+      </form>
+    </div>
+
+  
+ 
+ <div class="foods">
+  <ul>
+    版权所有@2015. 模板收集自 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> -  More Templates<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
+  </ul>
+  <dl>
+    <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
+  </dl>
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+</div>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="assets/js/polyfill/rem.min.js"></script>
+<script src="assets/js/polyfill/respond.min.js"></script>
+<script src="assets/js/amazeui.legacy.js"></script>
+<![endif]--> 
+
+<!--[if (gte IE 9)|!(IE)]><!--> 
+<script src="assets/js/amazeui.min.js"></script>
+<!--<![endif]-->
+
+<script>
+    $(function () {
+        $.ajax({
+            type:"POST",
+            url:"getSellerInfoById",
+            success:function (data) {
+                $("#s_code").html(data.s_code);
+                $("#s_name").val(data.s_name);
+                $("#s_pwd").val(data.s_pwd);
+                $("#s_phone").val(data.s_phone);
+                $("#s_address").val(data.s_address);
+                $("#s_desc").val(data.s_desc);
+                $("#s_status option").val(data.s_status);
+                $("#s_date").val(data.s_date);
+                $("#s_lastdate").val(data.s_lastdate);
+                $("#icon").val(data.icon);
+            },
+            error:function (data) {
+                alert("获取失败")
+            },
+            dataType:"json"
+        });
+
+    });
+
+    //修改用户信息
+    function updateSellerInfo() {
+        $.ajax({
+            type:"POST",
+            url:"updateSellerInfo",
+            contentType:"application/json",
+            data: JSON.stringify({
+                "s_code":$("#s_code").html(),
+                "s_name":$("#s_name").val(),
+                "s_pwd":$("#s_pwd").val(),
+                "s_phone":$("#s_phone").val(),
+                "s_address":$("#s_address").val(),
+                "s_desc":$("#s_desc").val(),
+                "s_status":$("#s_status").val(),
+                "icon":$("#icon").val()
+            }),
+            success : function (data) {
+                alert(data+"-------")
+                window.location.href="sellerInfo.html";
+            },
+            error : function (data) {
+                alert("修改店家信息失败")
+            },
+            dataType: "json"
+        });
+    }
+
+
+</script>
+
+
+</body>
+</html>

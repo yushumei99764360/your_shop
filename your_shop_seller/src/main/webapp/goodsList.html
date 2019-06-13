@@ -15,13 +15,12 @@
     <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
     <link rel="stylesheet" href="assets/css/admin.css">
     <!-- DataTables -->
-    <link rel="stylesheet" href="/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.css">
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/app.js"></script>
 
 
-    <!-- DataTables -->
-    <script src="assets/js/jquery.dataTables.js"></script>
 
 </head>
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
@@ -32,7 +31,8 @@
     <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
         <ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
             <li class="kuanjie">
-                <a href="#">退出</a>
+                <a href="sellerInfo.html">个人中心</a>
+                <a href="login.html">退出</a>
             </li>
         </ul>
     </div>
@@ -44,8 +44,10 @@
         <div class="sideMenu">
             <h3 class="am-icon-flag"><em></em> <a href="index.html">商品管理</a></h3>
             <ul>
-                <li><a href="商品列表.html">商品列表</a></li>
-                <li><a href="添加新商品.html">添加新商品</a></li>
+                <li><a href="goodsList.html">商品列表</a></li>
+                <li ><a href="addGoods.html">添加新商品</a></li>
+                <li><a href="categoryList.html">商品类别</a></li>
+                <li ><a href="addCategory.html">添加新商品类别</a></li>
             </ul>
             <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
             <ul>
@@ -85,7 +87,7 @@
             <dl class="am-icon-home" style="float: right;"> 当前位置： &gt; 商品列表</dl>
 
             <dl>
-                <a type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" href="添加新商品.html"> 添加产品</a>
+                <a type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" href="addGoods.html"> 添加产品</a>
             </dl>
 
 
@@ -113,7 +115,6 @@
                 <li style="margin-left: -10px;">
                     <div class="am-btn-group am-btn-group-xs">
                         <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="g_status">
-                            <option value="">商品状态</option>
                             <option value="1">上架</option>
                             <option value="0">下架</option>
                         </select>
@@ -126,7 +127,7 @@
 
 
         <form class="am-form am-g">
-            <table width="100%" id="datable" class="am-table am-table-bordered am-table-radius am-table-striped">
+            <table width="100%" id="table" class="am-table am-table-bordered am-table-radius am-table-striped">
                 <thead>
                 <tr class="am-success">
                     <th class="table-check"><input type="checkbox" id="all" onchange="selectAll()"/></th>
@@ -151,20 +152,7 @@
              <button type="button" class="am-btn am-btn-default" onclick="delCheckGoods()"><span class="am-icon-trash-o"></span> 删除</button>
             </div>
 
-         <!--   <ul class="am-pagination am-fr" id="page">
-                <li class="am-disabled"><a href="#">«</a></li>
-                <li class="am-active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-            </ul>-->
-            <!--<hr>-->
         </form>
-
-
-
 
         <div class="foods">
             <ul>
@@ -190,19 +178,15 @@
 <script src="assets/js/polyfill/rem.min.js"></script>
 <script src="assets/js/polyfill/respond.min.js"></script>
 <script src="assets/js/amazeui.legacy.js"></script>
-
-
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
-
+<!-- DataTables -->
+<script src="assets/js/jquery.dataTables.js"></script>
+<script src="datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
-
-    $(function () {
-
-    })
 
     function f(){
         //1.发送ajax请求获取数据
@@ -211,8 +195,8 @@
             url: "getAllGoods",
             success: function(data){
                 //循环
-                // alert(1111)
                 var tabObj = $("#dataTable");
+                console.log(data);
                 $(data).each(function (index,item) {
 
                     var trHtml = "<tr>\n" +
@@ -240,9 +224,8 @@
                     console.log(trHtml); //  2pm
                     //将字符串添加到table中
                     tabObj.append(trHtml);
-
                 });
-                $("#datable").DataTable({
+                $("#table").DataTable({
                     "paging":true,
                     "info":true,
                     "lengthChange":false,
@@ -268,7 +251,7 @@
                             "sPrevious": "上页",
                             "sNext": "下页",
                             "sLast": "末页"
-                        }
+                        },
                     }
                 });
             },
@@ -282,21 +265,21 @@
     f();
 
     function jumpToEdit(goodsId){
-        alert(goodsId)
-        var url = "修改商品.html?goodsId="+goodsId;
+        // alert(goodsId)
+        var url = "editGoods.html?goodsId="+goodsId;
         window.location.href = url;
     }
 
     // 单个删除
     function delGoodsById(goodsId) {
-        alert(goodsId)
+        // alert(goodsId)
         $.ajax({
             type: "POST",
             url:"delByGoodsId?goodsId="+goodsId,
             contentType:"application/json",
             success: function (data) {
-                alert("删除成功")
-                window.location.href="商品列表.html";
+                // alert("删除成功")
+                window.location.href="goodsList.html";
             },
             error: function (data) {
                 alert("删除失败")
@@ -322,7 +305,7 @@
             }),
             success: function(data){
                 //循环
-                alert(3333)
+                // alert(3333)
                 var tabObj = $("#dataTable");
                 $(data).each(function (index,item) {
 
@@ -370,15 +353,15 @@
                 selectedGoodsId.push($(this).val())
             }
         });
-        alert(selectedGoodsId);
+        // alert(selectedGoodsId);
         $.ajax({
             type: "POST",
             url: "delCheckGoods",
             contentType: "application/json",
             data: JSON.stringify(selectedGoodsId),
             success: function (data) {
-                alert(data)
-                window.location.href = "商品列表.html"
+                // alert(data)
+                window.location.href = "goodsList.html"
             },
             error: function (data) {
                 alert("执行失败")
@@ -391,7 +374,7 @@
     function selectAll() {
         var isCheck = $("#all").is(":checked"); //
         $("input[type='checkbox']").each(function () {
-            this.checked = isCheck ;
+            this.checked = isCheck ; //
         })
     }
 

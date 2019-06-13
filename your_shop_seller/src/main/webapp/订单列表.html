@@ -14,9 +14,8 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
     <link rel="stylesheet" href="assets/css/admin.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/jquery.dataTables.css">
-
-
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/app.js"></script>
 </head>
 
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
@@ -182,8 +181,8 @@
 
 
 
-            <div class="am-form am-g">
-                <table width="100%" id = "table" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
+            <form class="am-form am-g">
+                <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
                     <thead>
                     <tr class="am-success">
                         <th class="table-check"><input type="checkbox"  id="all" /></th>
@@ -208,9 +207,39 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
                     </tr>
                     </thead>
                     <tbody id="dataTable">
-                    </tbody>
+                    <!--<tr>-->
+                        <!--<td><input type="checkbox" /></td>-->
+
+                        <!--<td>201757066</td>-->
+                        <!--<td>顺丰</td>-->
+                        <!--<td>支付宝</td>-->
+                        <!--<td>16000</td>-->
+                        <!--<td>1</td>-->
+                        <!--<td>小杨</td>-->
+                        <!--<td>13829779615</td>-->
+                        <!--<td>花板湖小区</td>-->
+                        <!--<td>湖南省</td>-->
+                        <!--<td>岳阳市</td>-->
+                        <!--<td>岳阳楼区</td>-->
+
+
+
             </table>
-            </div>
+
+                <ul class="am-pagination am-fr">
+                    <li class="am-disabled"><a href="#">«</a></li>
+                    <li class="am-active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">»</a></li>
+                </ul>
+            </form>
+
+
+
+
             <div class="foods">
                 <ul>
                 </ul>
@@ -218,6 +247,10 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
                     <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
                 </dl>
             </div>
+
+
+
+
         </div>
 
     </div>
@@ -235,18 +268,11 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
 <script src="assets/js/amazeui.legacy.js"></script>
 <![endif]-->
 
+<!--[if (gte IE 9)|!(IE)]><!-->
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
-<!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="assets/js/jquery-1.10.2.min.js"></script>
-<!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="assets/js/jquery.dataTables.js"></script>
-<!--[if (gte IE 9)|!(IE)]><!-->
+
 <script type="text/javascript">
-
-
-
-
 
     function getAllOrderInfo() {
         $.ajax({
@@ -281,8 +307,6 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
                     //将字符串添加到table中
                     tabObj.append(trHtml);
                 });
-                $("#table").DataTable();
-
             },
             error:function (data) {
                 alert("执行失败")
@@ -365,7 +389,6 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
                     //console.log(trHtml); //  2pm
                     //将字符串添加到table中
                     tabObj.append(trHtml);
-
                 });
             },
             error:function (data) {
@@ -407,42 +430,7 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
         });
     }
 
-   /* $(function () {
-        $("#table").DataTable({
-            "paging":true,
-            "info":true,
-            "lengthChange":false,
-            "ordering":false,
-            "processing": true,
-            "searching": false,
-            "deferRender": true,
-            "language": {
-                "sProcessing": "处理中...",
-                "sLengthMenu": "显示 _MENU_ 项结果",
-                "sZeroRecords": "没有匹配结果",
-                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                "sInfoPostFix": "",
-                "sSearch": "搜索:",
-                "sUrl": "",
-                "sEmptyTable": "表中数据为空",
-                "sLoadingRecords": "载入中...",
-                "sInfoThousands": ",",
-                "oPaginate": {
-                    "sFirst": "首页",
-                    "sPrevious": "上页",
-                    "sNext": "下页",
-                    "sLast": "末页"
-                },
-            }
-        });
-    })*/
 
-    // function ss() {
-    //     $("#table").DataTable({});
-    // }
-    // ss();
 
 
 

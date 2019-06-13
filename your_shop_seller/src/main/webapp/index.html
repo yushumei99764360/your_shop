@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" xmlns:margin="http://www.w3.org/1999/xhtml">
+<html class="no-js">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +16,6 @@
 <link rel="stylesheet" href="assets/css/admin.css">
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/app.js"></script>
-    <script src="echarts/js/echarts.min.js"></script>
 </head>
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
 </head>
@@ -26,7 +25,8 @@
     <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
         <ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
             <li class="kuanjie">
-                <a href="#">退出</a>
+                <a href="sellerInfo.html">个人中心</a>
+                <a href="login.html">退出</a>
             </li>
         </ul>
     </div>
@@ -38,9 +38,10 @@
     <div class="sideMenu">
       <h3 class="am-icon-flag"><em></em> <a href="#">商品管理</a></h3>
       <ul>
-        <li><a href="商品列表.html">商品列表</a></li>
-          <li class="func" dataType='html' dataLink='msn.htm' iconImg='images/msn.gif'><a href="添加新商品.html">添加新商品</a></li>
-          <li><a href="修改商品.html">修改商品</a></li>
+        <li><a href="goodsList.html">商品列表</a></li>
+        <li ><a href="addGoods.html">添加新商品</a></li>
+        <li><a href="categoryList.html">商品类别</a></li>
+        <li ><a href="addCategory.html">添加新商品类别</a></li>
       </ul>
         <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
         <ul>
@@ -50,9 +51,9 @@
             <li><a href="">修改订单</a></li>
         </ul>
 
-        <h3 class="am-icon-users"><em></em> <a href="#">个人中心</a></h3>
+        <h3 class="am-icon-users"><em></em> <a href="sellerInfo.html">个人中心</a></h3>
         <ul>
-            <li><a href="商家信息.html">修改信息</a></li>
+            <li><a href="sellerInfo.html">修改信息</a></li>
         </ul>
 
     </div>
@@ -68,47 +69,55 @@
 				returnDefault:true //鼠标从.sideMen移走后返回默认状态（默认false）
 				});
 		</script>
+    
 </div>
 
 <div class=" admin-content">
-    <div class="daohang"></div>
+
+		<div class="daohang"></div>
+
 <div class="admin">
    <div class="admin-index">
       <dl data-am-scrollspy="{animation: 'slide-right', delay: 100}">
         <dt class="qs"><i class="am-icon-users"></i></dt>
-          <dd id="dd1" > </dd>
+        <dd>455</dd>
         <dd class="f12">今日订单数量</dd>
       </dl>
       <dl data-am-scrollspy="{animation: 'slide-right', delay: 600}">
         <dt class="hs"><i class="am-icon-shopping-cart"></i></dt>
-        <dd id="dd3"></dd>
+        <dd>4552</dd>
         <dd class="f12">今日卖出商品数量</dd>
       </dl>
       <dl data-am-scrollspy="{animation: 'slide-right', delay: 900}">
         <dt class="ls"><i class="am-icon-cny"></i></dt>
-        <dd id="dd2"></dd>
+        <dd>455434</dd>
         <dd class="f12">今日店铺总收入</dd>
       </dl>
     </div>
       <div class="slideTxtBox"></div>
-      <script type="text/javascript">jQuery(".slideTxtBox").slide();</script>
+      <script type="text/javascript">jQuery(".slideTxtBox").slide();</script> 
+
+</div>
+
+    <div class="foods">
+    	<ul>版权所有@2015 .模板收集自 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> -  More Templates<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></ul>
+    	<dl><a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a></dl>
+
+
+    	
+    </div>
 
 
 
-    <div id="pic2" style=”width:400px;height:400px; margin: 20px auto;”></div>
+
+
+
+
 </div>
 
 </div>
 
-
-
-
 </div>
-
-</div>
-
-
-
 
 <!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
@@ -122,116 +131,5 @@
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
 
-
-<script>
-    // 订单数据表
-    var myChart4 = echarts.init(document.getElementById('pic2'));
-    // 指定图表的配置项和数据
-    var option4 = {
-        title: {
-            text: '地区订单情况',
-
-        },
-        legend: {
-            data:['销量']
-        },
-        xAxis: {
-            type: 'category',
-            data: []
-        },
-        yAxis: {
-            type: 'value'
-        },
-
-        series: [{
-            type: 'bar',
-
-            label: {
-                normal: {
-                    show: true,
-                    position: 'top'
-                }
-            },
-            data: []
-        },]
-    };
-     // 地域
-    var  names = new Array();
-    // 销量
-var nums = new Array();
-
-    $.ajax({
-        type: 'POST',
-        url: "selectByPlace",
-        data:{
-        },
-        success: function(result){
-
-            if (result) {
-                for(var i=0;i<result.length;i++){
-                    names.push(result[i].o_province);    //挨个取出类别并填入类别数组
-                }
-                for(var i=0;i<result.length;i++){
-                    nums.push(result[i].count);    //挨个取出销量并填入销量数组
-                }
-        }
-            myChart4.hideLoading();    //隐藏加载动画
-            myChart4.setOption({        //加载数据图表
-
-                xAxis: {
-                    data: names
-                },
-                series: [{
-                    // 根据名字对应到相应的系列
-                    name: '销量',
-                    data: nums
-                }]
-            });
-        },
-        error:function (data) {
-            // console.error(data);
-            alert(22222)
-        },
-        dataType: "json"
-    });
-    // 使用刚指定的配置项和数据显示图表。
-    myChart4.setOption(option4);
-
-
-    $.ajax({
-        type: 'POST',
-        url: "selectByOrderNum",
-        data:{},
-        success: function(data){
-            var tabObj = $("#dd1");
-            var trHtml ="<span>"+data.allCount+"</span>"
-            tabObj.append(trHtml);
-            var tabObj1 = $("#dd2");
-            var trHtml1 ="<span>"+data.allMoeny+"</span>"
-            tabObj1.append(trHtml1);
-        },
-        error:function (data) {
-        },
-        dataType: "json"
-    });
-
-
-    $.ajax({
-        type: 'POST',
-        url: "selectByGoodsNum",
-        data:{},
-        success: function(data){
-            var tabObj = $("#dd3");
-            var trHtml ="<span>"+data.allGoods+"</span>"
-            tabObj.append(trHtml);
-        },
-        error:function (data) {
-        },
-        dataType: "json"
-    });
-
-
-
-</script>
 </body>
 </html>

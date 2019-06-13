@@ -18,10 +18,4 @@ public interface OrderMapper {
     List<OrderVo> selectOrderBy(OrderSelected orderSelected);
 
     Object deleteSelectOrder(List<Integer> selectOrderId);
-
-    List<OrderVo> selectByPlace();
-
-    OrderVo selectByOrderNum();
-
-    OrderVo selectByGoodsNum();
 }

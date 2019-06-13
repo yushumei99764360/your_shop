@@ -25,7 +25,6 @@ public class OrderController {
 //    @RequestParam int goodsId
     public Object getAllOrderInfo(){
         List<OrderVo> orderInfoList = orderService.getAllOrderInfo();
-
         return orderInfoList;
     }
 
@@ -70,27 +69,6 @@ public Object deleteSelectOrder(@RequestBody List<Integer> selectOrderId){
 
     return orderService.deleteSelectOrder(selectOrderId);
 }
-//echarts图表
-    @ResponseBody
-    @RequestMapping("selectByPlace")
-    public Object selectByPlace(){
-        List<OrderVo> orderVo1 = orderService.selectByPlace();
-        return orderVo1;
-    }
 
-//获取订单数量和金额
-    @ResponseBody
-    @RequestMapping("selectByOrderNum")
-    public Object selectByOrderNum(){
-        OrderVo orderVo2 = orderService.selectByOrderNum();
-        return orderVo2;
-    }
 
-//    获取商品数量
-    @ResponseBody
-    @RequestMapping("selectByGoodsNum")
-    public Object selectByGoodsNum(){
-        OrderVo orderVo3 = orderService.selectByGoodsNum();
-        return orderVo3;
-    }
 }

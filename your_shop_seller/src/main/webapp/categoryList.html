@@ -9,19 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!-- DataTables -->
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.css">
+
     <link rel="icon" type="image/png" href="assets/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
     <link rel="stylesheet" href="assets/css/admin.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/app.js"></script>
-
-
-    <!-- DataTables -->
-    <script src="assets/js/jquery.dataTables.js"></script>
 
 </head>
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
@@ -32,7 +29,8 @@
     <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
         <ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
             <li class="kuanjie">
-                <a href="#">退出</a>
+                <a href="sellerInfo.html">个人中心</a>
+                <a href="login.html">退出</a>
             </li>
         </ul>
     </div>
@@ -44,12 +42,14 @@
         <div class="sideMenu">
             <h3 class="am-icon-flag"><em></em> <a href="index.html">商品管理</a></h3>
             <ul>
-                <li><a href="商品列表.html">商品列表</a></li>
-                <li><a href="添加新商品.html">添加新商品</a></li>
+                <li><a href="goodsList.html">商品列表</a></li>
+                <li ><a href="addGoods.html">添加新商品</a></li>
+                <li><a href="categoryList.html">商品类别</a></li>
+                <li ><a href="addCategory.html">添加新商品类别</a></li>
             </ul>
             <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
             <ul>
-                <li><a href="">订单列表</a></li>
+                <li><a href="订单列表.html">订单列表</a></li>
                 <li><a href="">订单展示</a></li>
                 <li><a href="">添加新订单</a></li>
                 <li><a href="">修改订单</a></li>
@@ -80,12 +80,12 @@
     <div class="admin-biaogelist">
 
         <div class="listbiaoti am-cf">
-            <ul class="am-icon-flag on"> 本店商品信息列表</ul>
+            <ul class="am-icon-flag on"> 本店商品类别信息列表</ul>
 
-            <dl class="am-icon-home" style="float: right;"> 当前位置： &gt; 商品列表</dl>
+            <dl class="am-icon-home" style="float: right;"> 当前位置： &gt; 商品类别列表</dl>
 
             <dl>
-                <a type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" href="添加新商品.html"> 添加产品</a>
+                <a type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" href="addCategory.html"> 添加产品类别</a>
             </dl>
 
 
@@ -93,52 +93,21 @@
 
         <div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
             <ul>
-                <li>
-                    <div class="am-btn-group am-btn-group-xs">
-                        <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="categoryName">
-                            <option value="">产品分类</option>
-                            <option value="手机">手机</option>
-                        </select>
-                       </div>
-                </li>
-                <li style="margin-right: 0;">
-                    <span class="tubiao am-icon-calendar"></span>
-                    <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" id="minDate" placeholder="开始日期" data-am-datepicker="{theme: 'success',}" readonly="">
-                </li>
-                <li style="margin-left: -4px;">
-                    <span class="tubiao am-icon-calendar"></span>
-                    <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" id="maxDate" placeholder="最晚日期" data-am-datepicker="{theme: 'success',}" readonly="">
-                </li>
-
-                <li style="margin-left: -10px;">
-                    <div class="am-btn-group am-btn-group-xs">
-                        <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" style="display: none;" id="g_status">
-                            <option value="">商品状态</option>
-                            <option value="1">上架</option>
-                            <option value="0">下架</option>
-                        </select>
-                    </div>
-                </li>
                 <li><input type="text" class="am-form-field am-input-sm am-input-xm" placeholder="关键词搜索" id="str"></li>
-                <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" style="margin-top: -1px;" onclick="selectGoodsBys()">搜索</button></li>
+                <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" style="margin-top: -1px;" onclick="selectCategoryBys()">搜索</button></li>
             </ul>
         </div>
 
 
         <form class="am-form am-g">
-            <table width="100%" id="datable" class="am-table am-table-bordered am-table-radius am-table-striped">
+            <table width="100%" id="table" class="am-table am-table-bordered am-table-radius am-table-striped">
                 <thead>
                 <tr class="am-success">
                     <th class="table-check"><input type="checkbox" id="all" onchange="selectAll()"/></th>
-                    <th class="table-id">商品ID</th>
-                    <th class="table-title">商品品牌</th>
-                    <th class="table-type">商品名称</th>
-                    <th class="table-type">商品售价</th>
-                    <th class="table-type">库存</th>
-                    <th class="table-type">类别</th>
-                    <th class="table-author am-hide-sm-only">上架/下架 <i class="am-icon-check am-text-warning"></i> <i class="am-icon-close am-text-primary"></i></th>
-                    <th class="table-date am-hide-sm-only" >录入日期</th>
-                    <th class="table-date am-hide-sm-only">修改日期</th>
+                    <th class="table-id">商品二级类别ID</th>
+                    <th class="table-title">商品二级类别</th>
+                    <th class="table-type">商品一级类别ID</th>
+                    <th class="table-type">商品一级类别</th>
                     <th width="163px" class="table-set">操作</th>
                 </tr>
                 </thead>
@@ -148,19 +117,9 @@
             </table>
 
             <div class="am-btn-group am-btn-group-xs">
-             <button type="button" class="am-btn am-btn-default" onclick="delCheckGoods()"><span class="am-icon-trash-o"></span> 删除</button>
+             <button type="button" class="am-btn am-btn-default" onclick="delCheckCategory()"><span class="am-icon-trash-o"></span> 删除</button>
             </div>
 
-         <!--   <ul class="am-pagination am-fr" id="page">
-                <li class="am-disabled"><a href="#">«</a></li>
-                <li class="am-active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-            </ul>-->
-            <!--<hr>-->
         </form>
 
 
@@ -190,59 +149,48 @@
 <script src="assets/js/polyfill/rem.min.js"></script>
 <script src="assets/js/polyfill/respond.min.js"></script>
 <script src="assets/js/amazeui.legacy.js"></script>
-
-
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
 
+
+<!-- DataTables -->
+<script src="assets/js/jquery.dataTables.js"></script>
+<script src="datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
 
-    $(function () {
-
-    })
 
     function f(){
         //1.发送ajax请求获取数据
         $.ajax({
             type: 'POST',
-            url: "getAllGoods",
+            url: "getAllCategory",
             success: function(data){
                 //循环
-                // alert(1111)
                 var tabObj = $("#dataTable");
+                console.log(data);
                 $(data).each(function (index,item) {
 
                     var trHtml = "<tr>\n" +
-                        "                    <td><input type=\"checkbox\" value="+item.g_id+"></td>\n" +
-                        "                    <td>"+item.g_id+"</td>\n" +
-                        "                    <td>"+item.g_title+"</td>\n" +
-                        "                    <td>"+item.g_name+"</td>\n" +
-                        "                    <td>"+item.g_price+"</td>\n" +
-                        "                    <td>"+item.g_num+"</td>\n" +
-                        "                    <td>"+item.childName+"</td>\n"
-                            if(item.g_status==1){
-                                trHtml += "<td class=\"am-hide-sm-only\"><i class=\"am-icon-check am-text-warning\"></i></td>\n"
-                            }else {
-                                trHtml += "<td class=\"am-hide-sm-only\"><i class=\"am-icon-close am-text-primary\"></i></td>\n"
-                            }
-                            trHtml += "<td class=\"am-hide-sm-only\">"+item.g_date+"</td>\n" +
-                        "                    <td class=\"am-hide-sm-only\">"+item.g_lastdate+"</td>\n" +
+                        "                    <td><input type=\"checkbox\" value="+item.childId+"></td>\n" +
+                        "                    <td>"+item.childId+"</td>\n" +
+                        "                    <td>"+item.childName+"</td>\n" +
+                        "                    <td>"+item.fatherId+"</td>\n" +
+                        "                    <td>"+item.fatherName+"</td>\n" +
                         "                    <td><div class=\"am-btn-toolbar\">\n" +
                         "                        <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick = \"jumpToEdit("+item.g_id+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
-                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\" onclick = \"delGoodsById("+item.g_id+")\"><span class=\"am-icon-trash-o\"></span></button>\n" +
+                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick = \"jumpToEdit("+item.childId+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
+                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\" onclick = \"delCategoryById("+item.childId+")\"><span class=\"am-icon-trash-o\"></span></button>\n" +
                         "                        </div>\n" +
                         "                    </div></td>\n" +
                         "                </tr>"
                     console.log(trHtml); //  2pm
                     //将字符串添加到table中
                     tabObj.append(trHtml);
-
                 });
-                $("#datable").DataTable({
+                $("#table").DataTable({
                     "paging":true,
                     "info":true,
                     "lengthChange":false,
@@ -268,7 +216,7 @@
                             "sPrevious": "上页",
                             "sNext": "下页",
                             "sLast": "末页"
-                        }
+                        },
                     }
                 });
             },
@@ -281,22 +229,22 @@
     }
     f();
 
-    function jumpToEdit(goodsId){
-        alert(goodsId)
-        var url = "修改商品.html?goodsId="+goodsId;
+    function jumpToEdit(childId){
+        // alert(childId)
+        var url = "editCategory.html?childId="+childId;
         window.location.href = url;
     }
 
     // 单个删除
-    function delGoodsById(goodsId) {
-        alert(goodsId)
+    function delCategoryById(childId) {
+        // alert(childId)
         $.ajax({
             type: "POST",
-            url:"delByGoodsId?goodsId="+goodsId,
+            url:"delByCid?childId="+childId,
             contentType:"application/json",
             success: function (data) {
-                alert("删除成功")
-                window.location.href="商品列表.html";
+                // alert("删除成功")
+                window.location.href="categoryList.html";
             },
             error: function (data) {
                 alert("删除失败")
@@ -306,79 +254,64 @@
     }
 
     // 条件查询
-    function selectGoodsBys() {
+    function selectCategoryBys() {
         $("#dataTable").empty();
         //1.发送ajax请求获取数据
+        var str = $("#str").val();
+        alert(str);
         $.ajax({
-            type: 'POST',
-            url: "getGoodsBys",
+            type: "GET",
+            url: "selectCategoryBys",
             contentType:"application/json",
-            data:JSON.stringify({
-                "categoryName":$("#categoryName").val(),
-                "str":$("#str").val(),
-                "g_status":$("#g_status").val(),
-                "minDate":$("#minDate").val(),
-                "maxDate":$("#maxDate").val()
-            }),
+            data:{str},
             success: function(data){
                 //循环
                 alert(3333)
                 var tabObj = $("#dataTable");
                 $(data).each(function (index,item) {
-
                     var trHtml = "<tr>\n" +
-                        "                    <td><input type=\"checkbox\" value="+item.g_id+" ></td>\n" +
-                        "                    <td>"+item.g_id+"</td>\n" +
-                        "                    <td>"+item.g_title+"</td>\n" +
-                        "                    <td>"+item.g_name+"</td>\n" +
-                        "                    <td>"+item.g_price+"</td>\n" +
-                        "                    <td>"+item.g_num+"</td>\n" +
-                        "                    <td>"+item.childName+"</td>\n"
-                    if(item.g_status==1){
-                        trHtml += "<td class=\"am-hide-sm-only\"><i class=\"am-icon-check am-text-warning\"></i></td>\n"
-                    }else {
-                        trHtml += "<td class=\"am-hide-sm-only\"><i class=\"am-icon-close am-text-primary\"></i></td>\n"
-                    }
-                    trHtml += "<td class=\"am-hide-sm-only\">"+item.g_date+"</td>\n" +
-                        "                    <td class=\"am-hide-sm-only\">"+item.g_lastdate+"</td>\n" +
+                        "                    <td><input type=\"checkbox\" value="+item.childId+"></td>\n" +
+                        "                    <td>"+item.childId+"</td>\n" +
+                        "                    <td>"+item.childName+"</td>\n" +
+                        "                    <td>"+item.fatherId+"</td>\n" +
+                        "                    <td>"+item.fatherName+"</td>\n" +
                         "                    <td><div class=\"am-btn-toolbar\">\n" +
                         "                        <div class=\"am-btn-group am-btn-group-xs\">\n" +
-                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick = \"jumpToEdit("+item.g_id+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
-                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\" onclick = \"delGoodsById("+item.g_id+")\"><span class=\"am-icon-trash-o\"></span></button>\n" +
+                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-secondary am-round\" onclick = \"jumpToEdit("+item.childId+")\"><span class=\"am-icon-pencil-square-o\"></span></button>\n" +
+                        "                            <button type='button' class=\"am-btn am-btn-default am-btn-xs am-text-danger am-round\" onclick = \"delCategoryById("+item.childId+")\"><span class=\"am-icon-trash-o\"></span></button>\n" +
                         "                        </div>\n" +
                         "                    </div></td>\n" +
                         "                </tr>"
-                    console.log(trHtml); //  2pm
                     //将字符串添加到table中
                     tabObj.append(trHtml);
                 });
             },
             error:function (data) {
-                // console.error(data);
+                console.log(data);
                 alert(4444)
             },
             dataType: "json"
         });
     }
 
-    var selectedGoodsId = new  Array();
+    var selectedCId = new  Array();
     //删除选中的 批量删除
-    function delCheckGoods() {
+    function delCheckCategory() {
 
         $(":checkbox:checked").each(function (i) {
             if ($(this).val() != '') {
-                selectedGoodsId.push($(this).val())
+                selectedCId.push($(this).val())
             }
         });
-        alert(selectedGoodsId);
+        alert(selectedCId);
         $.ajax({
             type: "POST",
-            url: "delCheckGoods",
+            url: "delCheckCategoryIds",
             contentType: "application/json",
-            data: JSON.stringify(selectedGoodsId),
+            data: JSON.stringify(selectedCId),
             success: function (data) {
                 alert(data)
-                window.location.href = "商品列表.html"
+                window.location.href = "categoryList.html"
             },
             error: function (data) {
                 alert("执行失败")
@@ -391,7 +324,7 @@
     function selectAll() {
         var isCheck = $("#all").is(":checked"); //
         $("input[type='checkbox']").each(function () {
-            this.checked = isCheck ;
+            this.checked = isCheck ; //
         })
     }
 
