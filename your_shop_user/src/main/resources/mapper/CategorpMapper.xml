@@ -39,19 +39,19 @@
         ca.c_parentid =c.c_id and ca.c_parentid;
     </select>
 
-
-    <select id="findByAllGoods" parameterType="com.qf.dto.Category">
-        SELECT
-        c.c_id,c.c_name,c1.c_name,c1.c_parentid
-        FROM
-        category c,category c1
-        WHERE
-        c.c_id=c1.c_parentid and c.cid=1;
-    </select>
-
     <!--查询商品详细信息-->
     <select id="getGoodsInfoById" parameterType="int" resultType="com.qf.dto.GodsInfoDetail">
          SELECT g.*,s.`s_name`  FROM goodsinfo g ,sellerinfo s
          WHERE g.`s_id`=s.`s_id` AND g.`g_id`=#{g_id}
     </select>
+
+    <!--查询用户选择的地址-->
+    <select id="searchAddress" resultType="com.qf.dto.AddressInfoDto" parameterType="int">
+        select * from addressinfo where adsId = #{adsId}
+    </select>
+    <!--添加订单-->
+    <insert id="insertOrder" parameterType="com.qf.dto.AddressInfoDto">
+        insert into orderinfo (id,o_sendtype,o_paycount,province,city,district,street,shname,shphone,userId)
+        values (#{id},#{o_sendtype},#{o_paycount},#{province},#{city},#{district},#{street},#{shname},#{o_shphone},#{userId})
+    </insert>
 </mapper>

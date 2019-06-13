@@ -1,6 +1,10 @@
 package com.qf.controller;
 
+import com.qf.dto.AddressInfoDto;
 import com.qf.dto.CategoryDto;
+import com.qf.dto.CreateOrderDto;
+import com.qf.dto.OrdersOfUserDto;
+import com.qf.pojo.AddressInfo;
 import com.qf.pojo.Category;
 import com.qf.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class CategoryController {
@@ -31,9 +36,7 @@ public class CategoryController {
     @ResponseBody
     @RequestMapping(value = "categoryListOne",method = RequestMethod.GET)
     public Object categoryListOne() {
-        System.out.println(1);
         List<CategoryDto> categoryDtos = categoryService.categoryListOne();
-        System.out.println(categoryDtos);
         return categoryDtos;
     }
 
@@ -44,5 +47,25 @@ public class CategoryController {
     @RequestMapping("getGoodsInfoById")
     public Object getGoodsInfoById(@RequestParam int g_id){
         return categoryService.getGoodsInfoById(g_id);
+    }
+
+
+    /**
+     * 订单创建
+     */
+    @ResponseBody
+    @RequestMapping("createOrder")
+    public Object createOrder(@RequestBody CreateOrderDto createOrderDto){
+        System.out.println(createOrderDto);
+        int adsId = createOrderDto.getAddress();
+        AddressInfoDto addressInfoDto = categoryService.searchAddress(adsId);
+        //订单编号
+        int id = (int) new Random().nextInt(100000);
+        addressInfoDto.setO_sendtype(createOrderDto.getExpress());
+        addressInfoDto.setId(id);
+        //下单
+        int i= categoryService.insertOrder(addressInfoDto);
+
+        return "";
     }
 }

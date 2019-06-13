@@ -24,10 +24,7 @@ public class Order_Detail implements Serializable {
   PRIMARY KEY (`id`),
   KEY `FK_ORDER` (`o_orderid`)
 )
-
-
      */
-
      int id;
      Date order_date;
      int o_orderid;
@@ -39,5 +36,4 @@ public class Order_Detail implements Serializable {
      double g_total_price;
      String g_pic;
      Date order_modified;
-
 }
