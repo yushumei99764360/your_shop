@@ -9,6 +9,7 @@ import com.qf.pojo.AddressInfo;
 import com.qf.pojo.Category;
 import com.qf.pojo.GoodsInfo;
 import com.qf.service.CategoryService;
+import com.qf.vo.CategoryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,18 +22,19 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryMapper categoryMapper;
 
 
-
     @Override
-    public List<CategoryDto> categoryList() {
-        //System.out.println(3);
-        return categoryMapper.categoryList();
+    public List<Category> getFatherInfo() {
+        return null;
     }
 
+    @Override
+    public List<Category> getChildInfo() {
+        return null;
+    }
 
     @Override
-    public List<CategoryDto> categoryListOne() {
-        System.out.println(2);
-        return categoryMapper.categoryListOne();
+    public CategoryVo getChildCategoryInfo(int fatherId) {
+        return null;
     }
 
     /**
