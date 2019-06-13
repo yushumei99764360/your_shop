@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.CategoryMapper">
+
+    <!--<resultMap id="findAllKidGoods" type="com.qf.dto.CategoryDto">-->
+        <!--<id property="c_id" column="c_id"></id>-->
+        <!--<result property="c_name" column="c_name"/>-->
+        <!--<collection property="categories" ofType="com.qf.pojo.Category">-->
+            <!--<id column="c_id" property="c_id"></id>-->
+            <!--<result property="c_name" column="c_name"></result>-->
+        <!--</collection>-->
+    <!--</resultMap>-->
+    <!--<select id="categoryList" resultMap="findAllKidGoods">-->
+        <!--SELECT-->
+        <!--c.c_id,c1.c_name,c1.c_parentid-->
+        <!--FROM-->
+        <!--category c,category c1-->
+        <!--WHERE-->
+        <!--c.`c_id`=c1.`c_parentid`;-->
+    <!--</select>-->
+
+    <select id="categoryList" resultType="com.qf.dto.CategoryDto" parameterType="com.qf.dto.CategoryDto">
+        SELECT
+        c_id,c_name
+        FROM
+        category
+        WHERE
+        c_parentid=0;
+    </select>
+
+    <select id="categoryListOne" resultType="com.qf.dto.CategoryDto" parameterType="com.qf.dto.CategoryDto">
+        SELECT
+        c.c_id,c.c_name,ca.c_name
+        FROM
+        category c,category ca
+        WHERE
+        c.c_id=ca.c_parentid and ca.c_parentid=c.c_id;
+    </select>
+
+</mapper>

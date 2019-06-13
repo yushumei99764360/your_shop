@@ -11,7 +11,10 @@ public interface CategoryService {
      * 商品分类
      * @return
      */
-    public List<Category> categoryList();
+    public List<CategoryDto> categoryList();
+
+
+    public List<CategoryDto> categoryListOne();
 
     GoodsInfo getGoodsInfoById(int g_id);
 }

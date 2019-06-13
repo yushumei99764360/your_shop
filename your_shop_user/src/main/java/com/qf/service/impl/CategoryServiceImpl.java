@@ -16,10 +16,18 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryMapper categoryMapper;
 
+
+
     @Override
-    public List<Category> categoryList() {
-        System.out.println(2);
+    public List<CategoryDto> categoryList() {
+        System.out.println(3);
         return categoryMapper.categoryList();
+    }
+
+
+    @Override
+    public List<CategoryDto> categoryListOne() {
+        return categoryMapper.categoryListOne();
     }
 
     /**

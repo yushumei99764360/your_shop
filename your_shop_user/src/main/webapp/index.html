@@ -158,7 +158,78 @@
 
 		<!--左边导航-->
 		<div class="dd-inner" id="box">
-			<div class="font-item"></div>
+			<div class="font-item">
+				<!--<div class="item fore1">-->
+					<!--<h3>-->
+						<!--&lt;!&ndash;<a class="da_zhu" href="#">吃货必备</a>&ndash;&gt;-->
+						<!--<p>-->
+							<!--<a href="#">零食</a>-->
+							<!--<a href="#">蛋糕</a>-->
+							<!--<a href="#">饮料</a>-->
+						<!--</p>-->
+					<!--</h3>-->
+					<!--<i>></i>-->
+				<!--</div>-->
+				<!--<div class="font-item1">-->
+					<!--<div class="font-lefty">-->
+						<!--<dl class="fore1"></dl>-->
+						<!--<dl class="fore1">-->
+							<!--<dt><a href=""><i>></i>零食</a></dt>-->
+							<!--<dd>-->
+								<!--<a href="">旺仔牛奶</a><a href="">奥利奥</a><a href="">三只松鼠</a><a href="">百草味</a>-->
+							<!--</dd>-->
+						<!--</dl>-->
+						<!--<dl class="fore1">-->
+							<!--<dt><a href=""><i>></i>蛋糕</a></dt>-->
+							<!--<dd>-->
+								<!--<a href="">牛奶蛋糕</a><a href="">芝士蛋糕</a><a href="">草莓蛋糕</a><a href="">戚风蛋糕</a>-->
+							<!--</dd>-->
+						<!--</dl>-->
+						<!--<dl class="fore1">-->
+							<!--<dt><a href=""><i>></i>饮料</a></dt>-->
+							<!--<dd>-->
+								<!--<a href="">可乐</a><a href="">雪碧</a><a href="">百事可乐</a><a href="">康师傅果汁</a>-->
+							<!--</dd>-->
+						<!--</dl>-->
+					<!--</div>-->
+					<!--<div class="font-right">-->
+						<!--<div>-->
+							<!--<a href="#">-->
+								<!--<img src="./images/562f4971Na5379aba.jpg">-->
+							<!--</a>-->
+							<!--<a href="#">-->
+								<!--<img src="./images/54d9eef9N5bb8d27f.jpg">-->
+							<!--</a>-->
+							<!--<a href="#">-->
+								<!--<img src="./images/54d9ef02N99d26435.jpg">-->
+							<!--</a>-->
+							<!--<a href="#">-->
+								<!--<img src="./images/54d9ef10Nd206a236.jpg">-->
+							<!--</a>-->
+							<!--<a href="#">-->
+								<!--<img src="./images/54d9ef28N00328d44.jpg">-->
+							<!--</a>-->
+							<!--<a href="#">-->
+								<!--<img src="./images/54d9ef34N7cc61f4c.jpg">-->
+							<!--</a>-->
+							<!--<a href="#">-->
+								<!--<img src="./images/54d9ef3eN99aef1f0.jpg">-->
+							<!--</a>-->
+							<!--<a href="#">-->
+								<!--<img src="./images/54d9ef4cN4fe57f9b.jpg">-->
+							<!--</a>-->
+						<!--</div>-->
+					<!--</div>-->
+					<!--<div class="font-righty">-->
+						<!--&lt;!&ndash;<a href="#">&ndash;&gt;-->
+						<!--&lt;!&ndash;<img src="./images/5673a854N10856704.jpg">&ndash;&gt;-->
+						<!--&lt;!&ndash;</a>&ndash;&gt;-->
+						<!--&lt;!&ndash;<a href="#">&ndash;&gt;-->
+						<!--&lt;!&ndash;<img src="./images/56a0376aN7de1bdcf.jpg">&ndash;&gt;-->
+						<!--&lt;!&ndash;</a>&ndash;&gt;-->
+					<!--</div>-->
+				<!--</div>-->
+			</div>
 			<div class="fore-2"></div>
 			<div class="fore-3"></div>
 			<div class="fore-4"></div>
@@ -2331,82 +2402,23 @@
             contentType:"application/json",
             success: function(data){
                 var boxVal = $("#box");
-                $(data).each(function (index,eat) {
+                $(data).each(function (index,item) {
+                    //alert(item.c_name);
                     var trHtml =
-                		"<div class=\"item fore1\">"+
+						"<div class=\"item fore1\">"+
                         "<h3>"+
-                        "<a class=\"da_zhu\" href=\"#\">"+eat.cid+"</a>"+
+                        "<a class=\"da_zhu\" href=\"#\">"+item.c_name+"</a>"
                         "<p>"+
-                        "<a href=\"#\">"+eat.name+"</a>"+
-                        "<a href=\"#\">"+eat.name+"</a>"+
-                        "<a href=\"#\">"+eat.name+"</a>"+
+                        "<a href=\"#\">+item.c_name+</a>"+
+                        "<a href=\"#\">+item.c_name+</a>"+
+                        "<a href=\"#\">+item.c_name+</a>"+
                         "</p>"+
                         "</h3>"+
                         "<i></i>"+
-                        "</div>"+
-                        "<div class=\"font-item1\">"+
-                        "<div class=\"font-lefty\">"+
-                        "<dl class=\"fore1\"></dl>"+
-                        "<dl class=\"fore1\">"+
-                        "<dt><a href=\"\"><i>></i>零食</a></dt>"+
-                    	"<dd>"+
-                    	"<a href=\"\">旺仔牛奶</a><a href=\"\">奥利奥</a><a href=\"\">三只松鼠</a><a href=\"\">百草味</a>"+
-                    	"</dd>"+
-                    	"</dl>"+
-                    	"<dl class=\"fore1\">"+
-                        "<dt><a href=\"\"><i>></i>蛋糕</a></dt>"+
-                    	"<dd>"+
-                    	"<a href=\"\">牛奶蛋糕</a><a href=\"\">芝士蛋糕</a><a href=\"\">草莓蛋糕</a><a href=\"\">戚风蛋糕</a>"+
-                    	"</dd>"+
-                    	"</dl>"+
-                    	"<dl class=\"fore1\">"+
-                        "<dt><a href=\"\"><i>></i>饮料</a></dt>"+
-                    	"<dd>"+
-                    	"<a href=\"\">可乐</a><a href=\"\">雪碧</a><a href=\"\">百事可乐</a><a href=\"\">康师傅果汁</a>"+
-                    	"</dd>"+
-                    	"</dl>"+
-                    	"</div>"+
-                    	"<div class=\"font-right\">"+
-                        "<div>"+
-                        "<a href=\"#\">"+
-                        "<img src=\"./images/562f4971Na5379aba.jpg\">"+
-                        "</a>"+
-                        "<a href=\"#\">"+
-                        "<img src=\"./images/54d9eef9N5bb8d27f.jpg\">"+
-                        "</a>"+
-                        "<a href=\"#\">"+
-                        "<img src=\"./images/54d9ef02N99d26435.jpg\">"+
-                        "</a>"+
-                        "<a href=\"#\">"+
-                        "<img src=\"./images/54d9ef10Nd206a236.jpg\">"+
-                        "</a>"+
-                        "<a href=\"#\">"+
-                        "<img src=\"./images/54d9ef28N00328d44.jpg\">"+
-                        "</a>"
-                        "<a href=\"#\">"
-                        "<img src=\"./images/54d9ef34N7cc61f4c.jpg\">"
-                        "</a>"+
-                        "<a href=\"#\">"+
-                        "<img src=\"./images/54d9ef3eN99aef1f0.jpg\">"+
-                        "</a>"+
-                        "<a href=\"#\">"+
-                        "<img src=\"./images/54d9ef4cN4fe57f9b.jpg\">"+
-                        "</a>"+
-                        "</div>"+
-                        "</div>"+
-                        "<div class=\"font-righty\">"+
-                        "<!--<a href=\"#\">-->"
-                        "<!--<img src=\"./images/5673a854N10856704.jpg\">-->"
-                        "<!--</a>-->"
-                        "<!--<a href=\"#\">-->"
-                        "<!--<img src=\"./images/56a0376aN7de1bdcf.jpg\">-->"
-                        "<!--</a>-->"
-                        "</div>"+
-                        "</div>"+
-                        "</div>"+
+                        "</div>"
 
                     console.log(trHtml);
-                    tabObj.append(trHtml);
+                    boxVal.append(trHtml);
                 });
             },
             error:function (data) {
@@ -2416,6 +2428,30 @@
         });
     }
     categoryList();
+
+    function categoryListOne() {
+        $.ajax({
+            type: 'GET',
+            url: "categoryListOne",
+            contentType:"application/json",
+            success: function(data){
+                var boxVal = $("#box");
+                $(data).each(function (index,item) {
+                    //alert(item.c_name);
+                    var trHtml =
+
+
+                        console.log(trHtml);
+                    boxVal.append(trHtml);
+                });
+            },
+            error:function (data) {
+                console.error(data);
+            },
+            dataType: "json"
+        });
+    }
+    categoryListOne();
 </script>
 
 </body>
