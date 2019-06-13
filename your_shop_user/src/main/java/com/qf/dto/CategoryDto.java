@@ -10,7 +10,7 @@ public class CategoryDto {
     /**
      * 商品分类
      */
-    private int cid;
-    private String cname;
-    private List<Category> categories;
+    private int c_id;
+    private String c_name;
+    private String c_parentid;
 }

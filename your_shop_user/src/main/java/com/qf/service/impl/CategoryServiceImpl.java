@@ -1,8 +1,8 @@
 package com.qf.service.impl;
 
-import com.qf.dto.Category;
-import com.qf.dto.GodsInfoDetail;
+import com.qf.dto.CategoryDto;
 import com.qf.mapper.CategoryMapper;
+import com.qf.pojo.Category;
 import com.qf.pojo.GoodsInfo;
 import com.qf.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,18 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryMapper categoryMapper;
 
+
+
     @Override
-    public List<Category> categoryList() {
+    public List<CategoryDto> categoryList() {
+        System.out.println(3);
         return categoryMapper.categoryList();
+    }
+
+
+    @Override
+    public List<CategoryDto> categoryListOne() {
+        return categoryMapper.categoryListOne();
     }
 
     /**
@@ -27,7 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @return
      */
     @Override
-    public GodsInfoDetail getGoodsInfoById(int g_id) {
+    public GoodsInfo getGoodsInfoById(int g_id) {
         return categoryMapper.getGoodsInfoById(g_id);
     }
 }
