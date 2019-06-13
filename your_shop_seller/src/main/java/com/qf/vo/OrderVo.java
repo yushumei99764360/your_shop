@@ -30,8 +30,8 @@ public class OrderVo {
     String o_city;
 //区
     String  o_district;
-
-
+//    订单状态
+String o_status;
 
 
 //卖家id
@@ -54,12 +54,21 @@ public class OrderVo {
     int g_num;
 //    订单总价
     Double g_total_price;
+//销量
+   String COUNT;
 
+//总订单数
+String allCount;
+
+//总订单金额
+    String allMoeny;
+//    销售商品数量
+    String allGoods;
 
     public OrderVo() {
     }
 
-    public OrderVo(int id, String o_sendtype, String o_orderdate, String o_checkdate, String o_paytype, double o_paycount, int userId, String o_shperson, String o_shphone, String o_shaddress, String o_province, String o_city, String o_district, int s_id, String order_date, String order_modified, int o_orderid, int g_id, String g_name, Double g_disctprice, String g_desc, int g_num, Double g_total_price) {
+    public OrderVo(int id, String o_sendtype, String o_orderdate, String o_checkdate, String o_paytype, double o_paycount, int userId, String o_shperson, String o_shphone, String o_shaddress, String o_province, String o_city, String o_district, String o_status, int s_id, String order_date, String order_modified, int o_orderid, int g_id, String g_name, Double g_disctprice, String g_desc, int g_num, Double g_total_price, String COUNT, String allCount, String allMoeny) {
         this.id = id;
         this.o_sendtype = o_sendtype;
         this.o_orderdate = o_orderdate;
@@ -73,6 +82,7 @@ public class OrderVo {
         this.o_province = o_province;
         this.o_city = o_city;
         this.o_district = o_district;
+        this.o_status = o_status;
         this.s_id = s_id;
         this.order_date = order_date;
         this.order_modified = order_modified;
@@ -83,6 +93,9 @@ public class OrderVo {
         this.g_desc = g_desc;
         this.g_num = g_num;
         this.g_total_price = g_total_price;
+        this.COUNT = COUNT;
+        this.allCount = allCount;
+        this.allMoeny = allMoeny;
     }
 }
 

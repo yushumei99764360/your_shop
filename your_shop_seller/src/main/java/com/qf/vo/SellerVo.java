@@ -21,11 +21,9 @@ public class SellerVo {
 //    店家状态
     String s_status;
 //    开店时间
-    String s_date;
+    Date s_date;
 //    最后修改时间
-    String s_lastdate;
-    //商家图片
-    String icon;
+    Date g_lastdate;
 
     @Override
     public String toString() {
@@ -38,18 +36,9 @@ public class SellerVo {
                 ", s_address='" + s_address + '\'' +
                 ", s_desc='" + s_desc + '\'' +
                 ", s_status='" + s_status + '\'' +
-                ", s_date='" + s_date + '\'' +
-                ", s_lastdate='" + s_lastdate + '\'' +
-                ", icon='" + icon + '\'' +
+                ", s_date=" + s_date +
+                ", g_lastdate=" + g_lastdate +
                 '}';
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
     }
 
     public int getS_id() {
@@ -116,19 +105,19 @@ public class SellerVo {
         this.s_status = s_status;
     }
 
-    public String getS_date() {
+    public Date getS_date() {
         return s_date;
     }
 
-    public void setS_date(String s_date) {
+    public void setS_date(Date s_date) {
         this.s_date = s_date;
     }
 
-    public String getS_lastdate() {
-        return s_lastdate;
+    public Date getG_lastdate() {
+        return g_lastdate;
     }
 
-    public void setS_lastdate(String s_lastdate) {
-        this.s_lastdate = s_lastdate;
+    public void setG_lastdate(Date g_lastdate) {
+        this.g_lastdate = g_lastdate;
     }
 }

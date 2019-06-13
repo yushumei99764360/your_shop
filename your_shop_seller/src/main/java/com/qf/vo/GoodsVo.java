@@ -1,10 +1,7 @@
 package com.qf.vo;
 
 
-import com.qf.pojo.Category;
-
 import java.util.Date;
-import java.util.List;
 
 public class GoodsVo {
 
@@ -29,22 +26,17 @@ public class GoodsVo {
     //    商品照片
     String g_pic;
     //是否上架 1是 0不是
-    String g_status ;
+    int g_status ;
     // 商品录入时间
     String g_date;
     //    商品最后修改时间
     String g_lastdate;
     // 商店id
     int s_id;
-//    商品类别
+//    商品子类
     String childName;
-    // 商品类别id
-    int childId;
-    // 商品一级类别
+    // 商品父类
     String fatherName;
-
-    //所有的二级类别
-    List<Category> categoryList;
 
     @Override
     public String toString() {
@@ -59,14 +51,12 @@ public class GoodsVo {
                 ", g_num=" + g_num +
                 ", g_desc='" + g_desc + '\'' +
                 ", g_pic='" + g_pic + '\'' +
-                ", g_status='" + g_status + '\'' +
-                ", g_date='" + g_date + '\'' +
-                ", g_lastdate='" + g_lastdate + '\'' +
+                ", g_status=" + g_status +
+                ", g_date=" + g_date +
+                ", g_lastdate=" + g_lastdate +
                 ", s_id=" + s_id +
                 ", childName='" + childName + '\'' +
-                ", childId=" + childId +
                 ", fatherName='" + fatherName + '\'' +
-                ", categoryList=" + categoryList +
                 '}';
     }
 
@@ -150,11 +140,11 @@ public class GoodsVo {
         this.g_pic = g_pic;
     }
 
-    public String getG_status() {
+    public int getG_status() {
         return g_status;
     }
 
-    public void setG_status(String g_status) {
+    public void setG_status(int g_status) {
         this.g_status = g_status;
     }
 
@@ -190,28 +180,11 @@ public class GoodsVo {
         this.childName = childName;
     }
 
-    public int getChildId() {
-        return childId;
-    }
-
-    public void setChildId(int childId) {
-        this.childId = childId;
-    }
-
     public String getFatherName() {
         return fatherName;
     }
 
     public void setFatherName(String fatherName) {
         this.fatherName = fatherName;
-    }
-
-
-    public List<Category> getCategoryList() {
-        return categoryList;
-    }
-
-    public void setCategoryList(List<Category> categoryList) {
-        this.categoryList = categoryList;
     }
 }
