@@ -27,7 +27,8 @@
     <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
         <ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
             <li class="kuanjie">
-                <a href="#">退出</a>
+                <a href="sellerInfo.html">个人中心</a>
+                <a href="login.html">退出</a>
             </li>
         </ul>
     </div>
@@ -53,9 +54,9 @@
             <li><a href="">修改订单</a></li>
         </ul>
 
-        <h3 class="am-icon-users"><em></em> <a href="#">个人中心</a></h3>
+        <h3 class="am-icon-users"><em></em> <a href="sellerInfo.html">个人中心</a></h3>
         <ul>
-            <li><a href="商家信息.html">修改信息</a></li>
+            <li><a href="sellerInfo.html">修改信息</a></li>
         </ul>
 
     </div>
@@ -81,7 +82,7 @@
     <div class="listbiaoti am-cf">
       <ul class="am-icon-flag on"> 商家信息 </ul>
       
-      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">商家信息</a></dl>
+      <dl class="am-icon-home" style="float: right;"> 当前位置 > 商家信息</dl>
 
     </div>
 
@@ -90,31 +91,31 @@
           <div class="am-form-group am-cf">
               <div class="zuo">商家编号：</div>
               <div class="you" id="s_code">
-                  s100000002
+
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">商家名称：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="s_name" value="张家小店">
+                  <input type="text" class="am-input-sm" id="s_name" value="">
               </div>
           </div>
         <div class="am-form-group am-cf">
           <div class="zuo">店家密码：</div>
           <div class="you">
-            <input type="text" class="am-input-sm" id="s_pwd" value="zy1234">
+            <input type="text" class="am-input-sm" id="s_pwd" value="">
           </div>
         </div>
         <div class="am-form-group am-cf">
           <div class="zuo">商家联系电话：</div>
           <div class="you">
-            <input type="text" class="am-input-sm" id="s_phone" value="13305913846">
+            <input type="text" class="am-input-sm" id="s_phone" value="">
           </div>
         </div>
           <div class="am-form-group am-cf">
               <div class="zuo">店家地址：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="s_address" value="广东省广州市天河区汇通产业园B8栋">
+                  <input type="text" class="am-input-sm" id="s_address" value="">
               </div>
           </div>
         <div class="am-form-group am-cf">
@@ -126,35 +127,35 @@
         <div class="am-form-group am-cf">
           <div class="zuo">店家头像：</div>
           <div class="you" style="height: 45px;">
-            <input type="file" id="goodsPic">
-            <p class="am-form-help">请选择要上传的产品图片...</p>
+            <input type="file" id="icon">
+            <p class="am-form-help">请选择要上传的商家头像...</p>
           </div>
         </div>
           <div class="am-form-group am-cf">
               <div class="zuo">店家状态：</div>
               <div class="you" style="height: 45px;">
                   <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}" id="s_status">
-                      <option value="b">启用</option>
-                      <option value="o">禁止</option>
+                      <option value="1">启用</option>
+                      <option value="0">禁止</option>
                   </select>
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">开店时间：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="s_date" value="13305913846">
+                  <input type="text" class="am-input-sm" id="s_date" value="">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">最后修改时间：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="g_lastdate" value="13305913846">
+                  <input type="text" class="am-input-sm" id="s_lastdate" value="">
               </div>
           </div>
 
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
-              <button type="submit" class="am-btn am-btn-success am-radius">修改</button>&nbsp;  &raquo; &nbsp;
+              <button type="button" class="am-btn am-btn-success am-radius" onclick="updateSellerInfo()">修改</button>&nbsp;  &raquo; &nbsp;
           </div>
         </div>
       </form>
@@ -170,8 +171,6 @@
     <a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a>
   </dl>
 </div>
-
-
 
 
 </div>
@@ -195,6 +194,60 @@
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
 
+<script>
+    $(function () {
+        $.ajax({
+            type:"POST",
+            url:"getSellerInfoById",
+            success:function (data) {
+                $("#s_code").html(data.s_code);
+                $("#s_name").val(data.s_name);
+                $("#s_pwd").val(data.s_pwd);
+                $("#s_phone").val(data.s_phone);
+                $("#s_address").val(data.s_address);
+                $("#s_desc").val(data.s_desc);
+                $("#s_status option").val(data.s_status);
+                $("#s_date").val(data.s_date);
+                $("#s_lastdate").val(data.s_lastdate);
+                $("#icon").val(data.icon);
+            },
+            error:function (data) {
+                alert("获取失败")
+            },
+            dataType:"json"
+        });
+
+    });
+
+    //修改用户信息
+    function updateSellerInfo() {
+        $.ajax({
+            type:"POST",
+            url:"updateSellerInfo",
+            contentType:"application/json",
+            data: JSON.stringify({
+                "s_code":$("#s_code").html(),
+                "s_name":$("#s_name").val(),
+                "s_pwd":$("#s_pwd").val(),
+                "s_phone":$("#s_phone").val(),
+                "s_address":$("#s_address").val(),
+                "s_desc":$("#s_desc").val(),
+                "s_status":$("#s_status").val(),
+                "icon":$("#icon").val()
+            }),
+            success : function (data) {
+                alert(data+"-------")
+                window.location.href="sellerInfo.html";
+            },
+            error : function (data) {
+                alert("修改店家信息失败")
+            },
+            dataType: "json"
+        });
+    }
+
+
+</script>
 
 
 </body>

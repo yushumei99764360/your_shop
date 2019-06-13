@@ -27,7 +27,8 @@
     <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
         <ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
             <li class="kuanjie">
-                <a href="#">退出</a>
+                <a href="sellerInfo.html">个人中心</a>
+                <a href="login.html">退出</a>
             </li>
         </ul>
     </div>
@@ -162,7 +163,7 @@
             url:"getAllCategoryFather",
             contentType:"application/json",
             success:function (data) {
-                alert("option father")
+                // alert("option father")
                 var selectObj = $("#father");
                 $(data).each(function (index,item) {
                     var opHtml = "<option value="+item.c_id+">"+item.c_name+"</option>";
@@ -179,7 +180,7 @@
         });
     });
     function addCategory() {
-        alert("添加新商品")
+        // alert("添加新商品")
         $.ajax({
             type:"POST",
             url:"addCategoryInfo",

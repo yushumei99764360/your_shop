@@ -9,7 +9,7 @@
         SELECT * FROM sellerinfo WHERE
         s_name = #{s_name} AND s_pwd = #{s_pwd}
     </select>
-    <!--根据商家id 查询商家详细信息-->
+    <!--根据商家id 获取商家详细信息-->
     <select id="getSellerById" parameterType="int" resultType="com.qf.pojo.SellerInfo">
         SELECT * FROM sellerinfo WHERE
         s_id =  #{s_id}
@@ -35,6 +35,9 @@
             <if test="s_status != null and s_status !=''">
                 s_status = #{s_status},
             </if>
-        g_lastdate = default where s_id = #{s_id}
+            <if test="icon != null and icon !=''">
+                icon = #{icon},
+            </if>
+        s_lastdate = default where s_code = #{s_code}
     </update>
 </mapper>

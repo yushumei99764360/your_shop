@@ -34,8 +34,9 @@ public class SellersController {
     @RequestMapping("getSellerInfoById")
     public Object getSellerInfoById(HttpSession httpSession) {
         SellerInfo sellerInfo = (SellerInfo) httpSession.getAttribute("sellerInfo");
-        System.out.println(sellerInfo);
-        return sellerInfo;
+        SellerInfo sellerById = sellersService.getSellerById(sellerInfo.getS_id());
+        System.out.println(sellerById);
+        return sellerById;
     }
 
     //    修改商家信息
