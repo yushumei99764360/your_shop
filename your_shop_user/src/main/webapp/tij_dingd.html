@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<html>   
+
 <head> 
 <meta charset="utf-8">
 <title>MyShop——提交订单——结算页</title>
@@ -196,9 +196,15 @@
                 <div>
                 	<div class="jies_y_shouh_diz jies_y_shouh_diz_kuaid">
 			        	<ul>
+
 			        		<li class="zhif_fangs cur"><div class="dangq_xuanz_diz">申通快递</div></li>
 			        		<li class="zhif_fangs"><div class="dangq_xuanz_diz">圆通快递</div></li> 
 			        	</ul>  
+
+			        		<li id="hh" class="zhif_fangs"><input type="checkbox" class="express" value="申通快递"><div class="dangq_xuanz_diz">申通快递</div></li>
+			        		<li id="dd" class="zhif_fangs"><input type="checkbox" class="express" value="圆通快递"><div class="dangq_xuanz_diz">圆通快递</div></li>
+			        	</ul>
+
 			        </div>
                 </div>
                 <div class="peis_shij">
@@ -213,11 +219,19 @@
         		<div class="goods_list_neik">
         			<h4 class="vendor_name_h">商家：塔里服装旗舰店</h4>
         			<div class="goods_item">
+
         				<div class="p_img"><a href="#"><img src="images/lieb_tupi1.jpg"></a></div>
         				<div class="goods_msg">
         					<div class="p_name">
         						<a href="#">探路者TOREAD 情侣款男士三合一套绒冲锋衣 TAWB91603 黑色 M</a>
         					</div>
+
+        				<div class="p_img"><a href="#"><img src="" id="img" style="height: 80px"></a></div>
+        				<div class="goods_msg">
+							<div class="p_name">
+								<a href="#" id="g_name"></a>
+							</div>
+
         					<div class="p_price">
         						<span class="jq_price">￥ 529.00</span>
         						<span>x1</span>
@@ -277,7 +291,7 @@
 		</div>
 	</div>
 	<div class="tij_dingd_ann">
-		<a href="#">提交订单</a>
+		<a  onclick="ToPay()">提交订单</a>
 	</div>
 </div>
 
@@ -398,7 +412,106 @@
 		</div>
 	</div>
 </div>
- 
+
+<script>
+
+    var g_id;
+    var num;
+    var o_paycount;
+    function getUserId() {
+        g_id = window.location.search.split("=")[1];
+      	num=window.location.search.split("=")[2];
+    }
+    getUserId();
+    /**
+	 * 查询收货地址
+     */
+
+    function getUserInfoAddressById() {
+        $.ajax({
+            type: 'GET',
+            url: "getUserInfoAddressById",
+            contentType:"application/json",
+            success: function(data){
+                var obj=$("#address");
+                $(data).each(function (i,item) {
+                    var trHtml ="<li class=\"cur\">\n" +
+                        "        \t\t\t<input type=\"checkbox\" id='addressDetail' value='"+item.adsId+"' class=\"dangq_xuanz_diz\">\n" +
+                        "        \t\t\t<span>"+item.shname+"</span>\n" +
+                        "        \t\t\t<span>"+item.province+item.city+item.district+item.street+"</span>\n" +
+                        "        \t\t\t<span>"+item.shphone+"</span>\n" +
+                        "        \t\t</li>";
+                    obj.append(trHtml);
+                    $(".address").html("寄送至： "+item.province+item.city+item.district+item.street)
+                    $(".shperson").html("收货人："+item.shname+"       "+item.shphone)
+                })
+            },
+            error:function (data) {
+                console.error(data);
+            },
+            dataType: "json"
+        });
+    }
+    getUserInfoAddressById();
+
+
+    /**
+     * 获取商品详情
+     */
+    function getGoodsInfoById() {
+        $.ajax({
+            type: 'POST',
+            url: "getGoodsInfoById?g_id="+g_id,
+            contentType:"application/json",
+            success: function(data){
+                $("#img").attr("src",data.g_pic);
+                $("#g_name").html(data.g_name);
+                $("#num").html(num);
+                $("#totalPrice").html("￥"+num*data.g_disctprice);
+                $("#price").html("￥"+num*data.g_disctprice);
+                $("#g_price").html("￥"+data.g_disctprice);
+                $("#s_name").html("商家："+data.s_name+"旗舰店");
+                o_paycount=num*data.g_disctprice;
+            },
+            error:function (data) {
+                console.error(data);
+            },
+            dataType: "json"
+        });
+    }
+    getGoodsInfoById();
+
+    var address;
+    var express;
+	function ToPay() {
+        if($("#addressDetail").is(":checked")){//选中
+            address= $("#addressDetail").val();//打印选中的值
+        }
+        if($(".express").is(":checked")){//选中
+            express= $(".express").val();//打印选中的值
+        }
+        $.ajax({
+            type: "POST",
+            url: "createOrder",
+            contentType: "application/json",
+            data: JSON.stringify({
+				"address":address,
+				"express":express,
+				"g_id":g_id,
+				"o_paycount":o_paycount,
+				"num":num
+			}),
+            success: function (data) {
+                window.location.href = "dingd_xiangq.html"
+            },
+            error: function (data) {
+                alert("执行失败")
+            },
+            dataType: "json"
+        });
+    }
+
+</script>
 
 
 </body>

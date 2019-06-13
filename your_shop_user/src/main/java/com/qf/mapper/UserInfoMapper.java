@@ -1,6 +1,7 @@
 package com.qf.mapper;
 
 import com.qf.dto.AddressInfoDto;
+import com.qf.dto.MessageDto;
 import com.qf.dto.UserInfoMessageDto;
 import com.qf.dto.UserInfoMessageDto;
 import com.qf.pojo.AddressInfo;
@@ -64,4 +65,8 @@ public interface UserInfoMapper {
     int insertUserAddress(AddressInfoDto addressInfoDto);
 
     int deleteAddressByUserId(int adsId);
+
+    List<MessageDto> selectUserByMessage( int g_id);
+
+    Object insertMessageByGoods(MessageDto messageDto);
 }

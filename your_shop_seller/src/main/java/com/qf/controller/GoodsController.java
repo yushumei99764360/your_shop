@@ -10,8 +10,13 @@ import com.qf.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -100,4 +105,54 @@ public class GoodsController {
     }
 
 
+    // 商品图片上传修改替换
+    @RequestMapping(value = "GPicUpload", method = RequestMethod.POST)
+    public Object  GPicUpload(@RequestParam("file") CommonsMultipartFile file, @RequestParam("GId") int GId) {
+
+        System.out.println("fileName："+file.getOriginalFilename());
+        String path="D:\\Java1901\\your_shop\\your_shop_seller\\src\\main\\webapp\\images"+file.getOriginalFilename();
+
+        String icon = "images/"+file.getOriginalFilename();
+        File newFile=new File(path);
+        boolean flag = false;
+        try {
+            file.transferTo(newFile);
+            flag =  goodsService.updateIconByGId(GId, icon);
+            return flag;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    /**
+     * 商品图片添加
+     */
+    public static  String icon;
+    @ResponseBody
+    @RequestMapping(value="uploadPic",method=RequestMethod.POST)
+    public String uploadPic(MultipartFile dropzFile, HttpServletRequest request) throws IOException {
+        icon = dropzFile.getOriginalFilename();
+        // 设置文件上传路径
+        String filePath = "D:\\Java1901\\your_shop\\your_shop_seller\\src\\main\\webapp\\images";
+        // 判断并创建上传用的文件夹
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        file = new File(filePath,icon);
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            // 写入文件
+            dropzFile.transferTo(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file.getName();
+    }
 }

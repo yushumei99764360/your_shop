@@ -258,7 +258,7 @@
         $("#dataTable").empty();
         //1.发送ajax请求获取数据
         var str = $("#str").val();
-        alert(str);
+        // alert(str);
         $.ajax({
             type: "GET",
             url: "selectCategoryBys",
@@ -266,7 +266,7 @@
             data:{str},
             success: function(data){
                 //循环
-                alert(3333)
+                // alert(3333)
                 var tabObj = $("#dataTable");
                 $(data).each(function (index,item) {
                     var trHtml = "<tr>\n" +

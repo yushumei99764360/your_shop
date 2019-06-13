@@ -1,6 +1,7 @@
 package com.qf.controller;
 
 import com.qf.dto.AddressInfoDto;
+import com.qf.dto.MessageDto;
 import com.qf.dto.UserInfoMessageDto;
 import com.qf.dto.UserInfoMessageDto;
 import com.qf.pojo.AddressInfo;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class UserInfoController {
@@ -185,4 +187,25 @@ public class UserInfoController {
         System.out.println(adsId);
         return userInfoService.deleteAddressByUserId(adsId);
     }
+
+//    用户留言查询
+    @ResponseBody
+    @RequestMapping("selectUserByMessage")
+    public Object selectUserByMessage(@RequestParam int g_id){
+        List<MessageDto> message   = userInfoService.selectUserByMessage(g_id);
+        System.out.println(message);
+        return message;
+    }
+
+//用户评价商品
+    @ResponseBody
+    @RequestMapping("insertMessageByGoods")
+    public Object insertMessageByGoods(@RequestBody MessageDto messageDto,HttpSession httpSession){
+        UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
+        messageDto.setUserId(userInfo.getUserId());
+        System.out.println(userInfoService.insertMessageByGoods(messageDto));
+        return userInfoService.insertMessageByGoods(messageDto);
+    }
+
+
 }
