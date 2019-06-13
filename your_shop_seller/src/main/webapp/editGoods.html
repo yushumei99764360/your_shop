@@ -137,10 +137,24 @@
         </div>
         <div class="am-form-group am-cf">
           <div class="zuo">产品图片：</div>
-          <div class="you" style="height: 45px;">
+          <!--<div class="you" style="height: 45px;">
             <input type="file" id="g_pic">
             <p class="am-form-help">请选择要上传的产品图片...</p>
-          </div>
+          </div>-->
+            <!--<div class="you" >
+                <div class="pic-wrap ">
+                    <img src="images/timg.jpg" id="g_pic" style="height: 45px;">
+                </div>
+            </div>-->
+            <div class="you" >
+                <div>
+                    <img src="images/timg.jpg" alt="" id="GPicId" style="width: 180px; height: 150px">
+                </div>
+                <form name="GPicUpload" id="GPicUpload"  enctype="multipart/form-data">
+                    <input type="file" name="file" class="btn btn-sm  ">
+                </form>
+                <input type="submit" value="修改" class="btn btn-sm  btn-primary" onclick="GPicUpload()"/>
+            </div>
         </div>
           <div class="am-form-group am-cf">
               <div class="zuo">商品类别：</div>
@@ -224,8 +238,8 @@
                 $("#g_disctprice").val(data.g_disctprice);
                 $("#g_num").val(data.g_num);
                 $("#g_desc").val(data.g_desc);
-                $("#g_pic").val(data.g_pic);
-
+                // $("#g_pic").val(data.g_pic);
+                $("#g_pic").attr("src",data.g_pic);
                 $("#g_status option[value="+data.g_status+"]").attr("selected","selected");
                 $("#child option").html(data.childName);
                 var childObj = $("#child");
@@ -273,6 +287,31 @@
             dataType: "json"
         });
     }
+
+    function GPicUpload() {
+        var formData = new FormData($("#GPicUpload")[0]);
+        $.ajax({
+            type: 'post',
+            url: "GPicUpload?goodsId=" + goodsId,
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success : function (data) {
+                if (data) {
+                    window.location.reload();
+                } else {
+                    alert("修改失败！")
+                }
+            },
+            error : function (data) {
+                alert("请求失败！");
+            },
+            // dataType: "json"
+
+        });
+    }
+
 </script>
 
 

@@ -26,5 +26,6 @@ public interface GoodsService {
 
     // 选中删除，批量删除
     boolean delCheckGoods(List<Integer> selectedGoodsId);
-
+//    上传图片
+    boolean updateIconByGId(int GId, String icon);
 }

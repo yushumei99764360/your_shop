@@ -19,7 +19,7 @@
     <!--新增商品列表关系信息-->
     <insert id="addGoodsCategory" parameterType="com.qf.vo.GoodsVo">
         INSERT INTO goods_category VALUES
-        (DEFAULT,  (SELECT c_id FROM category WHERE c_name = #{childName}) ,
+        (DEFAULT, #{childId} ,
         (select g_id from goodsinfo WHERE g_name = #{g_name} AND g_title = #{g_title} AND s_id =#{s_id}))
     </insert>
 
@@ -27,7 +27,7 @@
     <!--根据商品id查询商品详情信息-->
     <select id="getGoodsInfoByGoodsId" parameterType="int" resultType="com.qf.vo.GoodsVo">
         SELECT g.*,c.fathername,c.c_name childname FROM goodsinfo g , goods_category gc ,
-        (SELECT a.c_name fathername,b.*FROM category a ,category b WHERE a.c_parentid = 0 AND a.c_id = b.c_parentid ) c
+        (SELECT a.c_name fathername,b.* FROM category a ,category b WHERE a.c_parentid = 0 AND a.c_id = b.c_parentid ) c
         WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id AND g.g_id = #{goodsId}
     </select>
     <!--修改商品信息-->
@@ -68,7 +68,7 @@
     </update>
     <!--修改关系信息-->
     <update id="updateGoodsCategory" parameterType="com.qf.vo.GoodsVo">
-        UPDATE goods_category set c_id = (SELECT c_id FROM category WHERE c_name = #{childName})
+        UPDATE goods_category set c_id = #{childId}
         WHERE g_id = #{g_id}
 
     </update>
@@ -77,11 +77,11 @@
     <select id="selectGoodsBys" resultType="com.qf.vo.GoodsVo" parameterType="com.qf.vo.GoodsSelecteds">
         SELECT g.*,c.fathername,c.c_name childname FROM goodsinfo g , goods_category gc ,
         (SELECT a.c_name fathername,b.* FROM category a ,category b WHERE a.c_parentid = 0 AND a.c_id = b.c_parentid ) c
-        WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id and g.s_id = #{s_id}
+        WHERE g.g_id = gc.g_id AND gc.c_id = c.c_id and g.s_id = #{sellerId}
         <if test="categoryName != null and categoryName !=''">
            and c.c_name = #{categoryName}
         </if>
-        <if test="g_status != null and g_status !=''">
+        <if test="g_status == 0 or g_status == 1 ">
             and g.g_status = #{g_status}
         </if>
         <if test="minDate != null and minDate !=''">
@@ -99,5 +99,18 @@
     <delete id="delByGoodsId" parameterType="int">
         DELETE FROM goodsinfo WHERE g_id = #{goodsId}
     </delete>
+
+    <!--批量删除-->
+    <delete id="delCheckGoods" parameterType="list">
+        delete from goodsinfo where g_id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!--修改商品图片-->
+    <update id="updateIconByGId" >
+        update goodsinfo set g_pic=#{icon} where g_id=#{GId}
+    </update>
 
 </mapper>

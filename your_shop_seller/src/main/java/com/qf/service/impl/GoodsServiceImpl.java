@@ -82,4 +82,14 @@ public class GoodsServiceImpl implements GoodsService {
         return false;
     }
 
+//    修改商品图片
+    @Transactional(propagation = Propagation.REQUIRED)
+    public boolean updateIconByGId(int GId, String icon) {
+        int i = goodsMapper.updateIconByGId(GId, icon);
+        if (i != 0) {
+            return true;
+        }
+        return false;
+    }
+
 }
