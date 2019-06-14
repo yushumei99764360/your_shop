@@ -191,15 +191,11 @@
         }
     })
 
-
-
     $.ajax({
         type : "post",
         url : "selectByOrderNum",    //请求发送到TestServlet处
         data : {},
         success : function(result) {
-alert(result);
-console.log(result);
             var tabObj = $("#dd1");
             var trHtml="<span>"+result.allcount+"</span>";
             tabObj.append(trHtml);
@@ -214,10 +210,6 @@ console.log(result);
             alert("333333");
         }
     })
-
-
-
-
 
     $.ajax({
         type : "post",

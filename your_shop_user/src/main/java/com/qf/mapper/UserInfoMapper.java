@@ -68,5 +68,7 @@ public interface UserInfoMapper {
 
     List<MessageDto> selectUserByMessage( int g_id);
 
-    Object insertMessageByGoods(MessageDto messageDto);
+    int insertMessageByGoods(MessageDto messageDto);
+
+    Object selectSellPic(int g_id);
 }
