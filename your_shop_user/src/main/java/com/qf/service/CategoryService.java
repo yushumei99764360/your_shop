@@ -14,7 +14,7 @@ public interface CategoryService {
     public List<CategoryDto> categoryList();
 
 
-    public List<CategoryDto> categoryListOne();
+    public List<CategoryDto> getAllGoods();
 
     GodsInfoDetail getGoodsInfoById(int g_id);
 

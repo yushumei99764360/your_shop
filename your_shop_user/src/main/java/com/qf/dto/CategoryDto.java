@@ -16,6 +16,6 @@ public class CategoryDto {
     //private int c_parentid;
     private String g_name;
     private Integer g_id;
-    private List<GoodsInfo> goodsInfos;
-    private List<Category> categories;
+    private List<Category> fatherCategory;
+    private List<GoodsInfo> sonCategory;
 }

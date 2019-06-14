@@ -11,20 +11,7 @@ import java.util.List;
 
 public interface CategoryMapper {
 
-    /**
-     * 商品分类
-     * @return
-     */
-    // 查询所有一级类别信息
-    List<Category> getFatherInfo();
-    //    查询所有的二级类别信息
-    List<Category> getChildInfo();
-    // 根据父类id 查询它所包含的所有子类信息
-    CategoryVo getChildCategoryInfo(int fatherId);
-
-    public List<GoodsInfo> goods();
-
-    public List<GoodsInfo> findAllCategory();
+    public List<GoodsInfo> getAllGoods();
 
     GodsInfoDetail getGoodsInfoById(int g_id);
 

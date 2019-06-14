@@ -5,22 +5,22 @@
 <mapper namespace="com.qf.mapper.CategoryMapper">
 
 
-    <resultMap id="category" type="com.qf.dto.CategoryDto">
+    <resultMap id="Allgoodsinfos" type="com.qf.dto.CategoryDto">
         <id column="c_id" property="c_id"></id>
         <result column="c_name" property="c_name"></result>
-        <collection property="goodsInfos" ofType="com.qf.dto.CategoryDto">
+        <collection property="sonCategory" ofType="com.qf.dto.CategoryDto">
             <id column="g_id" property="g_id"></id>
             <result column="g_id" property="g_id"></result>
             <result column="g_name" property="g_name"></result>
         </collection>
     </resultMap>
-    <select id="goods" resultMap="category">
-        SELECT
-        c.c_id,c_name,g.g_title,g.g_id,g.g_name
-        FROM
-        category c,goods_category gc,goodsinfo g
-        WHERE
-        c.c_id=gc.c_id and gc.g_id=g.g_id;
+    <select id="getAllGoods" resultMap="Allgoodsinfos">
+         SELECT
+ ca.c_name,g.g_id,g.g_name,g.g_pic
+ from
+ category c,category ca,goods_category gc,goodsinfo g
+ WHERE
+ c.c_id=ca.c_parentid and g.g_id=gc.g_id and ca.c_id=gc.c_id;
     </select>
 
 
