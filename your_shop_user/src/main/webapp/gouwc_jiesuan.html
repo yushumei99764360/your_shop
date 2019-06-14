@@ -402,10 +402,8 @@
                 $("#myCartInfosSelected").empty();
                 var html = "";
                 $(data).each(function (i,n) {
-
+                    s_id = n.s_id;
                     totalPayPrice += parseFloat(n.sum_price);
-
-
                      html += "<h4 class=\"vendor_name_h\" id=\"s_name\"></h4>\n" +
                         "                    <div class=\"goods_item\">\n" +
                         "                        <div class=\"p_img\"><a href=\"#\"><img src='"+n.g_pic+"' id=\"img\" style=\"height: 80px\"></a></div>\n" +
@@ -458,6 +456,7 @@
         var insertOrderDto = {
             "o_sendtype": express,
             "adsId": address,
+            "s_id": s_id,
             "o_paycount": parseInt(totalPayPrice)
         };
 
@@ -467,7 +466,7 @@
             contentType: "application/json",
             data: JSON.stringify(insertOrderDto),
             success: function (data) {
-                alert("succes");
+                alert(data);
                 // window.location.href = "dingd_xiangq.html"
             },
             error: function (data) {

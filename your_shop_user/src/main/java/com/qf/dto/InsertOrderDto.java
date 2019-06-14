@@ -15,4 +15,5 @@ public class InsertOrderDto implements Serializable {
     String o_sendtype;
     int adsId;
     int o_paycount;
+    int s_id;
 }
