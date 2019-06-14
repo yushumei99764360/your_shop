@@ -171,7 +171,7 @@
 		</div>
 		<div class="jies_ann_bei">
 			<!--已选 <em>1</em> 件商品-->
-			<p> 总计（不含运费）：<span>￥9999.00</span></p>
+			<p> 总计（不含运费）：<span id="moneySelected"></span></p>
 			<a class="order_btn" onclick="goToPay()">去结算</a>
 		</div>
 	</div>
@@ -461,7 +461,7 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
                     html += "\n" +
                         "\t\t<div class=\"cart-shop-good\">\n" +
                         "\t\t\t<div class=\"cart-col-1\">\n" +
-                        "\t\t\t\t<input type=\"checkbox\" class=\"jdcheckbox\" value='"+n.cart_id+"'>\n" +
+                        "\t\t\t\t<input type=\"checkbox\" class=\"jdcheckbox\" onclick='changeMoney()' value='"+n.cart_id+"'>\n" +
                         "\t\t\t</div>\n" +
                         "\t\t\t<div class=\"cart-col-2\" style=\"height: 82px;\">\n" +
                         "\t\t\t\t<a href=\"\" target=\"_blank\" class=\"g-img\"><img src='"+n.g_pic+"' alt=\"\"></a>\n" +
@@ -511,7 +511,7 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
 
     function deleteFromCartInfo(cartId) {
 
-        alert(cartId);
+
         $.ajax({
             type: "get",
             url: "deleteCartInfoById?cartId="+cartId,
@@ -528,11 +528,13 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
 
     }
 
+    var selectCartInfos = new Array();
 
-    function goToPay() {
-        var selectCartIds = new Array();
-        var selectCartInfos = new Array();
+    //获取选中的购物车对象
 
+
+    function getselectCartInfos() {
+		var selectCartInfos1 = new Array();
         $(":checkbox:checked").each(function (i,n) {
             if ($(this).val() != '' && $(this).val() != null) {
 
@@ -541,14 +543,18 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
 
                     if (k.cart_id == selectedId) {
 
-                        selectCartInfos.push(k);
+                        selectCartInfos1.push(k);
                     }
                 });
             }
         });
+        selectCartInfos = selectCartInfos1;
+    }
 
 
+    function goToPay() {
 
+        getselectCartInfos();
 
         $.ajax({
             type: "POST",
@@ -566,6 +572,26 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
         });
     }
 
+//点击修改金额
+    var moneySelected;
+    function changeMoney() {
+        moneySelected = 0;
+        getselectCartInfos();
+        $(selectCartInfos).each(function (i,n) {
+
+            moneySelected += n.sum_price;
+
+        });
+        // alert(moneySelected);
+        $("#moneySelected").html("￥" + moneySelected);
+    }
+
+
+    // $("checkbox").onclick(function () {
+    //     alert(111);
+    // });
+
+
 
 </script>
 
@@ -576,4 +602,6 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
 		
 
 </body>
+
+
 </html>
