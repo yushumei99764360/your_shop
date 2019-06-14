@@ -19,7 +19,7 @@
     <!--图片上传-->
     <link rel="stylesheet" href="dropzone/css/basic.min.css" />
     <link rel="stylesheet" href="dropzone/css/dropzone.min.css"/>
-    <!--!&#45;&#45;Dropzone-->
+    <!--!Dropzone-->
     <script src="dropzone/js/dropzone.min.js"></script>
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
     <style>
@@ -29,7 +29,7 @@
             width: 150px;
             height: 150px;
         }
-        .file-box img {
+        .file-box img, .file-box.dropzone{
             width: 150px;
             height: 150px;
             border-radius: 50%;
@@ -85,7 +85,6 @@
         <ul>
             <li><a href="sellerInfo.html">修改信息</a></li>
         </ul>
-
     </div>
     <!-- sideMenu End -->
     <script type="text/javascript">
@@ -115,17 +114,12 @@
 
     <div class="fbneirong">
         <div class="file-box">
-            <!--<div>-->
-                <img id="preview" src="">
-            <!--</div>-->
-            <input type="button" id="imgfield" class="txt" placeholder="预览" >
 
-            <form name="iconUploadCode" id="iconUploadCode"  enctype="multipart/form-data">
-                <!--<input type="file" name="file" class="btn btn-sm  ">-->
-                <input type="file" name="file" class="file" id = "input_file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" onclick= "imgPreview(this)">
-            </form>
-            <!--<input type="submit" value="修改" class="btn btn-sm  btn-primary" onclick="iconUploadByCode()"/>-->
-
+                <div class="file-box" id="Pic">
+                    <div id="dropz" class="dropzone">
+                        <img src="" alt="" id="preview" >
+                    </div>
+                </div>
 
         </div>
         <script>
@@ -310,7 +304,7 @@
                 $("#s_status option").val(data.s_status);
                 $("#s_date").val(data.s_date);
                 $("#s_lastdate").val(data.s_lastdate);
-                // $("#icon").val(data.icon);
+                // $("#Pic").val(data.icon);
                 $("#preview").attr("src",data.icon);
             },
             error:function (data) {
@@ -334,6 +328,7 @@
                 "s_phone":$("#s_phone").val(),
                 "s_address":$("#s_address").val(),
                 "s_desc":$("#s_desc").val(),
+                "icon":$("#Pic").val(),
                 "s_status":$("#s_status").val()
             }),
             success : function (data) {
@@ -346,35 +341,48 @@
             dataType: "json"
         });
     }
-    // 修改商家头像
-    function iconUploadByCode() {
-        var formData = new FormData();
-        formData.append('file', $('#iconUploadCode')[0]);  //添加图片信息的参数
-        formData.append('s_code',$("#s_code").html());  //添加其他参数
-        alert(formData)
-        $.ajax({
-            type: 'post',
-            url: "iconUploadCode",
-            data: formData,
-            cache: false,
-            processData: false,
-            contentType: false,
-            success : function (data) {
-                console.log(data);
-                if (data) {
-                    window.location.reload();
-                } else {
-                    alert("修改失败！")
-                }
-            },
-            error : function (data) {
-                console.log(data);
-                alert("请求失败！");
-            },
-            // dataType: "json"
 
-        });
-    }
+    // 修改商家头像
+    Dropzone.options.dropz={
+        url: "uploadPic", // 文件提交地址
+        method: "post",  // 也可用put
+        paramName: "dropzFile", // 默认为file
+        maxFiles: 1,// 一次性上传的文件数量上限
+        maxFilesize: 2, // 文件大小，单位：MB
+        acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
+        addRemoveLinks: true,
+        parallelUploads: 1,// 一次上传的文件数量
+        //previewsContainer:"#preview", // 上传图片的预览窗口
+        dictDefaultMessage: '拖动文件至此或者点击上传',
+        dictMaxFilesExceeded: "您最多只能上传1个文件！",
+        dictResponseError: '文件上传失败!',
+        dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
+        dictFallbackMessage: "浏览器不受支持",
+        dictFileTooBig: "文件过大上传文件最大支持.",
+        dictRemoveLinks: "删除",
+        dictCancelUpload: "取消",
+        init: function () {
+            this.on("addedfile", function (file) {
+                // 上传文件时触发的事件
+                $("#preview").attr("src","");
+            });
+            this.on("success", function (file, data) {
+                // 上传成功触发的事件
+
+                $("#Pic").val(data.fileName);
+
+                alert($("#Pic").val());
+
+                console.log(file);
+            });
+            this.on("error", function (file, data) {
+                // 上传失败触发的事件
+            });
+            this.on("removedfile", function (file) {
+                // 删除文件时触发的方法
+            });
+        }
+    };
 
 
 </script>
