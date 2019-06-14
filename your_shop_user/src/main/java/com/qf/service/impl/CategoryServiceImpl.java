@@ -2,11 +2,9 @@ package com.qf.service.impl;
 
 import com.qf.dto.*;
 import com.qf.mapper.CategoryMapper;
-import com.qf.pojo.AddressInfo;
-import com.qf.pojo.Category;
-import com.qf.pojo.GoodsInfo;
+
 import com.qf.service.CategoryService;
-import com.qf.vo.CategoryVo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,33 +16,15 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryMapper categoryMapper;
 
-    @Override
-    public List<GoodsInfo> findAllCategory() {
-        return categoryMapper.findAllCategory();
-    }
 
-    //    查询所有一级类别信息
     @Override
-    public List<Category> getFatherInfo() {
-        return categoryMapper.getFatherInfo();
-    }
-
-    //    查询所有二级类别信息
-    @Override
-    public List<Category> getChildInfo() {
-        return categoryMapper.getChildInfo();
-    }
-
-    // 根据父类id 查询它所包含的所有子类信息
-    @Override
-    public CategoryVo getChildCategoryInfo(int fatherId) {
-        CategoryVo categoryVo = categoryMapper.getChildCategoryInfo(fatherId);
-        return categoryVo;
+    public List<CategoryDto> categoryList() {
+        return null;
     }
 
     @Override
-    public List<GoodsInfo> goods() {
-        return categoryMapper.goods();
+    public List<CategoryDto> categoryListOne() {
+        return null;
     }
 
     /**

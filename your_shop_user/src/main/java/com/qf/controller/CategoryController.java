@@ -97,7 +97,6 @@ public class CategoryController {
         AddressInfoDto addressInfoDto = (AddressInfoDto) httpSession.getAttribute("addressInfoDto");
         return addressInfoDto;
     }
-
     /**
      * 获取物流信息
      */

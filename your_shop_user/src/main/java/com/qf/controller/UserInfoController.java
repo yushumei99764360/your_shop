@@ -208,8 +208,6 @@ public class UserInfoController {
     @ResponseBody
     @RequestMapping("selectSellPic")
     public Object selectSellPic(@RequestParam int g_id){
-        System.out.println(g_id+"333333333");
-        System.out.println(userInfoService.selectSellPic(g_id));
         return userInfoService.selectSellPic(g_id);
     }
 
