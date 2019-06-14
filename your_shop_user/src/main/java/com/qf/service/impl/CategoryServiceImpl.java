@@ -17,16 +17,6 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryMapper categoryMapper;
 
 
-    @Override
-    public List<CategoryDto> categoryList() {
-        return null;
-    }
-
-    @Override
-    public List<CategoryDto> categoryListOne() {
-        return null;
-    }
-
     /**
      * 商品信息查询
      * @param g_id
