@@ -1,10 +1,7 @@
 package com.qf.service;
 
 
-import com.qf.dto.AddressInfoDto;
-import com.qf.dto.CategoryDto;
-import com.qf.dto.GodsInfoDetail;
-import com.qf.dto.Order_DetailDto;
+import com.qf.dto.*;
 import com.qf.pojo.GoodsInfo;
 
 import java.util.List;
@@ -29,4 +26,5 @@ public interface CategoryService {
 
     GodsInfoDetail searchGoods(int g_id);
 
+    Logisticsinfo getlogistics(int g_id);
 }

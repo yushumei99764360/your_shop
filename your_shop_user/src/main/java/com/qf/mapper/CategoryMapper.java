@@ -26,4 +26,6 @@ public interface CategoryMapper {
     GodsInfoDetail searchGoods(int g_id);
 
     int insertOrderDetail(Order_DetailDto order_detailDto);
+
+    Logisticsinfo getlogistics(int g_id);
 }

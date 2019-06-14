@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<html>   
 <head>
 <meta charset="utf-8">
 <title>MyShop——订单详情</title>
@@ -9,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="css/ziy.css">
 <!--  <script src="js/jquery-1.11.3.min.js" ></script>
 <script src="js/index.js" ></script>  -->
-<!-- <script type="text/javascript" src="js/jquery1.42.min.js"></script> -->
+<script type="text/javascript" src="js/jquery1.42.min.js"></script>
 <!-- 
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
  <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.source.js"></script> -->
@@ -183,7 +182,6 @@
 				    <div class="state_bottom"> 
 				        <a class="btn_del" href="#"  style="display: inline;">
 				            <b></b>
-				            取消订单
 				        </a>
 				    </div>
 				</div>
@@ -196,52 +194,56 @@
 				        </div>
 				    </div>
 				    <!---->
-				    <div id="process-04" class="order-process">
-			            <div class="node ready">
-			            	<i class="node-icon icon-start"></i>
-			            	<ul>
-			            		<li class="txt1">&nbsp;</li>
-			            		<li class="txt2">提交订单</li>
-			            		<li id="track_time_0" class="txt3">2017-09-06 <br> 23:08:43</li>
-			            	</ul>
-			            </div>
-	            		<div class="proce done"><ul><li class="txt1"></li></ul></div>
-	            		<div class="node ready">
-	            			<i class="node-icon icon-pay"></i>
-	            			<ul>
-		            			<li class="txt1">&nbsp;</li>
-		            			<li class="txt2">付款成功</li>
-		            			<li id="track_time_4" class="txt3"></li>
-	            			</ul>
-	            		</div>
-	            		<div class="proce done"><ul><li class="txt1">&nbsp;</li></ul></div>
-	            		<div class="node ready">
-	            			<i class="node-icon icon-store"></i>
-	            			<ul>
-		            			<li class="txt1">&nbsp;</li>
-		            			<li class="txt2">商品出库</li>
-		            			<li id="track_time_1" class="txt3"></li>
-	            			</ul>
-	            		</div>
-	            		<div class="proce done"><ul><li class="txt1">&nbsp;</li></ul></div>
-	            		<div class="node ready">
-	            			<i class="node-icon icon-express"></i>
-	            			<ul>
-		            			<li class="txt1">&nbsp;</li>
-		            			<li class="txt2">等待收货</li>
-		            			<li id="track_time_5" class="txt3"></li>
-	            			</ul>
-	            		</div>
-	            		<div class="proce doing" id="procestate"><ul><li class="txt1">派送中</li></ul></div>
-	            		<div class="node wait">
-	            		<i class="node-icon icon-finish"></i>
-		            		<ul>
-			            		<li class="txt1" id="promise_time_2"></li>
-			            		<li class="txt2">完成</li>
-			            		<li class="txt3">&nbsp;</li>
-		            		</ul>
-	            		</div>
-            		</div>
+					<div class="state_rcol">
+						<!---->
+						<div id="process-04" class="order-process">
+							<div class="node ready">
+								<i class="node-icon icon-start"></i>
+								<ul>
+									<li class="txt1">&nbsp;</li>
+									<li class="txt2">提交订单</li>
+									<li id="track_time_0" class="txt3">2017-09-06 <br> 23:08:43</li>
+								</ul>
+							</div>
+							<div class="proce done"><ul><li class="txt1"></li></ul></div>
+							<div class="node ready">
+								<i class="node-icon icon-pay"></i>
+								<ul>
+									<li class="txt1">&nbsp;</li>
+									<li class="txt2">付款成功</li>
+									<li id="track_time_4" class="txt3"></li>
+								</ul>
+							</div>
+							<div class="proce done"><ul><li class="txt1">&nbsp;</li></ul></div>
+							<div class="node ready">
+								<i class="node-icon icon-store"></i>
+								<ul>
+									<li class="txt1">&nbsp;</li>
+									<li class="txt2">商品出库</li>
+									<li id="track_time_1" class="txt3"></li>
+								</ul>
+							</div>
+							<div class="proce done"><ul><li class="txt1">&nbsp;</li></ul></div>
+							<div class="node ready">
+								<i class="node-icon icon-express"></i>
+								<ul>
+									<li class="txt1">&nbsp;</li>
+									<li class="txt2">等待收货</li>
+									<li id="track_time_5" class="txt3"></li>
+								</ul>
+							</div>
+							<div class="proce doing" id="procestate"><ul><li class="txt1">派送中</li></ul></div>
+							<div class="node wait">
+								<i class="node-icon icon-finish"></i>
+								<ul>
+									<li class="txt1" id="promise_time_2"></li>
+									<li class="txt2">完成</li>
+									<li class="txt3">&nbsp;</li>
+								</ul>
+							</div>
+						</div>
+						<!---->
+					</div>
 				    <!---->
 				</div>
 			</div>
@@ -250,16 +252,16 @@
 			<div class="state_cont">
 				<div class="track_lcol">
 	                <div class="p-item"> 
-						<div class="p-img""><a href="#"><img src="images/xiangqtu_1.jpg" alt=""></a></div>
+						<div class="p-img"><a href="#"><img id="img" src=""></a></div>
 	                    <div class="p-info">
 	                        <ul>
 								<li>送货方式：普通快递</li>
-	                        	<li>承运人：中通快递</li><li>运费：￥6.00</li><li>承运人电话：95311</li><li>货运单号：452759108171</li>
+	                        	<li id="sendtype"></li><li>运费：￥00.00</li><li>承运人电话：95311</li><li>货运单号：452759108171</li>
 	                        </ul>
 	                    </div>
 	                </div>
 	                <div class="ac">
-	                    <a href="#none" class="btn-9 hide">查看物流</a>
+	                    <a onclick="jumptologistics()" class="btn-9 hide">查看物流</a>
 	                </div>
 	            </div>
 	            <!---->
@@ -272,20 +274,16 @@
 					    <div class="dd">
 					        <div class="item">
 					            <span class="label">收货人：</span>
-					            <div class="info-rcol"> 潘中全 </div>
+					            <div class="info-rcol" id="shname"> </div>
 					        </div>
 					        <div class="item">
 								<span class="label">地址：</span>
-					            <div class="info-rcol">贵州贵阳市云岩区城区下合群路达亨大厦1606</div>
+					            <div class="info-rcol" id="address"></div>
 					        </div>
 					        <div class="item">
 								<span class="label">手机号码：</span>
-					            <div class="info-rcol">182****0710</div>
+					            <div class="info-rcol" id="shphone"></div>
 					        </div>
-			                <div class="item">
-								<span class="label">邮箱：</span>
-			                	<div class="info-rcol">2***@***</div>
-			            	</div>
 			            </div>
 					</div>
 					<!-- 付款信息 -->
@@ -299,12 +297,8 @@
 					            <div class="info-rcol"> 在线支付 </div>
 					        </div>
 					        <div class="item">
-								<span class="label">商品总额：</span>
-					            <div class="info-rcol"> ¥48.00</div>
-					        </div>
-					        <div class="item">
 								<span class="label">应支付金额：</span>
-					            <div class="info-rcol"> ¥54.00</div>
+					            <div class="info-rcol" id="price"> </div>
 					        </div> 
 			            </div>
 					</div> 
@@ -419,7 +413,60 @@
 		</div>
 	</div>
 </div>
- 
+ <script>
 
+     var g_id;
+     function getUserId() {
+         g_id = window.location.search.split("=")[1];
+     }
+     getUserId();
+
+     /**
+      * 获取商品详情
+      */
+     function getGoodsInfoById() {
+         $.ajax({
+             type: 'POST',
+             url: "getGoodsInfoById?g_id="+g_id,
+             contentType:"application/json",
+             success: function(data){
+                 $("#img").attr("src",data.g_pic);
+             },
+             error:function (data) {
+                 console.error(data);
+             },
+             dataType: "json"
+         });
+     }
+     getGoodsInfoById();
+
+     /**
+	  * 获取订单详细信息
+      */
+     function getOrderDetail() {
+         $.ajax({
+             type: 'GET',
+             url: "getOrderDetail",
+             contentType:"application/json",
+             success: function(data){
+                $("#address").html(data.province+data.city+data.district+data.street);
+                $("#shname").html(data.shname);
+                $("#shphone").html(data.shphone);
+                $("#price").html(data.price);
+                 $("#sendtype").html(data.o_sendtype);
+             },
+             error:function (data) {
+             },
+             dataType: "json"
+         });
+     }
+     getOrderDetail();
+
+     function jumptologistics() {
+		 var url ="logistics.html?g_id="+g_id;
+		 window.location.href=url
+     }
+
+ </script>
 </body>
 </html>

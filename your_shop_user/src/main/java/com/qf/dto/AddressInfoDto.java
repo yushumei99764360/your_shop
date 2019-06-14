@@ -14,6 +14,8 @@ public class AddressInfoDto {
     String shname;
     String o_sendtype;
     int id;
+
     int s_id;
-    int price;
+
+    double price;
 }

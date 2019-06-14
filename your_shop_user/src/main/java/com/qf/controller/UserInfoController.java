@@ -200,7 +200,6 @@ public class UserInfoController {
     public Object insertMessageByGoods(@RequestBody MessageDto messageDto,HttpSession httpSession){
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
         messageDto.setUserId(userInfo.getUserId());
-        System.out.println(userInfoService.insertMessageByGoods(messageDto));
         return userInfoService.insertMessageByGoods(messageDto);
     }
 }

@@ -179,12 +179,12 @@
 					<div class="toux_kuang">
 						<div class="userImage">
 							<div class="myGome_userPhoto">
-								<img src="images/toux.png">
+								<img src="" id="img">
 								<a class="edit_photo_bitton" href="profile" target="_blank">编辑</a>
 							</div>
 						</div>
 						<div class="user_name_Level">
-							<p class="user_name" title="山的那边是海">山的那边是海</p>
+							<p class="user_name" title="山的那边是海" id="span"></p>
 							<p class="userLevel">会员：<span class="levelId icon_plus_nickname"></span></p> 
 						</div>
 					</div>
@@ -265,7 +265,7 @@
 							<h3>账户设置</h3>
 							<li><a href="#">基本资料</a></li>
 							<li><a href="#">账户安全</a></li>
-							<li><a href="#">收货地址</a></li>
+							<li><a href="shouh_diz.html">收货地址</a></li>
 						</ul>
 					</div>
 				</div>
@@ -591,6 +591,27 @@
         var url = "pingj.html?g_id="+g_id;
         window.location.href = url;
     }
+
+    function getUserInfoMessageById() {
+        $.ajax({
+            type: 'GET',
+            url: "getUserInfoMessageById",
+            contentType:"application/json",
+            success: function(data){
+                $("#img").attr("src",data.icon);
+                $("#span").html(data.nickName);
+
+
+            },
+            error:function (data) {
+                console.error(data);
+            },
+            dataType: "json"
+        });
+    }
+    getUserInfoMessageById();
+
+
 </script>
 
 

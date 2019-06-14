@@ -1,8 +1,6 @@
 package com.qf.controller;
 
 import com.qf.dto.*;
-import com.qf.pojo.AddressInfo;
-import com.qf.pojo.Category;
 import com.qf.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +31,6 @@ public class CategoryController {
     @ResponseBody
     @RequestMapping(value = "categoryListOne",method = RequestMethod.GET)
     public Object categoryListOne() {
-
         return "";
     }
 
@@ -51,8 +48,8 @@ public class CategoryController {
      */
     @ResponseBody
     @RequestMapping("createOrder")
-    public Object createOrder(@RequestBody CreateOrderDto createOrderDto){
-        System.out.println(createOrderDto);
+    public Object createOrder(@RequestBody CreateOrderDto createOrderDto,HttpSession session){
+
         int adsId = createOrderDto.getAddress();
         //查询选择的地址
         AddressInfoDto addressInfoDto = categoryService.searchAddress(adsId);
@@ -66,13 +63,13 @@ public class CategoryController {
         addressInfoDto.setS_id(createOrderDto.getS_id());
         //总价
         addressInfoDto.setPrice(createOrderDto.getPrice()*createOrderDto.getNum());
-        System.out.println(addressInfoDto);
+
+        session.setAttribute("addressInfoDto",addressInfoDto);
         //下订单
         int i= categoryService.insertOrder(addressInfoDto);
-        System.out.println(i);
         //获取商品信息
         GodsInfoDetail goodsInfoDetail = categoryService.searchGoods(createOrderDto.getG_id());
-
+        //赋值
         Order_DetailDto order_detailDto = new Order_DetailDto();
         order_detailDto.setG_total_price(createOrderDto.getPrice()*createOrderDto.getNum());
         order_detailDto.setO_orderid(id);
@@ -84,9 +81,29 @@ public class CategoryController {
         order_detailDto.setG_name(goodsInfoDetail.getG_name());
         //添加订单详情表
         int j = categoryService.insertOrderDetail(order_detailDto);
+
         if (j!=0&&i!=0){
             return true;
         }
         return false;
+    }
+
+    /**
+     * 获取订单详细信息
+     */
+    @ResponseBody
+    @RequestMapping("getOrderDetail")
+    public Object getOrderDetail(HttpSession httpSession){
+        AddressInfoDto addressInfoDto = (AddressInfoDto) httpSession.getAttribute("addressInfoDto");
+        return addressInfoDto;
+    }
+
+    /**
+     * 获取物流信息
+     */
+    @ResponseBody
+    @RequestMapping(value = "getlogistics", method = RequestMethod.POST)
+    public Object getlogistics(@RequestBody Logisticsinfo logisticsinfo){
+        return categoryService.getlogistics(logisticsinfo.getG_id());
     }
 }

@@ -292,7 +292,7 @@
 											</div>
 									</div>
 									<form name="iconUpLoad" id="iconUpLoad"  enctype="multipart/form-data">
-										<input type="file" name="file" class="btn btn-enter">
+										<input type="file" name="file" class="btn btn-enter" id="picture">
 									</form>
 									<div class="upload_btn_box">
 										<button id="up_avater_btn" onclick="updownload()" class="avater_btn" type="button">上传头像</button>
@@ -407,7 +407,6 @@
     }
     getUserInfoMessageById();
 
-h
 	function updownload() {
         var formData = new FormData($("#iconUpLoad")[0]);
         $.ajax({
@@ -418,12 +417,15 @@ h
             processData: false,
             contentType: false,
             success : function (data) {
-                 window.location.href="shez_toux.html";
+                if (data) {
+                    window.location.href="shez_toux.html";
+                    window.location.reload()
+				}
             },
             error : function (data) {
                 window.location.href="shez_toux.html";
+                window.location.reload()
             },
-            // dataType: "json"
         });
     }
 </script>

@@ -169,8 +169,10 @@
         				<div class="goods_msg">
 							<div class="p_name">
 								<a href="#" id="g_name"></a>
+
 							</div>
         					<div class="p_price">
+								<span id="nums"></span>
                                 <span id="g_price"></span>
         						<span>有货</span>
         					</div>
@@ -349,7 +351,6 @@
 
     var g_id;
     var num;
-    var o_paycount;
     var s_id;
 	var price;
     function getUserId() {
@@ -400,6 +401,7 @@
                 $("#img").attr("src",data.g_pic);
                 $("#g_name").html(data.g_name);
                 $("#num").html(num);
+                $("#nums").html("x"+num);
                 $("#totalPrice").html("￥"+num*data.g_disctprice);
                 $("#price").html("￥"+num*data.g_disctprice);
                 $("#g_price").html("￥"+data.g_disctprice);
@@ -437,7 +439,7 @@
 				"price":price
 			}),
             success: function (data) {
-                window.location.href = "dingd_xiangq.html"
+                window.location.href = "dingd_xiangq.html?g_id="+g_id
             },
             error: function (data) {
                 alert("执行失败")
