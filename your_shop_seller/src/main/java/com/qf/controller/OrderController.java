@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.nio.cs.ext.ExtendedCharsets;
 
 import java.util.List;
 
@@ -58,6 +59,7 @@ public Object deleteOrderInfo(@RequestParam int id) {
     @ResponseBody
     @RequestMapping("selectOrderBy")
     public Object selectOrderBy(@RequestBody OrderSelected orderSelected) {
+        System.out.println(orderSelected);
         List<OrderVo> orderVos = orderService.selectOrderBy(orderSelected);
         System.out.println(orderVos);
         return orderVos;
@@ -70,6 +72,27 @@ public Object deleteSelectOrder(@RequestBody List<Integer> selectOrderId){
 
     return orderService.deleteSelectOrder(selectOrderId);
 }
+//echats图表
+    @ResponseBody
+    @RequestMapping("selectByPlace")
+    public Object selectByPlace() {
+        List<OrderVo> orderVos= orderService.selectByPlace();
+        return orderVos;
+    }
 
+
+    @ResponseBody
+    @RequestMapping("selectByOrderNum")
+    public Object selectByOrderNum() {
+        OrderVo orderVo1= orderService.selectByOrderNum();
+        return orderVo1;
+    }
+
+    @ResponseBody
+    @RequestMapping("selectByGoodsNum")
+    public Object selectByGoodsNum() {
+        OrderVo orderVo1= orderService.selectByGoodsNum();
+        return orderVo1;
+    }
 
 }

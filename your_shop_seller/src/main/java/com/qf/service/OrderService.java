@@ -18,4 +18,10 @@ public interface OrderService {
      List<OrderVo> selectOrderBy(OrderSelected orderSelected);
 
     Object deleteSelectOrder(List<Integer> selectOrderId);
+
+    List<OrderVo> selectByPlace();
+
+    OrderVo selectByOrderNum();
+
+    OrderVo selectByGoodsNum();
 }

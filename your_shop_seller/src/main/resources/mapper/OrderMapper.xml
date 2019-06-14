@@ -47,7 +47,6 @@
     <!--条件查询-->
     <select id="selectOrderBy" resultType="com.qf.vo.OrderVo" parameterType="com.qf.vo.OrderSelected">
         SELECT * FROM orderinfo
-
         <where>
             <if test="changeStartTime != null and changeStartTime !=''">
                 and o_checkdate &gt; #{changeStartTime}
@@ -57,9 +56,6 @@
             </if>
             <if test="startTime != null and startTime !=''">
                 and o_orderdate &gt; #{startTime}
-            </if>
-            <if test="endTime != null and endTime !=''">
-                and  #{endTime} &gt; o_orderdate
             </if>
             <if test="endTime != null and endTime !=''">
                 and  #{endTime} &gt; o_orderdate
@@ -100,11 +96,12 @@
 
     <!--销售总额-->
     <select id="selectByOrderNum" resultType="com.qf.vo.OrderVo">
-      SELECT COUNT(*) AS allcount,SUM(o_paycount) AS allmoeny FROM orderinfo
+      SELECT COUNT(*) AS allcount,SUM(o_paycount) AS allmoney FROM orderinfo
     </select>
 
     <!--销售商品数量-->
     <select id="selectByGoodsNum" resultType="com.qf.vo.OrderVo">
+    SELECT SUM(g_num) AS allgoods FROM order_detail;
 
     </select>
 

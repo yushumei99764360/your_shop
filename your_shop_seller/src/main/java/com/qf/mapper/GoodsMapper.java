@@ -3,7 +3,6 @@ package com.qf.mapper;
 
 import com.qf.vo.GoodsSelecteds;
 import com.qf.vo.GoodsVo;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -34,8 +33,5 @@ public interface GoodsMapper {
 
     // 选中删除 ，批量删除
     int delCheckGoods(List<Integer> list);
-
-//    上传商品图片
-    int updateIconByGId(@Param("GId") int GId, @Param("icon") String icon);
 
 }

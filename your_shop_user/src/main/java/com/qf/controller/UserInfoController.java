@@ -96,7 +96,6 @@ public class UserInfoController {
     @RequestMapping(value = "RegisterUser",method = RequestMethod.POST)
     public String Register(@RequestBody(required = false) UserInfoVo userInfoVo){
         Boolean aBoolean = userInfoService.RegisterUserInfo(userInfoVo);
-        System.out.println(userInfoVo);
         return aBoolean.toString();
     }
 
@@ -184,7 +183,6 @@ public class UserInfoController {
     @ResponseBody
     @RequestMapping("deleteAddressById")
     public Object deleteAddressByUserId(@RequestParam int adsId){
-        System.out.println(adsId);
         return userInfoService.deleteAddressByUserId(adsId);
     }
 
@@ -193,7 +191,6 @@ public class UserInfoController {
     @RequestMapping("selectUserByMessage")
     public Object selectUserByMessage(@RequestParam int g_id){
         List<MessageDto> message   = userInfoService.selectUserByMessage(g_id);
-        System.out.println(message);
         return message;
     }
 

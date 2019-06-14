@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" xmlns:margin="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="assets/css/admin.css">
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/echarts.min.js"></script>
 </head>
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
 </head>
@@ -80,40 +81,29 @@
    <div class="admin-index">
       <dl data-am-scrollspy="{animation: 'slide-right', delay: 100}">
         <dt class="qs"><i class="am-icon-users"></i></dt>
-        <dd>455</dd>
+        <dd id="dd1"></dd>
         <dd class="f12">今日订单数量</dd>
       </dl>
       <dl data-am-scrollspy="{animation: 'slide-right', delay: 600}">
         <dt class="hs"><i class="am-icon-shopping-cart"></i></dt>
-        <dd>4552</dd>
+        <dd id="dd2"></dd>
         <dd class="f12">今日卖出商品数量</dd>
       </dl>
       <dl data-am-scrollspy="{animation: 'slide-right', delay: 900}">
         <dt class="ls"><i class="am-icon-cny"></i></dt>
-        <dd>455434</dd>
+        <dd id="dd3"></dd>
         <dd class="f12">今日店铺总收入</dd>
       </dl>
     </div>
       <div class="slideTxtBox"></div>
-      <script type="text/javascript">jQuery(".slideTxtBox").slide();</script> 
+      <script type="text/javascript">jQuery(".slideTxtBox").slide();</script>
+
+
+
+
+    <div id="main" style=”width:400px;height:400px; margin: 20px auto;”></div>
 
 </div>
-
-    <div class="foods">
-    	<ul>
-            版权所有@2019.  <a href="http://www.cssmoban.com/" target="_blank" title="">商铺之家</a> -  More Shop <a href="http://www.cssmoban.com/" title="" target="_blank"></a>
-        </ul>
-    	<dl><a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a></dl>
-
-
-    	
-    </div>
-
-
-
-
-
-
 
 </div>
 
@@ -132,6 +122,115 @@
 <!--[if (gte IE 9)|!(IE)]><!--> 
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
+<script>
+
+    var myChart = echarts.init(document.getElementById('main'));
+    // 显示标题，图例和空的坐标轴
+    myChart.setOption({
+        title: {
+            text: '地域订单图'
+        },
+        tooltip: {},
+        legend: {
+            data:['订单数量']
+        },
+        xAxis: {
+            data: []
+        },
+        yAxis: {},
+        series: [{
+            name: '订单数量',
+            type: 'bar',
+            data: []
+        }]
+    });
+
+    myChart.showLoading();    //数据加载完之前先显示一段简单的loading动画
+
+    var names=[];    //类别数组（实际用来盛放X轴坐标值）
+    var nums=[];    //销量数组（实际用来盛放Y坐标值）
+
+    $.ajax({
+        type : "post",
+        url : "selectByPlace",    //请求发送到TestServlet处
+        data : {},
+        success : function(result) {
+            //请求成功时执行该函数内容，result即为服务器返回的json对象
+            if (result) {
+                for(var i=0;i<result.length;i++){
+                    names.push(result[i].o_province);    //挨个取出类别并填入类别数组
+                }
+                for(var i=0;i<result.length;i++){
+                    nums.push(result[i].count);    //挨个取出销量并填入销量数组
+                }
+                myChart.hideLoading();    //隐藏加载动画
+                myChart.setOption({        //加载数据图表
+                    xAxis: {
+                        data: names
+                    },
+                    series: [{
+                        // 根据名字对应到相应的系列
+                        name: '订单数量',
+                        data: nums
+                    }]
+                });
+
+            }
+
+        },
+        error : function(errorMsg) {
+            //请求失败时执行该函数
+            alert("图表请求数据失败!");
+            myChart.hideLoading();
+        }
+    })
+
+
+
+    $.ajax({
+        type : "post",
+        url : "selectByOrderNum",    //请求发送到TestServlet处
+        data : {},
+        success : function(result) {
+alert(result);
+console.log(result);
+            var tabObj = $("#dd1");
+            var trHtml="<span>"+result.allcount+"</span>";
+            tabObj.append(trHtml);
+
+            var tabObj = $("#dd3");
+            var trHtml="<span>"+result.allmoney+"</span>";
+            tabObj.append(trHtml);
+
+
+        },
+        error : function(errorMsg) {
+            alert("333333");
+        }
+    })
+
+
+
+
+
+    $.ajax({
+        type : "post",
+        url : "selectByGoodsNum",    //请求发送到TestServlet处
+        data : {},
+        success : function(result) {
+            alert(result);
+            console.log(result);
+            var tabObj = $("#dd2");
+            var trHtml="<span>"+result.allgoods+"</span>";
+            tabObj.append(trHtml);
+        },
+        error : function(errorMsg) {
+            alert("333333");
+        }
+    })
+
+</script>
+
 
 </body>
 </html>

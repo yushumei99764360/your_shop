@@ -54,12 +54,21 @@ public class OrderVo {
     int g_num;
 //    订单总价
     Double g_total_price;
+//    订单情况
+String o_status;
+//订单数量
+int COUNT;
 
+String allmoney;
+
+String allcount;
+
+String    allgoods;
 
     public OrderVo() {
     }
 
-    public OrderVo(int id, String o_sendtype, String o_orderdate, String o_checkdate, String o_paytype, double o_paycount, int userId, String o_shperson, String o_shphone, String o_shaddress, String o_province, String o_city, String o_district, int s_id, String order_date, String order_modified, int o_orderid, int g_id, String g_name, Double g_disctprice, String g_desc, int g_num, Double g_total_price) {
+    public OrderVo(int id, String o_sendtype, String o_orderdate, String o_checkdate, String o_paytype, double o_paycount, int userId, String o_shperson, String o_shphone, String o_shaddress, String o_province, String o_city, String o_district, int s_id, String order_date, String order_modified, int o_orderid, int g_id, String g_name, Double g_disctprice, String g_desc, int g_num, Double g_total_price, String o_status, int COUNT, String allmoney, String allcount, String allgoods) {
         this.id = id;
         this.o_sendtype = o_sendtype;
         this.o_orderdate = o_orderdate;
@@ -83,6 +92,11 @@ public class OrderVo {
         this.g_desc = g_desc;
         this.g_num = g_num;
         this.g_total_price = g_total_price;
+        this.o_status = o_status;
+        this.COUNT = COUNT;
+        this.allmoney = allmoney;
+        this.allcount = allcount;
+        this.allgoods = allgoods;
     }
 }
 
