@@ -102,8 +102,18 @@
     <!--销售商品数量-->
     <select id="selectByGoodsNum" resultType="com.qf.vo.OrderVo">
     SELECT SUM(g_num) AS allgoods FROM order_detail;
-
     </select>
+
+    <select id="getAllRefund" resultType="com.qf.vo.OrderVo">
+ SELECT o.id,o.o_sendtype,o.o_paytype,o.o_paycount,o.o_shperson,o.o_shphone,o.o_shaddress,o.o_province,o.o_city,o.o_district,o.o_orderdate,o.o_status FROM orderinfo o,refund r
+        WHERE o.id=r.r_orderid;
+    </select>
+
+    <select id="getRefundInfoById" parameterType="int" resultType="com.qf.vo.RefundVo">
+     SELECT * FROM refund WHERE r_orderid=${id};
+    </select>
+
+
 
 
 </mapper>

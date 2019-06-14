@@ -2,6 +2,7 @@ package com.qf.service;
 
 import com.qf.vo.OrderSelected;
 import com.qf.vo.OrderVo;
+import com.qf.vo.RefundVo;
 
 import java.util.List;
 
@@ -24,4 +25,8 @@ public interface OrderService {
     OrderVo selectByOrderNum();
 
     OrderVo selectByGoodsNum();
+
+    List<OrderVo> getAllRefund();
+
+    RefundVo getRefundInfoById(int id);
 }

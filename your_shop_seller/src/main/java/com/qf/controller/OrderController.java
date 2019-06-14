@@ -2,10 +2,7 @@ package com.qf.controller;
 
 import com.qf.service.OrderService;
 
-import com.qf.vo.GoodsSelecteds;
-import com.qf.vo.GoodsVo;
-import com.qf.vo.OrderSelected;
-import com.qf.vo.OrderVo;
+import com.qf.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,9 +56,7 @@ public Object deleteOrderInfo(@RequestParam int id) {
     @ResponseBody
     @RequestMapping("selectOrderBy")
     public Object selectOrderBy(@RequestBody OrderSelected orderSelected) {
-        System.out.println(orderSelected);
         List<OrderVo> orderVos = orderService.selectOrderBy(orderSelected);
-        System.out.println(orderVos);
         return orderVos;
     }
 
@@ -94,5 +89,24 @@ public Object deleteSelectOrder(@RequestBody List<Integer> selectOrderId){
         OrderVo orderVo1= orderService.selectByGoodsNum();
         return orderVo1;
     }
+
+
+    @ResponseBody
+    @RequestMapping("getAllRefund")
+    public Object getAllRefund() {
+        List<OrderVo> refundInfo= orderService.getAllRefund();
+        return refundInfo;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("getRefundInfoById")
+    public Object getRefundInfoById(@RequestParam int id) {
+        System.out.println(id);
+        RefundVo refundInfo= orderService.getRefundInfoById(id);
+        System.out.println(refundInfo);
+        return refundInfo;
+    }
+
 
 }

@@ -6,6 +6,7 @@ import com.qf.service.OrderService;
 import com.qf.vo.GoodsVo;
 import com.qf.vo.OrderSelected;
 import com.qf.vo.OrderVo;
+import com.qf.vo.RefundVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderVo selectByGoodsNum() {
         return orderMapper.selectByGoodsNum();
+    }
+
+    @Override
+    public List<OrderVo> getAllRefund() {
+        return orderMapper.getAllRefund();
+    }
+
+    @Override
+    public RefundVo getRefundInfoById(int id) {
+        return orderMapper.getRefundInfoById(id);
     }
 
 

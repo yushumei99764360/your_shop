@@ -46,10 +46,12 @@
       </ul>
         <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
         <ul>
-            <li><a href="">订单列表</a></li>
-            <li><a href="">订单展示</a></li>
-            <li><a href="">添加新订单</a></li>
-            <li><a href="">修改订单</a></li>
+            <li><a href="OrderList.html">订单列表</a></li>
+
+        </ul>
+        <h3 class="am-icon-arrow-circle-right"><em></em> <a href="RefundList.html">退款列表</a></h3>
+        <ul>
+            <li><a href="RefundList.html">退款列表</a></li>
         </ul>
 
         <h3 class="am-icon-users"><em></em> <a href="sellerInfo.html">个人中心</a></h3>
@@ -207,7 +209,6 @@
 
         },
         error : function(errorMsg) {
-            alert("333333");
         }
     })
 
@@ -216,14 +217,12 @@
         url : "selectByGoodsNum",    //请求发送到TestServlet处
         data : {},
         success : function(result) {
-            alert(result);
             console.log(result);
             var tabObj = $("#dd2");
             var trHtml="<span>"+result.allgoods+"</span>";
             tabObj.append(trHtml);
         },
         error : function(errorMsg) {
-            alert("333333");
         }
     })
 
