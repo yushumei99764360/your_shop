@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 
 @RestController
 public class SellersController {
@@ -47,5 +49,27 @@ public class SellersController {
         System.out.println(updateSeller);
         return updateSeller;
     }
+
+
+    // 修改商家头像
+    @RequestMapping(value = "iconUploadCode", method = RequestMethod.POST)
+    public Object  iconUploadCode(@RequestParam("file") CommonsMultipartFile file, @RequestParam("s_code") String s_code) {
+
+        System.out.println("fileName："+file.getOriginalFilename());
+        String path="D:\\Java1901\\your_shop\\your_shop_seller\\src\\main\\webapp\\images"+file.getOriginalFilename();
+
+        String icon = "images/"+file.getOriginalFilename();
+        File newFile=new File(path);
+        boolean flag = false;
+        try {
+            file.transferTo(newFile);
+            flag =  sellersService.updatePicBySellerId(s_code, icon);
+            return flag;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
 }

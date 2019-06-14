@@ -40,4 +40,9 @@
             </if>
         s_lastdate = default where s_code = #{s_code}
     </update>
+
+    <!--修改商家头像-->
+    <update id="updatePicBySellerId" >
+        update sellerinfo set icon=#{icon} where s_code = #{s_code}
+    </update>
 </mapper>

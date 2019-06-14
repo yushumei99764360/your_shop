@@ -2,6 +2,7 @@ package com.qf.service;
 
 import com.qf.pojo.SellerInfo;
 import com.qf.vo.SellerVo;
+import org.apache.ibatis.annotations.Param;
 
 public interface SellersService {
 
@@ -11,5 +12,8 @@ public interface SellersService {
     SellerInfo getSellerById(int s_id);
     //    修改商家信息
     boolean updateSeller(SellerVo sellerVo);
+
+    //    修改商家头像
+    boolean updatePicBySellerId(String s_code, String icon);
 
 }

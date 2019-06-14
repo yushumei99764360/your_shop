@@ -19,6 +19,7 @@ public class SellersServiceImpl implements SellersService {
     public SellerInfo loginSeller(SellerVo sellerVo) {
 
         return sellersMapper.loginSeller(sellerVo);
+
     }
 
     //    根据商家id 查询商家详细信息
@@ -32,6 +33,15 @@ public class SellersServiceImpl implements SellersService {
     public boolean updateSeller(SellerVo sellerVo) {
         int updateSeller = sellersMapper.updateSeller(sellerVo);
         if (updateSeller>0)
+            return true;
+        return false;
+    }
+
+    //修改商家头像
+    @Transactional(propagation = Propagation.REQUIRED)
+    public boolean updatePicBySellerId(String s_code, String icon) {
+        int updatePicBySellerId = sellersMapper.updatePicBySellerId(s_code, icon);
+        if (updatePicBySellerId>0)
             return true;
         return false;
     }

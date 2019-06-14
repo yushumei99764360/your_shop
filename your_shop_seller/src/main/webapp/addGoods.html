@@ -211,7 +211,7 @@
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
 
-!--Dropzone-->
+<!--!Dropzone-->
 <script src="dropzone/js/dropzone.min.js"></script>
 <script>
     $(function () {
@@ -260,8 +260,9 @@
             });
             this.on("success", function (file, data) {
                 // 上传成功触发的事件
-                alert("上传成功")
-
+                alert(data.fileName);
+                $("#g_pic").val(data.fileName);
+                console.log(file);
             });
             this.on("error", function (file, data) {
                 // 上传失败触发的事件

@@ -17,7 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Controller
 public class GoodsController {
@@ -46,7 +49,10 @@ public class GoodsController {
 
         SellerInfo sellerInfo = (SellerInfo) httpSession.getAttribute("sellerInfo");
         goodsVo.setS_id(sellerInfo.getS_id());
-        goodsVo.setG_pic("images/"+icon);
+        String pic = goodsVo.getG_pic();
+        if (pic.length()>0)
+            goodsVo.setG_pic("http://localhost:8080/seller/static/upload/"+pic);
+//        goodsVo.setG_pic("images/"+icon);
         System.out.println(goodsVo);
         boolean addGoods = goodsService.addGoodsInfo(goodsVo);
         System.out.println(addGoods);
@@ -68,6 +74,7 @@ public class GoodsController {
     @RequestMapping("updateGoodsByGoodsId")
     public Object updateGoodsInfo(@RequestBody GoodsVo goodsVo) {
         System.out.println(goodsVo);
+        goodsVo.setG_pic("http://localhost:8080/seller/static/upload/"+goodsVo.getG_pic());
         boolean uodateGoodsInfo = goodsService.uodateGoodsInfo(goodsVo);
         System.out.println(uodateGoodsInfo);
         return uodateGoodsInfo;
@@ -130,7 +137,7 @@ public class GoodsController {
      */
     public static  String icon;
 
-    @RequestMapping(value="uploadPic",method=RequestMethod.POST)
+   /* @RequestMapping(value="uploadPic",method=RequestMethod.POST)
     public String uploadPic(MultipartFile dropzFile, HttpServletRequest request) throws IOException {
         icon = dropzFile.getOriginalFilename();
         // 设置文件上传路径
@@ -155,5 +162,38 @@ public class GoodsController {
             e.printStackTrace();
         }
         return file.getName();
+    }*/
+    @ResponseBody
+    @RequestMapping(value="uploadPic",method=RequestMethod.POST)
+    public Map<String,Object> uploadPic(MultipartFile dropzFile, HttpServletRequest request) throws IOException {
+
+        System.out.println(dropzFile);
+        Map<String,Object> result = new HashMap<String, Object>();
+        // 获取上传文件名
+        String fileName = dropzFile.getOriginalFilename();
+        // 设置文件上传路径
+        String filePath = request.getSession().getServletContext().getRealPath("/static/upload");
+//        获取文件的后缀名
+        String fileSuffix = fileName.substring(fileName.lastIndexOf("."),fileName.length());
+        // 判断并创建上传用的文件夹
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+//        重新设置文件名为UUID
+        file = new File(filePath, UUID.randomUUID()+fileSuffix);
+        System.out.println(file.getAbsoluteFile());
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+//                写入文件
+                dropzFile.transferTo(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+//        返回JSON数据，这里只带入了文件名
+        result.put("fileName",file.getName());
+        return result;
     }
 }

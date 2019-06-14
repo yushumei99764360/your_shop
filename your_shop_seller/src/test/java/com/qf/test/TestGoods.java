@@ -1,6 +1,6 @@
 package com.qf.test;
 
-
+import com.qf.pojo.GoodsInfo;
 import com.qf.service.GoodsService;
 import com.qf.vo.GoodsSelecteds;
 import com.qf.vo.GoodsVo;
@@ -58,6 +58,8 @@ public class TestGoods {
 
     @Test
     public void test5(){
+        boolean iconByGId = goodsService.updateIconByGId(158, "images/dd.jpg");
+        System.out.println(iconByGId);
 
     }
     @Test

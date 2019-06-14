@@ -139,27 +139,22 @@
             <textarea class="" rows="2" id="g_desc"></textarea>
           </div>
         </div>
-        <div class="am-form-group am-cf">
+        <!--<div class="am-form-group am-cf">
           <div class="zuo">产品图片：</div>
-          <!--<div class="you" style="height: 45px;">
-            <input type="file" id="g_pic">
-            <p class="am-form-help">请选择要上传的产品图片...</p>
-          </div>-->
-            <!--<div class="you" >
-                <div class="pic-wrap ">
-                    <img src="images/timg.jpg" id="g_pic" style="height: 45px;">
-                </div>
-            </div>-->
             <div class="you" >
-                <div>
-                    <img src="" alt="" id="g_pic" style="width: 180px; height: 150px">
+                <div id="dropz" class="dropzone" style="width: 180px; height: 150px">
+                    <img src="" alt="" id="g_pic" style="width: 140px; height: 120px">
                 </div>
-                <form name="picUpload" id="picUpload"  enctype="multipart/form-data">
-                    <input type="file" name="file" class="btn btn-sm  ">
-                </form>
-                <input type="submit" value="修改" class="btn btn-sm  btn-primary" onclick="picUpload()"/>
             </div>
-        </div>
+        </div>-->
+          <div class="am-form-group am-cf">
+              <div class="zuo">产品图片：</div>
+              <div class="you" id="Pic">
+                  <div id="dropz" class="dropzone" style="width: 200px; height: 200px;padding: 0px">
+                      <img src="" alt="" id="g_pic" style="width: 198px; height: 150px ">
+                  </div>
+              </div>
+          </div>
           <div class="am-form-group am-cf">
               <div class="zuo">商品类别：</div>
               <div class="you" style="height: 40px;">
@@ -222,7 +217,7 @@
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
 
-!--Dropzone-->
+<!--!Dropzone-->
 <script src="dropzone/js/dropzone.min.js"></script>
 <script>
     var goodsId;
@@ -265,9 +260,9 @@
     }
     getGoodsByGoodsId();
 
-    //修改用户信息
+    //修改商品信息
     function updateGoodsByGoodsId() {
-        // alert($("#g_status").val())
+
         $.ajax({
             type:"POST",
             url:"updateGoodsByGoodsId",
@@ -282,6 +277,7 @@
                 "g_num":$("#g_num").val(),
                 "g_desc":$("#g_desc").val(),
                 "childId":$("#child").val(),
+                "g_pic":$("#Pic").val(),
                 "g_status":$("#g_status").val()
             }),
             success : function (data) {
@@ -295,38 +291,47 @@
         });
     }
 
-    function picUpload() {
-        // var formData = new FormData($("#picUpload")[0]);
-        var formData = new FormData();
-        formData.append('file', $('#picUpload')[0]);  //添加图片信息的参数
-        formData.append('goodsId',goodsId);  //添加其他参数
-        alert(formData)
-        $.ajax({
-            type: "POST",
-            url: "picUpload" ,
-            data: formData,
-            async: false,
-            cache: false,
-            processData: false,
-            contentType: false,
-            success : function (data) {
-                alert(8888);
-                console.log(data);
-                if (data) {
-                    window.location.reload();
-                } else {
-                    alert("修改失败！")
-                }
-            },
-            error : function (data) {
-                console.log(data);
-                alert("请求失败！");
-            }
-            // dataType: "json"
+    Dropzone.options.dropz={
+        url: "uploadPic", // 文件提交地址
+        method: "post",  // 也可用put
+        paramName: "dropzFile", // 默认为file
+        maxFiles: 1,// 一次性上传的文件数量上限
+        maxFilesize: 2, // 文件大小，单位：MB
+        acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
+        addRemoveLinks: true,
+        parallelUploads: 1,// 一次上传的文件数量
+        //previewsContainer:"#preview", // 上传图片的预览窗口
+        dictDefaultMessage: '拖动文件至此或者点击上传',
+        dictMaxFilesExceeded: "您最多只能上传1个文件！",
+        dictResponseError: '文件上传失败!',
+        dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
+        dictFallbackMessage: "浏览器不受支持",
+        dictFileTooBig: "文件过大上传文件最大支持.",
+        dictRemoveLinks: "删除",
+        dictCancelUpload: "取消",
+        init: function () {
+            this.on("addedfile", function (file) {
+                // 上传文件时触发的事件
+                $("#g_pic").attr("src","");
+            });
+            this.on("success", function (file, data) {
+                // 上传成功触发的事件
 
-        });
-        alert(20000)
-    }
+                $("#Pic").val(data.fileName);
+
+                alert($("#Pic").val());
+
+                console.log(file);
+            });
+            this.on("error", function (file, data) {
+                // 上传失败触发的事件
+            });
+            this.on("removedfile", function (file) {
+                // 删除文件时触发的方法
+            });
+        }
+    };
+
 
 </script>
 
