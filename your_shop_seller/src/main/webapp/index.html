@@ -99,12 +99,18 @@
       <script type="text/javascript">jQuery(".slideTxtBox").slide();</script>
 
 
-
-
     <div id="main" style=”width:400px;height:400px; margin: 20px auto;”></div>
 
 </div>
+    <div class="foods">
+        <ul>
+            版权所有@2019.  <a href="http://www.cssmoban.com/" target="_blank" title="">商铺之家</a> -  More Shop <a href="http://www.cssmoban.com/" title="" target="_blank"></a>
+        </ul>
+        <dl><a href="" title="返回头部" class="am-icon-btn am-icon-arrow-up"></a></dl>
 
+
+
+    </div>
 </div>
 
 </div>
@@ -185,15 +191,11 @@
         }
     })
 
-
-
     $.ajax({
         type : "post",
         url : "selectByOrderNum",    //请求发送到TestServlet处
         data : {},
         success : function(result) {
-alert(result);
-console.log(result);
             var tabObj = $("#dd1");
             var trHtml="<span>"+result.allcount+"</span>";
             tabObj.append(trHtml);
@@ -208,10 +210,6 @@ console.log(result);
             alert("333333");
         }
     })
-
-
-
-
 
     $.ajax({
         type : "post",

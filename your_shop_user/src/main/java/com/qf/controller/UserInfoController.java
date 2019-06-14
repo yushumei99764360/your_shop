@@ -200,6 +200,17 @@ public class UserInfoController {
     public Object insertMessageByGoods(@RequestBody MessageDto messageDto,HttpSession httpSession){
         UserInfo userInfo = (UserInfo) httpSession.getAttribute("userInfo");
         messageDto.setUserId(userInfo.getUserId());
-        return userInfoService.insertMessageByGoods(messageDto);
+        int insert = userInfoService.insertMessageByGoods(messageDto);
+        return true;
     }
+
+//评价商家图片显示
+    @ResponseBody
+    @RequestMapping("selectSellPic")
+    public Object selectSellPic(@RequestParam int g_id){
+        System.out.println(g_id+"333333333");
+        System.out.println(userInfoService.selectSellPic(g_id));
+        return userInfoService.selectSellPic(g_id);
+    }
+
 }

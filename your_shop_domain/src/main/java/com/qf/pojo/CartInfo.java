@@ -27,6 +27,7 @@ public class CartInfo  {
     String g_pic;
     String g_name;
     String s_name;
+    int s_id;
     int g_id;
     int product_amount;
     double g_disctprice;

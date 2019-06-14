@@ -124,61 +124,12 @@
             </div>
         </div>
         <div class="jies_y_shouh_diz shiq_1">
-            <ul>
-                <li class="cur">
-                    <div class="dangq_xuanz_diz">当前地址</div>
-                    <span>艾丽西亚</span>
-                    <span>贵州省 贵阳市 云岩区 下合群路 达亨大厦16层</span>
-                    <span>182*****710</span>
-                    <div class="bianji_yv_shanc">
-                        <a href="#">设为默认</a>
-                        <a href="#">编辑</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="dangq_xuanz_diz">当前地址</div>
-                    <span>艾丽西亚</span>
-                    <span>贵州省 贵阳市 云岩区 下合群路 达亨大厦16层</span>
-                    <span>182*****710</span>
-                    <div class="bianji_yv_shanc">
-                        <a href="#">设为默认</a>
-                        <a href="#">编辑</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="dangq_xuanz_diz">当前地址</div>
-                    <span>艾丽西亚</span>
-                    <span>贵州省 贵阳市 云岩区 下合群路 达亨大厦16层</span>
-                    <span>182*****710</span>
-                    <div class="bianji_yv_shanc">
-                        <a href="#">设为默认</a>
-                        <a href="#">编辑</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="dangq_xuanz_diz">当前地址</div>
-                    <span>艾丽西亚</span>
-                    <span>贵州省 贵阳市 云岩区 下合群路 达亨大厦16层</span>
-                    <span>182*****710</span>
-                    <div class="bianji_yv_shanc">
-                        <a href="#">设为默认</a>
-                        <a href="#">编辑</a>
-                    </div>
-                </li>
+            <ul id="address">
             </ul>
-            <div class="addr-switch cur_e">
-                <p><span>更多地址</span><b></b></p>
-                <p class="jiant_xiangs"><span>收起更多</span><b></b></p>
-            </div>
         </div>
         <div class="jies_y_shouh_diz shiq_2">
             <ul>
                 <li class="zhif_fangs cur"><div class="dangq_xuanz_diz">在线支付</div></li>
-                <li class="zhif_fangs"><div class="dangq_xuanz_diz">货到付款</div></li>
-                <div class="addr-switch addr_switch_1 cur_e_1">
-                    <p><span>更多 >></span></p>
-                    <p><span>收起 <<</span></p>
-                </div>
             </ul>
         </div>
         <div class="step-tit">
@@ -196,13 +147,8 @@
                 <div>
                     <div class="jies_y_shouh_diz jies_y_shouh_diz_kuaid">
                         <ul>
-
-                            <li class="zhif_fangs cur"><div class="dangq_xuanz_diz">申通快递</div></li>
-                            <li class="zhif_fangs"><div class="dangq_xuanz_diz">圆通快递</div></li>
-                        </ul>
-
-                        <li id="hh" class="zhif_fangs"><input type="checkbox" class="express" value="申通快递"><div class="dangq_xuanz_diz">申通快递</div></li>
-                        <li id="dd" class="zhif_fangs"><input type="checkbox" class="express" value="圆通快递"><div class="dangq_xuanz_diz">圆通快递</div></li>
+                            <li id="hh" class="zhif_fangs"><input type="checkbox" class="express" value="申通快递"><div class="dangq_xuanz_diz">申通快递</div></li>
+                            <li id="dd" class="zhif_fangs"><input type="checkbox" class="express" value="圆通快递"><div class="dangq_xuanz_diz">圆通快递</div></li>
                         </ul>
 
                     </div>
@@ -216,302 +162,325 @@
                 </div>
             </div>
             <div class="goods_list">
-                <div class="goods_list_neik">
-                    <h4 class="vendor_name_h">商家：塔里服装旗舰店</h4>
+                <div class="goods_list_neik" id="myCartInfosSelected">
+                    <h4 class="vendor_name_h" id="s_name"></h4>
                     <div class="goods_item">
-
-                        <div class="p_img"><a href="#"><img src="images/lieb_tupi1.jpg"></a></div>
+                        <div class="p_img"><a href="#"><img src="" id="img" style="height: 80px"></a></div>
                         <div class="goods_msg">
                             <div class="p_name">
-                                <a href="#">探路者TOREAD 情侣款男士三合一套绒冲锋衣 TAWB91603 黑色 M</a>
+                                <a href="#" id="g_name"></a>
                             </div>
-
-                            <div class="p_img"><a href="#"><img src="" id="img" style="height: 80px"></a></div>
-                            <div class="goods_msg">
-                                <div class="p_name">
-                                    <a href="#" id="g_name"></a>
-                                </div>
-
-                                <div class="p_price">
-                                    <span class="jq_price">￥ 529.00</span>
-                                    <span>x1</span>
-                                    <span>有货</span>
-                                    <span>1.170kg</span>
-                                </div>
+                            <div class="p_price">
+                                <span id="g_price"></span>
+                                <span>有货</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="fap_beij">
-                <div class="step-tit">
-                    <h3>发票信息</h3>
-                </div>
-                <div class="kaif_p">
-                    <span>普通发票（电子)</span>
-                    <span>个人</span>
-                    <span> 明细 </span>
-                    <span> <a href="#">修改</a> </span>
-                </div>
+        </div>
+        <div class="fap_beij">
+            <div class="step-tit">
+                <h3>发票信息</h3>
+            </div>
+            <div class="kaif_p">
+                <span>普通发票（电子)</span>
+                <span>个人</span>
+                <span> 明细 </span>
+                <span> <a href="#">修改</a> </span>
             </div>
         </div>
-        <!--收费明细-->
-        <div class="order_summary">
+    </div>
+    <!--收费明细-->
+    <div class="order_summary">
+        <div class="qianq_mx">
+            <div class="jiaq_meih">
+                <span class="xiangq_leib"><em class="goumai_ges" id="num"></em> 件商品，总商品金额：</span>
+                <em class="goum_zongj" id="totalPrice"></em>
+            </div>
+            <div class="jiaq_meih">
+                <span class="xiangq_leib">返现：</span>
+                <em class="goum_zongj">￥00.00</em>
+            </div>
+            <div class="jiaq_meih">
+                <span class="xiangq_leib">运费：</span>
+                <em class="goum_zongj">￥00.00</em>
+            </div>
+            <div class="jiaq_meih">
+                <span class="xiangq_leib">服务费：</span>
+                <em class="goum_zongj">￥00.00</em>
+            </div>
+        </div>
+    </div>
+    <div class="trade_foot_detail_com">
+        <div class="dsgs">
             <div class="qianq_mx">
                 <div class="jiaq_meih">
-                    <span class="xiangq_leib"><em class="goumai_ges">1</em> 件商品，总商品金额：</span>
-                    <em class="goum_zongj">￥529.00</em>
-                </div>
-                <div class="jiaq_meih">
-                    <span class="xiangq_leib">返现：</span>
-                    <em class="goum_zongj">￥00.00</em>
-                </div>
-                <div class="jiaq_meih">
-                    <span class="xiangq_leib">运费：</span>
-                    <em class="goum_zongj">￥00.00</em>
-                </div>
-                <div class="jiaq_meih">
-                    <span class="xiangq_leib">服务费：</span>
-                    <em class="goum_zongj">￥00.00</em>
-                </div>
-            </div>
-        </div>
-        <div class="trade_foot_detail_com">
-            <div class="dsgs">
-                <div class="qianq_mx">
-                    <div class="jiaq_meih">
-                        <span class="xiangq_leib"> 应付总额：</span>
-                        <em class="goum_zongj zhongf_jine">￥529.00</em>
-                    </div>
-                </div>
-            </div>
-            <div class="zuiz_diz">
-                <span>寄送至： 贵州 贵阳市 云岩区 城区 下合群路达亨大厦1606</span>
-                <span> 收货人：艾丽西亚 182****0710</span>
-            </div>
-        </div>
-        <div class="tij_dingd_ann">
-            <a  onclick="ToPay()">提交订单</a>
-        </div>
-    </div>
-
-    <script type="text/javascript">
-        $(function(){
-            $(".shiq_1 ul li").hide().first().show()
-            $(".cur_e p").hide().first().show()
-            $(".cur_e p:first").click(
-                function(){
-                    $(".shiq_1 ul li").show()
-                    $(".cur_e p").hide().last().show()
-                }
-            )
-            $(".cur_e p:last").click(
-                function(){
-                    $(".shiq_1 ul li").hide().first().show()
-                    $(".cur_e p").hide().first().show()
-                }
-            )
-        })
-        $(function(){
-            $(".shiq_2 ul li").hide().first().show()
-            $(".cur_e_1 p").hide().first().show()
-            $(".cur_e_1 p:first").click(
-                function(){
-                    $(".shiq_2 ul li").show()
-                    $(".cur_e_1 p").hide().last().show()
-                }
-            )
-            $(".cur_e_1 p:last").click(
-                function(){
-                    $(".shiq_2 ul li").hide().first().show()
-                    $(".cur_e_1 p").hide().first().show()
-                }
-            )
-        })
-        //cur
-    </script>
-
-    <!--底部-->
-    <div class="dib_beij">
-        <div class="dib_jvz_beij">
-            <div class="shangp_baoz">
-                <p>本地购物&nbsp;&nbsp;看得见的商品</p>
-                <p class="beng1">正品行货&nbsp;&nbsp;购物无忧</p>
-                <p class="beng2">低价实惠&nbsp;&nbsp;帮你省钱</p>
-                <p class="beng3">本地直发&nbsp;&nbsp;专业配送</p>
-            </div>
-            <div class="zhongj_youx">
-                <div class="lieb_daoh">
-                    <h4>物流配送</h4>
-                    <ul>
-                        <li><a href="#">配送查询</a></li>
-                        <li><a href="#">配送服务</a></li>
-                        <li><a href="#">配送费用</a></li>
-                        <li><a href="#">配送时效</a></li>
-                        <li><a href="#">签收与验货</a></li>
-                    </ul>
-                </div>
-                <div class="lieb_daoh">
-                    <h4>支付与账户</h4>
-                    <ul>
-                        <li><a href="#">货到付款</a></li>
-                        <li><a href="#">在线支付</a></li>
-                        <li><a href="#">门店支付</a></li>
-                        <li><a href="#">账户安全</a></li>
-                    </ul>
-                </div>
-                <div class="lieb_daoh">
-                    <h4>购物帮助</h4>
-                    <ul>
-                        <li><a href="#">购物保障</a></li>
-                        <li><a href="#">购物流程</a></li>
-                        <li><a href="#">焦点问题</a></li>
-                        <li><a href="#">联系我们</a></li>
-                    </ul>
-                </div>
-                <div class="lieb_daoh">
-                    <h4>售后服务</h4>
-                    <ul>
-                        <li><a href="#">退换货服务</a></li>
-                        <li><a href="#">退款说明</a></li>
-                        <li><a href="#">专业维修</a></li>
-                        <li><a href="#">延保服务</a></li>
-                        <li><a href="#">家电回收</a></li>
-                    </ul>
-                </div>
-                <div class="lieb_daoh">
-                    <div class="kef_dianh">
-                        <p>客服电话</p><span>400-0250-250</span>
-                    </div>
-                    <div class="kef_dianh kef_dianh_youx">
-                        <p>意见收集邮箱</p><p>topsale@vip.qq.com</p>
-                    </div>
-                </div>
-                <div class="lieb_daoh lieb_daoh_you">
-                    <div class="erw_ma_beij">
-                        <div class="erw_m">
-                            <h1><img src="images/mb_wangid.png"></h1>
-                            <span>扫码下载MyShop客户端</span>
-                        </div>
-                        <div class="erw_m">
-                            <h1><img src="images/mb_wangid.png"></h1>
-                            <span>扫码下载MyShop客户端</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="beia_hao">
-                <p>京ICP备：123456789号  </p>
-                <p class="gonga_bei">京公网安备：123456789号</p>
-                <div class="renz_">
-                    <span></span>
-                    <span class="span1"></span>
-                    <span class="span2"></span>
-                    <span class="span3"></span>
+                    <span class="xiangq_leib" id="price"> 应付总额：</span>
+                    <em class="goum_zongj zhongf_jine"></em>
                 </div>
             </div>
         </div>
     </div>
+    <div class="tij_dingd_ann">
+        <a  onclick="addOrder()">提交订单</a>
+    </div>
+</div>
 
-    <script>
-
-        var g_id;
-        var num;
-        var o_paycount;
-        function getUserId() {
-            g_id = window.location.search.split("=")[1];
-            num=window.location.search.split("=")[2];
-        }
-        getUserId();
-        /**
-         * 查询收货地址
-         */
-
-        function getUserInfoAddressById() {
-            $.ajax({
-                type: 'GET',
-                url: "getUserInfoAddressById",
-                contentType:"application/json",
-                success: function(data){
-                    var obj=$("#address");
-                    $(data).each(function (i,item) {
-                        var trHtml ="<li class=\"cur\">\n" +
-                            "        \t\t\t<input type=\"checkbox\" id='addressDetail' value='"+item.adsId+"' class=\"dangq_xuanz_diz\">\n" +
-                            "        \t\t\t<span>"+item.shname+"</span>\n" +
-                            "        \t\t\t<span>"+item.province+item.city+item.district+item.street+"</span>\n" +
-                            "        \t\t\t<span>"+item.shphone+"</span>\n" +
-                            "        \t\t</li>";
-                        obj.append(trHtml);
-                        $(".address").html("寄送至： "+item.province+item.city+item.district+item.street)
-                        $(".shperson").html("收货人："+item.shname+"       "+item.shphone)
-                    })
-                },
-                error:function (data) {
-                    console.error(data);
-                },
-                dataType: "json"
-            });
-        }
-        getUserInfoAddressById();
-
-
-        /**
-         * 获取商品详情
-         */
-        function getGoodsInfoById() {
-            $.ajax({
-                type: 'POST',
-                url: "getGoodsInfoById?g_id="+g_id,
-                contentType:"application/json",
-                success: function(data){
-                    $("#img").attr("src",data.g_pic);
-                    $("#g_name").html(data.g_name);
-                    $("#num").html(num);
-                    $("#totalPrice").html("￥"+num*data.g_disctprice);
-                    $("#price").html("￥"+num*data.g_disctprice);
-                    $("#g_price").html("￥"+data.g_disctprice);
-                    $("#s_name").html("商家："+data.s_name+"旗舰店");
-                    o_paycount=num*data.g_disctprice;
-                },
-                error:function (data) {
-                    console.error(data);
-                },
-                dataType: "json"
-            });
-        }
-        getGoodsInfoById();
-
-        var address;
-        var express;
-        function ToPay() {
-            if($("#addressDetail").is(":checked")){//选中
-                address= $("#addressDetail").val();//打印选中的值
+<script type="text/javascript">
+    $(function(){
+        $(".shiq_1 ul li").hide().first().show()
+        $(".cur_e p").hide().first().show()
+        $(".cur_e p:first").click(
+            function(){
+                $(".shiq_1 ul li").show()
+                $(".cur_e p").hide().last().show()
             }
-            if($(".express").is(":checked")){//选中
-                express= $(".express").val();//打印选中的值
+        )
+        $(".cur_e p:last").click(
+            function(){
+                $(".shiq_1 ul li").hide().first().show()
+                $(".cur_e p").hide().first().show()
             }
-            $.ajax({
-                type: "POST",
-                url: "createOrder",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    "address":address,
-                    "express":express,
-                    "g_id":g_id,
-                    "o_paycount":o_paycount,
-                    "num":num
-                }),
-                success: function (data) {
-                    window.location.href = "dingd_xiangq.html"
-                },
-                error: function (data) {
-                    alert("执行失败")
-                },
-                dataType: "json"
-            });
+        )
+    })
+    $(function(){
+        $(".shiq_2 ul li").hide().first().show()
+        $(".cur_e_1 p").hide().first().show()
+        $(".cur_e_1 p:first").click(
+            function(){
+                $(".shiq_2 ul li").show()
+                $(".cur_e_1 p").hide().last().show()
+            }
+        )
+        $(".cur_e_1 p:last").click(
+            function(){
+                $(".shiq_2 ul li").hide().first().show()
+                $(".cur_e_1 p").hide().first().show()
+            }
+        )
+    })
+    //cur
+</script>
+
+<!--底部-->
+<div class="dib_beij">
+    <div class="dib_jvz_beij">
+        <div class="shangp_baoz">
+            <p>本地购物&nbsp;&nbsp;看得见的商品</p>
+            <p class="beng1">正品行货&nbsp;&nbsp;购物无忧</p>
+            <p class="beng2">低价实惠&nbsp;&nbsp;帮你省钱</p>
+            <p class="beng3">本地直发&nbsp;&nbsp;专业配送</p>
+        </div>
+        <div class="zhongj_youx">
+            <div class="lieb_daoh">
+                <h4>物流配送</h4>
+                <ul>
+                    <li><a href="#">配送查询</a></li>
+                    <li><a href="#">配送服务</a></li>
+                    <li><a href="#">配送费用</a></li>
+                    <li><a href="#">配送时效</a></li>
+                    <li><a href="#">签收与验货</a></li>
+                </ul>
+            </div>
+            <div class="lieb_daoh">
+                <h4>支付与账户</h4>
+                <ul>
+                    <li><a href="#">货到付款</a></li>
+                    <li><a href="#">在线支付</a></li>
+                    <li><a href="#">门店支付</a></li>
+                    <li><a href="#">账户安全</a></li>
+                </ul>
+            </div>
+            <div class="lieb_daoh">
+                <h4>购物帮助</h4>
+                <ul>
+                    <li><a href="#">购物保障</a></li>
+                    <li><a href="#">购物流程</a></li>
+                    <li><a href="#">焦点问题</a></li>
+                    <li><a href="#">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="lieb_daoh">
+                <h4>售后服务</h4>
+                <ul>
+                    <li><a href="#">退换货服务</a></li>
+                    <li><a href="#">退款说明</a></li>
+                    <li><a href="#">专业维修</a></li>
+                    <li><a href="#">延保服务</a></li>
+                    <li><a href="#">家电回收</a></li>
+                </ul>
+            </div>
+            <div class="lieb_daoh">
+                <div class="kef_dianh">
+                    <p>客服电话</p><span>400-0250-250</span>
+                </div>
+                <div class="kef_dianh kef_dianh_youx">
+                    <p>意见收集邮箱</p><p>topsale@vip.qq.com</p>
+                </div>
+            </div>
+            <div class="lieb_daoh lieb_daoh_you">
+                <div class="erw_ma_beij">
+                    <div class="erw_m">
+                        <h1><img src="images/mb_wangid.png"></h1>
+                        <span>扫码下载MyShop客户端</span>
+                    </div>
+                    <div class="erw_m">
+                        <h1><img src="images/mb_wangid.png"></h1>
+                        <span>扫码下载MyShop客户端</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="beia_hao">
+            <p>京ICP备：123456789号  </p>
+            <p class="gonga_bei">京公网安备：123456789号</p>
+            <div class="renz_">
+                <span></span>
+                <span class="span1"></span>
+                <span class="span2"></span>
+                <span class="span3"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var g_id;
+    var num;
+    var o_paycount;
+    var s_id;
+    var price;
+    function getUserId() {
+        g_id = window.location.search.split("=")[1];
+        num=window.location.search.split("=")[2];
+    }
+    getUserId();
+    /**
+     * 查询收货地址
+     */
+    function getUserInfoAddressById() {
+        $.ajax({
+            type: 'GET',
+            url: "getUserInfoAddressById",
+            contentType:"application/json",
+            success: function(data){
+                var obj=$("#address");
+                $(data).each(function (i,item) {
+                    var trHtml ="<li class=\"cur\">\n" +
+                        "        \t\t\t<input type=\"checkbox\" id='addressDetail' value='"+item.adsId+"' class=\"dangq_xuanz_diz\">\n" +
+                        "        \t\t\t<span>"+item.shname+"</span>\n" +
+                        "        \t\t\t<span>"+item.province+item.city+item.district+item.street+"</span>\n" +
+                        "        \t\t\t<span>"+item.shphone+"</span>\n" +
+                        "        \t\t</li>";
+                    obj.append(trHtml);
+                    $(".address").html("寄送至： "+item.province+item.city+item.district+item.street)
+                    $(".shperson").html("收货人："+item.shname+"       "+item.shphone)
+                })
+            },
+            error:function (data) {
+                console.error(data);
+            },
+            dataType: "json"
+        });
+    }
+    getUserInfoAddressById();
+
+
+    /**
+     * 获取商品详情
+     */
+
+    var totalPayPrice = 0;
+    function getCartInfosSelected() {
+        $.ajax({
+            type: 'POST',
+            url: "getCartInfosSelected",
+            contentType:"application/json",
+            success: function(data){
+                $("#myCartInfosSelected").empty();
+                var html = "";
+                $(data).each(function (i,n) {
+                    s_id = n.s_id;
+                    totalPayPrice += parseFloat(n.sum_price);
+                     html += "<h4 class=\"vendor_name_h\" id=\"s_name\"></h4>\n" +
+                        "                    <div class=\"goods_item\">\n" +
+                        "                        <div class=\"p_img\"><a href=\"#\"><img src='"+n.g_pic+"' id=\"img\" style=\"height: 80px\"></a></div>\n" +
+                        "                        <div class=\"goods_msg\">\n" +
+                        "                            <div class=\"p_name\">\n" +
+                        "                                <a href=\"#\" id=\"g_name\">"+n.g_name+"</a>\n" +
+                        "                            </div>\n" +
+                        "                            <div class=\"p_price\">\n" +
+                        "                                <span id=\"g_price\">"+n.g_disctprice+"</span>\n" +
+                        "                                <span id=\"g_price\">x"+n.product_amount+"</span>\n" +
+                        "                                <span>有货</span>\n" +
+                        "                            </div>\n" +
+                        "                        </div>\n" +
+                        "                    </div>";
+
+
+                });
+                $("#myCartInfosSelected").append(html);
+
+                // $("#img").attr("src",data.g_pic);
+                // $("#g_name").html(data.g_name);
+                // $("#num").html(num);
+                $("#totalPrice").html("￥"+totalPayPrice);
+                $("#price").html("￥"+totalPayPrice);
+                // $("#g_price").html("￥"+data.g_disctprice);
+                // $("#s_name").html("商家："+data.s_name+"旗舰店");
+                // s_id=data.s_id;
+                // price=data.g_disctprice
+            },
+            error:function (data) {
+                alert("执行失败！");
+            },
+            dataType: "json"
+        });
+    }
+    getCartInfosSelected();
+
+    var address;
+    var express;
+    function addOrder() {
+        if($("#addressDetail").is(":checked")){//选中
+            address= $("#addressDetail").val();//选中的值
+
+        }
+        if($(".express").is(":checked")){//选中
+            express= $(".express").val();//选中的值
+
         }
 
-    </script>
+        var insertOrderDto = {
+            "o_sendtype": express,
+            "adsId": address,
+            "s_id": s_id,
+            "o_paycount": parseInt(totalPayPrice)
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "insertOrderInfo",
+            contentType: "application/json",
+            data: JSON.stringify(insertOrderDto),
+            success: function (data) {
+                if (data) {
+                    window.location.href = "dingd_xiangq.html";
+                } else {
+                    alert("失败！");
+                }
+
+            },
+            error: function (data) {
+                alert("执行失败");
+            },
+            dataType: "json"
+        });
+    }
+
+</script>
 
 
 </body>

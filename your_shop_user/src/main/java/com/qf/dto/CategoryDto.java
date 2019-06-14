@@ -1,6 +1,7 @@
 package com.qf.dto;
 
 import com.qf.pojo.Category;
+import com.qf.pojo.GoodsInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -10,7 +11,11 @@ public class CategoryDto {
     /**
      * 商品分类
      */
-    private int c_id;
+    private Integer c_id;
     private String c_name;
-    private String c_parentid;
+    //private int c_parentid;
+    private String g_name;
+    private Integer g_id;
+    private List<GoodsInfo> goodsInfos;
+    private List<Category> categories;
 }

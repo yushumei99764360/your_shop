@@ -5,12 +5,42 @@
 <mapper namespace="com.qf.mapper.CartInfoMapper">
 
 
+
+
+
+
     <insert id="insertIntoCartInfo" parameterType="com.qf.vo.CartInfoVo">
-        insert into cartinfo (userId,g_pic,g_id,product_amount,g_disctprice,sum_price,g_name,s_name) values (#{userId},#{g_pic},#{g_id},#{product_amount},#{g_disctprice},#{sum_price},#{g_name},#{s_name})
+        insert into cartinfo (userId,g_pic,g_id,product_amount,g_disctprice,sum_price,g_name,s_name,s_id)
+        values (#{userId},#{g_pic},#{g_id},#{product_amount},#{g_disctprice},#{sum_price},#{g_name},#{s_name},#{s_id})
     </insert>
 
     <select id="listMyCartInfo" parameterType="int" resultType="com.qf.pojo.CartInfo">
         select * from cartinfo where userId = #{userId}
     </select>
+
+    <select id="getAddressInfoById" parameterType="int" resultType="com.qf.pojo.AddressInfo">
+        select * from addressinfo where adsId=#{adsId}
+    </select>
+
+    <!--添加订单-->
+    
+    <insert id="insertOrderInfo" parameterType="com.qf.dto.AddressInfoDto">
+       insert into orderinfo (id,o_sendtype,o_paycount,o_province,o_city,o_district,o_shaddress,o_shperson,o_shphone,userId,s_id)
+        values (#{id},#{o_sendtype},#{price},#{province},#{city},#{district},#{street},#{shname},#{shphone},#{userId},#{s_id})
+    </insert>
+    <!--添加订单详情-->
+    <insert id="insertOrderDetails" parameterType="com.qf.pojo.Order_Detail">
+        insert into order_detail (o_orderid,g_id,g_name,g_disctprice,g_pic,g_num,g_total_price)
+        values (#{o_orderid},#{g_id},#{g_name},#{g_disctprice},#{g_pic},#{g_num},#{g_total_price})
+    </insert>
+
+    <!--批量删除购物车-->
+
+    <delete id="deleteCartInfoSelected" parameterType="list">
+        delete from  cartinfo where cart_id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 
 </mapper>

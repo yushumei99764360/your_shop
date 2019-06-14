@@ -121,6 +121,10 @@
       INSERT INTO message (g_id,userId,context) VALUES (#{g_id},#{userId},#{message})
     </insert>
 
+    <!--评价商家信息图片显示-->
+    <select id="selectSellPic" parameterType="int" resultType="com.qf.dto.EvaluateDto">
+   SELECT g.g_name,g.g_price,g.g_pic,g.g_desc,s.s_name,s.icon FROM sellerinfo s,goodsinfo g WHERE s.s_id=g.s_id AND g.g_id=#{g_id};
+    </select>
 
 
 </mapper>

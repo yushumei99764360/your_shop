@@ -178,15 +178,11 @@
 	<div class="beij_center">
 		<div class="lingj_neir_beij">
 			<div class="dianp_pingj">
-				<div class="dianpu_minc_ji">
-					<a href="#" class="shop_logo" target="_blank"><img src="images/7_170312181624_2.jpg"></a>
+				<div class="dianpu_minc_ji" >
+					<a  class="shop_logo" target="_blank"><img id="sellPic"></a>
 					<div class="dinam_he">
-						<p class="shop_mignc">威莱登尼旗舰店</p>
+						<p class="shop_mignc" id="sellName"></p>
 						<div class="shop_score_01">
-							<div class="sum">
-								<span class="tit s_diy">综合</span>
-								<em class="num x_diy">9.59</em>
-							</div>
 							<div class="sum">
 								<span class="tit">商品</span>
 								<em class="num">9.59</em>
@@ -206,11 +202,10 @@
 			</div>
 			<div class="shangp_pingj">
 				<div class="shangp_minc_ji">
-					<div class="comment_goods">
-						<p class="zuo_img"><a href="#"><img src="images/lieb_tupi2.jpg"></a></p>
-						<p><a href="#">威莱登尼 棒球帽男女夏季防晒遮阳帽韩版潮鸭舌帽太阳的后裔平顶帽子 热卖纯色平</a></p>
-						<span class="zuo_jiag">￥58.00</span>
-						<span>热卖纯色平顶  黑色</span>
+					<div class="comment_goods" >
+						<p class="zuo_img"><img  id='goodsPic' ></p>
+						<p id="sellDes"> </p>
+						<span id="price" class="zuo_jiag"></span>
 					</div>
 				</div>
 				<div class="dianpu_minc_you">
@@ -223,8 +218,8 @@
 						<div class="fop_shur_kuang">
 							<div class="sdvg">
 								<div class="f-textarea">
-									<textarea name="" id="message" placeholder="商品是否给力？快分享你的购买心得吧~"></textarea>
-									<div class="textarea-ext">还可输入500字</div>
+									<textarea  id="message" placeholder="商品是否给力？快分享你的购买心得吧~"></textarea>
+									<div class="textarea-ext" >还可输入500字</div>
 								</div>
 							</div>
 							<!--<div class="pinj_shangc_tup">-->
@@ -340,26 +335,45 @@ function getid() {
 getid();
 
 	function inputMessage() {
-
         $.ajax({
             type: "POST",
             url:"insertMessageByGoods",
             contentType:"application/json",
 			data:JSON.stringify({
                 "message":$("#message").val(),
+				"g_id":g_id
             }),
             success: function (data) {
-
-                window.location.href = "shangp_xiangq.html"
+				if(data){
+			window.location.href=index.html;}
             },
             error: function (data) {
             },
             dataType: "json"
         });
-
     }
 
 
+function selectSellPic() {
+$.ajax({
+    type: "POST",
+    url:"selectSellPic?g_id="+g_id,
+    contentType:"application/json",
+    data:JSON.stringify({
+    }),
+    success: function (data) {
+        $("#goodsPic").attr("src",data.g_pic);
+        $("#sellDes").html(data.g_desc);
+        $("#price").html("￥:"+data.g_price);
+        $("#sellPic").attr("src",data.icon);
+        $("#sellName").html(data.s_name);
+    },
+    error: function (data) {
+    },
+    dataType: "json"
+});}
+
+selectSellPic();
 
 
 </script>

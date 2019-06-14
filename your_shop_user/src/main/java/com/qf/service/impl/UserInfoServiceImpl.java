@@ -134,7 +134,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 //    增加留言
     @Override
-    public Object insertMessageByGoods(MessageDto messageDto) {
+    public int insertMessageByGoods(MessageDto messageDto) {
         return userInfoMapper.insertMessageByGoods(messageDto);
+    }
+
+    @Override
+    public Object selectSellPic(int g_id) {
+        return userInfoMapper.selectSellPic(g_id);
     }
 }

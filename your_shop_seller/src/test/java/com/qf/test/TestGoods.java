@@ -49,7 +49,7 @@ public class TestGoods {
     @Test
     public void test4(){
         GoodsSelecteds goodsSelecteds = new GoodsSelecteds();
-        goodsSelecteds.setStr("果");
+//        goodsSelecteds.setStr("果");
         goodsSelecteds.setSellerId(1);
         goodsSelecteds.setG_status(0);
         List<GoodsVo> goodsVos = goodsService.selectGoodsBys(goodsSelecteds);

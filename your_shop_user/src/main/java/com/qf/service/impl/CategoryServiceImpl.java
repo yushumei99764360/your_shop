@@ -18,15 +18,33 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryMapper categoryMapper;
 
-
     @Override
-    public List<CategoryDto> categoryList() {
-        return null;
+    public List<GoodsInfo> findAllCategory() {
+        return categoryMapper.findAllCategory();
+    }
+
+    //    查询所有一级类别信息
+    @Override
+    public List<Category> getFatherInfo() {
+        return categoryMapper.getFatherInfo();
+    }
+
+    //    查询所有二级类别信息
+    @Override
+    public List<Category> getChildInfo() {
+        return categoryMapper.getChildInfo();
+    }
+
+    // 根据父类id 查询它所包含的所有子类信息
+    @Override
+    public CategoryVo getChildCategoryInfo(int fatherId) {
+        CategoryVo categoryVo = categoryMapper.getChildCategoryInfo(fatherId);
+        return categoryVo;
     }
 
     @Override
-    public List<CategoryDto> categoryListOne() {
-        return null;
+    public List<GoodsInfo> goods() {
+        return categoryMapper.goods();
     }
 
     /**
