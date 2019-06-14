@@ -14,6 +14,10 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="assets/css/amazeui.min.css"/>
     <link rel="stylesheet" href="assets/css/admin.css">
+    <!--图片上传-->
+    <link rel="stylesheet" href="dropzone/css/basic.min.css" />
+    <link rel="stylesheet" href="dropzone/css/dropzone.min.css"/>
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/app.js"></script>
 </head>
@@ -137,9 +141,12 @@
                     </div>
                     <div class="am-form-group am-cf">
                         <div class="zuo">产品图片：</div>
-                        <div class="you" style="height: 45px;">
+                        <!--<div class="you" style="height: 45px;">
                             <input type="file" id="g_pic">
                             <p class="am-form-help">请选择要上传的产品图片...</p>
+                        </div>-->
+                        <div class="you" id="g_pic">
+                            <div id="dropz" class="dropzone" style="width: 200px; height: 200px"></div>
                         </div>
                     </div>
 
@@ -203,6 +210,9 @@
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="assets/js/amazeui.min.js"></script>
 <!--<![endif]-->
+
+!--Dropzone-->
+<script src="dropzone/js/dropzone.min.js"></script>
 <script>
     $(function () {
         $.ajax({
@@ -225,8 +235,45 @@
             dataType: "json"
         });
     });
+
+    Dropzone.options.dropz={
+        url: "uploadPic", // 文件提交地址
+        method: "post",  // 也可用put
+        paramName: "dropzFile", // 默认为file
+        maxFiles: 1,// 一次性上传的文件数量上限
+        maxFilesize: 2, // 文件大小，单位：MB
+        acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
+        addRemoveLinks: true,
+        parallelUploads: 1,// 一次上传的文件数量
+        //previewsContainer:"#preview", // 上传图片的预览窗口
+        dictDefaultMessage: '拖动文件至此或者点击上传',
+        dictMaxFilesExceeded: "您最多只能上传1个文件！",
+        dictResponseError: '文件上传失败!',
+        dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
+        dictFallbackMessage: "浏览器不受支持",
+        dictFileTooBig: "文件过大上传文件最大支持.",
+        dictRemoveLinks: "删除",
+        dictCancelUpload: "取消",
+        init: function () {
+            this.on("addedfile", function (file) {
+                // 上传文件时触发的事件
+            });
+            this.on("success", function (file, data) {
+                // 上传成功触发的事件
+                alert("上传成功")
+
+            });
+            this.on("error", function (file, data) {
+                // 上传失败触发的事件
+            });
+            this.on("removedfile", function (file) {
+                // 删除文件时触发的方法
+            });
+        }
+    };
+
     function addGoodsInfo(num) {
-        alert($("#g_status").val() + ";;" +$("#child").val())
+        alert($("#g_status").val() + ";;" +$("#g_pic").val())
         $.ajax({
             type:"POST",
             url:"addGoodsInfo",
