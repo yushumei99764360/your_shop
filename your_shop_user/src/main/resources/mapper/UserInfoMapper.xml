@@ -57,20 +57,21 @@
     <!--注册用户-->
     <insert id="RegisterUserInfo" parameterType="com.qf.vo.UserInfoVo">
         insert into userinfo(userName,password,phoneNumber,email)
-        values (<trim suffixOverrides=",">
-        <if test="userName !=null and userName !=''">
-            #{userName},
-        </if>
-        <if test="password !=null and password !=''">
-            #{password},
-        </if>
-        <if test="phoneNumber !=null and phoneNumber !=''">
-            #{phoneNumber},
-        </if>
-        <if test="email !=null and email !=''">
-            #{email},
-        </if>
-    </trim>
+        values (
+        <trim suffixOverrides=",">
+            <if test="userName !=null and userName !=''">
+                #{userName},
+            </if>
+            <if test="password !=null and password !=''">
+                #{password},
+            </if>
+            <if test="phoneNumber !=null and phoneNumber !=''">
+                #{phoneNumber},
+            </if>
+            <if test="email !=null and email !=''">
+                #{email},
+            </if>
+        </trim>
         )
     </insert>
     <!--查询用户名是否存在-->
@@ -111,20 +112,21 @@
         delete from addressinfo where adsId = #{adsId}
     </delete>
 
-<!--首页查询个人用户留言信息-->
+    <!--首页查询个人用户留言信息-->
     <select id="selectUserByMessage" parameterType="int" resultType="com.qf.dto.MessageDto">
       SELECT m.g_id,m.context,m.userid,u.nickName,u.gender,u.icon FROM message m,userdetail u WHERE m.`userId`=u.`userId` and m.g_id=#{g_id};
     </select>
 
-<!--添加用户留言-->
+    <!--添加用户留言-->
 
     <insert id="insertUser" parameterType="com.qf.dto.AddressInfoDto">
-      INSERT INTO message (g_id,userId,context) VALUES (#{g_id},#{userId},#{message});
-
-    <insert id="insertMessageByGoods" parameterType="com.qf.dto.MessageDto">
+        INSERT INTO message (g_id,userId,context) VALUES (#{g_id},#{userId},#{message});
+</insert>
+        <insert id="insertMessageByGoods" parameterType="com.qf.dto.MessageDto">
       INSERT INTO message (g_id,userId,context) VALUES (#{g_id},#{userId},#{message})
 
     </insert>
+
 
 
 </mapper>
