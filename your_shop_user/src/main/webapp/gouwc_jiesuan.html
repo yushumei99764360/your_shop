@@ -391,7 +391,7 @@
     /**
      * 获取商品详情
      */
-
+    var totalAmount = 0;
     var totalPayPrice = 0;
     function getCartInfosSelected() {
         $.ajax({
@@ -403,8 +403,9 @@
                 var html = "";
                 $(data).each(function (i,n) {
                     s_id = n.s_id;
+                    totalAmount += n.product_amount;
                     totalPayPrice += parseFloat(n.sum_price);
-                     html += "<h4 class=\"vendor_name_h\" id=\"s_name\"></h4>\n" +
+                     html += "<h3 class=\"vendor_name_h\" id=\"s_name\">"+n.s_name+"</h3>\n" +
                         "                    <div class=\"goods_item\">\n" +
                         "                        <div class=\"p_img\"><a href=\"#\"><img src='"+n.g_pic+"' id=\"img\" style=\"height: 80px\"></a></div>\n" +
                         "                        <div class=\"goods_msg\">\n" +
@@ -425,9 +426,9 @@
 
                 // $("#img").attr("src",data.g_pic);
                 // $("#g_name").html(data.g_name);
-                // $("#num").html(num);
+                $("#num").html("共"+totalAmount);
                 $("#totalPrice").html("￥"+totalPayPrice);
-                $("#price").html("￥"+totalPayPrice);
+                $("#price").html("应付款 ￥"+totalPayPrice);
                 // $("#g_price").html("￥"+data.g_disctprice);
                 // $("#s_name").html("商家："+data.s_name+"旗舰店");
                 // s_id=data.s_id;

@@ -49,4 +49,12 @@ public interface CartInfoService {
      */
 
     boolean deleteCartInfoSelected(List<CartInfo> selectCartInfos);
+
+    /**
+     * 单个删除购物车
+     * @param cartId
+     * @return
+     */
+
+    boolean deleteCartInfoById(int cartId);
 }

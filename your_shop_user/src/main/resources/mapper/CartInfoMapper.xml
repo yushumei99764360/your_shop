@@ -43,4 +43,9 @@
         </foreach>
     </delete>
 
+    <!--单个删除购物车-->
+    <delete id="deleteCartInfoById" parameterType="int">
+        delete from cartinfo where cart_id = #{cartId}
+    </delete>
+
 </mapper>

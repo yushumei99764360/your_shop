@@ -127,36 +127,36 @@
 <div class="container">
 
 	<div class="cart-shop-goods dangq_honh" id="myCartInfo">
-		<div class="cart-shop-good">
-			<div class="cart-col-1">
-				<input type="checkbox" class="jdcheckbox" >
-			</div>
-			<div class="cart-col-2" style="height: 82px;">
-				<a href="" target="_blank" class="g-img"><img src="images/xiangqtu_1.jpg" alt=""></a>
-			</div>
-			<div class="fl houj_c"> 
-				<div class="cart-dfsg"><div class="cart-good-name"><a href="#" target="_blank">ThinkPad X1 Carbon(20HRA007CD)14英寸笔记本电脑(i5-7200U 8G ...</a></div></div>
-				<div class="cart-good-pro"></div>
-				<div class="cart-col-4"><div class="cart-good-real-price "><!--主品-->¥&nbsp;9999.00</div><div class="red"></div></div>
-				<div class="cart-col-5">
-					<div class="gui-count cart-count" >
-						<a href="#" gui-count-sub="" class="gui-count-btn gui-count-sub gui-count-disabled">-</a>
-						<a href="#" gui-count-add="" class="gui-count-btn gui-count-add">+</a>
-						<div class="gui-count-input"><input dytest="" class="" type="text" value="1"></div>
-					</div>
-				</div>
-				<div class="cart-col-6 ">
-				<div class="cart-good-amount">¥&nbsp;9999.00</div><!-- 重量展示(只展示全球百货的重量) --></div>
-			</div>
-			<div class="cart-col-7">
-				<div class="cart-good-fun delfixed">
-					<a href="#">删除</a>
-				</div>
-				<div class="cart-good-fun">
-					<a href="#">移入收藏夹</a>
-				</div>
-			</div>
-		</div>
+		<!--<div class="cart-shop-good">-->
+			<!--<div class="cart-col-1">-->
+				<!--<input type="checkbox" class="jdcheckbox" >-->
+			<!--</div>-->
+			<!--<div class="cart-col-2" style="height: 82px;">-->
+				<!--<a href="" target="_blank" class="g-img"><img src="images/xiangqtu_1.jpg" alt=""></a>-->
+			<!--</div>-->
+			<!--<div class="fl houj_c"> -->
+				<!--<div class="cart-dfsg"><div class="cart-good-name"><a href="#" target="_blank">ThinkPad X1 Carbon(20HRA007CD)14英寸笔记本电脑(i5-7200U 8G ...</a></div></div>-->
+				<!--<div class="cart-good-pro"></div>-->
+				<!--<div class="cart-col-4"><div class="cart-good-real-price ">&lt;!&ndash;主品&ndash;&gt;¥&nbsp;9999.00</div><div class="red"></div></div>-->
+				<!--<div class="cart-col-5">-->
+					<!--<div class="gui-count cart-count" >-->
+						<!--<a href="#" gui-count-sub="" class="gui-count-btn gui-count-sub gui-count-disabled">-</a>-->
+						<!--<a href="#" gui-count-add="" class="gui-count-btn gui-count-add">+</a>-->
+						<!--<div class="gui-count-input"><input dytest="" class="" type="text" value="1"></div>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="cart-col-6 ">-->
+				<!--<div class="cart-good-amount">¥&nbsp;9999.00</div>&lt;!&ndash; 重量展示(只展示全球百货的重量) &ndash;&gt;</div>-->
+			<!--</div>-->
+			<!--<div class="cart-col-7">-->
+				<!--<div class="cart-good-fun delfixed">-->
+					<!--<a href="#">删除</a>-->
+				<!--</div>-->
+				<!--<div class="cart-good-fun">-->
+					<!--<a href="#">移入收藏夹</a>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
 	</div>
 
 </div>
@@ -439,6 +439,8 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
 	</div>
 </div>
 
+<button onclick="deleteFromCartInfo(n.cart_id)">删除</button>
+
 
 <script src="jquery/jquery-2.1.1.min.js"></script>
 <script>
@@ -476,11 +478,12 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
                         "\t\t\t\t\t</div>\n" +
                         "\t\t\t\t</div>\n" +
                         "\t\t\t\t<div class=\"cart-col-6 \">\n" +
-                        "\t\t\t\t<div class=\"cart-good-amount\">¥&nbsp;"+n.sum_price+"</div><!-- 重量展示(只展示全球百货的重量) --></div>\n" +
+                        "\t\t\t\t<div class=\"cart-good-amount\">¥&nbsp;"+n.sum_price+"</div></div>\n" +
                         "\t\t\t</div>\n" +
                         "\t\t\t<div class=\"cart-col-7\">\n" +
                         "\t\t\t\t<div class=\"cart-good-fun delfixed\">\n" +
-                        "\t\t\t\t\t<a href=\"#\">删除</a>\n" +
+                        "\t\t\t\t\t<a  onclick='deleteFromCartInfo("+n.cart_id+")'>删除</a>\n" +
+                        // "\t\t\t\t\t<button onclick='deleteFromCartInfo("+n.cart_id+")'>删除</button>\n" +
                         "\t\t\t\t</div>\n" +
                         "\t\t\t\t<div class=\"cart-good-fun\">\n" +
                         "\t\t\t\t\t<a href=\"#\">移入收藏夹</a>\n" +
@@ -502,6 +505,29 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
 
 
     });
+
+    //购物车删除
+
+
+    function deleteFromCartInfo(cartId) {
+
+        alert(cartId);
+        $.ajax({
+            type: "get",
+            url: "deleteCartInfoById?cartId="+cartId,
+            contentType: "application/json",
+            success: function (data) {
+
+                window.location.reload();
+            },
+            error: function (data) {
+                alert("执行失败");
+            },
+            dataType: "json"
+        });
+
+    }
+
 
     function goToPay() {
         var selectCartIds = new Array();
@@ -539,6 +565,8 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
             dataType: "json"
         });
     }
+
+
 </script>
 
 

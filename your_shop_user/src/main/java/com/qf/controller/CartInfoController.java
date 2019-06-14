@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -46,7 +47,6 @@ public class CartInfoController {
      */
     @RequestMapping(value = "putSelectCartInfosIntoSession")
     public Object putSelectCartInfosIntoSession(@RequestBody List<CartInfo> selectCartInfos, HttpSession session) {
-
         session.setAttribute("selectCartInfos", selectCartInfos);
         return true;
     }
@@ -76,7 +76,7 @@ public class CartInfoController {
         UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
         List<CartInfo> selectCartInfos = (List<CartInfo>) session.getAttribute("selectCartInfos");
         AddressInfo addressInfo =  cartInfoService.getAddressInfoById(insertOrderDto.getAdsId());
-        System.out.println(addressInfo);
+
         //随机数编号
         int id = (int) new Random().nextInt(1000000);
         //订单添加 传值对象
@@ -96,7 +96,7 @@ public class CartInfoController {
         addressInfoDto.setUserId(userInfo.getUserId());
 
         //添加订单
-        System.out.println(addressInfoDto);
+
         boolean flag1 =  cartInfoService.insertOrderInfo(addressInfoDto);
 
         //添加订单详情
@@ -111,5 +111,13 @@ public class CartInfoController {
 
         return flag1&&flag2&&flag3;
     }
+
+
+    @RequestMapping(value = "deleteCartInfoById")
+    public Object deleteCartInfoById(@RequestParam int cartId) {
+        boolean flag = cartInfoService.deleteCartInfoById(cartId);
+        return flag;
+    }
+
 
 }

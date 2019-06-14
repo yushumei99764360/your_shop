@@ -54,4 +54,12 @@ public interface CartInfoMapper {
      */
 
     int deleteCartInfoSelected(List<Integer> cartIds);
+
+    /**
+     * 购物车单个删除
+     * @param cartId
+     * @return
+     */
+
+    int deleteCartInfoById(int cartId);
 }

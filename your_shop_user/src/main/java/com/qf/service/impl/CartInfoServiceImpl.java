@@ -128,4 +128,19 @@ public class CartInfoServiceImpl implements CartInfoService {
         return false;
     }
 
+    /**
+     * 购物车单个删除
+     * @param cartId
+     * @return
+     */
+
+    @Override
+    public boolean deleteCartInfoById(int cartId) {
+        int i = cartInfoMapper.deleteCartInfoById(cartId);
+        if (i != 0) {
+            return true;
+        }
+        return false;
+    }
+
 }
