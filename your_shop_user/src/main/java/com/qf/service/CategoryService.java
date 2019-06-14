@@ -26,6 +26,5 @@ public interface CategoryService {
 
     GodsInfoDetail searchGoods(int g_id);
 
-
     Logisticsinfo getlogistics(int g_id);
 }

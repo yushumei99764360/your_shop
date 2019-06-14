@@ -67,7 +67,6 @@ public class CategoryServiceImpl implements CategoryService {
     public GodsInfoDetail searchGoods(int g_id) {
         return categoryMapper.searchGoods(g_id);
     }
-
     /**
      * 获取物流信息
      * @param g_id

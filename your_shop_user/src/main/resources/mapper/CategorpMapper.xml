@@ -77,7 +77,6 @@
         values (#{o_orderid},#{g_id},#{g_name},#{g_disctprice},#{g_desc},#{g_pic},#{g_num},#{g_total_price})
     </insert>
 
-
     <!--查询物流信息-->
     <select id="getlogistics" parameterType="int" resultType="com.qf.dto.Logisticsinfo">
         select * from logisticsinfo where g_id = #{g_id}
