@@ -1,14 +1,16 @@
 package com.qf.controller;
 
 import com.qf.dto.*;
-import com.qf.pojo.AddressInfo;
 import com.qf.pojo.Category;
+import com.qf.pojo.GoodsInfo;
 import com.qf.service.CategoryService;
+import com.qf.vo.CategoryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -23,19 +25,59 @@ public class CategoryController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "categoryList",method = RequestMethod.GET)
-    public Object categoryList() {
+    @RequestMapping(value = "findAllCategory",method = RequestMethod.GET)
+    public Object findAllCategory() {
         //System.out.println(1);
-        //System.out.println(categories1);
-        return "";
+        List<GoodsInfo> allCategory = categoryService.findAllCategory();
+        System.out.println(allCategory);
+        return allCategory;
     }
+    // 查询所有一级类别
+    @RequestMapping("getAllCategoryFather")
+    public Object getAllCategoryFather(){
+        List<Category> fatherInfos = categoryService.getFatherInfo();
+        return fatherInfos;
+    }
+
+    // 查询所有一级类别
+    @ResponseBody
+    @RequestMapping("getAllChildInfo")
+    public Object getAllChildInfo(){
+        List<Category> childInfos = categoryService.getChildInfo();
+        return childInfos;
+    }
+
+    // 根据父类id 查询它所包含的所有子类信息
+    @ResponseBody
+    @RequestMapping("getChildCategoryInfo")
+    public Object getChildCategoryInfo(@RequestParam int fatherId) {
+        CategoryVo categoryVo = categoryService.getChildCategoryInfo(fatherId);
+        return categoryVo;
+    }
+
+    // 根据 所有父类 和 它所包含的所有子类信息
+    @ResponseBody
+    @RequestMapping("getAllChildCategoryInfo")
+    public Object getAllChildCategoryInfo() {
+        List<CategoryVo> categoryVoList = new ArrayList<>();
+        List<Category> fatherInfo = categoryService.getFatherInfo();
+        for (int i = 0 ; i<fatherInfo.size();i++){
+            CategoryVo categoryVo = categoryService.getChildCategoryInfo(fatherInfo.get(i).getC_id());
+            categoryVoList.add(categoryVo);
+            System.out.println(categoryVo);
+        }
+        return categoryVoList;
+    }
+
 
     @ResponseBody
-    @RequestMapping(value = "categoryListOne",method = RequestMethod.GET)
-    public Object categoryListOne() {
-
-        return "";
+    @RequestMapping(value = "goodsList")
+    public Object goods() {
+        List<GoodsInfo> goods = categoryService.goods();
+        System.out.println(goods);
+        return goods;
     }
+
 
     /**
      * 商品信息展示

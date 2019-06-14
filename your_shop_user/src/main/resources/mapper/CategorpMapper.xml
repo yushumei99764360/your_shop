@@ -5,24 +5,50 @@
 <mapper namespace="com.qf.mapper.CategoryMapper">
 
 
-
-    <select id="categoryList" resultType="com.qf.dto.CategoryDto" parameterType="com.qf.dto.CategoryDto">
+    <resultMap id="category" type="com.qf.dto.CategoryDto">
+        <id column="c_id" property="c_id"></id>
+        <result column="c_name" property="c_name"></result>
+        <collection property="goodsInfos" ofType="com.qf.dto.CategoryDto">
+            <id column="g_id" property="g_id"></id>
+            <result column="g_id" property="g_id"></result>
+            <result column="g_name" property="g_name"></result>
+        </collection>
+    </resultMap>
+    <select id="goods" resultMap="category">
         SELECT
-        c_id,c_name
+        c.c_id,c_name,g.g_title,g.g_id,g.g_name
         FROM
-        category
+        category c,goods_category gc,goodsinfo g
         WHERE
-        c_parentid=0;
+        c.c_id=gc.c_id and gc.g_id=g.g_id;
     </select>
 
-    <select id="categoryListOne" resultType="com.qf.dto.CategoryDto" parameterType="com.qf.dto.CategoryDto">
-        SELECT
-        ca.c_name,c.c_name
-        FROM
-        category c,category ca
-        WHERE
-        ca.c_parentid =c.c_id and ca.c_parentid;
+
+
+
+    <!--查询所有一级类别信息-->
+    <select id="getFatherInfo" resultType="com.qf.pojo.Category">
+        select * from category where c_parentid = 0
     </select>
+    <!--查询所有的二级类别信息-->
+    <select id="getChildInfo" resultType="com.qf.pojo.Category">
+        select * from category where c_parentid != 0
+    </select>
+    <!--根据父类id 查询它所包含的所有子类信息-->
+    <resultMap id="categoryMap" type="com.qf.vo.CategoryVo">
+        <id column="fatherid" property="fatherId"></id>
+        <result column="fathername" property="fatherName"></result>
+        <collection property="categoryList" ofType="com.qf.pojo.GoodsInfo">
+            <id column="g_id" property="goodsid"></id>
+            <result column="g_name" property="goodsname"></result>
+        </collection>
+    </resultMap>
+    <select id="getChildCategoryInfo" resultMap="categoryMap" parameterType="int">
+        SELECT  a.c_parentid fatherid,b.c_name fathername ,a.c_id childid, a.c_name childname ,g.g_id goodsid, g.g_name goodname
+        FROM category a , category b ,goods_category gc,goodsinfo g WHERE a.c_parentid = b.c_id and a.c_id=gc.c_id and g.g_id=gc.g_id and a.c_parentid = #{fathername};
+    </select>
+
+
 
     <!--查询商品详细信息-->
     <select id="getGoodsInfoById" parameterType="int" resultType="com.qf.dto.GodsInfoDetail">

@@ -5,6 +5,10 @@
 <mapper namespace="com.qf.mapper.CartInfoMapper">
 
 
+
+
+
+
     <insert id="insertIntoCartInfo" parameterType="com.qf.vo.CartInfoVo">
         insert into cartinfo (userId,g_pic,g_id,product_amount,g_disctprice,sum_price,g_name,s_name,s_id)
         values (#{userId},#{g_pic},#{g_id},#{product_amount},#{g_disctprice},#{sum_price},#{g_name},#{s_name},#{s_id})
