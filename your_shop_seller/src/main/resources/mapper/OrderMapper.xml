@@ -110,10 +110,16 @@
     </select>
 
     <select id="getRefundInfoById" parameterType="int" resultType="com.qf.vo.RefundVo">
-     SELECT * FROM refund WHERE r_orderid=${id};
+     SELECT * FROM refund WHERE r_orderid=#{id};
     </select>
 
+    <update id="insertNOInfoById" parameterType="com.qf.vo.RefundVo" >
+         UPDATE refund SET r_return=#{r_return} WHERE r_orderid=#{r_orderid};
+    </update>
 
+    <update id="updateRefundInfoById" parameterType="int" >
+         UPDATE refund SET r_remoney='已退款' WHERE r_orderid=#{id};
+    </update>
 
 
 </mapper>

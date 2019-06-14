@@ -29,4 +29,8 @@ public interface OrderMapper {
     List<OrderVo> getAllRefund();
 
     RefundVo getRefundInfoById(int id);
+
+    int insertNOInfoById(RefundVo refundVo);
+
+    int updateRefundInfoById(int id);
 }

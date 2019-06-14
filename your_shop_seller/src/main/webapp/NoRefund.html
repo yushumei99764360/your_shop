@@ -101,14 +101,14 @@
                     <div class="am-form-group am-cf">
                         <div class="zuo">拒绝退款理由：</div>
                         <div class="you">
-                            <textarea   ></textarea>
+                            <textarea  id="r_return" ></textarea>
                         </div>
                     </div>
 
 
                     <div class="am-form-group am-cf">
                         <div class="you" style="margin-left: 11%;">
-                            <button type="submit" class="am-btn am-btn-success am-radius" onclick="jumpToNO()" >提交拒绝说明</button>
+                            <button type="submit" class="am-btn am-btn-success am-radius" onclick="insertNOInfoById()" >提交拒绝说明</button>
 
                         </div>
                     </div>
@@ -143,10 +143,30 @@
     }
     getId()
 
-    function jumpToNo(id) {
-        var url = "ChangeOrder.html?id="+id;
-        window.location.href = url;
+    function insertNOInfoById() {
+            var r_return=$("#r_return").val();
+
+            $.ajax({
+                type :"POST",
+                url :"insertNOInfoById",
+                data:JSON.stringify({
+                    "r_return":r_return,
+                    "r_orderid":id
+                }),
+                contentType : "application/json",
+                success : function (data) {
+
+                    window.location.href = "RefundList.html"
+
+                },
+                error:function (data) {
+                    alert("执行失败")
+                }
+            });
+
     }
+
+
 
 
 

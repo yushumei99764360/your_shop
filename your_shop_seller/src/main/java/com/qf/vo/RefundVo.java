@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class RefundVo {
-   int r_orderid;
+   String  r_orderid;
     String r_reason;
     String  r_pic;
     String r_type;
@@ -14,7 +14,7 @@ public class RefundVo {
     public RefundVo() {
     }
 
-    public RefundVo(int r_orderid, String r_reason, String r_pic, String r_type, String r_return, String r_remoney) {
+    public RefundVo(String r_orderid, String r_reason, String r_pic, String r_type, String r_return, String r_remoney) {
         this.r_orderid = r_orderid;
         this.r_reason = r_reason;
         this.r_pic = r_pic;

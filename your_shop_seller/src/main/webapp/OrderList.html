@@ -417,7 +417,9 @@ return format(data,'yyyy-MM-dd HH:mm:ss');
             contentType: "application/json",
             data: JSON.stringify(selectUserId),
             success: function (data) {
+
                 window.location.href = "OrderList.html"
+
             },
             error: function (data) {
                 window.location.reload();

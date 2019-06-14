@@ -75,5 +75,15 @@ public class OrderServiceImpl implements OrderService {
         return orderMapper.getRefundInfoById(id);
     }
 
+    @Override
+    public int insertNOInfoById(RefundVo refundVo) {
+        return orderMapper.insertNOInfoById(refundVo);
+    }
+
+    @Override
+    public int updateRefundInfoById(int id) {
+        return orderMapper.updateRefundInfoById(id);
+    }
+
 
 }

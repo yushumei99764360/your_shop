@@ -102,9 +102,23 @@ public Object deleteSelectOrder(@RequestBody List<Integer> selectOrderId){
     @ResponseBody
     @RequestMapping("getRefundInfoById")
     public Object getRefundInfoById(@RequestParam int id) {
-        System.out.println(id);
         RefundVo refundInfo= orderService.getRefundInfoById(id);
-        System.out.println(refundInfo);
+        return refundInfo;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("insertNOInfoById")
+    public Object insertNOInfoById(@RequestBody RefundVo refundVo) {
+        int refundInfo= orderService.insertNOInfoById(refundVo);
+        return refundInfo;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("updateRefundInfoById")
+    public Object updateRefundInfoById(@RequestParam int id) {
+        int refundInfo= orderService.updateRefundInfoById(id);
         return refundInfo;
     }
 
