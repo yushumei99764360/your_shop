@@ -102,9 +102,14 @@ public class CartInfoController {
         //添加订单详情
         boolean flag2 = cartInfoService.insertOrderDetails(selectCartInfos,id);
 
+        //删除购物车信息(订单添加成功，删除购物车表中对应数据)
+        boolean flag3 = false;
+        if (flag1 && flag2) {
+            flag3 = cartInfoService.deleteCartInfoSelected(selectCartInfos);
+        }
 
 
-        return flag1&&flag2;
+        return flag1&&flag2&&flag3;
     }
 
 }

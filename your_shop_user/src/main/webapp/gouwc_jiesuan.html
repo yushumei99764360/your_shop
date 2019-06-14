@@ -446,11 +446,11 @@
     function addOrder() {
         if($("#addressDetail").is(":checked")){//选中
             address= $("#addressDetail").val();//选中的值
-            alert(address);
+
         }
         if($(".express").is(":checked")){//选中
             express= $(".express").val();//选中的值
-            alert(express);
+
         }
 
         var insertOrderDto = {
@@ -466,8 +466,12 @@
             contentType: "application/json",
             data: JSON.stringify(insertOrderDto),
             success: function (data) {
-                alert(data);
-                // window.location.href = "dingd_xiangq.html"
+                if (data) {
+                    window.location.href = "dingd_xiangq.html";
+                } else {
+                    alert("失败！");
+                }
+
             },
             error: function (data) {
                 alert("执行失败");

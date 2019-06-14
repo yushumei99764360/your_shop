@@ -34,4 +34,13 @@
         values (#{o_orderid},#{g_id},#{g_name},#{g_disctprice},#{g_pic},#{g_num},#{g_total_price})
     </insert>
 
+    <!--批量删除购物车-->
+
+    <delete id="deleteCartInfoSelected" parameterType="list">
+        delete from  cartinfo where cart_id in
+        <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
 </mapper>

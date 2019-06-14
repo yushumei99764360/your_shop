@@ -10,6 +10,7 @@ import com.qf.vo.CartInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -106,6 +107,25 @@ public class CartInfoServiceImpl implements CartInfoService {
             }
         }
         return flag;
+    }
+
+    /**
+     * 购物车对应数据删除
+     * @param selectCartInfos
+     * @return
+     */
+
+    @Override
+    public boolean deleteCartInfoSelected(List<CartInfo> selectCartInfos) {
+        List<Integer> cartIds = new ArrayList<>();
+        for (CartInfo cartInfo : selectCartInfos) {
+            cartIds.add(cartInfo.getCart_id());
+        }
+        int i = cartInfoMapper.deleteCartInfoSelected(cartIds);
+        if (i != 0) {
+            return true;
+        }
+        return false;
     }
 
 }

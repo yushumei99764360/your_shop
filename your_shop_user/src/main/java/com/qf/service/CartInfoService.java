@@ -41,4 +41,12 @@ public interface CartInfoService {
      */
 
     boolean insertOrderDetails(List<CartInfo> selectCartInfos, int id);
+
+    /**
+     * 订单添加成功后，删除购物车中相应数据
+     * @param selectCartInfos
+     * @return
+     */
+
+    boolean deleteCartInfoSelected(List<CartInfo> selectCartInfos);
 }
