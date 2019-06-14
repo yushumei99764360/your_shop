@@ -17,7 +17,8 @@
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/echarts.min.js"></script>
-</head>
+
+
 <!--[if lte IE 9]><p class="browsehappy">升级你的浏览器吧！ <a href="http://se.360.cn/" target="_blank">升级浏览器</a>以获得更好的体验！</p><![endif]-->
 </head>
 <body>
@@ -35,9 +36,9 @@
 <div class="am-cf admin-main">
 
 <div class="nav-navicon admin-main admin-sidebar">
-    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;"> 欢迎本店管理员：清风抚雪</div>
+    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;"> 欢迎进入本店后台管理</div>
     <div class="sideMenu">
-      <h3 class="am-icon-flag"><em></em> <a href="#">商品管理</a></h3>
+      <h3 class="am-icon-flag"><em></em> <a href="index.html">商品管理</a></h3>
       <ul>
         <li><a href="goodsList.html">商品列表</a></li>
         <li ><a href="addGoods.html">添加新商品</a></li>
@@ -227,6 +228,10 @@
         error : function(errorMsg) {
             alert("333333");
         }
+    });
+    $.ajax({
+        type:"post",
+        url:""
     })
 
 </script>
