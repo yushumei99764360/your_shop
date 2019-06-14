@@ -7,14 +7,6 @@ import com.qf.pojo.GoodsInfo;
 import java.util.List;
 
 public interface CategoryService {
-    /**
-     * 商品分类
-     * @return
-     */
-    public List<CategoryDto> categoryList();
-
-
-    public List<CategoryDto> getAllGoods();
 
     GodsInfoDetail getGoodsInfoById(int g_id);
 
