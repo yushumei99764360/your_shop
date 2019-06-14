@@ -3,10 +3,9 @@ package com.qf.pojo;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Data
-public class CartInfo implements Serializable {
+public class CartInfo  {
     /*
     CREATE TABLE `cartinfo` (
   `cart_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '购物车ID',
@@ -26,11 +25,12 @@ public class CartInfo implements Serializable {
     int cart_id;
     int userId;
     String g_pic;
+    String g_name;
+    String s_name;
     int g_id;
     int product_amount;
     double g_disctprice;
-    Date add_time;
-    Date modified_time;
     double sum_price;
+
 
 }

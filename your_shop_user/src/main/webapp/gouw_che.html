@@ -125,13 +125,8 @@
 	</div>
 </div>
 <div class="container">
-	<div class="cart-shop-header">
-		<div class="cart-col-1">
-			<input type="checkbox" class="jdcheckbox" >
-		</div>
-		<div class="cart-col-2"><span class="gouw_c_dianp">罗莱LOVO自营官方旗舰店 </span></div>
-	</div>
-	<div class="cart-shop-goods dangq_honh">
+
+	<div class="cart-shop-goods dangq_honh" id="myCartInfo">
 		<div class="cart-shop-good">
 			<div class="cart-col-1">
 				<input type="checkbox" class="jdcheckbox" >
@@ -163,44 +158,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="cart-shop-header">
-		<div class="cart-col-1">
-			<input type="checkbox" class="jdcheckbox" >
-		</div>
-		<div class="cart-col-2"><span class="gouw_c_dianp">罗莱LOVO自营官方旗舰店 </span></div>
-	</div>
-	<div class="cart-shop-goods">
-		<div class="cart-shop-good">
-			<div class="cart-col-1">
-				<input type="checkbox" class="jdcheckbox" >
-			</div>
-			<div class="cart-col-2" style="height: 82px;">
-				<a href="" target="_blank" class="g-img"><img src="images/xiangqtu_1.jpg" alt=""></a>
-			</div>
-			<div class="fl houj_c"> 
-				<div class="cart-dfsg"><div class="cart-good-name"><a href="#" target="_blank">ThinkPad X1 Carbon(20HRA007CD)14英寸笔记本电脑(i5-7200U 8G ...</a></div></div>
-				<div class="cart-good-pro"></div>
-				<div class="cart-col-4"><div class="cart-good-real-price "><!--主品-->¥&nbsp;9999.00</div><div class="red"></div></div>
-				<div class="cart-col-5">
-					<div class="gui-count cart-count" >
-						<a href="#" gui-count-sub="" class="gui-count-btn gui-count-sub gui-count-disabled">-</a>
-						<a href="#" gui-count-add="" class="gui-count-btn gui-count-add">+</a>
-						<div class="gui-count-input"><input dytest="" class="" type="text" value="1"></div>
-					</div>
-				</div>
-				<div class="cart-col-6 ">
-				<div class="cart-good-amount">¥&nbsp;9999.00</div><!-- 重量展示(只展示全球百货的重量) --></div>
-			</div>
-			<div class="cart-col-7">
-				<div class="cart-good-fun delfixed">
-					<a href="#">删除</a>
-				</div>
-				<div class="cart-good-fun">
-					<a href="#">移入收藏夹</a>
-				</div>
-			</div>
-		</div>
-	</div>
+
 </div>
 <div class="jies_beij">
 	<div class="beij_center over_dis">
@@ -212,8 +170,9 @@
 			<a href="#">删除</a>
 		</div>
 		<div class="jies_ann_bei">
-			<p>已选 <em>1</em> 件商品 总计（不含运费）：<span>￥9999.00</span></p>
-			<a href="tij_dingd.html" class="order_btn">去结算</a>
+			<!--已选 <em>1</em> 件商品-->
+			<p> 总计（不含运费）：<span>￥9999.00</span></p>
+			<a class="order_btn" onclick="goToPay()">去结算</a>
 		</div>
 	</div>
 </div>
@@ -479,11 +438,107 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
 		</div>
 	</div>
 </div>
- 
+
+
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script>
+
+    var myCartInfo;
+    $(function () {
+        alert(111);
+        $.ajax({
+            type: "post",
+            url: "listMyCartInfo",
+            contentType: "application/json",
+            data: {},
+            success: function (data) {
+                myCartInfo = data;
+                $("#myCartInfo").empty();
+                var html = "";
+                $(data).each(function (i, n) {
+                    html += "\n" +
+                        "\t\t<div class=\"cart-shop-good\">\n" +
+                        "\t\t\t<div class=\"cart-col-1\">\n" +
+                        "\t\t\t\t<input type=\"checkbox\" class=\"jdcheckbox\" value='"+n.cart_id+"'>\n" +
+                        "\t\t\t</div>\n" +
+                        "\t\t\t<div class=\"cart-col-2\" style=\"height: 82px;\">\n" +
+                        "\t\t\t\t<a href=\"\" target=\"_blank\" class=\"g-img\"><img src='"+n.g_pic+"' alt=\"\"></a>\n" +
+                        "\t\t\t</div>\n" +
+                        "\t\t\t<div class=\"fl houj_c\"> \n" +
+                        "\t\t\t\t<div class=\"cart-dfsg\"><div class=\"cart-good-name\"><a href=\"#\" target=\"_blank\">"+n.g_name+"</a></div></div>\n" +
+                        "\t\t\t\t<div class=\"cart-good-pro\"></div>\n" +
+                        "\t\t\t\t<div class=\"cart-col-4\"><div class=\"cart-good-real-price \"><!--主品-->¥&nbsp;"+n.g_disctprice+"</div><div class=\"red\"></div></div>\n" +
+                        "\t\t\t\t<div class=\"cart-col-5\">\n" +
+                        "\t\t\t\t\t<div class=\"gui-count cart-count\" >\n" +
+                        "\t\t\t\t\t\t<a href=\"#\" gui-count-sub=\"\" class=\"gui-count-btn gui-count-sub gui-count-disabled\">-</a>\n" +
+                        "\t\t\t\t\t\t<a href=\"#\" gui-count-add=\"\" class=\"gui-count-btn gui-count-add\">+</a>\n" +
+                        "\t\t\t\t\t\t<div class=\"gui-count-input\"><input dytest=\"\" class=\"\" type=\"text\" value='"+n.product_amount+"'></div>\n" +
+                        "\t\t\t\t\t</div>\n" +
+                        "\t\t\t\t</div>\n" +
+                        "\t\t\t\t<div class=\"cart-col-6 \">\n" +
+                        "\t\t\t\t<div class=\"cart-good-amount\">¥&nbsp;"+n.sum_price+"</div><!-- 重量展示(只展示全球百货的重量) --></div>\n" +
+                        "\t\t\t</div>\n" +
+                        "\t\t\t<div class=\"cart-col-7\">\n" +
+                        "\t\t\t\t<div class=\"cart-good-fun delfixed\">\n" +
+                        "\t\t\t\t\t<a href=\"#\">删除</a>\n" +
+                        "\t\t\t\t</div>\n" +
+                        "\t\t\t\t<div class=\"cart-good-fun\">\n" +
+                        "\t\t\t\t\t<a href=\"#\">移入收藏夹</a>\n" +
+                        "\t\t\t\t</div>\n" +
+                        "\t\t\t</div>\n" +
+                        "\t\t</div>\n" +
+                        "\t";
+
+                });
+                $("#myCartInfo").append(html);
+
+
+            },
+            error: function (data) {
+                alert("执行失败！");
+            },
+            dataType: "json"
+        });
+
+
+    });
+
+    function goToPay() {
+        var selectCartIds = new Array();
+        var selectCartInfos = new Array();
+
+        $(":checkbox:checked").each(function (i,n) {
+            if ($(this).val() != '' && $(this).val() != null) {
+
+                var selectedId = $(this).val();
+                $(myCartInfo).each(function (j,k) {
+
+                    if (k.cart_id == selectedId) {
+
+                        selectCartInfos.push(k);
+                    }
+                });
+            }
+        });
 
 
 
 
+        $.ajax({
+            type: "POST",
+            url: "putSelectCartInfosIntoSession",
+            contentType: "application/json",
+            data: JSON.stringify(selectCartInfos),
+            success: function (data) {
+                alert("OK！")
+            },
+            error: function (data) {
+                alert("执行失败")
+            },
+            dataType: "json"
+        });
+    }
+</script>
 
 
 

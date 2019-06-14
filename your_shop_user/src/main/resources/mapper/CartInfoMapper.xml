@@ -4,15 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.mapper.CartInfoMapper">
 
-    <!--int userId;-->
-    <!--String g_pic;-->
-    <!--int g_id;-->
-    <!--int product_amount;-->
-    <!--double g_disctprice;-->
-    <!--double sum_price;-->
 
     <insert id="insertIntoCartInfo" parameterType="com.qf.vo.CartInfoVo">
-        insert into cartinfo (userId,g_pic,g_id,product_amount,g_disctprice,sum_price) values (#{userId},#{g_pic},#{g_id},#{product_amount},#{g_disctprice},#{sum_price})
+        insert into cartinfo (userId,g_pic,g_id,product_amount,g_disctprice,sum_price,g_name,s_name) values (#{userId},#{g_pic},#{g_id},#{product_amount},#{g_disctprice},#{sum_price},#{g_name},#{s_name})
     </insert>
+
+    <select id="listMyCartInfo" parameterType="int" resultType="com.qf.pojo.CartInfo">
+        select * from cartinfo where userId = #{userId}
+    </select>
 
 </mapper>

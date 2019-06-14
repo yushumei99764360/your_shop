@@ -28,7 +28,7 @@ public interface UserInfoMapper {
 
     /**
      * 根据用户id修改用户信息
-     * @param userInfoMessage   用户信息
+     * @param
      * @return
      */
     public int updateUserInfo(UserInfoMessageDto userInfoMessageDto);

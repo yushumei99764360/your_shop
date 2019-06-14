@@ -1347,6 +1347,8 @@
     var g_id;
     var g_disctprice;
     var g_pic;
+    var g_name;
+    var s_name;
     var sum_price;
     var value = $("#sum").val();
     function getUserId() {
@@ -1372,7 +1374,10 @@
                 $("#g_disctprice").html(data.g_disctprice);
                 g_pic = data.g_pic;
                 g_disctprice = data.g_disctprice;
+
+                g_name = data.g_name;
                 $("#s_name").html(data.s_name);
+                s_name = data.s_name;
                 $("#g_num").html(data.g_num);
             },
             error:function (data) {
@@ -1416,15 +1421,15 @@
         var amount = $("#sum").val();
         sum_price = amount * g_disctprice;
 
-        // alert(g_id);
-        // alert(amount);
-        // alert(g_disctprice);
-        alert(g_pic);
+
+
 
         var cartInfoVo = {
             "userId": null,
             "g_pic": g_pic,
+            "s_name": s_name,
             "g_id": g_id,
+            "g_name": g_name,
             "product_amount": amount,
             "g_disctprice": g_disctprice,
             "sum_price": sum_price

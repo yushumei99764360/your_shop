@@ -1,10 +1,13 @@
 package com.qf.service.impl;
 
 import com.qf.mapper.CartInfoMapper;
+import com.qf.pojo.CartInfo;
 import com.qf.service.CartInfoService;
 import com.qf.vo.CartInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CartInfoServiceImpl implements CartInfoService {
@@ -29,4 +32,15 @@ public class CartInfoServiceImpl implements CartInfoService {
         }
         return false;
     }
+    /**
+     * 显示购物车列表
+     * @param userId
+     * @return
+     */
+
+    @Override
+    public List<CartInfo> listMyCartInfo(int userId) {
+        return cartInfoMapper.listMyCartInfo(userId);
+    }
+
 }

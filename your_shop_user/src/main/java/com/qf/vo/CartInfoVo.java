@@ -11,4 +11,7 @@ public class CartInfoVo {
     int product_amount;
     double g_disctprice;
     double sum_price;
+    String g_name;
+    String s_name;
+
 }
