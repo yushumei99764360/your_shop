@@ -13,7 +13,6 @@ public class AddressInfoDto {
     String shphone;
     String shname;
     String o_sendtype;
-    String o_paycount;
     int id;
     int s_id;
     int price;

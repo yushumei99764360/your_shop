@@ -203,6 +203,4 @@ public class UserInfoController {
         System.out.println(userInfoService.insertMessageByGoods(messageDto));
         return userInfoService.insertMessageByGoods(messageDto);
     }
-
-
 }

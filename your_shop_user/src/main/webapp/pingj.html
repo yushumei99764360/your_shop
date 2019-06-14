@@ -223,8 +223,8 @@
 						<div class="fop_shur_kuang">
 							<div class="sdvg">
 								<div class="f-textarea">
-									<textarea name="" id="haha" placeholder="商品是否给力？快分享你的购买心得吧~"></textarea>
-									<div class="textarea-ext" id="message">还可输入500字</div>
+									<textarea name="" id="message" placeholder="商品是否给力？快分享你的购买心得吧~"></textarea>
+									<div class="textarea-ext">还可输入500字</div>
 								</div>
 							</div>
 							<!--<div class="pinj_shangc_tup">-->
@@ -340,14 +340,13 @@ function getid() {
 getid();
 
 	function inputMessage() {
-	    alert($("#haha").val())
+
         $.ajax({
             type: "POST",
-            url:"insertMessageByGoods?g_id="+g_id,
+            url:"insertMessageByGoods",
             contentType:"application/json",
 			data:JSON.stringify({
                 "message":$("#message").val(),
-
             }),
             success: function (data) {
 
