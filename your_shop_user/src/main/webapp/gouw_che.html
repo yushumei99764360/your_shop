@@ -445,7 +445,7 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
 
     var myCartInfo;
     $(function () {
-        alert(111);
+
         $.ajax({
             type: "post",
             url: "listMyCartInfo",
@@ -530,10 +530,11 @@ jQuery(".picScroll_left_s").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:t
             contentType: "application/json",
             data: JSON.stringify(selectCartInfos),
             success: function (data) {
-                alert("OK！")
+                window.location.href = "gouwc_jiesuan.html";
+                alert("OK!");
             },
             error: function (data) {
-                alert("执行失败")
+                alert("执行失败");
             },
             dataType: "json"
         });

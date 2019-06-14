@@ -1,5 +1,7 @@
 package com.qf.controller;
 
+import com.qf.dto.InsertOrderDto;
+import com.qf.pojo.AddressInfo;
 import com.qf.pojo.CartInfo;
 import com.qf.pojo.UserInfo;
 import com.qf.service.CartInfoService;
@@ -45,6 +47,33 @@ public class CartInfoController {
         System.out.println(selectCartInfos);
         session.setAttribute("selectCartInfos", selectCartInfos);
         return true;
+    }
+
+
+
+    /**
+     * 将选中的cartInfos返回
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "getCartInfosSelected")
+    public Object getCartInfosSelected( HttpSession session) {
+        List<CartInfo> selectCartInfos = (List<CartInfo>) session.getAttribute("selectCartInfos");
+        return selectCartInfos;
+    }
+
+
+    /**
+     * 从购物车结算页面添加订单
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "insertOrderInfo")
+    public Object insertOrderInfo(@RequestBody InsertOrderDto insertOrderDto, HttpSession session) {
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        List<CartInfo> selectCartInfos = (List<CartInfo>) session.getAttribute("selectCartInfos");
+//        AddressInfo addressInfo =  cartInfoService.getAddressInfoById(insertOrderDto.getAdsId());
+        return null;
     }
 
 }
