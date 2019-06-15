@@ -23,6 +23,5 @@ public interface CategoryMapper {
 
     int insertOrderDetail(Order_DetailDto order_detailDto);
 
-
     Logisticsinfo getlogistics(int g_id);
 }

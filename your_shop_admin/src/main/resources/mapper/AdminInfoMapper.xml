@@ -5,7 +5,8 @@
 <mapper namespace="com.qf.mapper.AdminInfoMapper">
     <!--管理员添加-->
     <insert id="insertAdminInfo" parameterType="com.qf.pojo.AdminInfo">
-        insert into admininfo (ausername,apassword) values (#{ausername},#{apassword})
+        insert into
+         admininfo (ausername,apassword) values (#{ausername},#{apassword})
     </insert>
     <!--管理员总数查询-->
     <select id="count" resultType="int">
