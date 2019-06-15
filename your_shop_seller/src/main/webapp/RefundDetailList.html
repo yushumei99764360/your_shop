@@ -186,6 +186,7 @@
             url: "updateRefundInfoById?id="+id,
             contentType:"application/json",
             success: function(data){
+                alert("退款已修改");
                 window.location.href="RefundList.html"
             },
             error:function (data) {
