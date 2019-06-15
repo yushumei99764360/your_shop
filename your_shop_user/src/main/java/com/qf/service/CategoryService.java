@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface CategoryService {
 
+    public List<GoodsInfo> getSonCategory();
+
     GodsInfoDetail getGoodsInfoById(int g_id);
 
     AddressInfoDto searchAddress(int adsId);

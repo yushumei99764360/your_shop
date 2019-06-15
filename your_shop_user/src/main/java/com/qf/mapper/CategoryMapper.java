@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface CategoryMapper {
 
+    public List<GoodsInfo> getSonCategory();
+
     GodsInfoDetail getGoodsInfoById(int g_id);
 
     AddressInfoDto searchAddress(int adsId);
