@@ -3,6 +3,7 @@ package com.qf.service.impl;
 import com.qf.dto.*;
 import com.qf.mapper.CategoryMapper;
 
+import com.qf.pojo.GoodsInfo;
 import com.qf.service.CategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,16 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryMapper categoryMapper;
 
+    @Override
+    public List<GoodsInfo> getSonCategory() {
+        List<GoodsInfo> sonCategory = categoryMapper.getSonCategory();
+        return sonCategory;
+    }
+
 
     /**
      * 商品信息查询
+     *
      * @param g_id
      * @return
      */
